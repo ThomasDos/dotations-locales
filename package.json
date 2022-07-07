@@ -8,8 +8,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "git": "git add . && git-cz && git push",
-        "test": "jest"
+        "git": "git add . && git-cz && git push"
     },
     "dependencies": {
         "@gouvfr/dsfr": "^1.6.0",
@@ -27,7 +26,6 @@
         "eslint-config-next": "12.2.0",
         "git-cz": "^4.9.0",
         "husky": "^8.0.1",
-        "jest": "^28.1.2",
         "lint-staged": "^13.0.3",
         "postcss": "^8.4.14",
         "prettier": "^2.7.1",
