@@ -11,7 +11,7 @@
         "git": "git add . && git-cz && git push"
     },
     "dependencies": {
-        "@gouvfr/dsfr": "^1.6.0",
+        "@dataesr/react-dsfr": "^2.8.4",
         "next": "12.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
