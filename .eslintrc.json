@@ -1,6 +1,11 @@
 {
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
+    "rules": {
+        // disable the rule for all files
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+    },
+
     "overrides": [
         {
             "files": ["*.ts", "*.tsx"], // Your TypeScript files extension
@@ -10,6 +15,9 @@
             ],
             "parserOptions": {
                 "project": ["./tsconfig.json"] // Specify it only for TypeScript files
+            },
+            "rules": {
+                "@typescript-eslint/explicit-module-boundary-types": "off"
             }
         }
     ]
