@@ -17,14 +17,13 @@
         "incremental": true,
         "baseUrl": ".",
         "paths": {
-            "components/*": ["components/*"],
+            "components/*": ["src/components/*"],
             "public/*": ["public/*"],
-            "pages/*": ["pages/*"],
-            "services/*": ["services/*"],
-            "shared/*": ["shared/*"],
-            "styles/*": ["styles/*"]
+            "pages/*": ["src/pages/*"],
+            "services/*": ["src/services/*"],
+            "styles/*": ["src/styles/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],
     "exclude": ["node_modules"]
 }
