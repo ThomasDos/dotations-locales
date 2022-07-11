@@ -11,7 +11,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <>
             <Head>
-                <title>my firsts page</title>
+                <title>Dotations Locales</title>
             </Head>
             <Layout>
                 <Component {...pageProps} />
