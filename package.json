@@ -8,7 +8,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "git": "git add . && git-cz && git push"
+        "git": "git add . && git-cz && git push",
+        "rebase": "git checkout main && git pull && git rebase origin/develop && git push -f && git checkout -"
     },
     "dependencies": {
         "@dataesr/react-dsfr": "^2.8.4",
