@@ -17,6 +17,7 @@ const LinkArrow = ({ textLink }: LinkArrowProps) => {
                 height="11"
                 width="11"
                 alt="icone fleche droite"
+                layout="fixed"
             />
             <SpanContainer>{textLink}</SpanContainer>
         </>
