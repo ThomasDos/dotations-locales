@@ -1,7 +1,9 @@
-import { SearchBar, Text, Title } from "@dataesr/react-dsfr";
-import HomeRowImageText from "components/HomeRowImageText/HomeRowImageText";
+import { Text, Title } from "@dataesr/react-dsfr";
+import HomeRowImageText from "components/HomeRowImageText";
+import SearchInput from "components/SearchInput";
 import type { NextPage } from "next";
 import Image from "next/image";
+import { useState } from "react";
 import styled from "styled-components";
 
 const MainBottom = styled.div`
@@ -14,21 +16,14 @@ const MainBottomBody = styled.div`
 `;
 
 const Home: NextPage = () => {
+    const [search, setSearch] = useState<string>("");
     return (
         <div className="flex flex-col items-center">
-            <div className="pt-20 mb-6">
+            <div className="pt-20 pb-6">
                 <Title as="h1">Rechercher votre collectivité</Title>
             </div>
-            <SearchBar
-                size="lg"
-                onSearch={e => {
-                    console.log("target", e.target.value);
-                }}
-                label="Rechercher"
-                placeholder="Nom de la collectivité ou code insee"
-                buttonLabel="Rechercher"
-            />
-            <div className="mt-6 mb-20 ">
+            <SearchInput search={search} setSearch={setSearch} />
+            <div className="mt-6 mb-20">
                 <Text size="md">
                     Egestas magna eu, condimentum amet. Vitae odio mauris
                     suspendisse duis vestibulum. Nulla.
@@ -78,6 +73,7 @@ const Home: NextPage = () => {
                             height="160px"
                             width="160px"
                             alt="icone france relance"
+                            layout="fixed"
                         />
                     </div>
 

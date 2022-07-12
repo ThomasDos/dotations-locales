@@ -32,6 +32,7 @@ const HomeRowImageText = ({
                 height={imageHeight}
                 width={imageWidth}
                 alt={imageAlt}
+                layout="fixed"
             />
         </div>
     );

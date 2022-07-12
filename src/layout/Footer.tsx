@@ -22,6 +22,7 @@ const FooterContainer = () => {
                         height="90px"
                         width="160px"
                         alt="logo incubateur territoires"
+                        layout="fixed"
                     />
                 </FooterOperator>
                 <FooterBodyItem>
@@ -51,6 +52,7 @@ const FooterContainer = () => {
                         height="14.67px"
                         width="14.67px"
                         alt="icon paramètre d'affichage"
+                        layout="fixed"
                     />
 
                     <span className="ml-2">Paramètres d&apos;affichage</span>
