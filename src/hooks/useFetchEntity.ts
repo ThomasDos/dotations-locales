@@ -1,4 +1,4 @@
-import type { IFetchEntityResult } from "interfaces/IFetchEntityResult";
+import type { IFetchEntityResult } from "interfaces/entity.interface";
 import { useQuery } from "react-query";
 import fetchEntity from "services/fetchEntity";
 

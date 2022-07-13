@@ -1,6 +1,6 @@
-export type IFetchEntityResult = IEntityResult[];
+export type IFetchEntityResult = IEntity[];
 
-interface IEntityResult {
+export interface IEntity {
     autocompletion: string;
     code: string;
     commune: ICommune;

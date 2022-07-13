@@ -1,10 +1,8 @@
 import { Text, Title } from "@dataesr/react-dsfr";
 import HomeRowImageText from "components/HomeRowImageText";
 import SearchInput from "components/SearchInput";
-import useFetchEntity from "hooks/useFetchEntity";
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useState } from "react";
 import styled from "styled-components";
 
 const MainBottom = styled.div`
@@ -17,23 +15,12 @@ const MainBottomBody = styled.div`
 `;
 
 const Home: NextPage = () => {
-    const [search, setSearch] = useState<string>("");
-
-    const { data: searchResult, isLoading: searchResultIsLoading } =
-        useFetchEntity(search);
-
-    console.log("searchResult", searchResult);
-
     return (
         <div className="flex flex-col items-center">
             <div className="pt-20 pb-6">
                 <Title as="h1">Rechercher votre collectivité</Title>
             </div>
-            <SearchInput
-                search={search}
-                setSearch={setSearch}
-                searchResultIsLoading={searchResultIsLoading}
-            />
+            <SearchInput />
             <div className="mt-6 mb-20">
                 <Text size="md">
                     Egestas magna eu, condimentum amet. Vitae odio mauris
