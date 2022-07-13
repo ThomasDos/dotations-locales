@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { IFetchEntityResult } from "interfaces/IFetchEntityResult";
+import type { IFetchEntityResult } from "interfaces/entity.interface";
 
 export default async (
     search: string,

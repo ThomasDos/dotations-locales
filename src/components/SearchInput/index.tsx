@@ -1,7 +1,11 @@
+import { Collapse } from "@mui/material";
 import { Spinner } from "components/ui";
+import useFetchEntity from "hooks/useFetchEntity";
 import Image from "next/image";
-import type { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+
+import DropdownSearch from "./DropdownSearch";
 
 const SearchButtonContainer = styled.div`
     background-color: var(--blue-france-sun-113-625);
@@ -27,49 +31,49 @@ const InputContainer = styled.input`
     }
 `;
 
-interface SearchInputProps {
-    search: string;
-    setSearch: Dispatch<SetStateAction<string>>;
-    searchResultIsLoading: boolean;
-}
+const SearchInput = () => {
+    const [search, setSearch] = useState<string>("");
 
-const SearchInput = ({
-    search,
-    setSearch,
-    searchResultIsLoading,
-}: SearchInputProps) => {
+    const { data: searchResult, isLoading: searchResultIsLoading } =
+        useFetchEntity(search);
+
     return (
-        <SearchInputContainer className="flex">
-            <InputContainer
-                type="text"
-                placeholder="Nom de la collectivité ou code insee"
-                className="pl-4"
-                value={search}
-                onChange={e => {
-                    setSearch(e.target.value);
-                }}
-            />
-            <button type="button" role="button">
-                <SearchButtonContainer className="flex justify-center items-center py-3 px-8">
-                    <div className="flex items-center space-x-2">
-                        {searchResultIsLoading ? (
-                            <Spinner />
-                        ) : (
-                            <Image
-                                src="/icons/search.svg"
-                                height="20.31px"
-                                width="20.31px"
-                                alt="icone rechercher"
-                                layout="fixed"
-                            />
-                        )}
-                        <SpanButtonContainer className="text-xl font-normal">
-                            Rechercher
-                        </SpanButtonContainer>
-                    </div>
-                </SearchButtonContainer>
-            </button>
-        </SearchInputContainer>
+        <div>
+            <SearchInputContainer className="flex">
+                <InputContainer
+                    type="text"
+                    placeholder="Nom de la collectivité ou code insee"
+                    className="pl-4"
+                    value={search}
+                    onChange={e => {
+                        setSearch(e.target.value);
+                    }}
+                />
+                <button type="button" role="button">
+                    <SearchButtonContainer className="flex justify-center items-center py-3 px-8">
+                        <div className="flex items-center space-x-2">
+                            {searchResultIsLoading ? (
+                                <Spinner />
+                            ) : (
+                                <Image
+                                    src="/icons/search.svg"
+                                    height="20.31px"
+                                    width="20.31px"
+                                    alt="icone rechercher"
+                                    layout="fixed"
+                                />
+                            )}
+                            <SpanButtonContainer className="text-xl font-normal">
+                                Rechercher
+                            </SpanButtonContainer>
+                        </div>
+                    </SearchButtonContainer>
+                </button>
+            </SearchInputContainer>
+            <Collapse in={!!searchResult && !!search}>
+                <DropdownSearch searchResult={searchResult} />
+            </Collapse>
+        </div>
     );
 };
 
