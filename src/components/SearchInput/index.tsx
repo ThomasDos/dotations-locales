@@ -1,3 +1,4 @@
+import { Spinner } from "components/ui";
 import Image from "next/image";
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
@@ -21,14 +22,22 @@ const InputContainer = styled.input`
     background: var(--grey-950);
     color: var(--grey-425);
     font-style: italic;
+    :focus {
+        outline: none;
+    }
 `;
 
 interface SearchInputProps {
     search: string;
     setSearch: Dispatch<SetStateAction<string>>;
+    searchResultIsLoading: boolean;
 }
 
-const SearchInput = ({ search, setSearch }: SearchInputProps) => {
+const SearchInput = ({
+    search,
+    setSearch,
+    searchResultIsLoading,
+}: SearchInputProps) => {
     return (
         <SearchInputContainer className="flex">
             <InputContainer
@@ -43,13 +52,17 @@ const SearchInput = ({ search, setSearch }: SearchInputProps) => {
             <button type="button" role="button">
                 <SearchButtonContainer className="flex justify-center items-center py-3 px-8">
                     <div className="flex items-center space-x-2">
-                        <Image
-                            src="/icons/search.svg"
-                            height="20.31px"
-                            width="20.31px"
-                            alt="icone rechercher"
-                            layout="fixed"
-                        />
+                        {searchResultIsLoading ? (
+                            <Spinner />
+                        ) : (
+                            <Image
+                                src="/icons/search.svg"
+                                height="20.31px"
+                                width="20.31px"
+                                alt="icone rechercher"
+                                layout="fixed"
+                            />
+                        )}
                         <SpanButtonContainer className="text-xl font-normal">
                             Rechercher
                         </SpanButtonContainer>
