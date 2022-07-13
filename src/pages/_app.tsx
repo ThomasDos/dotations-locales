@@ -3,19 +3,32 @@ import "styles/variables.css";
 
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-import Layout from "../layout";
+import Layout from "../layouts";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const MyApp = ({ Component, pageProps }: AppProps) => {
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        refetchOnWindowFocus: false,
+                    },
+                },
+            })
+    );
     return (
         <>
-            <Head>
-                <title>Dotations Locales</title>
-            </Head>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <QueryClientProvider client={queryClient}>
+                <Head>
+                    <title>Dotations Locales</title>
+                </Head>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </QueryClientProvider>
         </>
     );
 };
