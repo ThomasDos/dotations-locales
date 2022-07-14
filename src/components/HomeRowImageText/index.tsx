@@ -1,3 +1,4 @@
+import { Title } from "@dataesr/react-dsfr";
 import Image from "next/image";
 
 interface HomeRowImageTextProps {
@@ -24,16 +25,18 @@ const HomeRowImageText = ({
             }`}
         >
             <div className={`flex flex-col ${reverse ? "ml-14" : "mr-14"}`}>
-                <span className="text-2xl font-bold mb-4">{titleContent}</span>
+                <Title as="h1">{titleContent}</Title>
                 <span>{bodyContent}</span>
             </div>
-            <Image
-                src="/icons/temporary-image-placeholder.svg"
-                height={imageHeight}
-                width={imageWidth}
-                alt={imageAlt}
-                layout="fixed"
-            />
+            <div>
+                <Image
+                    src="/icons/temporary-image-placeholder.svg"
+                    height={imageHeight}
+                    width={imageWidth}
+                    alt={imageAlt}
+                    layout="fixed"
+                />
+            </div>
         </div>
     );
 };
