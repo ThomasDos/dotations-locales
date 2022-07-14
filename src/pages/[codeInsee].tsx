@@ -1,5 +1,14 @@
+import SubHeader from "components/SubHeader";
+import { useRouter } from "next/router";
+
 const Dashboard = () => {
-    return <div>Dashboard</div>;
+    const router = useRouter();
+    const { commune } = router.query;
+    return (
+        <div>
+            <SubHeader commune={commune as string} />
+        </div>
+    );
 };
 
 export default Dashboard;
