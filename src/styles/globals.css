@@ -9,12 +9,15 @@ body {
     font-family: Arial, -apple-system, sans-serif;
 }
 
-/* a {
-    color: inherit;
-    text-decoration: none;
-    background-image: none !important;
-} */
-
 * {
     box-sizing: border-box;
+}
+
+li,
+ul {
+    all: unset;
+}
+
+hr {
+    padding: 1px !important;
 }
