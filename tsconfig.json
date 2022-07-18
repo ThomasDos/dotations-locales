@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "types": ["node"],
+        "types": ["node", "jest"],
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
@@ -23,7 +23,8 @@
             "services/*": ["src/services/*"],
             "styles/*": ["src/styles/*"],
             "interfaces/*": ["src/interfaces/*"],
-            "hooks/*": ["src/hooks/*"]
+            "hooks/*": ["src/hooks/*"],
+            "utils/*": ["src/utils/*"]
         }
     },
     "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],

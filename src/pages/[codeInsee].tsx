@@ -1,13 +1,21 @@
-import SubHeader from "components/SubHeader";
+import {
+    DashboardBody,
+    EntityParameters,
+    SubHeader,
+} from "components/dashboard";
 import { useRouter } from "next/router";
 
 const Dashboard = () => {
     const router = useRouter();
     const { commune } = router.query;
     return (
-        <div>
+        <>
             <SubHeader commune={commune as string} />
-        </div>
+            <div className="flex">
+                <DashboardBody />
+                <EntityParameters />
+            </div>
+        </>
     );
 };
 

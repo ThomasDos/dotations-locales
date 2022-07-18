@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const LinkContainer = styled.a`
-    color: #666666;
+    color: var(--grey-425);
     text-decoration: underline;
 `;
 
