@@ -1,5 +1,4 @@
-import HomeRowImageText from "components/HomeRowImageText";
-import SearchInput from "components/SearchInput";
+import { HomeRowImageText, SearchInput } from "components/home";
 import type { NextPage } from "next";
 import Image from "next/image";
 import styled from "styled-components";

@@ -57,7 +57,9 @@ const FooterContainer = () => {
 
                     <span className="ml-2">Paramètres d&apos;affichage</span>
                 </FooterLink>
-                <FooterCopy>licence etalab-2.0</FooterCopy>
+
+                {/* TODO:LINK TO REPLACE : https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText  */}
+                <FooterCopy>licence AGPL3</FooterCopy>
             </FooterBottom>
         </Footer>
     );

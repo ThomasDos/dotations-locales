@@ -19,7 +19,7 @@ interface LinkIconProps {
 
 const LinkIcon = ({ icon, text }: LinkIconProps) => {
     return (
-        //TODO: update href when features is ready
+        //TODO: update href when page is ready
         // <Link href='/${path}'>
         <LinkIconContainer className="flex items-center">
             <Image
