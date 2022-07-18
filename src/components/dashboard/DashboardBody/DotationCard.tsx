@@ -57,13 +57,13 @@ const DotationCard = ({
                     </SpanTotalNumber>
                     <div className="relative">
                         <div className="absolute r-0 ml-3 cursor-copy">
-                            <IconCopy toCopy={dotationTotal} />
+                            <IconCopy />
                         </div>
                     </div>
                 </div>
                 <div className="flex items-center">
                     <span className="mr-2">+23 850€</span>
-                    <Label percentage={-8.4} />
+                    <Label percentage={8.4} />
                 </div>
             </div>
         </DotationCardContainer>

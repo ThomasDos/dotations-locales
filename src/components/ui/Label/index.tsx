@@ -17,7 +17,7 @@ interface LabelProps {
 
 const Label = ({ percentage }: LabelProps) => {
     const percentageFormatted = String(percentage).replace(".", ",");
-    const percentageIsPositive = percentage >= 0;
+    const percentageIsPositive = percentage >= 0 ? "+" : "";
     return (
         <LabelContainer
             backgroundColor={percentageIsPositive ? "success-975" : "error-950"}
@@ -25,7 +25,7 @@ const Label = ({ percentage }: LabelProps) => {
         >
             {percentageIsPositive ? <IconVectorUp /> : <IconVectorDown />}
             <span className="ml-1 font-bold">
-                {percentageIsPositive ? "+" : ""}
+                {percentageIsPositive}
                 {percentageFormatted}%
             </span>
         </LabelContainer>

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+import DotationCard from "./DotationCard";
+
 const DashboardBodyContainer = styled.div`
     width: 75%;
     padding: 56px 80px 120px 120px;
@@ -18,7 +20,7 @@ const SpanMajContainer = styled.span`
 const DashboardBody = () => {
     return (
         <DashboardBodyContainer>
-            <InfoDateContainer className="px-8 py-4 flex justify-between">
+            <InfoDateContainer className="px-8 py-4 mb-10 flex justify-between">
                 <span className="text-base font-bold">
                     Vos dotations connues à ce jour pour l&apos;année 2022
                 </span>
@@ -35,6 +37,12 @@ const DashboardBody = () => {
                     />
                 </div>
             </InfoDateContainer>
+            <DotationCard
+                dotationTotal={870967}
+                title="Dotations Générales de Fonctionnement (DGC)"
+                description="Evolution de votre montant total de dotations
+"
+            />
         </DashboardBodyContainer>
     );
 };
