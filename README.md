@@ -1,3 +1,3 @@
 ## Dotations Locales
 
-WIP
+Bienvenue sur Dotations Locales
