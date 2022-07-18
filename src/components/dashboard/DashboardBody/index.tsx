@@ -28,6 +28,7 @@ const DashboardBody = () => {
                     <SpanMajContainer className="mr-1 text-sm">
                         Mise à jour hier à 08h45
                     </SpanMajContainer>
+
                     <Image
                         src="/icons/clock.svg"
                         height="16px"
