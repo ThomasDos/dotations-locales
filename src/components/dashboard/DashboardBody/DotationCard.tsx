@@ -63,7 +63,7 @@ const DotationCard = ({
                 </div>
                 <div className="flex items-center">
                     <span className="mr-2">+23 850€</span>
-                    <Label percentage={8.4} />
+                    <Label percentage={-8.4} />
                 </div>
             </div>
         </DotationCardContainer>
