@@ -40,8 +40,7 @@ const DashboardBody = () => {
             <DotationCard
                 dotationTotal={870967}
                 title="Dotations Générales de Fonctionnement (DGC)"
-                description="Evolution de votre montant total de dotations
-"
+                description="Evolution de votre montant total de dotations"
             />
         </DashboardBodyContainer>
     );
