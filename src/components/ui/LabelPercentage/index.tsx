@@ -15,7 +15,7 @@ interface LabelProps {
     percentage: number;
 }
 
-const Label = ({ percentage }: LabelProps) => {
+const LabelPercentage = ({ percentage }: LabelProps) => {
     const percentageFormatted = String(percentage).replace(".", ",");
     const percentageIsPositive = percentage >= 0;
     return (
@@ -32,4 +32,4 @@ const Label = ({ percentage }: LabelProps) => {
     );
 };
 
-export default Label;
+export default LabelPercentage;

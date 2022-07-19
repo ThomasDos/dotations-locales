@@ -26,7 +26,7 @@ const DropdownRow = ({ ...entity }: IEntity) => {
         <Link
             href={{
                 pathname: `/${codeInsee}`,
-                query: { année: "2022", commune: nomCommune },
+                query: { commune: nomCommune },
             }}
         >
             <DropdownRowContainer className="flex justify-between px-6 py-4">

@@ -1,4 +1,9 @@
-import { IconCopy, IconInformation, Label } from "components/ui";
+import {
+    IconCopyWithSuccess,
+    IconInformation,
+    LabelPercentage,
+    LabelText,
+} from "components/ui";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
@@ -6,7 +11,7 @@ const DotationCardContainer = styled.div`
     padding: 32px 48px 32px 32px;
     display: flex;
     justify-content: space-between;
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--blue-france-850);
 `;
 
 const SpanTotalNumber = styled.span`
@@ -26,12 +31,14 @@ interface DotationCardProps {
     hasInformation?: boolean;
     title: string;
     description: string;
+    percentage: number;
 }
 
 const DotationCard = ({
     dotationTotal,
     title,
     description,
+    percentage,
     hasInformation = true,
 }: DotationCardProps) => {
     const dotationTotalFormatted = formatNumberWithSpace(dotationTotal);
@@ -50,22 +57,26 @@ const DotationCard = ({
                 </div>
                 <span>{description}</span>
             </div>
-            <div className="flex flex-col items-end">
-                <div className="flex mb-2">
-                    <SpanTotalNumber>
-                        {dotationTotalFormatted} €
-                    </SpanTotalNumber>
-                    <div className="relative">
-                        <div className="absolute r-0 ml-3 cursor-copy">
-                            <IconCopy toCopy={dotationTotal} />
+            {dotationTotal ? (
+                <div className="flex flex-col items-end">
+                    <div className="flex mb-2">
+                        <SpanTotalNumber>
+                            {dotationTotalFormatted} €
+                        </SpanTotalNumber>
+                        <div className="relative">
+                            <div className="absolute r-0 ml-3 cursor-copy">
+                                <IconCopyWithSuccess toCopy={dotationTotal} />
+                            </div>
                         </div>
                     </div>
+                    <div className="flex items-center">
+                        <span className="mr-2">+23 850€</span>
+                        <LabelPercentage percentage={percentage} />
+                    </div>
                 </div>
-                <div className="flex items-center">
-                    <span className="mr-2">+23 850€</span>
-                    <Label percentage={-8.4} />
-                </div>
-            </div>
+            ) : (
+                <LabelText nonEligible={true} />
+            )}
         </DotationCardContainer>
     );
 };
