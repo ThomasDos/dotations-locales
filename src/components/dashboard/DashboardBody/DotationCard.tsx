@@ -1,4 +1,9 @@
-import { IconCopyWithSuccess, IconInformation, Label } from "components/ui";
+import {
+    IconCopyWithSuccess,
+    IconInformation,
+    LabelPercentage,
+    LabelText,
+} from "components/ui";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
@@ -52,22 +57,26 @@ const DotationCard = ({
                 </div>
                 <span>{description}</span>
             </div>
-            <div className="flex flex-col items-end">
-                <div className="flex mb-2">
-                    <SpanTotalNumber>
-                        {dotationTotalFormatted} €
-                    </SpanTotalNumber>
-                    <div className="relative">
-                        <div className="absolute r-0 ml-3 cursor-copy">
-                            <IconCopyWithSuccess toCopy={dotationTotal} />
+            {dotationTotal ? (
+                <div className="flex flex-col items-end">
+                    <div className="flex mb-2">
+                        <SpanTotalNumber>
+                            {dotationTotalFormatted} €
+                        </SpanTotalNumber>
+                        <div className="relative">
+                            <div className="absolute r-0 ml-3 cursor-copy">
+                                <IconCopyWithSuccess toCopy={dotationTotal} />
+                            </div>
                         </div>
                     </div>
+                    <div className="flex items-center">
+                        <span className="mr-2">+23 850€</span>
+                        <LabelPercentage percentage={percentage} />
+                    </div>
                 </div>
-                <div className="flex items-center">
-                    <span className="mr-2">+23 850€</span>
-                    <Label percentage={percentage} />
-                </div>
-            </div>
+            ) : (
+                <LabelText nonEligible={true} />
+            )}
         </DotationCardContainer>
     );
 };
