@@ -9,15 +9,13 @@ const IconCopy = ({ toCopy }: IconCopyProps) => {
     const [copied, setCopied] = useState(false);
 
     const onCopy = () => {
-        console.log("click");
         setCopied(true);
 
         setTimeout(() => {
             setCopied(false);
-        }, 3000);
+        }, 2000);
     };
 
-    console.log("copied", copied);
     return (
         <div
             onClick={async () => {
@@ -26,7 +24,7 @@ const IconCopy = ({ toCopy }: IconCopyProps) => {
             }}
         >
             <Image
-                src="/icons/copy-success.svg"
+                src={`/icons/${copied ? "checked.png" : "copy.svg"}`}
                 height="16px"
                 width="13.87px"
                 alt="vecteur sous forme de flèche vers le haut"

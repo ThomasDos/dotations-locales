@@ -1,9 +1,12 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-const LinkContainer = styled.a`
-    color: var(--grey-425);
+const LinkContainer = styled.div`
+    color: var(--grey-main-525);
     text-decoration: underline;
+    :hover {
+        color: var(--grey-425);
+    }
 `;
 
 interface BreadCrumbsTwoLinkProps {
