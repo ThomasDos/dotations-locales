@@ -1,5 +1,9 @@
 import axios from "axios";
-import type { IFetchEntityResult } from "interfaces/entity.interface";
+import type {
+    IFetchEntityResult,
+    IFetchEntityResultDto,
+} from "src/models/entity/entity.interface";
+import { fetchEntityResultSerializer } from "src/models/entity/entity.serializer";
 
 export default async (
     search: string,
@@ -10,6 +14,6 @@ export default async (
             `https://territoires.leximpact.dev/communes/autocomplete?field=commune&field=distributions_postales&q=${search}`,
             { signal }
         )
-        .then(res => {
-            return res.data;
+        .then((res: { data: IFetchEntityResultDto }) => {
+            return fetchEntityResultSerializer(res.data);
         });

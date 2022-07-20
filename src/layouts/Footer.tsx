@@ -10,10 +10,15 @@ import {
     Logo,
 } from "@dataesr/react-dsfr";
 import Image from "next/image";
+import styled from "styled-components";
+
+export const FooterMain = styled(Footer)`
+    z-index: 100 !important;
+`;
 
 const FooterContainer = () => {
     return (
-        <Footer>
+        <FooterMain>
             <FooterBody description="Texte optionnel 3 lignes maximum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur et vel quam auctor semper. Cras si amet mollis dolor.">
                 <Logo splitCharacter={10}>RÉPUBLIQUE FRANÇAISE</Logo>
                 <FooterOperator>
@@ -61,7 +66,7 @@ const FooterContainer = () => {
                 {/* TODO:LINK TO REPLACE : https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText  */}
                 <FooterCopy>licence AGPL3</FooterCopy>
             </FooterBottom>
-        </Footer>
+        </FooterMain>
     );
 };
 

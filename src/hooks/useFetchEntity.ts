@@ -1,6 +1,6 @@
-import type { IFetchEntityResult } from "interfaces/entity.interface";
 import { useQuery } from "react-query";
 import fetchEntity from "services/fetchEntity";
+import type { IFetchEntityResult } from "src/models/entity/entity.interface";
 
 export default (search: string) =>
     useQuery<IFetchEntityResult>(
@@ -11,6 +11,7 @@ export default (search: string) =>
                 //TODO: manage error
                 return err;
             },
+
             retry: 1,
         }
     );

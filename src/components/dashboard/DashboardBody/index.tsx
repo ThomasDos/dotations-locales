@@ -43,7 +43,7 @@ const DashboardBody = () => {
                 hasInformation={false}
                 percentage={8.4}
                 dotationTotal={870967}
-                title="Dotations Générales de Fonctionnement (DGC)"
+                title="Dotations Générales de Fonctionnement (DGF)"
                 description="Evolution de votre montant total de dotations"
             />
 

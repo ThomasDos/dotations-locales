@@ -1,5 +1,8 @@
-import type { IEntity, IFetchEntityResult } from "interfaces/entity.interface";
 import Link from "next/link";
+import type {
+    IEntity,
+    IFetchEntityResult,
+} from "src/models/entity/entity.interface";
 import styled from "styled-components";
 
 const DropdownRowContainer = styled.div`
@@ -19,8 +22,8 @@ interface DropdownSearchProps {
 
 const DropdownRow = ({ ...entity }: IEntity) => {
     console.log("entity", entity);
-    const { code_commune_insee: codeInsee, code_postal: codePostal } =
-        entity.distributions_postales[0];
+    const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
+        entity.distributionsPostales[0];
     const { LIBELLE: nomCommune } = entity.commune;
     return (
         <Link

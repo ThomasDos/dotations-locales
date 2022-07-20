@@ -11,7 +11,7 @@ const Dashboard = () => {
     return (
         <>
             <SubHeader commune={commune as string} />
-            <div className="flex">
+            <div className="flex pb-0.5">
                 <DashboardBody />
                 <EntityParameters />
             </div>
