@@ -2,33 +2,41 @@ import Image from "next/image";
 import styled from "styled-components";
 
 interface LabelTextProps {
-    nonEligible: boolean;
+    text: string;
+    backgroundColor?: string;
+    icon?: string;
 }
 
-const LabelTextContainer = styled.div`
+interface LabelTextContainerProps {
+    backgroundColor: string;
+}
+
+const LabelTextContainer = styled.div<LabelTextContainerProps>`
     border-radius: 40px;
-    background: #eeeeee;
+    background: ${props => props.backgroundColor};
 `;
-const NonEligible = () => (
-    <div className="flex">
-        <div>
-            <Image
-                src="/icons/cross.svg"
-                height="8.5px"
-                width="8.5px"
-                alt="icone croix"
-            />
-        </div>
-        <span className="ml-2">Non éligible</span>
-    </div>
-);
 
-const ALetude = () => <span>A l&lsquo;étude</span>;
-
-const LabelText = ({ nonEligible }: LabelTextProps) => {
+const LabelText = ({
+    text,
+    icon,
+    backgroundColor = "#eeeeee",
+}: LabelTextProps) => {
     return (
-        <LabelTextContainer className="py-1 px-4 flex justify-center items-center text-sm">
-            {nonEligible ? <NonEligible /> : <ALetude />}
+        <LabelTextContainer
+            className="py-1 px-4 flex justify-center items-center text-sm"
+            backgroundColor={backgroundColor}
+        >
+            {icon && (
+                <div>
+                    <Image
+                        src={`/icons/${icon}`}
+                        height="8.5px"
+                        width="8.5px"
+                        alt="icone croix"
+                    />
+                </div>
+            )}
+            <span className={`${icon ? "ml-2" : ""}`}>{text}</span>
         </LabelTextContainer>
     );
 };

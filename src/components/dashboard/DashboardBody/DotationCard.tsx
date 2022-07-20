@@ -1,8 +1,9 @@
 import {
     IconCopyWithSuccess,
     IconInformation,
+    LabelALetude,
+    LabelGreyCustomCrossIcon,
     LabelPercentage,
-    LabelText,
 } from "components/ui";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
@@ -74,8 +75,10 @@ const DotationCard = ({
                         <LabelPercentage percentage={percentage} />
                     </div>
                 </div>
+            ) : title.includes("DNP") ? (
+                <LabelALetude />
             ) : (
-                <LabelText nonEligible={true} />
+                <LabelGreyCustomCrossIcon text="Non éligible" />
             )}
         </DotationCardContainer>
     );
