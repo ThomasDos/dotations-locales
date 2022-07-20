@@ -1,4 +1,5 @@
 export { default as BreadCrumbsTwoLink } from "./BreadCrumbsTwoLink";
+export { default as Button } from "./Button";
 export { default as IconCopyWithSuccess } from "./IconCopyWithSuccess";
 export { default as IconInformation } from "./icons/IconInformation";
 export { default as IconVectorDown } from "./icons/IconVectorDown";
