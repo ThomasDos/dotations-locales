@@ -16,7 +16,7 @@ const EntityParametersContainer = styled.div`
 const EntityParameters = () => {
     return (
         <EntityParametersContainer>
-            <div className="w-full text-center">
+            <div className="w-full text-center sticky top-16">
                 <div className="mb-6">
                     <span className="font-bold">
                         Données connues de votre commune
