@@ -3,7 +3,7 @@ interface EntityRowProps {
     data: string;
 }
 
-const EntityRow = ({ text, data }: EntityRowProps) => {
+const ParameterRow = ({ text, data }: EntityRowProps) => {
     return (
         <>
             <hr />
@@ -15,4 +15,4 @@ const EntityRow = ({ text, data }: EntityRowProps) => {
     );
 };
 
-export default EntityRow;
+export default ParameterRow;

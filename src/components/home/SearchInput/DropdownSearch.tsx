@@ -1,8 +1,5 @@
 import Link from "next/link";
-import type {
-    IEntity,
-    IFetchEntityResult,
-} from "src/models/entity/entity.interface";
+import type { IAutocompletion } from "src/models/autocompletion/autocompletion.interface";
 import styled from "styled-components";
 
 const DropdownRowContainer = styled.div`
@@ -17,10 +14,10 @@ const DropdownRowContainer = styled.div`
 `;
 
 interface DropdownSearchProps {
-    searchResult: IFetchEntityResult | undefined;
+    autocompletion: IAutocompletion[] | undefined;
 }
 
-const DropdownRow = ({ ...entity }: IEntity) => {
+const DropdownRow = ({ ...entity }: IAutocompletion) => {
     console.log("entity", entity);
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
@@ -42,11 +39,11 @@ const DropdownRow = ({ ...entity }: IEntity) => {
     );
 };
 
-const DropdownSearch = ({ searchResult }: DropdownSearchProps) => {
+const DropdownSearch = ({ autocompletion }: DropdownSearchProps) => {
     return (
         <>
-            {!!searchResult &&
-                searchResult.map((entity: IEntity) => (
+            {!!autocompletion &&
+                autocompletion.map((entity: IAutocompletion) => (
                     <DropdownRow {...entity} key={entity.code} />
                 ))}
         </>

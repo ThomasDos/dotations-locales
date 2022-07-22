@@ -1,23 +1,20 @@
-export type IFetchEntityResultDto = IEntityDto[];
-export type IFetchEntityResult = IEntity[];
-
-export interface IEntityDto {
+export interface IAutocompletionDto {
     autocompletion: string;
     code: string;
-    commune: ICommune;
+    commune: IAutocompletionCommune;
     distance: number;
     distributions_postales: IDistributionPostaleDto[];
 }
 
-export interface IEntity {
+export interface IAutocompletion {
     autocompletion: string;
     code: string;
-    commune: ICommune;
+    commune: IAutocompletionCommune;
     distance: number;
     distributionsPostales: IDistributionPostale[];
 }
 
-interface ICommune {
+interface IAutocompletionCommune {
     ARR: string;
     CAN: string;
     COM: string;

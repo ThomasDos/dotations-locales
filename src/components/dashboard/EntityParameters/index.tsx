@@ -1,7 +1,7 @@
 import { Button, LabelPercentage } from "components/ui";
 import styled from "styled-components";
 
-import EntityRow from "./EntityRow";
+import ParameterRow from "./ParameterRow";
 
 const EntityParametersContainer = styled.div`
     width: 25%;
@@ -23,11 +23,11 @@ const EntityParameters = () => {
                     </span>
                 </div>
                 <div>
-                    <EntityRow text="Habitant" data="data" />
-                    <EntityRow text="Habitant" data="data" />
-                    <EntityRow text="Habitant" data="data" />
-                    <EntityRow text="Habitant" data="data" />
-                    <EntityRow text="Habitant" data="data" />
+                    <ParameterRow text="Habitant" data="data" />
+                    <ParameterRow text="Habitant" data="data" />
+                    <ParameterRow text="Habitant" data="data" />
+                    <ParameterRow text="Habitant" data="data" />
+                    <ParameterRow text="Habitant" data="data" />
                 </div>
                 <div className="my-6">
                     <Button text="Modifier pour simuler" />
