@@ -32,49 +32,73 @@ const Home: NextPage = () => {
             <SearchInput />
             <div className="mx-60 mt-20">
                 <HomeRowImageText
+                    src="/images/landing-1.svg"
                     imageHeight="444px"
                     imageWidth="444px"
                     imageAlt="first row image"
-                    titleContent="Améliorons la connaissance sur les dotations."
-                    bodyContent="Le Service Dotations Locales a pour objectif de vous aider et d’améliorer votre connaissance sur les dotations de votre collectivité afin de vous permettre d’anticiper et de construire sereinement votre budget local."
-                />
+                    titleContent="Améliorons la connaissance sur les dotations d'état"
+                >
+                    Le Service
+                    <strong> Dotations Locales</strong> a pour objectif de vous
+                    aider et d’améliorer votre connaissance sur les dotations de
+                    votre collectivité afin de vous permettre d’anticiper et de
+                    construire sereinement votre budget local.
+                </HomeRowImageText>
 
                 <HomeRowImageText
+                    src="/images/landing-2.svg"
                     reverse
-                    imageHeight="236px"
-                    imageWidth="236px"
+                    imageHeight="444px"
+                    imageWidth="444px"
                     imageAlt="second row image"
-                    titleContent="Toutes les données utiles pour construire votre budget."
-                    bodyContent="Accédez rapidement aux informations et aux montants utiles pour constrir votre budget primitif. Exportez et exploitez les données comme bon vous semble !"
-                />
+                    titleContent="Les données utiles pour construire votre budget"
+                >
+                    Accédez rapidement aux informations et aux montants dont
+                    vous avez besoin pour établir votre budget. <br /> <br />
+                    <strong>
+                        Exportez et utilisez les données comme vous le souhaitez
+                        !
+                    </strong>
+                </HomeRowImageText>
 
                 <HomeRowImageText
-                    imageHeight="336px"
-                    imageWidth="336px"
+                    src="/images/landing-3.svg"
+                    imageHeight="320px"
+                    imageWidth="320px"
                     imageAlt="third row image"
-                    titleContent="Simulez, comparez et analysez l’évolution de vos dotations locales."
-                    bodyContent="Corps de texte réservé aux usages éditoriaux (type :
-                            actualités, blog) afin de permettre un plus grand
-                            confort de lecture."
-                />
+                    titleContent="Simulez, comparez et analysez l’évolution de vos dotations locales"
+                >
+                    Un outil pratique pour suivre l’évolution des montants,
+                    comparez et analysez les critères et les données qui ont un
+                    impact fort sur les fonds qui vous sont attribués.
+                </HomeRowImageText>
 
                 <HomeRowImageText
+                    src="/images/landing-4.svg"
                     reverse
-                    imageHeight="236px"
-                    imageWidth="236px"
+                    imageHeight="256px"
+                    imageWidth="256px"
                     imageAlt="fourth row image"
-                    titleContent="Sur la base du moteur de calcul OpenFisca."
-                    bodyContent="Accédez rapidement aux informations et aux montants utiles pour constrir votre budget primitif. Exportez et exploitez les données comme bon vous semble !"
-                />
+                    titleContent="Sur la base du moteur de calcul OpenFisca"
+                >
+                    <strong>Dotations Locales</strong> s’appuie sur{" "}
+                    <strong>OpenFisca</strong>, un moteur de calcul libre,
+                    collaboratif et transparent qui permet de simuler
+                    l&lsquo;impact de réformes sur les dotations des
+                    collectivités.
+                </HomeRowImageText>
 
                 <HomeRowImageText
-                    reverse
-                    imageHeight="236px"
-                    imageWidth="236px"
+                    src="/images/landing-5.svg"
+                    imageHeight="256px"
+                    imageWidth="256px"
                     imageAlt="fifth row image"
-                    titleContent="Open data."
-                    bodyContent="Accédez rapidement aux informations et aux montants utiles pour constrir votre budget primitif. Exportez et exploitez les données comme bon vous semble !"
-                />
+                    titleContent="Des données libres et partagées en Open Data"
+                >
+                    L’ensemble des données de votre collectivité sont collectées
+                    automatiquement à partir des plateformes publiques
+                    <strong>Data.gouv.fr.</strong>
+                </HomeRowImageText>
             </div>
 
             <MainBottom className="w-full py-20 px-60 flex justify-center items-center">
@@ -82,8 +106,8 @@ const Home: NextPage = () => {
                     <div className="mr-14">
                         <Image
                             src="/icons/france-relance.svg"
-                            height="160px"
-                            width="160px"
+                            height="116px"
+                            width="116px"
                             alt="icone france relance"
                             layout="fixed"
                         />
