@@ -1,11 +1,5 @@
 import { fetchCommuneMocked } from "constants/fetchCommuneMocked";
 
-import type {
-    CommuneDto,
-    CriteresDto,
-    DotationsDto,
-    SousDotationsDto,
-} from "../commune.interface";
 import {
     criteresSerializer,
     dotationSerializer,
