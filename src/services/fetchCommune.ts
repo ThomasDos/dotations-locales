@@ -10,6 +10,5 @@ export default async (codeInsee: string): Promise<Commune> =>
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then(({ data }: { data: CommuneDto }) => {
-            console.log("res", data);
             return fetchCommuneSerializer(data);
         });

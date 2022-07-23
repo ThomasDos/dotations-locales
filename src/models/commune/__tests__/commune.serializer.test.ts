@@ -72,35 +72,43 @@ describe("fetchCommuneSerializer", () => {
             dotations: {
                 dotationForfaitaire: {
                     annees: [{ "2022": 15161 }, { "2021": 15993 }],
-                    description: "Dotations Forfaitaire (DF)",
+                    description:
+                        "Evolution de votre montant total de dotations",
+                    title: "Dotations Forfaitaire (DF)",
                 },
                 dotationSolidariteRurale: {
                     annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                    description: "Dotations Solidarité Rurale (DSR)",
+                    description:
+                        "Légère augmentation en 2022 dû à la part Bourg Centre",
                     sousDotations: [
                         {
                             dsrFractionCible: {
                                 annees: [{ "2022": 0 }, { "2021": 0 }],
-                                description: "Part Cible",
+                                description: "",
+                                title: "Part Cible",
                             },
                         },
                         {
                             dsrFractionPerequation: {
                                 annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                                description: "Part Péréquation",
+                                description: "",
+                                title: "Part Péréquation",
                             },
                         },
                         {
                             dsrFractionBourgCentre: {
                                 annees: [{ "2022": 0 }, { "2021": 0 }],
-                                description: "Part Bourg Centre",
+                                description: "",
+                                title: "Part Bourg Centre",
                             },
                         },
                     ],
+                    title: "Dotations Solidarité Rurale (DSR)",
                 },
                 dsuMontant: {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
-                    description: "Dotations Solidarité Urbaine (DSU)",
+                    description: "Dotation pour les communes urbaines",
+                    title: "Dotations Solidarité Urbaine (DSU)",
                 },
             },
         });
@@ -174,35 +182,42 @@ describe("dotationSerializer", () => {
         expect(dotationSerializer(fetchCommuneMocked.dotations)).toEqual({
             dotationForfaitaire: {
                 annees: [{ "2022": 15161 }, { "2021": 15993 }],
-                description: "Dotations Forfaitaire (DF)",
+                description: "Evolution de votre montant total de dotations",
+                title: "Dotations Forfaitaire (DF)",
             },
             dotationSolidariteRurale: {
                 annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                description: "Dotations Solidarité Rurale (DSR)",
+                description:
+                    "Légère augmentation en 2022 dû à la part Bourg Centre",
                 sousDotations: [
                     {
                         dsrFractionCible: {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
-                            description: "Part Cible",
+                            description: "",
+                            title: "Part Cible",
                         },
                     },
                     {
                         dsrFractionPerequation: {
                             annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                            description: "Part Péréquation",
+                            description: "",
+                            title: "Part Péréquation",
                         },
                     },
                     {
                         dsrFractionBourgCentre: {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
-                            description: "Part Bourg Centre",
+                            description: "",
+                            title: "Part Bourg Centre",
                         },
                     },
                 ],
+                title: "Dotations Solidarité Rurale (DSR)",
             },
             dsuMontant: {
                 annees: [{ "2022": 0 }, { "2021": 0 }],
-                description: "Dotations Solidarité Urbaine (DSU)",
+                description: "Dotation pour les communes urbaines",
+                title: "Dotations Solidarité Urbaine (DSU)",
             },
         });
     });
@@ -219,19 +234,22 @@ describe("sousDotationsSerializer", () => {
             {
                 dsrFractionCible: {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
-                    description: "Part Cible",
+                    description: "",
+                    title: "Part Cible",
                 },
             },
             {
                 dsrFractionPerequation: {
                     annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                    description: "Part Péréquation",
+                    description: "",
+                    title: "Part Péréquation",
                 },
             },
             {
                 dsrFractionBourgCentre: {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
-                    description: "Part Bourg Centre",
+                    description: "",
+                    title: "Part Bourg Centre",
                 },
             },
         ]);

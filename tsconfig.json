@@ -25,7 +25,8 @@
             "interfaces/*": ["src/interfaces/*"],
             "hooks/*": ["src/hooks/*"],
             "utils/*": ["src/utils/*"],
-            "constants/*": ["src/constants/*"]
+            "constants/*": ["src/constants/*"],
+            "models/*": ["src/models/*"]
         }
     },
     "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],

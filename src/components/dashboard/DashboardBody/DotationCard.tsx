@@ -5,6 +5,7 @@ import {
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
+import type { Dotation } from "models/commune/commune.interface";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
@@ -28,21 +29,23 @@ const CardTitleContainer = styled.span`
 `;
 
 interface DotationCardProps {
-    dotationTotal: number;
     hasInformation?: boolean;
-    title: string;
-    description: string;
-    percentage: number;
+    dotation: Dotation;
 }
 
 const DotationCard = ({
-    dotationTotal,
-    title,
-    description,
-    percentage,
+    dotation,
     hasInformation = true,
 }: DotationCardProps) => {
-    const dotationTotalFormatted = formatNumberWithSpace(dotationTotal);
+    const currentYearTotal = dotation.annees[0][new Date().getFullYear()];
+    const lastYear = dotation.annees[1][new Date().getFullYear() - 1];
+    const dotationTotalFormatted = formatNumberWithSpace(currentYearTotal);
+
+    const totalEvolution = currentYearTotal - lastYear;
+    const percentageEvolution = Number(
+        ((currentYearTotal / lastYear - 1) * 100).toFixed(2)
+    );
+    const { title, description } = dotation;
     return (
         <DotationCardContainer>
             <div className="flex flex-col">
@@ -58,7 +61,7 @@ const DotationCard = ({
                 </div>
                 <span>{description}</span>
             </div>
-            {dotationTotal ? (
+            {dotationTotalFormatted ? (
                 <div className="flex flex-col items-end">
                     <div className="flex mb-2">
                         <SpanTotalNumber>
@@ -66,14 +69,20 @@ const DotationCard = ({
                         </SpanTotalNumber>
                         <div className="relative">
                             <div className="absolute r-0 ml-3 cursor-copy">
-                                <IconCopyWithSuccess toCopy={dotationTotal} />
+                                <IconCopyWithSuccess
+                                    toCopy={currentYearTotal}
+                                />
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center">
-                        <span className="mr-2">+23 850€</span>
-                        <LabelPercentage percentage={percentage} />
-                    </div>
+                    {totalEvolution ? (
+                        <div className="flex items-center">
+                            <span className="mr-2">{`${
+                                totalEvolution > 0 ? "+" : ""
+                            } ${totalEvolution}€`}</span>
+                            <LabelPercentage percentage={percentageEvolution} />
+                        </div>
+                    ) : null}
                 </div>
             ) : title.includes("DNP") ? (
                 <LabelALetude />

@@ -1,4 +1,5 @@
 import { Button, LabelPercentage } from "components/ui";
+import type { Criteres } from "models/commune/commune.interface";
 import styled from "styled-components";
 
 import ParameterRow from "./ParameterRow";
@@ -13,7 +14,12 @@ const EntityParametersContainer = styled.div`
     align-items: center;
 `;
 
-const EntityParameters = () => {
+interface EntityParametersProps {
+    criteres: Criteres;
+}
+
+const EntityParameters = ({ criteres }: EntityParametersProps) => {
+    const criteresKeys = Object.keys(criteres);
     return (
         <EntityParametersContainer>
             <div className="w-full text-center sticky top-16">
@@ -23,11 +29,14 @@ const EntityParameters = () => {
                     </span>
                 </div>
                 <div>
-                    <ParameterRow text="Habitant" data="data" />
-                    <ParameterRow text="Habitant" data="data" />
-                    <ParameterRow text="Habitant" data="data" />
-                    <ParameterRow text="Habitant" data="data" />
-                    <ParameterRow text="Habitant" data="data" />
+                    {criteresKeys.map((critereKey: string) => {
+                        return (
+                            <ParameterRow
+                                key={critereKey}
+                                critere={criteres[critereKey]}
+                            />
+                        );
+                    })}
                 </div>
                 <div className="my-6">
                     <Button text="Modifier pour simuler" />

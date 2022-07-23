@@ -17,14 +17,14 @@ export type DotationsDto = Record<
         sous_dotations?: SousDotationsDto;
     }
 >;
-export type Dotations = Record<
-    string,
-    {
-        annees: DotationAnnee[];
-        sousDotations?: SousDotations;
-        description: string;
-    }
->;
+export type Dotations = Record<string, Dotation>;
+
+export interface Dotation {
+    annees: DotationAnnee[];
+    sousDotations?: SousDotations;
+    description: string;
+    title: string;
+}
 
 export type SousDotationsDto = DotationsDto[];
 export type SousDotations = Dotations[];
@@ -37,14 +37,17 @@ export type CriteresDto = Record<
         annees: CritereAnnee[];
     }
 >;
-export type Criteres = Record<
+export type Criteres = Record<string, Critere>;
+
+export interface Critere {
+    annees: CritereAnnee[];
+    description: string;
+}
+
+export type CritereAnnee = Record<
     string,
     {
-        annees: CritereAnnee[];
-        description: string;
+        unite: string | null;
+        valeur: string;
     }
 >;
-
-type Critere = Record<string, string | null>;
-
-type CritereAnnee = Record<string, Critere>;

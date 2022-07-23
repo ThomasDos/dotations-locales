@@ -9,14 +9,29 @@ export const criteresMap: Record<string, string> = {
     zoneDeMontagne: "Zone de montagne",
 };
 
-export const dotationsMap: Record<string, string> = {
-    dotationForfaitaire: "Dotations Forfaitaire (DF)",
-    dotationSolidariteRurale: "Dotations Solidarité Rurale (DSR)",
-    dsuMontant: "Dotations Solidarité Urbaine (DSU)",
+export const dotationsMap: Record<
+    string,
+    { description: string; title: string }
+> = {
+    dotationForfaitaire: {
+        description: "Evolution de votre montant total de dotations",
+        title: "Dotations Forfaitaire (DF)",
+    },
+    dotationSolidariteRurale: {
+        description: "Légère augmentation en 2022 dû à la part Bourg Centre",
+        title: "Dotations Solidarité Rurale (DSR)",
+    },
+    dsuMontant: {
+        description: "Dotation pour les communes urbaines",
+        title: "Dotations Solidarité Urbaine (DSU)",
+    },
 };
 
-export const sousDotationsMap: Record<string, string> = {
-    dsrFractionBourgCentre: "Part Bourg Centre",
-    dsrFractionCible: "Part Cible",
-    dsrFractionPerequation: "Part Péréquation",
+export const sousDotationsMap: Record<
+    string,
+    { description: string; title: string }
+> = {
+    dsrFractionBourgCentre: { description: "", title: "Part Bourg Centre" },
+    dsrFractionCible: { description: "", title: "Part Cible" },
+    dsrFractionPerequation: { description: "", title: "Part Péréquation" },
 };

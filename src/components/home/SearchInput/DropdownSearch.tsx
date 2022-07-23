@@ -18,7 +18,6 @@ interface DropdownSearchProps {
 }
 
 const DropdownRow = ({ ...entity }: Autocompletion) => {
-    console.log("entity", entity);
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
     const { LIBELLE: nomCommune } = entity.commune;
