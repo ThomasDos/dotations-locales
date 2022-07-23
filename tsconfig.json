@@ -24,7 +24,8 @@
             "styles/*": ["src/styles/*"],
             "interfaces/*": ["src/interfaces/*"],
             "hooks/*": ["src/hooks/*"],
-            "utils/*": ["src/utils/*"]
+            "utils/*": ["src/utils/*"],
+            "constants/*": ["src/constants/*"]
         }
     },
     "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],

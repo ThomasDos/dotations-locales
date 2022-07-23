@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { IAutocompletion } from "src/models/autocompletion/autocompletion.interface";
+import type { Autocompletion } from "src/models/autocompletion/autocompletion.interface";
 import styled from "styled-components";
 
 const DropdownRowContainer = styled.div`
@@ -14,10 +14,10 @@ const DropdownRowContainer = styled.div`
 `;
 
 interface DropdownSearchProps {
-    autocompletion: IAutocompletion[] | undefined;
+    autocompletion: Autocompletion[] | undefined;
 }
 
-const DropdownRow = ({ ...entity }: IAutocompletion) => {
+const DropdownRow = ({ ...entity }: Autocompletion) => {
     console.log("entity", entity);
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
@@ -43,7 +43,7 @@ const DropdownSearch = ({ autocompletion }: DropdownSearchProps) => {
     return (
         <>
             {!!autocompletion &&
-                autocompletion.map((entity: IAutocompletion) => (
+                autocompletion.map((entity: Autocompletion) => (
                     <DropdownRow {...entity} key={entity.code} />
                 ))}
         </>

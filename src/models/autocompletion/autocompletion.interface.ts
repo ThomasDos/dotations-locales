@@ -1,20 +1,20 @@
-export interface IAutocompletionDto {
+export interface AutocompletionDto {
     autocompletion: string;
     code: string;
-    commune: IAutocompletionCommune;
+    commune: AutocompletionCommune;
     distance: number;
-    distributions_postales: IDistributionPostaleDto[];
+    distributions_postales: DistributionPostaleDto[];
 }
 
-export interface IAutocompletion {
+export interface Autocompletion {
     autocompletion: string;
     code: string;
-    commune: IAutocompletionCommune;
+    commune: AutocompletionCommune;
     distance: number;
-    distributionsPostales: IDistributionPostale[];
+    distributionsPostales: DistributionPostale[];
 }
 
-interface IAutocompletionCommune {
+interface AutocompletionCommune {
     ARR: string;
     CAN: string;
     COM: string;
@@ -28,7 +28,7 @@ interface IAutocompletionCommune {
     TYPECOM: string;
 }
 
-export interface IDistributionPostaleDto {
+export interface DistributionPostaleDto {
     code_commune_insee: string;
     code_postal: string;
     coordonnees_gps: [number, number];
@@ -36,7 +36,7 @@ export interface IDistributionPostaleDto {
     nom_de_la_commune: string;
 }
 
-export interface IDistributionPostale {
+export interface DistributionPostale {
     codeCommuneInsee: string;
     codePostal: string;
     coordonneesGps: [number, number];
