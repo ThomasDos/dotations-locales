@@ -73,7 +73,7 @@ describe("fetchCommuneSerializer", () => {
                 dotationForfaitaire: {
                     annees: [{ "2022": 15161 }, { "2021": 15993 }],
                     description:
-                        "Evolution de votre montant total de dotations",
+                        "Votre dotation forfaitaire est stable par rapport à l’année 2021",
                     title: "Dotations Forfaitaire (DF)",
                 },
                 dotationSolidariteRurale: {
@@ -182,7 +182,8 @@ describe("dotationSerializer", () => {
         expect(dotationSerializer(fetchCommuneMocked.dotations)).toEqual({
             dotationForfaitaire: {
                 annees: [{ "2022": 15161 }, { "2021": 15993 }],
-                description: "Evolution de votre montant total de dotations",
+                description:
+                    "Votre dotation forfaitaire est stable par rapport à l’année 2021",
                 title: "Dotations Forfaitaire (DF)",
             },
             dotationSolidariteRurale: {

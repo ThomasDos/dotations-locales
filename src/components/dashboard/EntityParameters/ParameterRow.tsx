@@ -1,4 +1,5 @@
 import type { Critere } from "models/commune/commune.interface";
+import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
 interface EntityRowProps {
     critere: Critere;
@@ -17,7 +18,9 @@ const ParameterRow = ({ critere }: EntityRowProps) => {
                 <span className="font-bold text-end">
                     {isNaN(valeurToNumber)
                         ? currentYear.valeur
-                        : Math.round(Number(currentYear.valeur))}
+                        : formatNumberWithSpace(
+                              Math.round(Number(currentYear.valeur))
+                          )}
                     {currentYear.unite && currentYear.unite}
                 </span>
             </div>

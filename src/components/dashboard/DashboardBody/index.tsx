@@ -1,4 +1,4 @@
-import type { Dotations } from "models/commune/commune.interface";
+import type { Dotation, Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -21,10 +21,28 @@ const SpanMajContainer = styled.span`
 
 interface DashboardBodyProps {
     dotations: Dotations;
+    currentYearTotal: number;
+    lastYearTotal: number;
 }
 
-const DashboardBody = ({ dotations }: DashboardBodyProps) => {
+const DashboardBody = ({
+    dotations,
+    currentYearTotal,
+    lastYearTotal,
+}: DashboardBodyProps) => {
     const dotationsKeys = Object.keys(dotations);
+    const currentYear = new Date().getFullYear();
+    const lastYear = new Date().getFullYear() - 1;
+    const countEligibleDotations = dotationsKeys.length;
+
+    const dotationDGF: Dotation = {
+        annees: [
+            { [currentYear]: currentYearTotal },
+            { [lastYear]: lastYearTotal },
+        ],
+        description: "Evolution de votre montant total de dotations",
+        title: "Dotations Générales de Fonctionnement (DGF)",
+    };
     return (
         <DashboardBodyContainer>
             <>
@@ -46,27 +64,19 @@ const DashboardBody = ({ dotations }: DashboardBodyProps) => {
                         />
                     </div>
                 </InfoDateContainer>
+
+                <DotationCard hasInformation={false} dotation={dotationDGF} />
+
+                <ExportContainer
+                    countEligibleDotations={countEligibleDotations}
+                />
                 {dotationsKeys.map(dotationKey => {
                     return (
-                        dotationKey === "dotationForfaitaire" && (
-                            <DotationCard
-                                key={dotationKey}
-                                hasInformation={false}
-                                dotation={dotations[dotationKey]}
-                            />
-                        )
-                    );
-                })}
-                <ExportContainer />
-                {dotationsKeys.map(dotationKey => {
-                    return (
-                        dotationKey !== "dotationForfaitaire" && (
-                            <DotationCard
-                                key={dotationKey}
-                                hasInformation={false}
-                                dotation={dotations[dotationKey]}
-                            />
-                        )
+                        <DotationCard
+                            key={dotationKey}
+                            hasInformation={false}
+                            dotation={dotations[dotationKey]}
+                        />
                     );
                 })}
             </>

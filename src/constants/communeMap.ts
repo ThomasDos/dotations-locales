@@ -14,7 +14,8 @@ export const dotationsMap: Record<
     { description: string; title: string }
 > = {
     dotationForfaitaire: {
-        description: "Evolution de votre montant total de dotations",
+        description:
+            "Votre dotation forfaitaire est stable par rapport à l’année 2021",
         title: "Dotations Forfaitaire (DF)",
     },
     dotationSolidariteRurale: {

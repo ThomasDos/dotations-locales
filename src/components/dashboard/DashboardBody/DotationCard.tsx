@@ -61,7 +61,7 @@ const DotationCard = ({
                 </div>
                 <span>{description}</span>
             </div>
-            {dotationTotalFormatted ? (
+            {currentYearTotal ? (
                 <div className="flex flex-col items-end">
                     <div className="flex mb-2">
                         <SpanTotalNumber>
@@ -79,7 +79,7 @@ const DotationCard = ({
                         <div className="flex items-center">
                             <span className="mr-2">{`${
                                 totalEvolution > 0 ? "+" : ""
-                            } ${totalEvolution}€`}</span>
+                            } ${formatNumberWithSpace(totalEvolution)}€`}</span>
                             <LabelPercentage percentage={percentageEvolution} />
                         </div>
                     ) : null}
