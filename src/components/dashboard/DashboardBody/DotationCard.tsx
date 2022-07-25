@@ -9,6 +9,8 @@ import type { Dotation } from "models/commune/commune.interface";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
+import SousDotationsContainer from "./SousDotationsContainer";
+
 const DotationCardContainer = styled.div`
     padding: 32px 48px 32px 32px;
     display: flex;
@@ -45,7 +47,8 @@ const DotationCard = ({
     const percentageEvolution = Number(
         ((currentYearTotal / lastYear - 1) * 100).toFixed(2)
     );
-    const { title, description } = dotation;
+    const { title, description, sousDotations } = dotation;
+
     return (
         <DotationCardContainer>
             <div className="flex flex-col">
@@ -60,6 +63,9 @@ const DotationCard = ({
                     )}
                 </div>
                 <span>{description}</span>
+                {sousDotations && (
+                    <SousDotationsContainer sousDotations={sousDotations} />
+                )}
             </div>
             {currentYearTotal ? (
                 <div className="flex flex-col items-end">

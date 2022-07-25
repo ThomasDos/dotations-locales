@@ -62,12 +62,12 @@ const DashboardBody = ({
                         <span className="text-3xl font-bold">
                             Dotations pour {currentYear}
                         </span>
-                        <div className="flex text-sm items-center">
-                            <div className="mr-1">
+                        <div className="flex text-sm items-center cursor-pointer">
+                            <div className="flex mr-1">
                                 <Image
-                                    src="/icons/arrow-dropdown.svg"
-                                    width="12.73px"
-                                    height="7.78px"
+                                    src="/icons/file-download.svg"
+                                    width="16px"
+                                    height="16px"
                                     alt="icone exporter"
                                 />
                             </div>
