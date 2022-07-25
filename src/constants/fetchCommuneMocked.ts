@@ -1,0 +1,205 @@
+import type { CommuneDto } from "src/models/commune/commune.interface";
+
+export const fetchCommuneMocked: CommuneDto = {
+    code_insee: "42113",
+    criteres: {
+        longueur_voirie: {
+            annees: [
+                {
+                    "2022": {
+                        unite: "km",
+                        valeur: "9290",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: "km",
+                        valeur: "9290",
+                    },
+                },
+            ],
+        },
+        places_caravanes_avant_majoration: {
+            annees: [
+                {
+                    "2022": {
+                        unite: null,
+                        valeur: "0",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: null,
+                        valeur: "0",
+                    },
+                },
+            ],
+        },
+        population_dgf: {
+            annees: [
+                {
+                    "2022": {
+                        unite: null,
+                        valeur: "248",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: null,
+                        valeur: "248",
+                    },
+                },
+            ],
+        },
+        population_enfants: {
+            annees: [
+                {
+                    "2022": {
+                        unite: null,
+                        valeur: "43",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: null,
+                        valeur: "43",
+                    },
+                },
+            ],
+        },
+        potentiel_financier_par_habitant: {
+            annees: [
+                {
+                    "2022": {
+                        unite: "€",
+                        valeur: "742.818548",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: "€",
+                        valeur: "742.818548",
+                    },
+                },
+            ],
+        },
+        residences_secondaires: {
+            annees: [
+                {
+                    "2022": {
+                        unite: null,
+                        valeur: "14",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: null,
+                        valeur: "14",
+                    },
+                },
+            ],
+        },
+        superficie: {
+            annees: [
+                {
+                    "2022": {
+                        unite: "m²",
+                        valeur: "622",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: "m²",
+                        valeur: "622",
+                    },
+                },
+            ],
+        },
+        zone_de_montagne: {
+            annees: [
+                {
+                    "2022": {
+                        unite: null,
+                        valeur: "Oui",
+                    },
+                },
+                {
+                    "2021": {
+                        unite: null,
+                        valeur: "Oui",
+                    },
+                },
+            ],
+        },
+    },
+    dotations: {
+        dotation_forfaitaire: {
+            annees: [
+                {
+                    "2022": 15161,
+                },
+                {
+                    "2021": 15993,
+                },
+            ],
+        },
+        dotation_solidarite_rurale: {
+            annees: [
+                {
+                    "2022": 8765,
+                },
+                {
+                    "2021": 8795,
+                },
+            ],
+            sous_dotations: [
+                {
+                    dsr_fraction_cible: {
+                        annees: [
+                            {
+                                "2022": 0,
+                            },
+                            {
+                                "2021": 0,
+                            },
+                        ],
+                    },
+                },
+                {
+                    dsr_fraction_perequation: {
+                        annees: [
+                            {
+                                "2022": 8765,
+                            },
+                            {
+                                "2021": 8795,
+                            },
+                        ],
+                    },
+                },
+                {
+                    dsr_fraction_bourg_centre: {
+                        annees: [
+                            {
+                                "2022": 0,
+                            },
+                            {
+                                "2021": 0,
+                            },
+                        ],
+                    },
+                },
+            ],
+        },
+        dsu_montant: {
+            annees: [
+                {
+                    "2022": 0,
+                },
+                {
+                    "2021": 0,
+                },
+            ],
+        },
+    },
+};

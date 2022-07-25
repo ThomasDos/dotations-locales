@@ -20,7 +20,28 @@
                 "@typescript-eslint/explicit-module-boundary-types": "off",
                 "@typescript-eslint/naming-convention": "off",
                 "import/no-anonymous-default-export": "off",
+                //TODO: remove when back is ready and not use mocked data
+                "@typescript-eslint/no-unsafe-argument": "off",
                 "@typescript-eslint/no-unsafe-return": "off"
+            }
+        },
+        {
+            "files": ["*.test.ts", "*.test.tsx"], // Your TypeScript files extension
+            "extends": [
+                "next/core-web-vitals",
+                "@socialgouv/eslint-config-typescript"
+            ],
+            "parserOptions": {
+                "project": ["./tsconfig.json"] // Specify it only for TypeScript files
+            },
+            "rules": {
+                "@typescript-eslint/explicit-module-boundary-types": "off",
+                "@typescript-eslint/naming-convention": "off",
+                "import/no-anonymous-default-export": "off",
+                "@typescript-eslint/no-unsafe-return": "off",
+                "@typescript-eslint/no-unused-vars": "off",
+                "@typescript-eslint/no-unsafe-argument": "off",
+                "jest/valid-expect": 0
             }
         }
     ]

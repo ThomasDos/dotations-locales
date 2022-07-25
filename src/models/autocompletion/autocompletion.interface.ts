@@ -1,23 +1,20 @@
-export type IFetchEntityResultDto = IEntityDto[];
-export type IFetchEntityResult = IEntity[];
-
-export interface IEntityDto {
+export interface AutocompletionDto {
     autocompletion: string;
     code: string;
-    commune: ICommune;
+    commune: AutocompletionCommune;
     distance: number;
-    distributions_postales: IDistributionPostaleDto[];
+    distributions_postales: DistributionPostaleDto[];
 }
 
-export interface IEntity {
+export interface Autocompletion {
     autocompletion: string;
     code: string;
-    commune: ICommune;
+    commune: AutocompletionCommune;
     distance: number;
-    distributionsPostales: IDistributionPostale[];
+    distributionsPostales: DistributionPostale[];
 }
 
-interface ICommune {
+interface AutocompletionCommune {
     ARR: string;
     CAN: string;
     COM: string;
@@ -31,7 +28,7 @@ interface ICommune {
     TYPECOM: string;
 }
 
-export interface IDistributionPostaleDto {
+export interface DistributionPostaleDto {
     code_commune_insee: string;
     code_postal: string;
     coordonnees_gps: [number, number];
@@ -39,7 +36,7 @@ export interface IDistributionPostaleDto {
     nom_de_la_commune: string;
 }
 
-export interface IDistributionPostale {
+export interface DistributionPostale {
     codeCommuneInsee: string;
     codePostal: string;
     coordonneesGps: [number, number];

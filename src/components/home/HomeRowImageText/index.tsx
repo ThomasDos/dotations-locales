@@ -1,22 +1,25 @@
 import { Title } from "@dataesr/react-dsfr";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 interface HomeRowImageTextProps {
     reverse?: boolean;
+    src: string;
     imageHeight: string;
     imageWidth: string;
     imageAlt: string;
     titleContent: string;
-    bodyContent: string;
+    children: ReactNode;
 }
 
 const HomeRowImageText = ({
     reverse = false,
+    src,
     imageHeight,
     imageWidth,
     imageAlt,
     titleContent,
-    bodyContent,
+    children,
 }: HomeRowImageTextProps) => {
     return (
         <div
@@ -26,11 +29,11 @@ const HomeRowImageText = ({
         >
             <div className={`flex flex-col ${reverse ? "ml-14" : "mr-14"}`}>
                 <Title as="h1">{titleContent}</Title>
-                <span>{bodyContent}</span>
+                <div>{children}</div>
             </div>
             <div>
                 <Image
-                    src="/icons/temporary-image-placeholder.svg"
+                    src={src}
                     height={imageHeight}
                     width={imageWidth}
                     alt={imageAlt}

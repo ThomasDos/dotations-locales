@@ -1,6 +1,6 @@
 import { Collapse } from "@mui/material";
 import { Spinner } from "components/ui";
-import useFetchEntity from "hooks/useFetchEntity";
+import useFetchAutocompletion from "hooks/useFetchAutocompletion";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
@@ -34,8 +34,8 @@ const InputContainer = styled.input`
 const SearchInput = () => {
     const [search, setSearch] = useState<string>("");
 
-    const { data: searchResult, isLoading: searchResultIsLoading } =
-        useFetchEntity(search);
+    const { data: autocompletion, isLoading: searchResultIsLoading } =
+        useFetchAutocompletion(search);
 
     return (
         <div>
@@ -70,8 +70,8 @@ const SearchInput = () => {
                     </SearchButtonContainer>
                 </button>
             </SearchInputContainer>
-            <Collapse in={!!searchResult && !!search}>
-                <DropdownSearch searchResult={searchResult} />
+            <Collapse in={!!autocompletion && !!search}>
+                <DropdownSearch autocompletion={autocompletion} />
             </Collapse>
         </div>
     );
