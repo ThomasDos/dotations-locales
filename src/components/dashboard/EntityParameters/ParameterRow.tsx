@@ -21,7 +21,7 @@ const ParameterRow = ({ critere }: EntityRowProps) => {
                         : formatNumberWithSpace(
                               Math.round(Number(currentYear.valeur))
                           )}
-                    {currentYear.unite && currentYear.unite}
+                    {currentYear.unite && " " + currentYear.unite}
                 </span>
             </div>
         </>

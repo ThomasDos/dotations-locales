@@ -52,7 +52,9 @@ const Dashboard = () => {
                 <div className="flex pb-0.5">
                     <DashboardBody
                         dotations={dotations}
+                        currentYear={currentYear}
                         currentYearTotal={currentYearTotal}
+                        lastYear={lastYear}
                         lastYearTotal={lastYearTotal}
                     />
                     <EntityParameters

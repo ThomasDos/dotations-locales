@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 import DotationCard from "./DotationCard";
-import ExportContainer from "./ExportContainer";
+import SubtitleDotations from "./SubtitleDotations";
 
 const DashboardBodyContainer = styled.div`
     width: 75%;
@@ -12,27 +12,38 @@ const DashboardBodyContainer = styled.div`
 
 const InfoDateContainer = styled.div`
     width: 100%;
-    background: var(--green-tilleul-verveine-975);
 `;
 
 const SpanMajContainer = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
+const SpanExport = styled.span`
+    color: var(--blue-france-sun-113-625);
+`;
+
+const MajHoursContainer = styled.div`
+    border-top: solid 1px var(--blue-france-925);
+    padding-top: 16px;
+    margin-top: 16px;
+`;
+
 interface DashboardBodyProps {
     dotations: Dotations;
+    currentYear: number;
     currentYearTotal: number;
+    lastYear: number;
     lastYearTotal: number;
 }
 
 const DashboardBody = ({
     dotations,
+    currentYear,
     currentYearTotal,
+    lastYear,
     lastYearTotal,
 }: DashboardBodyProps) => {
     const dotationsKeys = Object.keys(dotations);
-    const currentYear = new Date().getFullYear();
-    const lastYear = new Date().getFullYear() - 1;
     const countEligibleDotations = dotationsKeys.length;
 
     const dotationDGF: Dotation = {
@@ -46,15 +57,27 @@ const DashboardBody = ({
     return (
         <DashboardBodyContainer>
             <>
-                <InfoDateContainer className="px-8 py-4 mb-10 flex justify-between">
-                    <span className="text-base font-bold">
-                        Vos dotations connues à ce jour pour l&apos;année 2022
-                    </span>
-                    <div className="flex items-center">
+                <InfoDateContainer className="px-8 py-4 mb-10 flex flex-col">
+                    <div className="flex justify-between">
+                        <span className="text-3xl font-bold">
+                            Dotations pour {currentYear}
+                        </span>
+                        <div className="flex text-sm items-center">
+                            <div className="mr-1">
+                                <Image
+                                    src="/icons/arrow-dropdown.svg"
+                                    width="12.73px"
+                                    height="7.78px"
+                                    alt="icone exporter"
+                                />
+                            </div>
+                            <SpanExport>Exporter</SpanExport>
+                        </div>
+                    </div>
+                    <MajHoursContainer className="flex items-center justify-end">
                         <SpanMajContainer className="mr-1 text-sm">
                             Mise à jour hier à 08h45
                         </SpanMajContainer>
-
                         <Image
                             src="/icons/clock.svg"
                             height="16px"
@@ -62,12 +85,12 @@ const DashboardBody = ({
                             layout="fixed"
                             alt="icone horloge"
                         />
-                    </div>
+                    </MajHoursContainer>
                 </InfoDateContainer>
 
                 <DotationCard hasInformation={false} dotation={dotationDGF} />
 
-                <ExportContainer
+                <SubtitleDotations
                     countEligibleDotations={countEligibleDotations}
                 />
                 {dotationsKeys.map(dotationKey => {
