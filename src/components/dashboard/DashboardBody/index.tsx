@@ -50,6 +50,7 @@ const DashboardBody = ({ dotations }: DashboardBodyProps) => {
                     return (
                         dotationKey === "dotationForfaitaire" && (
                             <DotationCard
+                                key={dotationKey}
                                 hasInformation={false}
                                 dotation={dotations[dotationKey]}
                             />
@@ -61,6 +62,7 @@ const DashboardBody = ({ dotations }: DashboardBodyProps) => {
                     return (
                         dotationKey !== "dotationForfaitaire" && (
                             <DotationCard
+                                key={dotationKey}
                                 hasInformation={false}
                                 dotation={dotations[dotationKey]}
                             />

@@ -3,31 +3,41 @@ import {
     EntityParameters,
     SubHeader,
 } from "components/dashboard";
-import { fetchCommuneMocked } from "constants/fetchCommuneMocked";
+import { Spinner } from "components/ui";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
-import type { Commune } from "src/models/commune/commune.interface";
-import { fetchCommuneSerializer } from "src/models/commune/commune.serializer";
 
 const Dashboard = () => {
     const router = useRouter();
     const { commune, codeInsee } = router.query;
-    const { data, error: fetchCommuneError } = useFetchCommune(
-        codeInsee as string
-    );
-    console.log("data", data);
+    const {
+        data: fetchCommuneData,
+        error: fetchCommuneError,
+        isLoading: fetchCommuneIsLoading,
+    } = useFetchCommune(codeInsee as string);
 
-    const fetchCommuneData: Commune =
-        fetchCommuneSerializer(fetchCommuneMocked);
+    if ((!fetchCommuneData || fetchCommuneError) && !fetchCommuneIsLoading) {
+        return (
+            <>
+                <SubHeader commune={commune as string} />
 
-    console.log("fetchCommuneError", fetchCommuneError);
+                <div className="flex pb-0.5">
+                    <div>Merci de reessayer plus tard</div>
+                </div>
+            </>
+        );
+    }
     return (
         <>
             <SubHeader commune={commune as string} />
-            <div className="flex pb-0.5">
-                <DashboardBody dotations={fetchCommuneData.dotations} />
-                <EntityParameters criteres={fetchCommuneData.criteres} />
-            </div>
+            {fetchCommuneIsLoading ? (
+                <Spinner />
+            ) : (
+                <div className="flex pb-0.5">
+                    <DashboardBody dotations={fetchCommuneData.dotations} />
+                    <EntityParameters criteres={fetchCommuneData.criteres} />
+                </div>
+            )}
         </>
     );
 };

@@ -6,8 +6,7 @@ interface EntityRowProps {
 
 const ParameterRow = ({ critere }: EntityRowProps) => {
     const currentYear = critere.annees[0][new Date().getFullYear()];
-    const lastYear = critere.annees[1][new Date().getFullYear() - 1];
-    console.log("lastYear", lastYear);
+    // const lastYear = critere.annees[1][new Date().getFullYear() - 1];
     const valeurToNumber = Number(currentYear.valeur);
 
     return (
