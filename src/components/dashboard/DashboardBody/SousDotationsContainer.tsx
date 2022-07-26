@@ -11,7 +11,7 @@ interface SousDotationsProps {
 const SousDotationsContainer = ({ sousDotations }: SousDotationsProps) => {
     const currentYear = String(new Date().getFullYear());
     return (
-        <div className="flex justify-around mt-4">
+        <div className="flex space mt-4 space-x-4">
             {sousDotations.map(sousDot => {
                 const dotationKey: string = Object.keys(sousDot)[0];
                 const { annees, title } = sousDot[dotationKey];

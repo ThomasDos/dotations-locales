@@ -88,17 +88,22 @@ const DashboardBody = ({
                     </MajHoursContainer>
                 </InfoDateContainer>
 
-                <DotationCard hasInformation={false} dotation={dotationDGF} />
+                <DotationCard
+                    hasInformation={false}
+                    dotation={dotationDGF}
+                    borderTop
+                />
 
                 <SubtitleDotations
                     countEligibleDotations={countEligibleDotations}
                 />
-                {dotationsKeys.map(dotationKey => {
+                {dotationsKeys.map((dotationKey, index) => {
                     return (
                         <DotationCard
                             key={dotationKey}
                             hasInformation={false}
                             dotation={dotations[dotationKey]}
+                            borderTop={index === 0}
                         />
                     );
                 })}
