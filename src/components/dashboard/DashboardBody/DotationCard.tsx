@@ -1,7 +1,7 @@
 import {
     IconCopyWithSuccess,
     IconInformation,
-    LabelALetude,
+    // LabelALetude,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
@@ -96,10 +96,13 @@ const DotationCard = ({
                             </div>
                         ) : null}
                     </div>
-                ) : title.includes("DNP") ? (
-                    <LabelALetude />
                 ) : (
-                    <LabelGreyCustomCrossIcon text="Non éligible" />
+                    // title.includes("DNP") ? (
+                    // <LabelALetude />
+                    // ) :
+                    <div>
+                        <LabelGreyCustomCrossIcon text="Non éligible" />
+                    </div>
                 )}
             </div>
 
