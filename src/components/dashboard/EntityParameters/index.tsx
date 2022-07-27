@@ -1,6 +1,7 @@
 import { Button, LabelPercentage } from "components/ui";
 import type { Criteres } from "models/commune/commune.interface";
 import styled from "styled-components";
+import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
 import ParameterRow from "./ParameterRow";
 
@@ -16,10 +17,38 @@ const EntityParametersContainer = styled.div`
 
 interface EntityParametersProps {
     criteres: Criteres;
+    currentYearTotal: number;
+    currentYear: string;
+    lastYear: string;
+    lastYearTotal: number;
 }
 
-const EntityParameters = ({ criteres }: EntityParametersProps) => {
+const EntityParameters = ({
+    criteres,
+    currentYearTotal,
+    currentYear,
+    lastYear,
+    lastYearTotal,
+}: EntityParametersProps) => {
     const criteresKeys = Object.keys(criteres);
+
+    const currentYearDotationPerHabitant = getDotationPerHabitant(
+        criteres,
+        currentYear,
+        currentYearTotal
+    );
+    const lastYearDotationPerHabitant = getDotationPerHabitant(
+        criteres,
+        lastYear,
+        lastYearTotal
+    );
+
+    const percentageEvolution = Number(
+        (
+            (currentYearDotationPerHabitant / lastYearDotationPerHabitant - 1) *
+            100
+        ).toFixed(2)
+    );
     return (
         <EntityParametersContainer>
             <div className="w-full text-center sticky top-16">
@@ -45,8 +74,10 @@ const EntityParameters = ({ criteres }: EntityParametersProps) => {
                 <div className="bg-white rounded-lg py-4 px-16">
                     <span className="text-sm">Dotation / habitant</span>
                     <div className="flex justify-center mt-2">
-                        <span className="font-bold text-xl mr-2">110,25€</span>
-                        <LabelPercentage percentage={2.2} />
+                        <span className="font-bold text-xl mr-2">
+                            {currentYearDotationPerHabitant.toFixed(2)}€
+                        </span>
+                        <LabelPercentage percentage={percentageEvolution} />
                     </div>
                 </div>
             </div>

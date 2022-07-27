@@ -1,5 +1,5 @@
 import { Collapse } from "@mui/material";
-import { Spinner } from "components/ui";
+import { LabelText, Spinner } from "components/ui";
 import useFetchAutocompletion from "hooks/useFetchAutocompletion";
 import Image from "next/image";
 import { useState } from "react";
@@ -29,6 +29,10 @@ const InputContainer = styled.input`
     :focus {
         outline: none;
     }
+`;
+
+const SpanCodePostalContainer = styled.span`
+    color: #666666;
 `;
 
 const SearchInput = () => {
@@ -71,6 +75,18 @@ const SearchInput = () => {
                 </button>
             </SearchInputContainer>
             <Collapse in={!!autocompletion && !!search}>
+                <div className="flex justify-between px-6 py-4">
+                    <div>
+                        <LabelText
+                            text={`Communes (${autocompletion?.length})`}
+                            backgroundColor="var(--blue-france-925)"
+                            color="var(--blue-france-113)"
+                        />
+                    </div>
+                    <SpanCodePostalContainer className="text-xs">
+                        Code postal
+                    </SpanCodePostalContainer>
+                </div>
                 <DropdownSearch autocompletion={autocompletion} />
             </Collapse>
         </div>

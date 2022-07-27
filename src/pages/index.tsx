@@ -66,10 +66,10 @@ const Home: NextPage = () => {
                     imageHeight="320px"
                     imageWidth="320px"
                     imageAlt="third row image"
-                    titleContent="Simulez, comparez et analysez l’évolution de vos dotations locales"
+                    titleContent="Simuler, comparer et analyser l’évolution de vos dotations locales"
                 >
                     Un outil pratique pour suivre l’évolution des montants,
-                    comparez et analysez les critères et les données qui ont un
+                    comparer et analyser les critères et les données qui ont un
                     impact fort sur les fonds qui vous sont attribués.
                 </HomeRowImageText>
 

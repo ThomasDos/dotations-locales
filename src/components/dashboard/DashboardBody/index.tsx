@@ -1,9 +1,10 @@
-import type { Dotations } from "models/commune/commune.interface";
+import { Tab, Tabs } from "@dataesr/react-dsfr";
+import type { Dotation, Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
 import styled from "styled-components";
 
 import DotationCard from "./DotationCard";
-import ExportContainer from "./ExportContainer";
+import SubtitleDotations from "./SubtitleDotations";
 
 const DashboardBodyContainer = styled.div`
     width: 75%;
@@ -12,31 +13,72 @@ const DashboardBodyContainer = styled.div`
 
 const InfoDateContainer = styled.div`
     width: 100%;
-    background: var(--green-tilleul-verveine-975);
 `;
 
 const SpanMajContainer = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
+const SpanExport = styled.span`
+    color: var(--blue-france-sun-113-625);
+`;
+
+const MajHoursContainer = styled.div`
+    border-top: solid 1px var(--blue-france-925);
+    padding-top: 16px;
+    margin-top: 16px;
+`;
+
 interface DashboardBodyProps {
     dotations: Dotations;
+    currentYear: number;
+    currentYearTotal: number;
+    lastYear: number;
+    lastYearTotal: number;
 }
 
-const DashboardBody = ({ dotations }: DashboardBodyProps) => {
+const DashboardBody = ({
+    dotations,
+    currentYear,
+    currentYearTotal,
+    lastYear,
+    lastYearTotal,
+}: DashboardBodyProps) => {
     const dotationsKeys = Object.keys(dotations);
+    const countEligibleDotations = dotationsKeys.length;
+
+    const dotationDGF: Dotation = {
+        annees: [
+            { [currentYear]: currentYearTotal },
+            { [lastYear]: lastYearTotal },
+        ],
+        description: "Evolution de votre montant total de dotations",
+        title: "Dotations Générales de Fonctionnement (DGF)",
+    };
     return (
         <DashboardBodyContainer>
             <>
-                <InfoDateContainer className="px-8 py-4 mb-10 flex justify-between">
-                    <span className="text-base font-bold">
-                        Vos dotations connues à ce jour pour l&apos;année 2022
-                    </span>
-                    <div className="flex items-center">
+                <InfoDateContainer className="px-8 py-4 mb-10 flex flex-col">
+                    <div className="flex justify-between">
+                        <span className="text-3xl font-bold">
+                            Dotations pour {currentYear}
+                        </span>
+                        <div className="flex text-sm items-center cursor-pointer">
+                            <div className="flex mr-1">
+                                <Image
+                                    src="/icons/file-download.svg"
+                                    width="16px"
+                                    height="16px"
+                                    alt="icone exporter"
+                                />
+                            </div>
+                            <SpanExport>Exporter</SpanExport>
+                        </div>
+                    </div>
+                    <MajHoursContainer className="flex items-center justify-end">
                         <SpanMajContainer className="mr-1 text-sm">
                             Mise à jour hier à 08h45
                         </SpanMajContainer>
-
                         <Image
                             src="/icons/clock.svg"
                             height="16px"
@@ -44,31 +86,51 @@ const DashboardBody = ({ dotations }: DashboardBodyProps) => {
                             layout="fixed"
                             alt="icone horloge"
                         />
-                    </div>
+                    </MajHoursContainer>
                 </InfoDateContainer>
-                {dotationsKeys.map(dotationKey => {
-                    return (
-                        dotationKey === "dotationForfaitaire" && (
-                            <DotationCard
-                                key={dotationKey}
-                                hasInformation={false}
-                                dotation={dotations[dotationKey]}
-                            />
-                        )
-                    );
-                })}
-                <ExportContainer />
-                {dotationsKeys.map(dotationKey => {
-                    return (
-                        dotationKey !== "dotationForfaitaire" && (
-                            <DotationCard
-                                key={dotationKey}
-                                hasInformation={false}
-                                dotation={dotations[dotationKey]}
-                            />
-                        )
-                    );
-                })}
+
+                <Tabs>
+                    {/*@ts-ignore*/}
+                    <Tab index={1} activeTab={1} label="Résumé">
+                        <DotationCard
+                            hasInformation={false}
+                            dotation={dotationDGF}
+                            borderTop
+                        />
+
+                        <SubtitleDotations
+                            countEligibleDotations={countEligibleDotations}
+                        />
+                        {dotationsKeys.map((dotationKey, index) => {
+                            return (
+                                <DotationCard
+                                    key={dotationKey}
+                                    hasInformation={false}
+                                    dotation={dotations[dotationKey]}
+                                    borderTop={index === 0}
+                                />
+                            );
+                        })}
+                    </Tab>
+
+                    {/*@ts-ignore*/}
+                    <Tab index={2} activeTab={1} label="DF">
+                        <h3>DF</h3>
+                        <p>En construction...</p>
+                    </Tab>
+
+                    {/*@ts-ignore*/}
+                    <Tab index={3} activeTab={1} label="DSR">
+                        <h3>DSR</h3>
+                        <p>En construction...</p>
+                    </Tab>
+
+                    {/*@ts-ignore*/}
+                    <Tab index={4} activeTab={1} label="DNP">
+                        <h3>DNP</h3>
+                        <p>En construction...</p>
+                    </Tab>
+                </Tabs>
             </>
         </DashboardBodyContainer>
     );
