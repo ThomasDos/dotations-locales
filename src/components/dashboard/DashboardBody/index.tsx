@@ -1,3 +1,4 @@
+import { Tab, Tabs } from "@dataesr/react-dsfr";
 import type { Dotation, Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
 import styled from "styled-components";
@@ -88,25 +89,48 @@ const DashboardBody = ({
                     </MajHoursContainer>
                 </InfoDateContainer>
 
-                <DotationCard
-                    hasInformation={false}
-                    dotation={dotationDGF}
-                    borderTop
-                />
-
-                <SubtitleDotations
-                    countEligibleDotations={countEligibleDotations}
-                />
-                {dotationsKeys.map((dotationKey, index) => {
-                    return (
+                <Tabs>
+                    {/*@ts-ignore*/}
+                    <Tab index={1} activeTab={1} label="Résumé">
                         <DotationCard
-                            key={dotationKey}
                             hasInformation={false}
-                            dotation={dotations[dotationKey]}
-                            borderTop={index === 0}
+                            dotation={dotationDGF}
+                            borderTop
                         />
-                    );
-                })}
+
+                        <SubtitleDotations
+                            countEligibleDotations={countEligibleDotations}
+                        />
+                        {dotationsKeys.map((dotationKey, index) => {
+                            return (
+                                <DotationCard
+                                    key={dotationKey}
+                                    hasInformation={false}
+                                    dotation={dotations[dotationKey]}
+                                    borderTop={index === 0}
+                                />
+                            );
+                        })}
+                    </Tab>
+
+                    {/*@ts-ignore*/}
+                    <Tab index={2} activeTab={1} label="DF">
+                        <h3>DF</h3>
+                        <p>En construction...</p>
+                    </Tab>
+
+                    {/*@ts-ignore*/}
+                    <Tab index={3} activeTab={1} label="DSR">
+                        <h3>DSR</h3>
+                        <p>En construction...</p>
+                    </Tab>
+
+                    {/*@ts-ignore*/}
+                    <Tab index={4} activeTab={1} label="DNP">
+                        <h3>DNP</h3>
+                        <p>En construction...</p>
+                    </Tab>
+                </Tabs>
             </>
         </DashboardBodyContainer>
     );
