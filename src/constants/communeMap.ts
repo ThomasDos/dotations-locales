@@ -20,7 +20,7 @@ export const dotationsMap: Record<
     },
     dotationNationalePerequation: {
         description: "Lorem Ipsum DNP",
-        title: "Dotation Nationale de Péréquation (DNP)",
+        title: "Dotations Nationale de Péréquation (DNP)",
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
