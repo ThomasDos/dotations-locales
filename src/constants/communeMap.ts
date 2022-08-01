@@ -18,6 +18,10 @@ export const dotationsMap: Record<
             "Votre dotation forfaitaire est stable par rapport à l’année 2021",
         title: "Dotations Forfaitaire (DF)",
     },
+    dotationNationalePerequation: {
+        description: "Lorem Ipsum DNP",
+        title: "Dotations Nationale de Péréquation (DNP)",
+    },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
         title: "Dotations Solidarité Rurale (DSR)",
