@@ -14,6 +14,12 @@ export default async (
             `https://territoires.leximpact.dev/communes/autocomplete?field=commune&field=distributions_postales&q=${search}`,
             { signal }
         )
-        .then(({ data }: { data: AutocompletionDto[] }) => {
-            return fetchAutocompletionSerializer(data);
-        });
+        .then(
+            ({
+                data: { suggestions },
+            }: {
+                data: { suggestions: AutocompletionDto[] };
+            }) => {
+                return fetchAutocompletionSerializer(suggestions);
+            }
+        );
