@@ -1,10 +1,14 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
+import { Collapse } from "@mui/material";
 import type { Dotation, Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
+import { useState } from "react";
 import styled from "styled-components";
+import sortDotationsByAmount from "utils/sortDotationsByAmount";
 
 import DotationCard from "./DotationCard";
-import SubtitleDotations from "./SubtitleDotations";
+import TitleDotationsEligibles from "./TitleDotationsEligibles";
+import TitleDotationsNonEligibles from "./TitleDotationsNonEligibles";
 
 const DashboardBodyContainer = styled.div`
     width: 75%;
@@ -44,8 +48,16 @@ const DashboardBody = ({
     lastYear,
     lastYearTotal,
 }: DashboardBodyProps) => {
-    const dotationsKeys = Object.keys(dotations);
-    const countEligibleDotations = dotationsKeys.length;
+    const [showNonEligible, setShowNonEligible] = useState(false);
+
+    const { dotationsEligibles, dotationsNonEligibles } =
+        sortDotationsByAmount(dotations);
+    const dotationsEligiblesKeys = Object.keys(dotationsEligibles);
+    const dotationsNonEligiblesKeys = Object.keys(dotationsNonEligibles);
+
+    const countDotationsEligiblesDotations = dotationsEligiblesKeys.length;
+    const countDotationsNonEligiblesDotations =
+        dotationsNonEligiblesKeys.length;
 
     const dotationDGF: Dotation = {
         annees: [
@@ -97,20 +109,61 @@ const DashboardBody = ({
                             dotation={dotationDGF}
                             borderTop
                         />
-
-                        <SubtitleDotations
-                            countEligibleDotations={countEligibleDotations}
-                        />
-                        {dotationsKeys.map((dotationKey, index) => {
-                            return (
-                                <DotationCard
-                                    key={dotationKey}
-                                    hasInformation={false}
-                                    dotation={dotations[dotationKey]}
-                                    borderTop={index === 0}
+                        {countDotationsEligiblesDotations ? (
+                            <>
+                                <TitleDotationsEligibles
+                                    countEligibleDotations={
+                                        countDotationsEligiblesDotations
+                                    }
                                 />
-                            );
-                        })}
+                                {dotationsEligiblesKeys.map(
+                                    (dotationEligibleKey, index) => {
+                                        return (
+                                            <DotationCard
+                                                key={dotationEligibleKey}
+                                                hasInformation={false}
+                                                dotation={
+                                                    dotationsEligibles[
+                                                        dotationEligibleKey
+                                                    ]
+                                                }
+                                                borderTop={index === 0}
+                                            />
+                                        );
+                                    }
+                                )}
+                            </>
+                        ) : null}
+
+                        {countDotationsNonEligiblesDotations ? (
+                            <>
+                                <TitleDotationsNonEligibles
+                                    countNonEligibleDotations={
+                                        countDotationsNonEligiblesDotations
+                                    }
+                                    setShowNonEligible={setShowNonEligible}
+                                    showNonEligible={showNonEligible}
+                                />
+                                <Collapse in={showNonEligible}>
+                                    {dotationsNonEligiblesKeys.map(
+                                        (dotationNonEligibleKey, index) => {
+                                            return (
+                                                <DotationCard
+                                                    key={dotationNonEligibleKey}
+                                                    hasInformation={false}
+                                                    dotation={
+                                                        dotationsNonEligibles[
+                                                            dotationNonEligibleKey
+                                                        ]
+                                                    }
+                                                    borderTop={index === 0}
+                                                />
+                                            );
+                                        }
+                                    )}
+                                </Collapse>
+                            </>
+                        ) : null}
                     </Tab>
 
                     {/*@ts-ignore*/}

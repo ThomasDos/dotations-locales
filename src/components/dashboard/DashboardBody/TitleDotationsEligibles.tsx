@@ -1,9 +1,9 @@
-interface SubtitleDotationsProps {
+interface TitleDotationsEligiblesProps {
     countEligibleDotations: number;
 }
-const SubtitleDotations = ({
+const TitleDotationsEligibles = ({
     countEligibleDotations,
-}: SubtitleDotationsProps) => {
+}: TitleDotationsEligiblesProps) => {
     const ifPluralS = countEligibleDotations > 1 ? "s" : "";
     return (
         <div className="flex text-sm justify-between my-10 cursor-pointer">
@@ -15,4 +15,4 @@ const SubtitleDotations = ({
     );
 };
 
-export default SubtitleDotations;
+export default TitleDotationsEligibles;

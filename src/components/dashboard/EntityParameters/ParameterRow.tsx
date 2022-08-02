@@ -12,7 +12,7 @@ const ParameterRow = ({ critere }: EntityRowProps) => {
     return (
         <>
             <hr />
-            <div className="flex justify-between my-3 text-sm">
+            <div className="flex justify-between my-3 text-sm items-center">
                 <span className="text-start">{critere.description}</span>
                 <Value currentYear={currentYear} />
             </div>
