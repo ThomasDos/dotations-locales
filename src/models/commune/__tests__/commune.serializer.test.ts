@@ -1,4 +1,4 @@
-import { fetchCommuneMocked } from "constants/fetchCommuneMocked";
+import { fetchCommuneMocked } from "__fixtures__/fetchCommuneMocked";
 
 import {
     criteresSerializer,

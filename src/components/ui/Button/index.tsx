@@ -18,6 +18,7 @@ const ButtonContainer = styled.button`
         color: var(--blue-france-975);
     }
 `;
+//TODO: check size icon
 const Button = ({ text, icon }: Buttonprops) => {
     return (
         <ButtonContainer type="button">

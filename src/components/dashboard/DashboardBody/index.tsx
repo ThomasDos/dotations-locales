@@ -4,7 +4,7 @@ import type { Dotation, Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import sortDotationsByAmount from "utils/sortDotationsByAmount";
+import sortDotationsByAmount from "utils/sortDotationsEligiblesOrNonEligibles";
 
 import DotationCard from "./DotationCard";
 import TitleDotationsEligibles from "./TitleDotationsEligibles";
