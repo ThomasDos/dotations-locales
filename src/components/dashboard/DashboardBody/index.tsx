@@ -1,10 +1,10 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
-import type { Dotation, Dotations } from "models/commune/commune.interface";
+import type { Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
 import styled from "styled-components";
 
-import DotationCard from "./DotationCard";
-import SubtitleDotations from "./SubtitleDotations";
+import MainTab from "./MainTab";
+import SubTab from "./SubTab";
 
 const DashboardBodyContainer = styled.div`
     width: 75%;
@@ -44,17 +44,6 @@ const DashboardBody = ({
     lastYear,
     lastYearTotal,
 }: DashboardBodyProps) => {
-    const dotationsKeys = Object.keys(dotations);
-    const countEligibleDotations = dotationsKeys.length;
-
-    const dotationDGF: Dotation = {
-        annees: [
-            { [currentYear]: currentYearTotal },
-            { [lastYear]: lastYearTotal },
-        ],
-        description: "Evolution de votre montant total de dotations",
-        title: "Dotations Générales de Fonctionnement (DGF)",
-    };
     return (
         <DashboardBodyContainer>
             <>
@@ -92,43 +81,30 @@ const DashboardBody = ({
                 <Tabs>
                     {/*@ts-ignore*/}
                     <Tab index={1} activeTab={1} label="Résumé">
-                        <DotationCard
-                            hasInformation={false}
-                            dotation={dotationDGF}
-                            borderTop
+                        <MainTab
+                            currentYear={currentYear}
+                            currentYearTotal={currentYearTotal}
+                            lastYear={lastYear}
+                            lastYearTotal={lastYearTotal}
+                            dotations={dotations}
                         />
-
-                        <SubtitleDotations
-                            countEligibleDotations={countEligibleDotations}
-                        />
-                        {dotationsKeys.map((dotationKey, index) => {
-                            return (
-                                <DotationCard
-                                    key={dotationKey}
-                                    hasInformation={false}
-                                    dotation={dotations[dotationKey]}
-                                    borderTop={index === 0}
-                                />
-                            );
-                        })}
                     </Tab>
 
                     {/*@ts-ignore*/}
                     <Tab index={2} activeTab={1} label="DF">
-                        <h3>DF</h3>
-                        <p>En construction...</p>
+                        <SubTab dotation={dotations.dotationForfaitaire} />
                     </Tab>
 
                     {/*@ts-ignore*/}
                     <Tab index={3} activeTab={1} label="DSR">
-                        <h3>DSR</h3>
-                        <p>En construction...</p>
+                        <SubTab dotation={dotations.dotationSolidariteRurale} />
                     </Tab>
 
                     {/*@ts-ignore*/}
                     <Tab index={4} activeTab={1} label="DNP">
-                        <h3>DNP</h3>
-                        <p>En construction...</p>
+                        <SubTab
+                            dotation={dotations.dotationNationalePerequation}
+                        />
                     </Tab>
                 </Tabs>
             </>

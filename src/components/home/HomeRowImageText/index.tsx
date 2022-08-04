@@ -23,7 +23,7 @@ const HomeRowImageText = ({
 }: HomeRowImageTextProps) => {
     return (
         <div
-            className={`my-20 max-w-5xl flex items-center ${
+            className={`my-20 max-w-5xl flex items-center z-0 ${
                 reverse ? "flex-row-reverse" : ""
             }`}
         >

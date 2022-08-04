@@ -36,7 +36,16 @@ export const sousDotationsMap: Record<
     string,
     { description: string; title: string }
 > = {
-    dsrFractionBourgCentre: { description: "", title: "Part Bourg Centre" },
-    dsrFractionCible: { description: "", title: "Part Cible" },
-    dsrFractionPerequation: { description: "", title: "Part Péréquation" },
+    dsrFractionBourgCentre: {
+        description: "Montant de la commune éligible",
+        title: "Part Bourg Centre",
+    },
+    dsrFractionCible: {
+        description: "Non éligible à la Part Cible",
+        title: "Part Cible",
+    },
+    dsrFractionPerequation: {
+        description: "Montant de la commune éligible à la Péréquation",
+        title: "Part Péréquation",
+    },
 };

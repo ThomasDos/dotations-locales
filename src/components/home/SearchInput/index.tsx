@@ -13,6 +13,10 @@ const SearchButtonContainer = styled.div`
     gap: 8px;
 `;
 
+const CollapseContentContainer = styled.div`
+    width: 792px;
+`;
+
 const SearchInputContainer = styled.div`
     width: 792px;
     border-bottom: 2px solid var(--blue-france-sun-113-625);
@@ -74,20 +78,22 @@ const SearchInput = () => {
                     </SearchButtonContainer>
                 </button>
             </SearchInputContainer>
-            <Collapse in={!!autocompletion && !!search}>
-                <div className="flex justify-between px-6 py-4">
-                    <div>
-                        <LabelText
-                            text={`Communes (${autocompletion?.length})`}
-                            backgroundColor="var(--blue-france-925)"
-                            color="var(--blue-france-113)"
-                        />
+            <Collapse in={!!autocompletion?.length && !!search}>
+                <CollapseContentContainer className="absolute bg-white z-10">
+                    <div className="flex justify-between px-6 py-4">
+                        <div>
+                            <LabelText
+                                text={`Communes (${autocompletion?.length})`}
+                                backgroundColor="var(--blue-france-925)"
+                                color="var(--blue-france-113)"
+                            />
+                        </div>
+                        <SpanCodePostalContainer className="text-xs">
+                            Code postal
+                        </SpanCodePostalContainer>
                     </div>
-                    <SpanCodePostalContainer className="text-xs">
-                        Code postal
-                    </SpanCodePostalContainer>
-                </div>
-                <DropdownSearch autocompletion={autocompletion} />
+                    <DropdownSearch autocompletion={autocompletion} />
+                </CollapseContentContainer>
             </Collapse>
         </div>
     );

@@ -14,7 +14,7 @@
         "rebase": "git checkout main && git pull && git rebase origin/develop && git push -f && git checkout -"
     },
     "dependencies": {
-        "@dataesr/react-dsfr": "^2.8.4",
+        "@dataesr/react-dsfr": "^3.1.3",
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
         "@gouvfr/dsfr": "^1.6.0",
