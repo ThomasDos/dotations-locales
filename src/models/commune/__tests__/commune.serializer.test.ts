@@ -84,21 +84,22 @@ describe("fetchCommuneSerializer", () => {
                         {
                             dsrFractionCible: {
                                 annees: [{ "2022": 0 }, { "2021": 0 }],
-                                description: "",
+                                description: "Non éligible à la Part Cible",
                                 title: "Part Cible",
                             },
                         },
                         {
                             dsrFractionPerequation: {
                                 annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                                description: "",
+                                description:
+                                    "Montant de la commune éligible à la Péréquation",
                                 title: "Part Péréquation",
                             },
                         },
                         {
                             dsrFractionBourgCentre: {
                                 annees: [{ "2022": 0 }, { "2021": 0 }],
-                                description: "",
+                                description: "Montant de la commune éligible",
                                 title: "Part Bourg Centre",
                             },
                         },
@@ -194,21 +195,22 @@ describe("dotationSerializer", () => {
                     {
                         dsrFractionCible: {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
-                            description: "",
+                            description: "Non éligible à la Part Cible",
                             title: "Part Cible",
                         },
                     },
                     {
                         dsrFractionPerequation: {
                             annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                            description: "",
+                            description:
+                                "Montant de la commune éligible à la Péréquation",
                             title: "Part Péréquation",
                         },
                     },
                     {
                         dsrFractionBourgCentre: {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
-                            description: "",
+                            description: "Montant de la commune éligible",
                             title: "Part Bourg Centre",
                         },
                     },
@@ -235,21 +237,22 @@ describe("sousDotationsSerializer", () => {
             {
                 dsrFractionCible: {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
-                    description: "",
+                    description: "Non éligible à la Part Cible",
                     title: "Part Cible",
                 },
             },
             {
                 dsrFractionPerequation: {
                     annees: [{ "2022": 8765 }, { "2021": 8795 }],
-                    description: "",
+                    description:
+                        "Montant de la commune éligible à la Péréquation",
                     title: "Part Péréquation",
                 },
             },
             {
                 dsrFractionBourgCentre: {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
-                    description: "",
+                    description: "Montant de la commune éligible",
                     title: "Part Bourg Centre",
                 },
             },

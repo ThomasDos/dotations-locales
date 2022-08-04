@@ -10,13 +10,18 @@ import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
 import SousDotationsContainer from "./SousDotationsContainer";
 
-const DotationCardContainer = styled.div<{ borderTop: boolean }>`
+const DotationCardContainer = styled.div<{
+    borderTop: boolean;
+    backgroundColor: boolean;
+}>`
     padding: 32px 48px 32px 32px;
     display: flex;
     flex-direction: column;
 
     border: 1px solid var(--blue-france-850);
-    border-top: ${props => (props.borderTop ? "" : "none")};
+    border-top: ${({ borderTop }) => (borderTop ? "" : "none")};
+    background-color: ${({ backgroundColor }) =>
+        backgroundColor ? "var(--blue-france-975)" : "none"};
 `;
 
 const SpanTotalNumber = styled.span`
@@ -35,12 +40,14 @@ interface DotationCardProps {
     hasInformation?: boolean;
     dotation: Dotation;
     borderTop: boolean;
+    backgroundColor?: boolean;
 }
 
 const DotationCard = ({
     dotation,
     hasInformation = true,
     borderTop,
+    backgroundColor = false,
 }: DotationCardProps) => {
     const currentYearTotal = dotation.annees[0][new Date().getFullYear()];
     const lastYear = dotation.annees[1][new Date().getFullYear() - 1];
@@ -53,7 +60,10 @@ const DotationCard = ({
     const { title, description, sousDotations } = dotation;
 
     return (
-        <DotationCardContainer borderTop={borderTop}>
+        <DotationCardContainer
+            borderTop={borderTop}
+            backgroundColor={backgroundColor}
+        >
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <div className="flex">
