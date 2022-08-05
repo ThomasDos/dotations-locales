@@ -85,7 +85,7 @@ const DotationCard = ({
                                 {dotationTotalFormatted} €
                             </SpanTotalNumber>
                             <div className="relative">
-                                <div className="absolute r-0 ml-3 cursor-copy">
+                                <div className="absolute r-0 ml-3">
                                     <IconCopyWithSuccess
                                         toCopy={currentYearTotal}
                                     />
