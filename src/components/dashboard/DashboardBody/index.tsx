@@ -1,4 +1,5 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
+import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import type { Dotations } from "models/commune/commune.interface";
 import Image from "next/image";
 import styled from "styled-components";
@@ -16,10 +17,6 @@ const InfoDateContainer = styled.div`
 `;
 
 const SpanMajContainer = styled.span`
-    color: var(--blue-france-sun-113-625);
-`;
-
-const SpanExport = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
@@ -52,17 +49,7 @@ const DashboardBody = ({
                         <span className="text-3xl font-bold">
                             Dotations pour {currentYear}
                         </span>
-                        <div className="flex text-sm items-center cursor-pointer">
-                            <div className="flex mr-1">
-                                <Image
-                                    src="/icons/file-download.svg"
-                                    width="16px"
-                                    height="16px"
-                                    alt="icone exporter"
-                                />
-                            </div>
-                            <SpanExport>Exporter</SpanExport>
-                        </div>
+                        <DropdownMenuDownload />
                     </div>
                     <MajHoursContainer className="flex items-center justify-end">
                         <SpanMajContainer className="mr-1 text-sm">
