@@ -6,6 +6,11 @@ import Image from "next/image";
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const DividerContainer = styled(Divider)`
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+`;
+
 const CustomSpanContainer = styled.span`
     color: var(--blue-france-sun-113-625);
     font-family: Marianne;
@@ -83,13 +88,19 @@ const DropdownMenuDownload = () => {
                         icon="file-csv"
                     />
                 </div>
-                <Divider sx={{ borderBottomWidth: 0, my: 0 }} />
+                <DividerContainer
+                    sx={{ borderBottomWidth: 0 }}
+                    variant="middle"
+                />
                 <MenuItemCustom
                     handleClose={handleClose}
                     text="Fichier xls"
                     icon="file-xls"
                 />
-                <Divider sx={{ borderBottomWidth: 0, my: 0 }} />
+                <DividerContainer
+                    sx={{ borderBottomWidth: 0 }}
+                    variant="middle"
+                />
                 <MenuItemCustom
                     handleClose={handleClose}
                     text="Fichier pdf"
