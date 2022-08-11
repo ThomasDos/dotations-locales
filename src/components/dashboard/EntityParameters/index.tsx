@@ -1,5 +1,7 @@
 import { Button, LabelPercentage } from "components/ui";
 import type { Criteres } from "models/commune/commune.interface";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
@@ -30,6 +32,8 @@ const EntityParameters = ({
     lastYear,
     lastYearTotal,
 }: EntityParametersProps) => {
+    const router = useRouter();
+
     const criteresKeys = Object.keys(criteres);
 
     const currentYearDotationPerHabitant = getDotationPerHabitant(
@@ -78,7 +82,19 @@ const EntityParameters = ({
                     </div>
                 </div>
                 <div>
-                    <Button icon="calculator" text="Créer une simulation" />
+                    <Link
+                        href={{
+                            pathname: "/[codeInsee]/Simulation",
+                            query: { ...router.query },
+                        }}
+                    >
+                        <div>
+                            <Button
+                                icon="calculator"
+                                text="Créer une simulation"
+                            />
+                        </div>
+                    </Link>
                 </div>
             </div>
         </EntityParametersContainer>

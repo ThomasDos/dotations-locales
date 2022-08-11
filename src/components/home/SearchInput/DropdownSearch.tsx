@@ -20,17 +20,13 @@ interface DropdownSearchProps {
 const DropdownRow = ({ ...entity }: Autocompletion) => {
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
-    const { LIBELLE: nomCommune } = entity.commune;
+    const { LIBELLE: commune } = entity.commune;
+
     return (
-        <Link
-            href={{
-                pathname: `/${codeInsee}`,
-                query: { commune: nomCommune },
-            }}
-        >
+        <Link href={{ pathname: `/${codeInsee}`, query: { commune } }}>
             <DropdownRowContainer className="flex justify-between px-6 py-4">
                 <span>
-                    {nomCommune} ({codeInsee})
+                    {commune} ({codeInsee})
                 </span>
                 <span>{codePostal}</span>
             </DropdownRowContainer>

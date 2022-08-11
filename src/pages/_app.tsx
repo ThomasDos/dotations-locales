@@ -21,16 +21,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             })
     );
     return (
-        <>
-            <QueryClientProvider client={queryClient}>
-                <Head>
-                    <title>Dotations Locales</title>
-                </Head>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </QueryClientProvider>
-        </>
+        <QueryClientProvider client={queryClient}>
+            <Head>
+                <title>Dotations Locales</title>
+            </Head>
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </QueryClientProvider>
     );
 };
 

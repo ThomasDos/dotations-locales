@@ -9,15 +9,15 @@ const LinkContainer = styled.div`
     }
 `;
 
-interface BreadCrumbsTwoLinkProps {
+interface BreadCrumbsTwoLinksProps {
     firstLink: string;
     secondLink: string;
 }
 
-const BreadCrumbsTwoLink = ({
+const BreadCrumbsTwoLinks = ({
     firstLink,
     secondLink,
-}: BreadCrumbsTwoLinkProps) => {
+}: BreadCrumbsTwoLinksProps) => {
     return (
         <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 p-0">
@@ -53,4 +53,4 @@ const BreadCrumbsTwoLink = ({
     );
 };
 
-export default BreadCrumbsTwoLink;
+export default BreadCrumbsTwoLinks;

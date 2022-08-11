@@ -1,5 +1,8 @@
-import { BreadCrumbsTwoLink, LinkIcon } from "components/ui";
-import { useRouter } from "next/router";
+import {
+    BreadCrumbsThreeLinks,
+    BreadCrumbsTwoLinks,
+    LinkIcon,
+} from "components/ui";
 import styled from "styled-components";
 
 const HeaderDashboardContainer = styled.div`
@@ -8,22 +11,34 @@ const HeaderDashboardContainer = styled.div`
 
 interface SubHeaderProps {
     commune: string;
+    codeInsee: string;
+    isSimulation?: boolean;
 }
 
-const SubHeader = ({ commune }: SubHeaderProps) => {
-    const router = useRouter();
-    const { codeInsee } = router.query;
-
+const SubHeader = ({
+    commune,
+    codeInsee,
+    isSimulation = false,
+}: SubHeaderProps) => {
     const communeWithCodeInsee = `${commune} (${codeInsee})`;
 
     return (
         <>
             <HeaderDashboardContainer className="flex justify-between">
                 <div className="flex flex-col">
-                    <BreadCrumbsTwoLink
-                        firstLink="Accueil"
-                        secondLink={communeWithCodeInsee}
-                    />
+                    {isSimulation ? (
+                        <BreadCrumbsThreeLinks
+                            firstLink="Accueil"
+                            secondLink={communeWithCodeInsee}
+                            hrefSecondLink="/[codeInsee]"
+                            currentLink="simulation"
+                        />
+                    ) : (
+                        <BreadCrumbsTwoLinks
+                            firstLink="Accueil"
+                            secondLink={communeWithCodeInsee}
+                        />
+                    )}
 
                     <h2 className="p-0 m-0 ">{communeWithCodeInsee}</h2>
                 </div>

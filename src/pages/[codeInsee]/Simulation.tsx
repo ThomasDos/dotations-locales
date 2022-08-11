@@ -8,12 +8,12 @@ import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
 import getTotalDotations from "utils/getTotalDotations";
 
-const Dashboard = () => {
-    const router = useRouter();
-    const { commune, codeInsee } = router.query as {
+const Simulation = () => {
+    const { commune, codeInsee } = useRouter().query as {
         commune: string;
         codeInsee: string;
     };
+
     const {
         data: fetchCommuneData,
         error: fetchCommuneError,
@@ -27,11 +27,13 @@ const Dashboard = () => {
     ) {
         return (
             <>
-                <SubHeader commune={commune} />
+                <SubHeader
+                    commune={commune}
+                    codeInsee={codeInsee}
+                    isSimulation
+                />
 
-                <div className="flex pb-0.5">
-                    <div>Merci de reessayer plus tard</div>
-                </div>
+                <Spinner />
             </>
         );
     }
@@ -45,7 +47,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <SubHeader commune={commune} />
+            <SubHeader commune={commune} codeInsee={codeInsee} isSimulation />
             {(fetchCommuneIsLoading as boolean) ? (
                 <Spinner />
             ) : (
@@ -70,4 +72,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Simulation;
