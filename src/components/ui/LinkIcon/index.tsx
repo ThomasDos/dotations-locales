@@ -20,16 +20,18 @@ interface LinkIconProps {
 const LinkIcon = ({ icon, text }: LinkIconProps) => {
     return (
         //TODO: update href when page is ready
-        // <Link href='/${path}'>
+        // <Link  href='/${path}'>
         <LinkIconContainer className="flex items-center">
-            <Image
-                src={`/icons/${icon}.svg`}
-                width="14.43px"
-                height="12px"
-                layout="fixed"
-                alt={`icone ${text}`}
-            />
-            <SpanContainer className="text-sm ml-2">{text}</SpanContainer>
+            <a>
+                <Image
+                    src={`/icons/${icon}.svg`}
+                    width="14.43px"
+                    height="12px"
+                    layout="fixed"
+                    alt={`icone ${text}`}
+                />
+                <SpanContainer className="text-sm ml-2">{text}</SpanContainer>
+            </a>
         </LinkIconContainer>
         // </Link>
     );

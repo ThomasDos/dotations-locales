@@ -27,16 +27,20 @@ const BreadCrumbsThreeLinks = ({
             <ol className="inline-flex items-center space-x-1 p-0">
                 <li className="inline-flex items-center mr-1">
                     <Link href="/">
-                        <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
-                            {firstLink}
-                        </LinkContainer>
+                        <a>
+                            <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
+                                {firstLink}
+                            </LinkContainer>
+                        </a>
                     </Link>
                 </li>
                 <li className="inline-flex items-center mr-1">
                     <Link href={{ pathname: hrefSecondLink }}>
-                        <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
-                            {secondLink}
-                        </LinkContainer>
+                        <a>
+                            <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
+                                {secondLink}
+                            </LinkContainer>
+                        </a>
                     </Link>
                 </li>
 

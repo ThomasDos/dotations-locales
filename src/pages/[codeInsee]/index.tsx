@@ -18,7 +18,7 @@ const Dashboard = () => {
         data: fetchCommuneData,
         error: fetchCommuneError,
         isLoading: fetchCommuneIsLoading,
-    } = useFetchCommune(codeInsee);
+    } = useFetchCommune(codeInsee, !!codeInsee);
 
     if (
         !fetchCommuneData ||

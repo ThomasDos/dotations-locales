@@ -18,14 +18,16 @@ const HeaderContainer = () => {
                 <div className="flex">
                     <div>
                         <Link href="/">
-                            <Image
-                                src="/icons/marianne-text-header.svg"
-                                height="90px"
-                                width="88px"
-                                layout="fixed"
-                                alt="Logo de la marianne qui redirige vers l'accueil"
-                                className="cursor-pointer"
-                            />
+                            <a>
+                                <Image
+                                    src="/icons/marianne-text-header.svg"
+                                    height="90px"
+                                    width="88px"
+                                    layout="fixed"
+                                    alt="Logo de la marianne qui redirige vers l'accueil"
+                                    className="cursor-pointer"
+                                />
+                            </a>
                         </Link>
                     </div>
                     <div className="ml-10 py-5">

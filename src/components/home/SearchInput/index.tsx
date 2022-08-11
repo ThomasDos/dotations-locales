@@ -83,7 +83,9 @@ const SearchInput = () => {
                     <div className="flex justify-between px-6 py-4">
                         <div>
                             <LabelText
-                                text={`Communes (${autocompletion?.length})`}
+                                text={`Communes (${
+                                    autocompletion?.length ?? "0"
+                                })`}
                                 backgroundColor="var(--blue-france-925)"
                                 color="var(--blue-france-113)"
                             />

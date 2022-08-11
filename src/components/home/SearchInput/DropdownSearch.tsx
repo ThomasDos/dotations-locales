@@ -24,12 +24,14 @@ const DropdownRow = ({ ...entity }: Autocompletion) => {
 
     return (
         <Link href={{ pathname: `/${codeInsee}`, query: { commune } }}>
-            <DropdownRowContainer className="flex justify-between px-6 py-4">
-                <span>
-                    {commune} ({codeInsee})
-                </span>
-                <span>{codePostal}</span>
-            </DropdownRowContainer>
+            <a>
+                <DropdownRowContainer className="flex justify-between px-6 py-4">
+                    <span>
+                        {commune} ({codeInsee})
+                    </span>
+                    <span>{codePostal}</span>
+                </DropdownRowContainer>
+            </a>
         </Link>
     );
 };

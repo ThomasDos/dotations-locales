@@ -13,6 +13,11 @@ body {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none !important;
+    background-image: none !important;
+}
+
 li,
 ul {
     all: unset;
