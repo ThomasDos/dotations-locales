@@ -23,11 +23,11 @@ const BreadCrumbsTwoLinks = ({
             <ol className="inline-flex items-center space-x-1 p-0">
                 <li className="inline-flex items-center mr-1">
                     <Link href="/">
-                        <a>
+                        <div>
                             <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
                                 {firstLink}
                             </LinkContainer>
-                        </a>
+                        </div>
                     </Link>
                 </li>
 

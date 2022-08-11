@@ -18,7 +18,7 @@ const HeaderContainer = () => {
                 <div className="flex">
                     <div>
                         <Link href="/">
-                            <a>
+                            <div>
                                 <Image
                                     src="/icons/marianne-text-header.svg"
                                     height="90px"
@@ -27,7 +27,7 @@ const HeaderContainer = () => {
                                     alt="Logo de la marianne qui redirige vers l'accueil"
                                     className="cursor-pointer"
                                 />
-                            </a>
+                            </div>
                         </Link>
                     </div>
                     <div className="ml-10 py-5">

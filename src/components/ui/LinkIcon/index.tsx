@@ -22,7 +22,7 @@ const LinkIcon = ({ icon, text }: LinkIconProps) => {
         //TODO: update href when page is ready
         // <Link  href='/${path}'>
         <LinkIconContainer className="flex items-center">
-            <a>
+            <div>
                 <Image
                     src={`/icons/${icon}.svg`}
                     width="14.43px"
@@ -31,7 +31,7 @@ const LinkIcon = ({ icon, text }: LinkIconProps) => {
                     alt={`icone ${text}`}
                 />
                 <SpanContainer className="text-sm ml-2">{text}</SpanContainer>
-            </a>
+            </div>
         </LinkIconContainer>
         // </Link>
     );

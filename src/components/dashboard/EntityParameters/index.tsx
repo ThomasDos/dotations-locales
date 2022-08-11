@@ -88,12 +88,12 @@ const EntityParameters = ({
                             query: { ...router.query },
                         }}
                     >
-                        <a>
+                        <div>
                             <Button
                                 icon="calculator"
                                 text="Créer une simulation"
                             />
-                        </a>
+                        </div>
                     </Link>
                 </div>
             </div>
