@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-const LinkContainer = styled.div`
+const StyledLink = styled.div`
     color: var(--grey-main-525);
     text-decoration: underline;
     :hover {
@@ -24,9 +24,9 @@ const BreadCrumbsTwoLinks = ({
                 <li className="inline-flex items-center mr-1">
                     <Link href="/">
                         <div>
-                            <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
+                            <StyledLink className="cursor-pointer text-xs inline-flex items-center font-medium">
                                 {firstLink}
-                            </LinkContainer>
+                            </StyledLink>
                         </div>
                     </Link>
                 </li>

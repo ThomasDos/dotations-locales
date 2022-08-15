@@ -5,7 +5,7 @@ import styled from "styled-components";
 import HorizontalSeparator from "./HorizontalSeparator";
 import LinkArrow from "./LinkArrow";
 
-const HeaderBodyContainer = styled.div`
+const StyledHeaderBody = styled.div`
     display: flex;
     align-items: center;
     padding: 12px 120px;
@@ -14,7 +14,7 @@ const HeaderBodyContainer = styled.div`
 const HeaderContainer = () => {
     return (
         <div>
-            <HeaderBodyContainer className="w-full flex justify-between">
+            <StyledHeaderBody className="w-full flex justify-between">
                 <div className="flex">
                     <div>
                         <Link href="/">
@@ -49,7 +49,7 @@ const HeaderContainer = () => {
                         </div>
                     </div>
                 </div>
-            </HeaderBodyContainer>
+            </StyledHeaderBody>
             <hr />
         </div>
     );

@@ -29,9 +29,7 @@ const Dashboard = () => {
             <>
                 <SubHeader commune={commune} codeInsee={codeInsee} />
 
-                <div className="flex pb-0.5">
-                    <div>Merci de reessayer plus tard</div>
-                </div>
+                <Spinner />
             </>
         );
     }

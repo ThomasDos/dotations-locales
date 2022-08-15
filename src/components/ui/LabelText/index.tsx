@@ -13,7 +13,7 @@ interface LabelTextContainerProps {
     color: string;
 }
 
-const LabelTextContainer = styled.div<LabelTextContainerProps>`
+const StyledLabelText = styled.div<LabelTextContainerProps>`
     border-radius: 40px;
     background: ${props => props.backgroundColor};
     color: ${props => props.color};
@@ -26,7 +26,7 @@ const LabelText = ({
     color = "#000000",
 }: LabelTextProps) => {
     return (
-        <LabelTextContainer
+        <StyledLabelText
             className="py-1 px-4 flex justify-center items-center text-sm"
             backgroundColor={backgroundColor}
             color={color}
@@ -42,7 +42,7 @@ const LabelText = ({
                 </div>
             )}
             <span className={`${icon ? "ml-2" : ""}`}>{text}</span>
-        </LabelTextContainer>
+        </StyledLabelText>
     );
 };
 

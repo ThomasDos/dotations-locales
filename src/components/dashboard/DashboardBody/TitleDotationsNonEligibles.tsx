@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
-const SpanToggleContainer = styled.span`
+const StyledSpanToggle = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
@@ -29,17 +29,19 @@ const TitleDotationsNonEligibles = ({
                     setShowNonEligible(!showNonEligible);
                 }}
             >
-                <SpanToggleContainer>
+                <StyledSpanToggle>
                     {showNonEligible ? "Tout masquer" : "Tout voir"}
-                </SpanToggleContainer>
-                <Image
-                    src="/icons/arrow-up.svg"
-                    height="24px"
-                    width="24px"
-                    layout="fixed"
-                    alt="Fleche vers le haut pour ouvrir les dotations non éligibles"
-                    className={showNonEligible ? "" : "rotate-180"}
-                />
+                </StyledSpanToggle>
+                <div>
+                    <Image
+                        src="/icons/arrow-up.svg"
+                        height="24px"
+                        width="24px"
+                        layout="fixed"
+                        alt="Fleche vers le haut pour ouvrir les dotations non éligibles"
+                        className={showNonEligible ? "" : "rotate-180"}
+                    />
+                </div>
             </div>
         </div>
     );

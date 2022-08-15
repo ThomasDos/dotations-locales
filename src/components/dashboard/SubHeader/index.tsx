@@ -1,11 +1,8 @@
-import {
-    BreadCrumbsThreeLinks,
-    BreadCrumbsTwoLinks,
-    LinkIcon,
-} from "components/ui";
+import { SimulationBanner } from "components/simulation";
+import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
 import styled from "styled-components";
 
-const HeaderDashboardContainer = styled.div`
+const StyledHeaderDashboard = styled.div`
     padding: 32px 40px 32px 120px;
 `;
 
@@ -24,21 +21,12 @@ const SubHeader = ({
 
     return (
         <>
-            <HeaderDashboardContainer className="flex justify-between">
+            <StyledHeaderDashboard className="flex justify-between">
                 <div className="flex flex-col">
-                    {isSimulation ? (
-                        <BreadCrumbsThreeLinks
-                            firstLink="Accueil"
-                            secondLink={communeWithCodeInsee}
-                            hrefSecondLink="/[codeInsee]"
-                            currentLink="simulation"
-                        />
-                    ) : (
-                        <BreadCrumbsTwoLinks
-                            firstLink="Accueil"
-                            secondLink={communeWithCodeInsee}
-                        />
-                    )}
+                    <BreadCrumbsTwoLinks
+                        firstLink="Accueil"
+                        secondLink={communeWithCodeInsee}
+                    />
 
                     <h2 className="p-0 m-0 ">{communeWithCodeInsee}</h2>
                 </div>
@@ -48,7 +36,8 @@ const SubHeader = ({
                     <LinkIcon icon="comparer" text="Comparer" path="#" />
                     <LinkIcon icon="alerter" text="M'alerter" path="#" />
                 </div>
-            </HeaderDashboardContainer>
+            </StyledHeaderDashboard>
+            {isSimulation && <SimulationBanner />}
             <hr />
         </>
     );

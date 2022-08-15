@@ -7,20 +7,20 @@ import styled from "styled-components";
 import MainTab from "./MainTab";
 import SubTab from "./SubTab";
 
-const DashboardBodyContainer = styled.div`
+const StyledDashboardBody = styled.div`
     width: 75%;
     padding: 56px 80px 120px 120px;
 `;
 
-const InfoDateContainer = styled.div`
+const StyledInfoDate = styled.div`
     width: 100%;
 `;
 
-const SpanMajContainer = styled.span`
+const StyledSpanMaj = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
-const MajHoursContainer = styled.div`
+const StyledMajHours = styled.div`
     border-top: solid 1px var(--blue-france-925);
     padding-top: 16px;
     margin-top: 16px;
@@ -32,6 +32,7 @@ interface DashboardBodyProps {
     currentYearTotal: number;
     lastYear: number;
     lastYearTotal: number;
+    isSimulation?: boolean;
 }
 
 const DashboardBody = ({
@@ -40,30 +41,35 @@ const DashboardBody = ({
     currentYearTotal,
     lastYear,
     lastYearTotal,
+    isSimulation,
 }: DashboardBodyProps) => {
     return (
-        <DashboardBodyContainer>
+        <StyledDashboardBody>
             <>
-                <InfoDateContainer className="px-8 py-4 mb-10 flex flex-col">
-                    <div className="flex justify-between">
-                        <span className="text-3xl font-bold">
-                            Dotations pour {currentYear}
-                        </span>
-                        <DropdownMenuDownload />
-                    </div>
-                    <MajHoursContainer className="flex items-center justify-end">
-                        <SpanMajContainer className="mr-1 text-sm">
-                            Mise à jour hier à 08h45
-                        </SpanMajContainer>
-                        <Image
-                            src="/icons/clock.svg"
-                            height="16px"
-                            width="16px"
-                            layout="fixed"
-                            alt="icone horloge"
-                        />
-                    </MajHoursContainer>
-                </InfoDateContainer>
+                {!isSimulation && (
+                    <StyledInfoDate className="px-8 py-4 mb-10 flex flex-col">
+                        <div className="flex justify-between">
+                            <span className="text-3xl font-bold">
+                                Dotations pour {currentYear}
+                            </span>
+                            <DropdownMenuDownload />
+                        </div>
+                        <StyledMajHours className="flex items-center justify-end">
+                            <StyledSpanMaj className="mr-1 text-sm">
+                                Mise à jour hier à 08h45
+                            </StyledSpanMaj>
+                            <div>
+                                <Image
+                                    src="/icons/clock.svg"
+                                    height="16px"
+                                    width="16px"
+                                    layout="fixed"
+                                    alt="icone horloge"
+                                />
+                            </div>
+                        </StyledMajHours>
+                    </StyledInfoDate>
+                )}
 
                 <Tabs>
                     {/*@ts-ignore*/}
@@ -95,7 +101,7 @@ const DashboardBody = ({
                     </Tab>
                 </Tabs>
             </>
-        </DashboardBodyContainer>
+        </StyledDashboardBody>
     );
 };
 

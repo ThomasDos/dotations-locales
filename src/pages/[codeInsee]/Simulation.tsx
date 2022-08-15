@@ -58,6 +58,7 @@ const Simulation = () => {
                         currentYearTotal={currentYearTotal}
                         lastYear={lastYear}
                         lastYearTotal={lastYearTotal}
+                        isSimulation
                     />
                     <EntityParameters
                         criteres={criteres}
@@ -65,6 +66,7 @@ const Simulation = () => {
                         currentYear={`${currentYear}`}
                         lastYear={`${lastYear}`}
                         lastYearTotal={lastYearTotal}
+                        isSimulation
                     />
                 </div>
             )}

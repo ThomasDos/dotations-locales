@@ -3,11 +3,11 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const SpanContainer = styled.span`
+const StyledSpan = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
-const LinkIconContainer = styled.div`
+const StyledLinkIcon = styled.div`
     padding: 4px 12px 4px 8px;
 `;
 
@@ -21,7 +21,7 @@ const LinkIcon = ({ icon, text }: LinkIconProps) => {
     return (
         //TODO: update href when page is ready
         // <Link  href='/${path}'>
-        <LinkIconContainer className="flex items-center">
+        <StyledLinkIcon className="flex items-center">
             <div>
                 <Image
                     src={`/icons/${icon}.svg`}
@@ -30,9 +30,9 @@ const LinkIcon = ({ icon, text }: LinkIconProps) => {
                     layout="fixed"
                     alt={`icone ${text}`}
                 />
-                <SpanContainer className="text-sm ml-2">{text}</SpanContainer>
+                <StyledSpan className="text-sm ml-2">{text}</StyledSpan>
             </div>
-        </LinkIconContainer>
+        </StyledLinkIcon>
         // </Link>
     );
 };

@@ -7,7 +7,7 @@ import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
 import ParameterRow from "./ParameterRow";
 
-const EntityParametersContainer = styled.div`
+const StyledEntityParameters = styled.div`
     width: 25%;
     background: var(--grey-975-75);
     z-index: 1;
@@ -23,6 +23,7 @@ interface EntityParametersProps {
     currentYear: string;
     lastYear: string;
     lastYearTotal: number;
+    isSimulation?: boolean;
 }
 
 const EntityParameters = ({
@@ -31,6 +32,7 @@ const EntityParameters = ({
     currentYear,
     lastYear,
     lastYearTotal,
+    isSimulation = false,
 }: EntityParametersProps) => {
     const router = useRouter();
 
@@ -54,7 +56,7 @@ const EntityParameters = ({
         ).toFixed(2)
     );
     return (
-        <EntityParametersContainer>
+        <StyledEntityParameters>
             <div className="w-full text-center sticky top-16">
                 <div className="mb-6">
                     <span className="font-bold">
@@ -81,23 +83,25 @@ const EntityParameters = ({
                         <LabelPercentage percentage={percentageEvolution} />
                     </div>
                 </div>
-                <div>
-                    <Link
-                        href={{
-                            pathname: "/[codeInsee]/Simulation",
-                            query: { ...router.query },
-                        }}
-                    >
-                        <div>
-                            <Button
-                                icon="calculator"
-                                text="Créer une simulation"
-                            />
-                        </div>
-                    </Link>
-                </div>
+                {!isSimulation && (
+                    <div>
+                        <Link
+                            href={{
+                                pathname: "/[codeInsee]/Simulation",
+                                query: { ...router.query },
+                            }}
+                        >
+                            <div>
+                                <Button
+                                    icon="calculator"
+                                    text="Créer une simulation"
+                                />
+                            </div>
+                        </Link>
+                    </div>
+                )}
             </div>
-        </EntityParametersContainer>
+        </StyledEntityParameters>
     );
 };
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Autocompletion } from "src/models/autocompletion/autocompletion.interface";
 import styled from "styled-components";
 
-const DropdownRowContainer = styled.div`
+const StyledDropdownRow = styled.div`
     cursor: pointer;
     :hover {
         background-color: var(--blue-france-975);
@@ -25,12 +25,12 @@ const DropdownRow = ({ ...entity }: Autocompletion) => {
     return (
         <Link href={{ pathname: `/${codeInsee}`, query: { commune } }}>
             <div>
-                <DropdownRowContainer className="flex justify-between px-6 py-4">
+                <StyledDropdownRow className="flex justify-between px-6 py-4">
                     <span>
                         {commune} ({codeInsee})
                     </span>
                     <span>{codePostal}</span>
-                </DropdownRowContainer>
+                </StyledDropdownRow>
             </div>
         </Link>
     );
