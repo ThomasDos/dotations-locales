@@ -1,6 +1,7 @@
 import { Button, LabelPercentage } from "components/ui";
-import type { Criteres } from "models/commune/commune.interface";
+import type { Commune, Criteres } from "models/commune/commune.interface";
 import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
@@ -17,24 +18,37 @@ const StyledEntityParameters = styled.div`
 `;
 
 interface EntityParametersProps {
-    criteres: Criteres;
     currentYearTotal: number;
     currentYear: string;
     lastYear: string;
     lastYearTotal: number;
     isSimulation: boolean;
     setIsSimulation: Dispatch<SetStateAction<boolean>>;
+    fetchCommuneData: Commune | undefined;
 }
 
 const EntityParameters = ({
-    criteres,
     currentYearTotal,
     currentYear,
     lastYear,
     lastYearTotal,
     isSimulation,
     setIsSimulation,
+    fetchCommuneData,
 }: EntityParametersProps) => {
+    const [tempCommuneData, setTempCommuneData] = useState<Commune>();
+
+    useEffect(() => {
+        setTempCommuneData(fetchCommuneData);
+    }, [fetchCommuneData]);
+
+    const { criteres: initialCriteres } = fetchCommuneData as {
+        criteres: Criteres;
+    };
+    const { criteres } = isSimulation
+        ? (tempCommuneData as { criteres: Criteres })
+        : (fetchCommuneData as { criteres: Criteres });
+
     const criteresKeys = Object.keys(criteres);
 
     const currentYearDotationPerHabitant = getDotationPerHabitant(
@@ -68,6 +82,9 @@ const EntityParameters = ({
                             <ParameterRow
                                 key={critereKey}
                                 critere={criteres[critereKey]}
+                                initialCritere={initialCriteres[critereKey]}
+                                isSimulation={isSimulation}
+                                setTempCommuneData={setTempCommuneData}
                             />
                         );
                     })}

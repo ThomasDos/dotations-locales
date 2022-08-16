@@ -46,7 +46,7 @@ const Dashboard = () => {
         );
     }
 
-    const { dotations, criteres } = fetchCommuneData;
+    const { dotations } = fetchCommuneData;
 
     const currentYear = new Date().getFullYear();
     const lastYear = new Date().getFullYear() - 1;
@@ -74,13 +74,13 @@ const Dashboard = () => {
                         isSimulation={isSimulation}
                     />
                     <EntityParameters
-                        criteres={criteres}
                         currentYearTotal={currentYearTotal}
                         currentYear={`${currentYear}`}
                         lastYear={`${lastYear}`}
                         lastYearTotal={lastYearTotal}
                         isSimulation={isSimulation}
                         setIsSimulation={setIsSimulation}
+                        fetchCommuneData={fetchCommuneData}
                     />
                 </div>
             )}
