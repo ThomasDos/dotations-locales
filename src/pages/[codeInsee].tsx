@@ -6,6 +6,7 @@ import {
 import { Spinner } from "components/ui";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import getTotalDotations from "utils/getTotalDotations";
 
 const Dashboard = () => {
@@ -14,11 +15,17 @@ const Dashboard = () => {
         codeInsee: string;
     };
 
+    const [isSimulation, setIsSimulation] = useState<boolean>(false);
+
     const {
         data: fetchCommuneData,
         error: fetchCommuneError,
         isLoading: fetchCommuneIsLoading,
     } = useFetchCommune(codeInsee, !!codeInsee);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [isSimulation]);
 
     if (
         !fetchCommuneData ||
@@ -27,7 +34,12 @@ const Dashboard = () => {
     ) {
         return (
             <>
-                <SubHeader commune={commune} codeInsee={codeInsee} />
+                <SubHeader
+                    commune={commune}
+                    codeInsee={codeInsee}
+                    isSimulation={isSimulation}
+                    setIsSimulation={setIsSimulation}
+                />
 
                 <Spinner />
             </>
@@ -43,7 +55,12 @@ const Dashboard = () => {
 
     return (
         <>
-            <SubHeader commune={commune} codeInsee={codeInsee} />
+            <SubHeader
+                commune={commune}
+                codeInsee={codeInsee}
+                isSimulation={isSimulation}
+                setIsSimulation={setIsSimulation}
+            />
             {(fetchCommuneIsLoading as boolean) ? (
                 <Spinner />
             ) : (
@@ -54,6 +71,7 @@ const Dashboard = () => {
                         currentYearTotal={currentYearTotal}
                         lastYear={lastYear}
                         lastYearTotal={lastYearTotal}
+                        isSimulation={isSimulation}
                     />
                     <EntityParameters
                         criteres={criteres}
@@ -61,6 +79,8 @@ const Dashboard = () => {
                         currentYear={`${currentYear}`}
                         lastYear={`${lastYear}`}
                         lastYearTotal={lastYearTotal}
+                        isSimulation={isSimulation}
+                        setIsSimulation={setIsSimulation}
                     />
                 </div>
             )}

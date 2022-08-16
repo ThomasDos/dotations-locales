@@ -3,8 +3,7 @@ import "dayjs/locale/fr";
 import dayjs, { extend as dayjsExtend } from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
 dayjsExtend(isToday);
@@ -36,14 +35,16 @@ const StyledCancelButton = styled.div`
     cursor: pointer;
 `;
 
-const SimulationBanner = () => {
+interface SimulationBannerProps {
+    setIsSimulation: Dispatch<SetStateAction<boolean>>;
+}
+
+const SimulationBanner = ({ setIsSimulation }: SimulationBannerProps) => {
     const timeCreated = dayjs();
     const hoursCreated = dayjs(timeCreated).format("HH[h]mm");
     const dayCreated = dayjs(timeCreated).locale("fr").format("ddddd");
 
     const timeCreatedIsToday = dayjs(timeCreated).isToday();
-    const router = useRouter();
-    const { codeInsee } = router.query as { codeInsee: string };
 
     return (
         <StyledSimulationBanner>
@@ -67,14 +68,14 @@ const SimulationBanner = () => {
                     </span>
                 </div>
             </div>
-            <Link
-                href={{
-                    pathname: `/${codeInsee}`,
-                    query: { ...router.query },
+
+            <StyledCancelButton
+                onClick={() => {
+                    setIsSimulation(false);
                 }}
             >
-                <StyledCancelButton>Abandonner</StyledCancelButton>
-            </Link>
+                Abandonner
+            </StyledCancelButton>
         </StyledSimulationBanner>
     );
 };

@@ -1,7 +1,6 @@
 import { Button, LabelPercentage } from "components/ui";
 import type { Criteres } from "models/commune/commune.interface";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
@@ -23,7 +22,8 @@ interface EntityParametersProps {
     currentYear: string;
     lastYear: string;
     lastYearTotal: number;
-    isSimulation?: boolean;
+    isSimulation: boolean;
+    setIsSimulation: Dispatch<SetStateAction<boolean>>;
 }
 
 const EntityParameters = ({
@@ -32,10 +32,9 @@ const EntityParameters = ({
     currentYear,
     lastYear,
     lastYearTotal,
-    isSimulation = false,
+    isSimulation,
+    setIsSimulation,
 }: EntityParametersProps) => {
-    const router = useRouter();
-
     const criteresKeys = Object.keys(criteres);
 
     const currentYearDotationPerHabitant = getDotationPerHabitant(
@@ -85,19 +84,13 @@ const EntityParameters = ({
                 </div>
                 {!isSimulation && (
                     <div>
-                        <Link
-                            href={{
-                                pathname: "/[codeInsee]/Simulation",
-                                query: { ...router.query },
+                        <Button
+                            icon="calculator"
+                            text="Créer une simulation"
+                            onClick={() => {
+                                setIsSimulation(true);
                             }}
-                        >
-                            <div>
-                                <Button
-                                    icon="calculator"
-                                    text="Créer une simulation"
-                                />
-                            </div>
-                        </Link>
+                        />
                     </div>
                 )}
             </div>

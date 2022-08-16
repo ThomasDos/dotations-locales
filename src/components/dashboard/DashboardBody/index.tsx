@@ -32,7 +32,7 @@ interface DashboardBodyProps {
     currentYearTotal: number;
     lastYear: number;
     lastYearTotal: number;
-    isSimulation?: boolean;
+    isSimulation: boolean;
 }
 
 const DashboardBody = ({

@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface Buttonprops {
     text: string;
     icon?: string;
+    onClick?: () => void;
 }
 
 const StyledButton = styled.button`
@@ -18,9 +19,9 @@ const StyledButton = styled.button`
         color: var(--blue-france-975);
     }
 `;
-const Button = ({ text, icon }: Buttonprops) => {
+const Button = ({ text, icon, onClick }: Buttonprops) => {
     return (
-        <StyledButton type="button">
+        <StyledButton type="button" onClick={onClick}>
             {icon && (
                 <div>
                     <Image
