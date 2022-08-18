@@ -17,6 +17,8 @@ const customJestConfig = {
         "^hooks/(.*)$": "<rootDir>/src/hooks/$1",
         "^utils/(.*)$": "<rootDir>/src/utils/$1",
         "^constants/(.*)$": "<rootDir>/src/constants/$1",
+        "^models/(.*)$": "<rootDir>/src/models/$1",
+        "^store/(.*)$": "<rootDir>/src/store/$1",
         "^__fixtures__/(.*)$": "<rootDir>/src/__fixtures__/$1",
     },
     testEnvironment: "jest-environment-jsdom",

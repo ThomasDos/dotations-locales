@@ -7,6 +7,8 @@ import { Spinner } from "components/ui";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { hydrateSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
 import getTotalDotations from "utils/getTotalDotations";
 
 const Dashboard = () => {
@@ -17,11 +19,19 @@ const Dashboard = () => {
 
     const [isSimulation, setIsSimulation] = useState<boolean>(false);
 
+    const dispatch = useDispatch();
+
     const {
         data: fetchCommuneData,
         error: fetchCommuneError,
         isLoading: fetchCommuneIsLoading,
     } = useFetchCommune(codeInsee, !!codeInsee);
+
+    useEffect(() => {
+        if (!fetchCommuneData) return;
+
+        dispatch(hydrateSimulationCommune(fetchCommuneData));
+    }, [fetchCommuneData, dispatch]);
 
     useEffect(() => {
         window.scrollTo(0, 0);

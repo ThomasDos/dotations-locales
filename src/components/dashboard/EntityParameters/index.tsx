@@ -1,7 +1,8 @@
 import { Button, LabelPercentage } from "components/ui";
 import type { Commune, Criteres } from "models/commune/commune.interface";
 import type { Dispatch, SetStateAction } from "react";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
@@ -36,17 +37,13 @@ const EntityParameters = ({
     setIsSimulation,
     fetchCommuneData,
 }: EntityParametersProps) => {
-    const [tempCommuneData, setTempCommuneData] = useState<Commune>();
-
-    useEffect(() => {
-        setTempCommuneData(fetchCommuneData);
-    }, [fetchCommuneData]);
+    const simulationCommune = useSelector(selectSimulationCommune);
 
     const { criteres: initialCriteres } = fetchCommuneData as {
         criteres: Criteres;
     };
     const { criteres } = isSimulation
-        ? (tempCommuneData as { criteres: Criteres })
+        ? (simulationCommune as { criteres: Criteres })
         : (fetchCommuneData as { criteres: Criteres });
 
     const criteresKeys = Object.keys(criteres);
@@ -81,10 +78,10 @@ const EntityParameters = ({
                         return (
                             <ParameterRow
                                 key={critereKey}
+                                critereKey={critereKey}
                                 critere={criteres[critereKey]}
                                 initialCritere={initialCriteres[critereKey]}
                                 isSimulation={isSimulation}
-                                setTempCommuneData={setTempCommuneData}
                             />
                         );
                     })}

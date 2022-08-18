@@ -27,6 +27,7 @@
             "utils/*": ["src/utils/*"],
             "constants/*": ["src/constants/*"],
             "models/*": ["src/models/*"],
+            "store/*": ["src/store/*"],
             "__fixtures__/*": ["src/__fixtures__/*"]
         }
     },

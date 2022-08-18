@@ -1,6 +1,5 @@
 import { LabelText } from "components/ui";
-import type { Commune, Critere } from "models/commune/commune.interface";
-import type { Dispatch, SetStateAction } from "react";
+import type { Critere } from "models/commune/commune.interface";
 
 import Value from "./Value";
 
@@ -8,19 +7,20 @@ interface EntityRowProps {
     critere: Critere;
     initialCritere: Critere;
     isSimulation: boolean;
-    setTempCommuneData: Dispatch<SetStateAction<Commune | undefined>>;
+    critereKey: string;
 }
 
 const ParameterRow = ({
     critere,
+    critereKey,
     initialCritere,
     isSimulation,
-    setTempCommuneData,
 }: EntityRowProps) => {
     const initialCurrentYear =
         initialCritere.annees[0][new Date().getFullYear()];
     const currentYear = critere.annees[0][new Date().getFullYear()];
-    const valueIsModified = initialCurrentYear !== currentYear;
+
+    const valueIsModified = initialCurrentYear.valeur !== currentYear.valeur;
 
     return (
         <>
@@ -42,7 +42,9 @@ const ParameterRow = ({
                 <Value
                     currentYear={currentYear}
                     isSimulation={isSimulation}
-                    setTempCommuneData={setTempCommuneData}
+                    critere={critere}
+                    critereKey={critereKey}
+                    initialCurrentYear={initialCurrentYear}
                 />
             </div>
         </>

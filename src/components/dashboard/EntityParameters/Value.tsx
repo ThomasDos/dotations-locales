@@ -3,10 +3,12 @@ import {
     LabelGreenCustomCrossIcon,
     LabelGreyCustomCrossIcon,
 } from "components/ui";
-import type { Commune } from "models/commune/commune.interface";
+import type { Critere } from "models/commune/commune.interface";
 import Image from "next/image";
-import type { Dispatch, SetStateAction } from "react";
+import type { ChangeEvent } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateCritereValeur } from "store/simulationCommune/simulationCommune.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
@@ -57,19 +59,82 @@ interface ValueProps {
         unite: string | null;
         valeur: string;
     };
+    initialCurrentYear: {
+        unite: string | null;
+        valeur: string;
+    };
     isSimulation: boolean;
-    setTempCommuneData: Dispatch<SetStateAction<Commune | undefined>>;
+    critere: Critere;
+    critereKey: string;
 }
 
 const Value = ({
     currentYear,
     isSimulation,
-    setTempCommuneData,
+    critereKey,
+    initialCurrentYear,
 }: ValueProps) => {
     const [showModal, setShowModal] = useState(false);
+    const dispatch = useDispatch();
     const { valeur } = currentYear;
     const valeurToNumber = Number(currentYear.valeur);
+    const valueIsNotNumber = isNaN(valeurToNumber);
+    const [entityInput, setEntityInput] = useState<number | string>(
+        valueIsNotNumber ? valeur : valeurToNumber
+    );
     const valeurIsLabel = valeur === "Non" || valeur === "Oui";
+
+    const handleModalClose = () => {
+        setShowModal(false);
+    };
+
+    const handleInputChange = ({
+        target: { value },
+    }: ChangeEvent<HTMLInputElement>) => {
+        setEntityInput(value);
+        dispatch(
+            updateCritereValeur({
+                critereKey,
+                value,
+            })
+        );
+    };
+
+    const handleInputReset = () => {
+        setEntityInput(initialCurrentYear.valeur);
+        dispatch(
+            updateCritereValeur({
+                critereKey,
+                value: initialCurrentYear.valeur,
+            })
+        );
+    };
+
+    const handleInputIncrement = () => {
+        if (valueIsNotNumber) return;
+        const value = Number(entityInput) + 1;
+        setEntityInput(value);
+        dispatch(
+            updateCritereValeur({
+                critereKey,
+                value: String(value),
+            })
+        );
+    };
+
+    const handleInputDecrement = () => {
+        if (valueIsNotNumber) return;
+        if (Number(entityInput) <= 0) return;
+        const value = Number(entityInput) - 1;
+        setEntityInput(value);
+        dispatch(
+            updateCritereValeur({
+                critereKey,
+                value: String(value),
+            })
+        );
+    };
+
     return valeurIsLabel ? (
         valeur === "Oui" ? (
             <LabelGreenCustomCrossIcon text="Oui" />
@@ -79,7 +144,7 @@ const Value = ({
     ) : (
         <div className="flex items-center">
             <span className="font-bold text-end">
-                {isNaN(valeurToNumber)
+                {valueIsNotNumber
                     ? currentYear.valeur
                     : formatNumberWithSpace(
                           Math.round(Number(currentYear.valeur))
@@ -106,25 +171,13 @@ const Value = ({
 
             <Modal
                 open={showModal}
-                onClose={() => {
-                    setShowModal(false);
-                }}
+                onClose={handleModalClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
                 className="flex items-center justify-center"
             >
-                {/* TODO: gestion edit */}
-                <div
-                    className="bg-white"
-                    onClick={() => {
-                        setTempCommuneData(prev => prev);
-                    }}
-                >
-                    <StyledModalHeader
-                        onClick={() => {
-                            setShowModal(false);
-                        }}
-                    >
+                <div className="bg-white">
+                    <StyledModalHeader onClick={handleModalClose}>
                         <div className="flex items-center cursor-pointer">
                             <Image
                                 src={`/icons/arrow-right.svg`}
@@ -143,7 +196,10 @@ const Value = ({
                                 Nombre d&apos;habitants de la commune
                             </StyledTitleEditor>
                             <div className="flex items-center mb-12">
-                                <div className="flex items-center cursor-pointer">
+                                <div
+                                    className="flex items-center cursor-pointer"
+                                    onClick={handleInputDecrement}
+                                >
                                     <Image
                                         src={`/icons/substract.svg`}
                                         width="56px"
@@ -152,8 +208,20 @@ const Value = ({
                                         alt="Fermer la modal et revenir à la simulation"
                                     />
                                 </div>
-                                <StyledInput>3792</StyledInput>
-                                <div className="flex items-center cursor-pointer ">
+                                <StyledInput>
+                                    {!valueIsNotNumber && (
+                                        <input
+                                            type="number"
+                                            className="text-center"
+                                            onChange={handleInputChange}
+                                            value={entityInput}
+                                        />
+                                    )}
+                                </StyledInput>
+                                <div
+                                    className="flex items-center cursor-pointer"
+                                    onClick={handleInputIncrement}
+                                >
                                     <Image
                                         src={`/icons/add.svg`}
                                         width="56px"
@@ -163,7 +231,10 @@ const Value = ({
                                     />
                                 </div>
                             </div>
-                            <div className="cursor-pointer text-sm">
+                            <div
+                                className="cursor-pointer text-sm"
+                                onClick={handleInputReset}
+                            >
                                 Réinitialiser
                             </div>
                         </StyledModalEditor>
