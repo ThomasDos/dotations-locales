@@ -1,8 +1,28 @@
-const SpinnerSearchInput = () => {
+import { useMemo } from "react";
+
+interface SpinnerProps {
+    size?: "lg" | "md" | "sm";
+}
+
+const Spinner = ({ size }: SpinnerProps) => {
+    const spinnerSize = useMemo(() => {
+        switch (size) {
+            case "md":
+                return "h-10 w-10";
+            case "lg":
+                return "h-20 w-20";
+            case "sm":
+            default:
+                return "h-5 w-5";
+        }
+    }, [size]);
     return (
         <svg
             role="status"
-            className="inline w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-white dark:fill-white"
+            className={
+                "inline text-gray-200 animate-spin dark:text-gray-600 fill-white dark:fill-white " +
+                spinnerSize
+            }
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -19,4 +39,4 @@ const SpinnerSearchInput = () => {
     );
 };
 
-export default SpinnerSearchInput;
+export default Spinner;

@@ -8,6 +8,7 @@ import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { hydrateInitialCommune } from "store/initialCommune/initialCommune.slice";
 import { hydrateSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
 import getTotalDotations from "utils/getTotalDotations";
 
@@ -30,6 +31,7 @@ const Dashboard = () => {
     useEffect(() => {
         if (!fetchCommuneData) return;
 
+        dispatch(hydrateInitialCommune(fetchCommuneData));
         dispatch(hydrateSimulationCommune(fetchCommuneData));
     }, [fetchCommuneData, dispatch]);
 
@@ -51,7 +53,7 @@ const Dashboard = () => {
                     setIsSimulation={setIsSimulation}
                 />
                 <div className="w-auto my-40 flex justify-center">
-                    <Spinner />
+                    <Spinner size="md" />
                 </div>
             </>
         );
@@ -74,12 +76,11 @@ const Dashboard = () => {
             />
             {(fetchCommuneIsLoading as boolean) ? (
                 <div className="w-auto my-40 flex justify-center">
-                    <Spinner />
+                    <Spinner size="md" />
                 </div>
             ) : (
                 <div className="flex pb-0.5">
                     <DashboardBody
-                        dotations={dotations}
                         currentYear={currentYear}
                         currentYearTotal={currentYearTotal}
                         lastYear={lastYear}
@@ -93,7 +94,6 @@ const Dashboard = () => {
                         lastYearTotal={lastYearTotal}
                         isSimulation={isSimulation}
                         setIsSimulation={setIsSimulation}
-                        fetchCommuneData={fetchCommuneData}
                     />
                 </div>
             )}

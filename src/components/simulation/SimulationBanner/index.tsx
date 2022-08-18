@@ -4,6 +4,8 @@ import dayjs, { extend as dayjsExtend } from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
 import type { Dispatch, SetStateAction } from "react";
+import { useSelector } from "react-redux";
+import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune/simulationCommune.slice";
 import styled from "styled-components";
 
 dayjsExtend(isToday);
@@ -26,7 +28,7 @@ const StyledBannerTitle = styled.span`
     line-height: 36px;
 `;
 
-const StyledCancelButton = styled.div`
+const StyledBannerButton = styled.div`
     padding: 8px 24px;
     border: 1px #fff solid;
     display: flex;
@@ -45,6 +47,10 @@ const SimulationBanner = ({ setIsSimulation }: SimulationBannerProps) => {
     const dayCreated = dayjs(timeCreated).locale("fr").format("ddddd");
 
     const timeCreatedIsToday = dayjs(timeCreated).isToday();
+
+    const simulationIsDifferentThanInitial = useSelector(
+        selectSimulationIsDifferentThanInitial
+    );
 
     return (
         <StyledSimulationBanner>
@@ -68,14 +74,25 @@ const SimulationBanner = ({ setIsSimulation }: SimulationBannerProps) => {
                     </span>
                 </div>
             </div>
-
-            <StyledCancelButton
-                onClick={() => {
-                    setIsSimulation(false);
-                }}
-            >
-                Abandonner
-            </StyledCancelButton>
+            <div className="flex">
+                <StyledBannerButton
+                    onClick={() => {
+                        setIsSimulation(false);
+                    }}
+                >
+                    Abandonner
+                </StyledBannerButton>
+                {simulationIsDifferentThanInitial && (
+                    <>
+                        <StyledBannerButton className="ml-4">
+                            Exporter
+                        </StyledBannerButton>
+                        <StyledBannerButton className="ml-4">
+                            Enregistrer
+                        </StyledBannerButton>
+                    </>
+                )}
+            </div>
         </StyledSimulationBanner>
     );
 };

@@ -1,7 +1,9 @@
 import { Button, LabelPercentage } from "components/ui";
-import type { Commune, Criteres } from "models/commune/commune.interface";
+import _ from "lodash";
+import type { Criteres } from "models/commune/commune.interface";
 import type { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
+import { selectInitialCommune } from "store/initialCommune/initialCommune.slice";
 import { selectSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
@@ -25,7 +27,6 @@ interface EntityParametersProps {
     lastYearTotal: number;
     isSimulation: boolean;
     setIsSimulation: Dispatch<SetStateAction<boolean>>;
-    fetchCommuneData: Commune | undefined;
 }
 
 const EntityParameters = ({
@@ -35,16 +36,17 @@ const EntityParameters = ({
     lastYearTotal,
     isSimulation,
     setIsSimulation,
-    fetchCommuneData,
 }: EntityParametersProps) => {
     const simulationCommune = useSelector(selectSimulationCommune);
 
-    const { criteres: initialCriteres } = fetchCommuneData as {
+    const initialCommune = useSelector(selectInitialCommune);
+    if (_.isEmpty(simulationCommune.criteres)) return null;
+    const { criteres: initialCriteres } = initialCommune as {
         criteres: Criteres;
     };
     const { criteres } = isSimulation
         ? (simulationCommune as { criteres: Criteres })
-        : (fetchCommuneData as { criteres: Criteres });
+        : (initialCommune as { criteres: Criteres });
 
     const criteresKeys = Object.keys(criteres);
 

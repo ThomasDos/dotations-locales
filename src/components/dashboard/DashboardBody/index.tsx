@@ -1,7 +1,9 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
-import type { Dotations } from "models/commune/commune.interface";
+import _ from "lodash";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { selectInitialDotations } from "store/initialCommune/initialCommune.slice";
 import styled from "styled-components";
 
 import MainTab from "./MainTab";
@@ -35,8 +37,13 @@ const StyledTabs = styled(Tabs)`
     }
 `;
 
+const StyledWarningMessage = styled.div`
+    background-color: var(--green-tilleul-verveine-975);
+    padding: 16px 32px;
+    margin: 40px;
+`;
+
 interface DashboardBodyProps {
-    dotations: Dotations;
     currentYear: number;
     currentYearTotal: number;
     lastYear: number;
@@ -45,17 +52,28 @@ interface DashboardBodyProps {
 }
 
 const DashboardBody = ({
-    dotations,
     currentYear,
     currentYearTotal,
     lastYear,
     lastYearTotal,
     isSimulation,
 }: DashboardBodyProps) => {
+    const dotations = useSelector(selectInitialDotations);
+    if (_.isEmpty(dotations)) return null;
+    const {
+        dotationForfaitaire,
+        dotationSolidariteRurale,
+        dotationNationalePerequation,
+    } = dotations;
+
     return (
         <StyledDashboardBody>
             <>
-                {!isSimulation && (
+                {isSimulation ? (
+                    <StyledWarningMessage>
+                        👋 Message lorem ipsum dolores
+                    </StyledWarningMessage>
+                ) : (
                     <StyledInfoDate className="px-8 py-4 mb-10 flex flex-col">
                         <div className="flex justify-between">
                             <span className="text-3xl font-bold">
@@ -88,25 +106,22 @@ const DashboardBody = ({
                             currentYearTotal={currentYearTotal}
                             lastYear={lastYear}
                             lastYearTotal={lastYearTotal}
-                            dotations={dotations}
                         />
                     </Tab>
 
                     {/*@ts-ignore*/}
                     <Tab index={2} activeTab={1} label="DF">
-                        <SubTab dotation={dotations.dotationForfaitaire} />
+                        <SubTab dotation={dotationForfaitaire} />
                     </Tab>
 
                     {/*@ts-ignore*/}
                     <Tab index={3} activeTab={1} label="DSR">
-                        <SubTab dotation={dotations.dotationSolidariteRurale} />
+                        <SubTab dotation={dotationSolidariteRurale} />
                     </Tab>
 
                     {/*@ts-ignore*/}
                     <Tab index={4} activeTab={1} label="DNP">
-                        <SubTab
-                            dotation={dotations.dotationNationalePerequation}
-                        />
+                        <SubTab dotation={dotationNationalePerequation} />
                     </Tab>
                 </StyledTabs>
             </>

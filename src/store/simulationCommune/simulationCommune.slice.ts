@@ -1,18 +1,13 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import {
-    createEntityAdapter,
-    createSelector,
-    createSlice,
-} from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { Commune, Criteres } from "models/commune/commune.interface";
+import { selectInitialCriteres } from "store/initialCommune/initialCommune.slice";
 
 import type { RootState } from "..";
 
-const criteresAdapter = createEntityAdapter();
-
 const initialState: Commune = {
     codeInsee: "",
-    criteres: criteresAdapter.getInitialState<Criteres>({}),
+    criteres: {},
     dotations: {},
 };
 
@@ -43,6 +38,26 @@ const selectSelf = (state: RootState) => state[simulationCommuneSlice.name];
 export const selectSimulationCommune = createSelector(
     selectSelf,
     state => state
+);
+const selectCriteres = createSelector(selectSelf, state => state.criteres);
+
+export const selectSimulationIsDifferentThanInitial = createSelector(
+    selectCriteres,
+    selectInitialCriteres,
+    (criteres: Criteres, initialCriteres: Criteres): boolean => {
+        const criteresKeys = Object.keys(criteres);
+
+        return !!criteresKeys.find((initialCritereKey: string) => {
+            const initialCurrentYear =
+                initialCriteres[initialCritereKey].annees[0][
+                    new Date().getFullYear()
+                ];
+            const currentYear =
+                criteres[initialCritereKey].annees[0][new Date().getFullYear()];
+
+            return initialCurrentYear.valeur !== currentYear.valeur;
+        });
+    }
 );
 
 export default simulationCommuneSlice.reducer;
