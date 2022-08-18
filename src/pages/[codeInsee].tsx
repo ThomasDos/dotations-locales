@@ -50,8 +50,9 @@ const Dashboard = () => {
                     isSimulation={isSimulation}
                     setIsSimulation={setIsSimulation}
                 />
-
-                <Spinner />
+                <div className="w-auto my-40 flex justify-center">
+                    <Spinner />
+                </div>
             </>
         );
     }
@@ -72,7 +73,9 @@ const Dashboard = () => {
                 setIsSimulation={setIsSimulation}
             />
             {(fetchCommuneIsLoading as boolean) ? (
-                <Spinner />
+                <div className="w-auto my-40 flex justify-center">
+                    <Spinner />
+                </div>
             ) : (
                 <div className="flex pb-0.5">
                     <DashboardBody
