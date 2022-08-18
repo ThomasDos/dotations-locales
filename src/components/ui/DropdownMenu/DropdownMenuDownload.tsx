@@ -36,6 +36,7 @@ const MenuItemCustom = ({
                         width="16px"
                         height="16px"
                         alt="icone exporter"
+                        layout="fixed"
                     />
                 </div>
             </div>
@@ -68,6 +69,7 @@ const DropdownMenuDownload = () => {
                             width="16px"
                             height="16px"
                             alt="icone exporter"
+                            layout="fixed"
                         />
                     </div>
                 }

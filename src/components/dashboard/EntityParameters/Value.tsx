@@ -66,6 +66,7 @@ interface ValueProps {
     isSimulation: boolean;
     critere: Critere;
     critereKey: string;
+    valueIsModified: boolean;
 }
 
 const Value = ({
@@ -73,6 +74,7 @@ const Value = ({
     isSimulation,
     critereKey,
     initialCurrentYear,
+    valueIsModified,
 }: ValueProps) => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
@@ -159,7 +161,9 @@ const Value = ({
                     }}
                 >
                     <Image
-                        src="/icons/arrow-up.svg"
+                        src={`/icons/${
+                            valueIsModified ? "edit-pencil" : "arrow-up"
+                        }.svg`}
                         height="16px"
                         width="16px"
                         layout="fixed"
@@ -214,7 +218,9 @@ const Value = ({
                                             type="number"
                                             className="text-center"
                                             onChange={handleInputChange}
-                                            value={entityInput}
+                                            value={Math.round(
+                                                Number(entityInput)
+                                            )}
                                         />
                                     )}
                                 </StyledInput>

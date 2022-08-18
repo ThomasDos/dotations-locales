@@ -26,6 +26,15 @@ const StyledMajHours = styled.div`
     margin-top: 16px;
 `;
 
+const StyledTabs = styled(Tabs)`
+    ul {
+        align-items: center !important;
+    }
+    &::before {
+        height: 1px;
+    }
+`;
+
 interface DashboardBodyProps {
     dotations: Dotations;
     currentYear: number;
@@ -71,7 +80,7 @@ const DashboardBody = ({
                     </StyledInfoDate>
                 )}
 
-                <Tabs>
+                <StyledTabs>
                     {/*@ts-ignore*/}
                     <Tab index={1} activeTab={1} label="Résumé">
                         <MainTab
@@ -99,7 +108,7 @@ const DashboardBody = ({
                             dotation={dotations.dotationNationalePerequation}
                         />
                     </Tab>
-                </Tabs>
+                </StyledTabs>
             </>
         </StyledDashboardBody>
     );

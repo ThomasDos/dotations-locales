@@ -32,7 +32,7 @@ const ParameterRow = ({
                         <div className="ml-1">
                             <LabelText
                                 text="SIMU"
-                                backgroundColor="#F6F6F6"
+                                backgroundColor="var(--grey-975)"
                                 color="#FC5D00"
                                 borderColor="#FC5D00"
                             />
@@ -45,6 +45,7 @@ const ParameterRow = ({
                     critere={critere}
                     critereKey={critereKey}
                     initialCurrentYear={initialCurrentYear}
+                    valueIsModified={valueIsModified}
                 />
             </div>
         </>

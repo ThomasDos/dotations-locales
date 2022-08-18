@@ -91,9 +91,11 @@ const EntityParameters = ({
                     <span className="text-sm">Dotation / habitant</span>
                     <div className="flex justify-center mt-2">
                         <span className="font-bold text-xl mr-2">
-                            {currentYearDotationPerHabitant.toFixed(2)}€
+                            {Math.round(currentYearDotationPerHabitant)}€
                         </span>
-                        <LabelPercentage percentage={percentageEvolution} />
+                        {!!percentageEvolution && (
+                            <LabelPercentage percentage={percentageEvolution} />
+                        )}
                     </div>
                 </div>
                 {!isSimulation && (
