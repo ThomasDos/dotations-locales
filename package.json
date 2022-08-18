@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "description": "Dotations Locales app",
     "license": "AGPL-3.0-or-later",
-    "private": true,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
