@@ -40,7 +40,7 @@ const EntityParameters = ({
     const simulationCommune = useSelector(selectSimulationCommune);
 
     const initialCommune = useSelector(selectInitialCommune);
-    if (_.isEmpty(simulationCommune.criteres)) return null;
+    if (_.isEmpty(initialCommune.criteres)) return null;
     const { criteres: initialCriteres } = initialCommune as {
         criteres: Criteres;
     };
@@ -55,6 +55,7 @@ const EntityParameters = ({
         currentYear,
         currentYearTotal
     );
+
     const lastYearDotationPerHabitant = getDotationPerHabitant(
         criteres,
         lastYear,

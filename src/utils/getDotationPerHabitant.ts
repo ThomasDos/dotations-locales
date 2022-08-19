@@ -7,7 +7,7 @@ export default (
     year: string,
     yearTotal: number
 ): number => {
-    if (!_.isEmpty(criteres)) return 0;
+    if (_.isEmpty(criteres)) return 0;
     const {
         populationDgf: { annees },
     } = criteres;

@@ -63,7 +63,7 @@ const SearchInput = () => {
                             {searchResultIsLoading ? (
                                 <Spinner />
                             ) : (
-                                <div>
+                                <div className="flex">
                                     <Image
                                         src="/icons/search.svg"
                                         height="20.31px"
