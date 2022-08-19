@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-const LinkContainer = styled.div`
+const StyledLink = styled.div`
     color: var(--grey-main-525);
     text-decoration: underline;
     :hover {
@@ -9,23 +9,25 @@ const LinkContainer = styled.div`
     }
 `;
 
-interface BreadCrumbsTwoLinkProps {
+interface BreadCrumbsTwoLinksProps {
     firstLink: string;
     secondLink: string;
 }
 
-const BreadCrumbsTwoLink = ({
+const BreadCrumbsTwoLinks = ({
     firstLink,
     secondLink,
-}: BreadCrumbsTwoLinkProps) => {
+}: BreadCrumbsTwoLinksProps) => {
     return (
         <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 p-0">
                 <li className="inline-flex items-center mr-1">
                     <Link href="/">
-                        <LinkContainer className="cursor-pointer text-xs inline-flex items-center font-medium">
-                            {firstLink}
-                        </LinkContainer>
+                        <div>
+                            <StyledLink className="cursor-pointer text-xs inline-flex items-center font-medium">
+                                {firstLink}
+                            </StyledLink>
+                        </div>
                     </Link>
                 </li>
 
@@ -53,4 +55,4 @@ const BreadCrumbsTwoLink = ({
     );
 };
 
-export default BreadCrumbsTwoLink;
+export default BreadCrumbsTwoLinks;

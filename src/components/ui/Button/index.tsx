@@ -4,9 +4,10 @@ import styled from "styled-components";
 interface Buttonprops {
     text: string;
     icon?: string;
+    onClick?: () => void;
 }
 
-const ButtonContainer = styled.button`
+const StyledButton = styled.button`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -18,21 +19,22 @@ const ButtonContainer = styled.button`
         color: var(--blue-france-975);
     }
 `;
-//TODO: check size icon
-const Button = ({ text, icon }: Buttonprops) => {
+const Button = ({ text, icon, onClick }: Buttonprops) => {
     return (
-        <ButtonContainer type="button">
+        <StyledButton type="button" onClick={onClick}>
             {icon && (
-                <Image
-                    src={`/icons/${icon}.svg`}
-                    width="20.8px"
-                    height="24px"
-                    layout="fixed"
-                    alt={`icone ${text}`}
-                />
+                <div>
+                    <Image
+                        src={`/icons/${icon}.svg`}
+                        width="20.8px"
+                        height="24px"
+                        layout="fixed"
+                        alt={`icone ${text}`}
+                    />
+                </div>
             )}
             <span className={icon ? "ml-2" : ""}>{text}</span>
-        </ButtonContainer>
+        </StyledButton>
     );
 };
 

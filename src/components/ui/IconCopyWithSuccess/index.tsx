@@ -6,7 +6,7 @@ interface IconCopyProps {
     toCopy: number | string;
 }
 
-const IconCopy = ({ toCopy }: IconCopyProps) => {
+const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
     const [copied, setCopied] = useState(false);
 
     const onCopy = () => {
@@ -43,18 +43,22 @@ const IconCopy = ({ toCopy }: IconCopyProps) => {
                     },
                 }}
             >
-                <Image
-                    data-tip
-                    data-for="tooltip-copy"
-                    src={`/icons/${copied ? "copy-success.svg" : "copy.svg"}`}
-                    height="16px"
-                    width="13.87px"
-                    alt="vecteur sous forme de flèche vers le haut"
-                    layout="fixed"
-                />
+                <div>
+                    <Image
+                        data-tip
+                        data-for="tooltip-copy"
+                        src={`/icons/${
+                            copied ? "copy-success.svg" : "copy.svg"
+                        }`}
+                        height="16px"
+                        width="13.87px"
+                        alt="vecteur sous forme de flèche vers le haut"
+                        layout="fixed"
+                    />
+                </div>
             </Tooltip>
         </div>
     );
 };
 
-export default IconCopy;
+export default IconCopyWithSuccess;

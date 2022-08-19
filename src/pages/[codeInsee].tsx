@@ -6,19 +6,38 @@ import {
 import { Spinner } from "components/ui";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { hydrateInitialCommune } from "store/initialCommune/initialCommune.slice";
+import { hydrateSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
 import getTotalDotations from "utils/getTotalDotations";
 
 const Dashboard = () => {
-    const router = useRouter();
-    const { commune, codeInsee } = router.query as {
+    const { commune, codeInsee } = useRouter().query as {
         commune: string;
         codeInsee: string;
     };
+
+    const [isSimulation, setIsSimulation] = useState<boolean>(false);
+
+    const dispatch = useDispatch();
+
     const {
         data: fetchCommuneData,
         error: fetchCommuneError,
         isLoading: fetchCommuneIsLoading,
-    } = useFetchCommune(codeInsee);
+    } = useFetchCommune(codeInsee, !!codeInsee);
+
+    useEffect(() => {
+        if (!fetchCommuneData) return;
+
+        dispatch(hydrateInitialCommune(fetchCommuneData));
+        dispatch(hydrateSimulationCommune(fetchCommuneData));
+    }, [fetchCommuneData, dispatch]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [isSimulation]);
 
     if (
         !fetchCommuneData ||
@@ -27,16 +46,20 @@ const Dashboard = () => {
     ) {
         return (
             <>
-                <SubHeader commune={commune} />
-
-                <div className="flex pb-0.5">
-                    <div>Merci de reessayer plus tard</div>
+                <SubHeader
+                    commune={commune}
+                    codeInsee={codeInsee}
+                    isSimulation={isSimulation}
+                    setIsSimulation={setIsSimulation}
+                />
+                <div className="w-auto my-40 flex justify-center">
+                    <Spinner size="md" />
                 </div>
             </>
         );
     }
 
-    const { dotations, criteres } = fetchCommuneData;
+    const { dotations } = fetchCommuneData;
 
     const currentYear = new Date().getFullYear();
     const lastYear = new Date().getFullYear() - 1;
@@ -45,24 +68,32 @@ const Dashboard = () => {
 
     return (
         <>
-            <SubHeader commune={commune} />
+            <SubHeader
+                commune={commune}
+                codeInsee={codeInsee}
+                isSimulation={isSimulation}
+                setIsSimulation={setIsSimulation}
+            />
             {(fetchCommuneIsLoading as boolean) ? (
-                <Spinner />
+                <div className="w-auto my-40 flex justify-center">
+                    <Spinner size="md" />
+                </div>
             ) : (
                 <div className="flex pb-0.5">
                     <DashboardBody
-                        dotations={dotations}
                         currentYear={currentYear}
                         currentYearTotal={currentYearTotal}
                         lastYear={lastYear}
                         lastYearTotal={lastYearTotal}
+                        isSimulation={isSimulation}
                     />
                     <EntityParameters
-                        criteres={criteres}
                         currentYearTotal={currentYearTotal}
                         currentYear={`${currentYear}`}
                         lastYear={`${lastYear}`}
                         lastYearTotal={lastYearTotal}
+                        isSimulation={isSimulation}
+                        setIsSimulation={setIsSimulation}
                     />
                 </div>
             )}

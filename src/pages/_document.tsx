@@ -1,6 +1,5 @@
 import { Head, Html, Main, NextScript } from "next/document";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export default function Document() {
     return (
         <Html lang="fr">

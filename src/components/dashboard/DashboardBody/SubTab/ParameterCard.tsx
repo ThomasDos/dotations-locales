@@ -6,7 +6,7 @@ import {
 import type { Dotation } from "models/commune/commune.interface";
 import styled from "styled-components";
 
-const ParameterCardContainer = styled.div<{
+const StyledParameterCard = styled.div<{
     backgroundColor: boolean;
 }>`
     padding: 16px 48px 16px 32px;
@@ -19,7 +19,7 @@ const ParameterCardContainer = styled.div<{
         backgroundColor ? "var(--blue-france-975)" : "none"};
 `;
 
-const CardTitleContainer = styled.span`
+const StyledCardTitle = styled.span`
     font-size: 14px;
     line-height: 18px;
     font-weight: 700;
@@ -45,13 +45,13 @@ const ParameterCard = ({
     const { title, description } = parameter;
 
     return (
-        <ParameterCardContainer backgroundColor={backgroundColor}>
+        <StyledParameterCard backgroundColor={backgroundColor}>
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <div className="flex">
-                        <CardTitleContainer className="mb-2 mr-1">
+                        <StyledCardTitle className="mb-2 mr-1">
                             {title}
-                        </CardTitleContainer>
+                        </StyledCardTitle>
                         {hasInformation && (
                             <div className="cursor-help">
                                 <IconInformation />
@@ -73,7 +73,7 @@ const ParameterCard = ({
                     </div>
                 )}
             </div>
-        </ParameterCardContainer>
+        </StyledParameterCard>
     );
 };
 

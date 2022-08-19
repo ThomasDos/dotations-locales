@@ -26,16 +26,14 @@ const SubTabSousDotations = ({
                 const sousDotation: Dotation =
                     sousDotationRecord[Object.keys(sousDotationRecord)[0]];
                 return (
-                    <>
-                        <div className="pt-10" key={sousDotation.title}>
-                            <DotationCard
-                                dotation={sousDotation}
-                                borderTop={true}
-                                backgroundColor={true}
-                            />
-                            <ParameterCard parameter={dotationMocked} />
-                        </div>
-                    </>
+                    <div className="pt-10" key={sousDotation.title}>
+                        <DotationCard
+                            dotation={sousDotation}
+                            borderTop={true}
+                            backgroundColor={true}
+                        />
+                        <ParameterCard parameter={dotationMocked} />
+                    </div>
                 );
             })}
         </>

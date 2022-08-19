@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const SpanContainer = styled.span`
+const StyledSpan = styled.span`
     margin-left: 10.67px;
     font-size: 14px;
     color: var(--blue-france-sun-113-625);
@@ -22,7 +22,7 @@ const LinkArrow = ({ textLink }: LinkArrowProps) => {
                 layout="fixed"
             />
 
-            <SpanContainer>{textLink}</SpanContainer>
+            <StyledSpan>{textLink}</StyledSpan>
         </div>
     );
 };

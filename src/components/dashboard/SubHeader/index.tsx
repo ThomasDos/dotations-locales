@@ -1,26 +1,32 @@
-import { BreadCrumbsTwoLink, LinkIcon } from "components/ui";
-import { useRouter } from "next/router";
+import { SimulationBanner } from "components/simulation";
+import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
+import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
-const HeaderDashboardContainer = styled.div`
+const StyledHeaderDashboard = styled.div`
     padding: 32px 40px 32px 120px;
 `;
 
 interface SubHeaderProps {
     commune: string;
+    codeInsee: string;
+    isSimulation: boolean;
+    setIsSimulation: Dispatch<SetStateAction<boolean>>;
 }
 
-const SubHeader = ({ commune }: SubHeaderProps) => {
-    const router = useRouter();
-    const { codeInsee } = router.query;
-
+const SubHeader = ({
+    commune,
+    codeInsee,
+    isSimulation,
+    setIsSimulation,
+}: SubHeaderProps) => {
     const communeWithCodeInsee = `${commune} (${codeInsee})`;
 
     return (
         <>
-            <HeaderDashboardContainer className="flex justify-between">
+            <StyledHeaderDashboard className="flex justify-between">
                 <div className="flex flex-col">
-                    <BreadCrumbsTwoLink
+                    <BreadCrumbsTwoLinks
                         firstLink="Accueil"
                         secondLink={communeWithCodeInsee}
                     />
@@ -33,7 +39,10 @@ const SubHeader = ({ commune }: SubHeaderProps) => {
                     <LinkIcon icon="comparer" text="Comparer" path="#" />
                     <LinkIcon icon="alerter" text="M'alerter" path="#" />
                 </div>
-            </HeaderDashboardContainer>
+            </StyledHeaderDashboard>
+            {isSimulation && (
+                <SimulationBanner setIsSimulation={setIsSimulation} />
+            )}
             <hr />
         </>
     );

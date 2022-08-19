@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Autocompletion } from "src/models/autocompletion/autocompletion.interface";
 import styled from "styled-components";
 
-const DropdownRowContainer = styled.div`
+const StyledDropdownRow = styled.div`
     cursor: pointer;
     :hover {
         background-color: var(--blue-france-975);
@@ -20,20 +20,18 @@ interface DropdownSearchProps {
 const DropdownRow = ({ ...entity }: Autocompletion) => {
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
-    const { LIBELLE: nomCommune } = entity.commune;
+    const { LIBELLE: commune } = entity.commune;
+
     return (
-        <Link
-            href={{
-                pathname: `/${codeInsee}`,
-                query: { commune: nomCommune },
-            }}
-        >
-            <DropdownRowContainer className="flex justify-between px-6 py-4">
-                <span>
-                    {nomCommune} ({codeInsee})
-                </span>
-                <span>{codePostal}</span>
-            </DropdownRowContainer>
+        <Link href={{ pathname: `/${codeInsee}`, query: { commune } }}>
+            <div>
+                <StyledDropdownRow className="flex justify-between px-6 py-4">
+                    <span>
+                        {commune} ({codeInsee})
+                    </span>
+                    <span>{codePostal}</span>
+                </StyledDropdownRow>
+            </div>
         </Link>
     );
 };
