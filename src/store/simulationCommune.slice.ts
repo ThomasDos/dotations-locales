@@ -1,9 +1,9 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { Commune, Criteres } from "models/commune/commune.interface";
-import { selectInitialCriteres } from "store/initialCommune/initialCommune.slice";
+import { selectInitialCriteres } from "store/initialCommune.slice";
 
-import type { RootState } from "..";
+import type { RootState } from ".";
 
 const initialState: Commune = {
     codeInsee: "",

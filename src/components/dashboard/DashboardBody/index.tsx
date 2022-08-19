@@ -3,7 +3,7 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import _ from "lodash";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { selectInitialDotations } from "store/initialCommune/initialCommune.slice";
+import { selectInitialDotations } from "store/initialCommune.slice";
 import styled from "styled-components";
 
 import MainTab from "./MainTab";

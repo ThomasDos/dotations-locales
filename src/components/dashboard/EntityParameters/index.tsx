@@ -7,8 +7,8 @@ import {
     selectCurrentYearTotal,
     selectInitialCommune,
     selectLastYearTotal,
-} from "store/initialCommune/initialCommune.slice";
-import { selectSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
+} from "store/initialCommune.slice";
+import { selectSimulationCommune } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 

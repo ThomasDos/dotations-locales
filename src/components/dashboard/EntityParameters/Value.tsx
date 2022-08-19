@@ -8,7 +8,7 @@ import Image from "next/image";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateSimulationCritereValeur } from "store/simulationCommune/simulationCommune.slice";
+import { updateSimulationCritereValeur } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 

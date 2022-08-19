@@ -5,7 +5,7 @@ import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
 import type { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
-import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune/simulationCommune.slice";
+import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 dayjsExtend(isToday);

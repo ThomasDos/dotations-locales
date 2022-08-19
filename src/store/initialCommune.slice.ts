@@ -3,7 +3,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { Commune, Dotations } from "models/commune/commune.interface";
 import getTotalDotations from "utils/getTotalDotations";
 
-import type { RootState } from "..";
+import type { RootState } from ".";
 
 const initialState: Commune = {
     codeInsee: "",

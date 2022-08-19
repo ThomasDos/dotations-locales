@@ -6,7 +6,7 @@ import {
     selectCurrentYearTotal,
     selectInitialDotations,
     selectLastYearTotal,
-} from "store/initialCommune/initialCommune.slice";
+} from "store/initialCommune.slice";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
