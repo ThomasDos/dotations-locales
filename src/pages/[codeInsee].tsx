@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { hydrateInitialCommune } from "store/initialCommune/initialCommune.slice";
 import { hydrateSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
-import getTotalDotations from "utils/getTotalDotations";
 
 const Dashboard = () => {
     const { commune, codeInsee } = useRouter().query as {
@@ -59,13 +58,6 @@ const Dashboard = () => {
         );
     }
 
-    const { dotations } = fetchCommuneData;
-
-    const currentYear = new Date().getFullYear();
-    const lastYear = new Date().getFullYear() - 1;
-    const currentYearTotal = getTotalDotations(dotations, String(currentYear));
-    const lastYearTotal = getTotalDotations(dotations, String(lastYear));
-
     return (
         <>
             <SubHeader
@@ -80,18 +72,8 @@ const Dashboard = () => {
                 </div>
             ) : (
                 <div className="flex pb-0.5">
-                    <DashboardBody
-                        currentYear={currentYear}
-                        currentYearTotal={currentYearTotal}
-                        lastYear={lastYear}
-                        lastYearTotal={lastYearTotal}
-                        isSimulation={isSimulation}
-                    />
+                    <DashboardBody isSimulation={isSimulation} />
                     <EntityParameters
-                        currentYearTotal={currentYearTotal}
-                        currentYear={`${currentYear}`}
-                        lastYear={`${lastYear}`}
-                        lastYearTotal={lastYearTotal}
                         isSimulation={isSimulation}
                         setIsSimulation={setIsSimulation}
                     />
