@@ -3,7 +3,7 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import _ from "lodash";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { selectInitialDotations } from "store/initialCommune/initialCommune.slice";
+import { selectInitialDotations } from "store/initialCommune.slice";
 import styled from "styled-components";
 
 import MainTab from "./MainTab";
@@ -35,8 +35,12 @@ const StyledTabs = styled(Tabs)`
     &::before {
         height: 1px;
     }
+    padding: 0 32px !important;
 `;
 
+const StyledTab = styled(Tab)`
+    padding: 0 !important;
+`;
 const StyledWarningMessage = styled.div`
     background-color: var(--green-tilleul-verveine-975);
     padding: 16px 32px;
@@ -44,20 +48,10 @@ const StyledWarningMessage = styled.div`
 `;
 
 interface DashboardBodyProps {
-    currentYear: number;
-    currentYearTotal: number;
-    lastYear: number;
-    lastYearTotal: number;
     isSimulation: boolean;
 }
 
-const DashboardBody = ({
-    currentYear,
-    currentYearTotal,
-    lastYear,
-    lastYearTotal,
-    isSimulation,
-}: DashboardBodyProps) => {
+const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
     const dotations = useSelector(selectInitialDotations);
     if (_.isEmpty(dotations)) return null;
     const {
@@ -66,6 +60,8 @@ const DashboardBody = ({
         dotationNationalePerequation,
     } = dotations;
 
+    const currentYear = new Date().getFullYear();
+    const lastYear = new Date().getFullYear() - 1;
     return (
         <StyledDashboardBody>
             <>
@@ -100,29 +96,27 @@ const DashboardBody = ({
 
                 <StyledTabs>
                     {/*@ts-ignore*/}
-                    <Tab index={1} activeTab={1} label="Résumé">
+                    <StyledTab index={1} activeTab={1} label="Résumé">
                         <MainTab
                             currentYear={currentYear}
-                            currentYearTotal={currentYearTotal}
                             lastYear={lastYear}
-                            lastYearTotal={lastYearTotal}
                         />
-                    </Tab>
+                    </StyledTab>
 
                     {/*@ts-ignore*/}
-                    <Tab index={2} activeTab={1} label="DF">
+                    <StyledTab index={2} activeTab={1} label="DF">
                         <SubTab dotation={dotationForfaitaire} />
-                    </Tab>
+                    </StyledTab>
 
                     {/*@ts-ignore*/}
-                    <Tab index={3} activeTab={1} label="DSR">
+                    <StyledTab index={3} activeTab={1} label="DSR">
                         <SubTab dotation={dotationSolidariteRurale} />
-                    </Tab>
+                    </StyledTab>
 
                     {/*@ts-ignore*/}
-                    <Tab index={4} activeTab={1} label="DNP">
+                    <StyledTab index={4} activeTab={1} label="DNP">
                         <SubTab dotation={dotationNationalePerequation} />
-                    </Tab>
+                    </StyledTab>
                 </StyledTabs>
             </>
         </StyledDashboardBody>

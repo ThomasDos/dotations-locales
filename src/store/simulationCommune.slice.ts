@@ -1,9 +1,9 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { Commune, Criteres } from "models/commune/commune.interface";
-import { selectInitialCriteres } from "store/initialCommune/initialCommune.slice";
+import { selectInitialCriteres } from "store/initialCommune.slice";
 
-import type { RootState } from "..";
+import type { RootState } from ".";
 
 const initialState: Commune = {
     codeInsee: "",
@@ -17,20 +17,20 @@ const simulationCommuneSlice = createSlice({
     reducers: {
         hydrateSimulationCommune: (_, { payload }: PayloadAction<Commune>) =>
             payload,
-        updateCritereValeur: (
+        updateSimulationCritereValeur: (
             state,
             {
-                payload: { critereKey, value },
-            }: PayloadAction<{ critereKey: string; value: string }>
+                payload: { critereKey, valeur },
+            }: PayloadAction<{ critereKey: string; valeur: string }>
         ) => {
             state.criteres[critereKey].annees[0][
                 new Date().getFullYear()
-            ].valeur = value;
+            ].valeur = valeur;
         },
     },
 });
 
-export const { hydrateSimulationCommune, updateCritereValeur } =
+export const { hydrateSimulationCommune, updateSimulationCritereValeur } =
     simulationCommuneSlice.actions;
 
 const selectSelf = (state: RootState) => state[simulationCommuneSlice.name];
@@ -39,10 +39,13 @@ export const selectSimulationCommune = createSelector(
     selectSelf,
     state => state
 );
-const selectCriteres = createSelector(selectSelf, state => state.criteres);
+const selectSimulationCriteres = createSelector(
+    selectSelf,
+    state => state.criteres
+);
 
 export const selectSimulationIsDifferentThanInitial = createSelector(
-    selectCriteres,
+    selectSimulationCriteres,
     selectInitialCriteres,
     (criteres: Criteres, initialCriteres: Criteres): boolean => {
         const criteresKeys = Object.keys(criteres);

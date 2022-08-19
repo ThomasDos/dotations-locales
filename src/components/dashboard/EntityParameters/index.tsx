@@ -3,8 +3,12 @@ import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
 import type { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
-import { selectInitialCommune } from "store/initialCommune/initialCommune.slice";
-import { selectSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
+import {
+    selectCurrentYearTotal,
+    selectInitialCommune,
+    selectLastYearTotal,
+} from "store/initialCommune.slice";
+import { selectSimulationCommune } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
@@ -21,26 +25,24 @@ const StyledEntityParameters = styled.div`
 `;
 
 interface EntityParametersProps {
-    currentYearTotal: number;
-    currentYear: string;
-    lastYear: string;
-    lastYearTotal: number;
     isSimulation: boolean;
     setIsSimulation: Dispatch<SetStateAction<boolean>>;
 }
 
 const EntityParameters = ({
-    currentYearTotal,
-    currentYear,
-    lastYear,
-    lastYearTotal,
     isSimulation,
     setIsSimulation,
 }: EntityParametersProps) => {
     const simulationCommune = useSelector(selectSimulationCommune);
-
+    const currentYearTotal = useSelector(selectCurrentYearTotal);
+    const lastYearTotal = useSelector(selectLastYearTotal);
     const initialCommune = useSelector(selectInitialCommune);
+
+    const currentYear = new Date().getFullYear();
+    const lastYear = new Date().getFullYear() - 1;
+
     if (_.isEmpty(initialCommune.criteres)) return null;
+
     const { criteres: initialCriteres } = initialCommune as {
         criteres: Criteres;
     };

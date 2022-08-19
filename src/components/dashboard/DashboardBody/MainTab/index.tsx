@@ -2,7 +2,11 @@ import { Collapse } from "@mui/material";
 import type { Dotation } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectInitialDotations } from "store/initialCommune/initialCommune.slice";
+import {
+    selectCurrentYearTotal,
+    selectInitialDotations,
+    selectLastYearTotal,
+} from "store/initialCommune.slice";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
@@ -11,19 +15,14 @@ import TitleDotationsNonEligibles from "../TitleDotationsNonEligibles";
 
 interface MainTabProps {
     currentYear: number;
-    currentYearTotal: number;
     lastYear: number;
-    lastYearTotal: number;
 }
 
-const MainTab = ({
-    currentYear,
-    currentYearTotal,
-    lastYear,
-    lastYearTotal,
-}: MainTabProps) => {
+const MainTab = ({ currentYear, lastYear }: MainTabProps) => {
     const [showNonEligible, setShowNonEligible] = useState(false);
     const dotations = useSelector(selectInitialDotations);
+    const currentYearTotal = useSelector(selectCurrentYearTotal);
+    const lastYearTotal = useSelector(selectLastYearTotal);
 
     const { dotationsEligibles, dotationsNonEligibles } =
         sortDotationsEligiblesOrNonEligibles(dotations);

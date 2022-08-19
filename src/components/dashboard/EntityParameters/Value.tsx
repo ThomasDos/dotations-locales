@@ -8,7 +8,7 @@ import Image from "next/image";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateCritereValeur } from "store/simulationCommune/simulationCommune.slice";
+import { updateSimulationCritereValeur } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
@@ -95,9 +95,9 @@ const Value = ({
     }: ChangeEvent<HTMLInputElement>) => {
         setEntityInput(value);
         dispatch(
-            updateCritereValeur({
+            updateSimulationCritereValeur({
                 critereKey,
-                value,
+                valeur: value,
             })
         );
     };
@@ -105,9 +105,9 @@ const Value = ({
     const handleInputReset = () => {
         setEntityInput(initialCurrentYear.valeur);
         dispatch(
-            updateCritereValeur({
+            updateSimulationCritereValeur({
                 critereKey,
-                value: initialCurrentYear.valeur,
+                valeur: initialCurrentYear.valeur,
             })
         );
     };
@@ -117,9 +117,9 @@ const Value = ({
         const value = Number(entityInput) + 1;
         setEntityInput(value);
         dispatch(
-            updateCritereValeur({
+            updateSimulationCritereValeur({
                 critereKey,
-                value: String(value),
+                valeur: String(value),
             })
         );
     };
@@ -130,9 +130,9 @@ const Value = ({
         const value = Number(entityInput) - 1;
         setEntityInput(value);
         dispatch(
-            updateCritereValeur({
+            updateSimulationCritereValeur({
                 critereKey,
-                value: String(value),
+                valeur: String(value),
             })
         );
     };
