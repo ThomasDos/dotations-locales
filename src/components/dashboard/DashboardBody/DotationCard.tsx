@@ -10,7 +10,7 @@ import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
 import SousDotationsContainer from "./SousDotationsContainer";
 
-const DotationCardContainer = styled.div<{
+const StyledDotationCard = styled.div<{
     borderTop: boolean;
     backgroundColor: boolean;
 }>`
@@ -24,13 +24,13 @@ const DotationCardContainer = styled.div<{
         backgroundColor ? "var(--blue-france-975)" : "none"};
 `;
 
-const SpanTotalNumber = styled.span`
+const StyledSpanTotalNumber = styled.span`
     font-size: 28px;
     line-height: 36px;
     font-weight: 700;
 `;
 
-const CardTitleContainer = styled.span`
+const StyledCardTitle = styled.span`
     font-size: 22px;
     line-height: 28px;
     font-weight: 700;
@@ -60,16 +60,16 @@ const DotationCard = ({
     const { title, description, sousDotations } = dotation;
 
     return (
-        <DotationCardContainer
+        <StyledDotationCard
             borderTop={borderTop}
             backgroundColor={backgroundColor}
         >
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <div className="flex">
-                        <CardTitleContainer className="mb-2 mr-1">
+                        <StyledCardTitle className="mb-2 mr-1">
                             {title}
-                        </CardTitleContainer>
+                        </StyledCardTitle>
                         {hasInformation && (
                             <div className="cursor-help">
                                 <IconInformation />
@@ -81,9 +81,9 @@ const DotationCard = ({
                 {currentYearTotal ? (
                     <div className="flex flex-col items-end">
                         <div className="flex mb-2">
-                            <SpanTotalNumber>
+                            <StyledSpanTotalNumber>
                                 {dotationTotalFormatted} €
-                            </SpanTotalNumber>
+                            </StyledSpanTotalNumber>
                             <div className="relative">
                                 <div className="absolute r-0 ml-3">
                                     <IconCopyWithSuccess
@@ -115,7 +115,7 @@ const DotationCard = ({
             {sousDotations && (
                 <SousDotationsContainer sousDotations={sousDotations} />
             )}
-        </DotationCardContainer>
+        </StyledDotationCard>
     );
 };
 

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
 
 export default (
@@ -6,6 +7,7 @@ export default (
     year: string,
     yearTotal: number
 ): number => {
+    if (_.isEmpty(criteres)) return 0;
     const {
         populationDgf: { annees },
     } = criteres;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import HorizontalSeparator from "./HorizontalSeparator";
 import LinkArrow from "./LinkArrow";
 
-const HeaderBodyContainer = styled.div`
+const StyledHeaderBody = styled.div`
     display: flex;
     align-items: center;
     padding: 12px 120px;
@@ -14,18 +14,20 @@ const HeaderBodyContainer = styled.div`
 const HeaderContainer = () => {
     return (
         <div>
-            <HeaderBodyContainer className="w-full flex justify-between">
+            <StyledHeaderBody className="w-full flex justify-between">
                 <div className="flex">
                     <div>
                         <Link href="/">
-                            <Image
-                                src="/icons/marianne-text-header.svg"
-                                height="90px"
-                                width="88px"
-                                layout="fixed"
-                                alt="Logo de la marianne qui redirige vers l'accueil"
-                                className="cursor-pointer"
-                            />
+                            <div>
+                                <Image
+                                    src="/icons/marianne-text-header.svg"
+                                    height="90px"
+                                    width="88px"
+                                    layout="fixed"
+                                    alt="Logo de la marianne qui redirige vers l'accueil"
+                                    className="cursor-pointer"
+                                />
+                            </div>
                         </Link>
                     </div>
                     <div className="ml-10 py-5">
@@ -47,7 +49,7 @@ const HeaderContainer = () => {
                         </div>
                     </div>
                 </div>
-            </HeaderBodyContainer>
+            </StyledHeaderBody>
             <hr />
         </div>
     );

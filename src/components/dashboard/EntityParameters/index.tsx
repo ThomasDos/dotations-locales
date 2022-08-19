@@ -1,11 +1,16 @@
 import { Button, LabelPercentage } from "components/ui";
+import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
+import type { Dispatch, SetStateAction } from "react";
+import { useSelector } from "react-redux";
+import { selectInitialCommune } from "store/initialCommune/initialCommune.slice";
+import { selectSimulationCommune } from "store/simulationCommune/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
 import ParameterRow from "./ParameterRow";
 
-const EntityParametersContainer = styled.div`
+const StyledEntityParameters = styled.div`
     width: 25%;
     background: var(--grey-975-75);
     z-index: 1;
@@ -16,20 +21,33 @@ const EntityParametersContainer = styled.div`
 `;
 
 interface EntityParametersProps {
-    criteres: Criteres;
     currentYearTotal: number;
     currentYear: string;
     lastYear: string;
     lastYearTotal: number;
+    isSimulation: boolean;
+    setIsSimulation: Dispatch<SetStateAction<boolean>>;
 }
 
 const EntityParameters = ({
-    criteres,
     currentYearTotal,
     currentYear,
     lastYear,
     lastYearTotal,
+    isSimulation,
+    setIsSimulation,
 }: EntityParametersProps) => {
+    const simulationCommune = useSelector(selectSimulationCommune);
+
+    const initialCommune = useSelector(selectInitialCommune);
+    if (_.isEmpty(initialCommune.criteres)) return null;
+    const { criteres: initialCriteres } = initialCommune as {
+        criteres: Criteres;
+    };
+    const { criteres } = isSimulation
+        ? (simulationCommune as { criteres: Criteres })
+        : (initialCommune as { criteres: Criteres });
+
     const criteresKeys = Object.keys(criteres);
 
     const currentYearDotationPerHabitant = getDotationPerHabitant(
@@ -37,6 +55,7 @@ const EntityParameters = ({
         currentYear,
         currentYearTotal
     );
+
     const lastYearDotationPerHabitant = getDotationPerHabitant(
         criteres,
         lastYear,
@@ -50,7 +69,7 @@ const EntityParameters = ({
         ).toFixed(2)
     );
     return (
-        <EntityParametersContainer>
+        <StyledEntityParameters>
             <div className="w-full text-center sticky top-16">
                 <div className="mb-6">
                     <span className="font-bold">
@@ -62,7 +81,10 @@ const EntityParameters = ({
                         return (
                             <ParameterRow
                                 key={critereKey}
+                                critereKey={critereKey}
                                 critere={criteres[critereKey]}
+                                initialCritere={initialCriteres[critereKey]}
+                                isSimulation={isSimulation}
                             />
                         );
                     })}
@@ -72,16 +94,26 @@ const EntityParameters = ({
                     <span className="text-sm">Dotation / habitant</span>
                     <div className="flex justify-center mt-2">
                         <span className="font-bold text-xl mr-2">
-                            {currentYearDotationPerHabitant.toFixed(2)}€
+                            {Math.round(currentYearDotationPerHabitant)}€
                         </span>
-                        <LabelPercentage percentage={percentageEvolution} />
+                        {!!percentageEvolution && (
+                            <LabelPercentage percentage={percentageEvolution} />
+                        )}
                     </div>
                 </div>
-                <div>
-                    <Button icon="calculator" text="Créer une simulation" />
-                </div>
+                {!isSimulation && (
+                    <div>
+                        <Button
+                            icon="calculator"
+                            text="Créer une simulation"
+                            onClick={() => {
+                                setIsSimulation(true);
+                            }}
+                        />
+                    </div>
+                )}
             </div>
-        </EntityParametersContainer>
+        </StyledEntityParameters>
     );
 };
 
