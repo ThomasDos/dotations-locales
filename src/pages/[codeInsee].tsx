@@ -8,8 +8,14 @@ import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { hydrateInitialCommune } from "store/initialCommune.slice";
-import { hydrateSimulationCommune } from "store/simulationCommune.slice";
+import {
+    hydrateInitialCommune,
+    resetInitialCommune,
+} from "store/initialCommune.slice";
+import {
+    hydrateSimulationCommune,
+    resetSimulationCommune,
+} from "store/simulationCommune.slice";
 
 const Dashboard = () => {
     const { commune, codeInsee } = useRouter().query as {
@@ -32,6 +38,10 @@ const Dashboard = () => {
 
         dispatch(hydrateInitialCommune(fetchCommuneData));
         dispatch(hydrateSimulationCommune(fetchCommuneData));
+        return () => {
+            dispatch(resetSimulationCommune());
+            dispatch(resetInitialCommune());
+        };
     }, [fetchCommuneData, dispatch]);
 
     useEffect(() => {

@@ -17,6 +17,7 @@ const simulationCommuneSlice = createSlice({
     reducers: {
         hydrateSimulationCommune: (_, { payload }: PayloadAction<Commune>) =>
             payload,
+        resetSimulationCommune: () => initialState,
         updateSimulationCritereValeur: (
             state,
             {
@@ -30,8 +31,11 @@ const simulationCommuneSlice = createSlice({
     },
 });
 
-export const { hydrateSimulationCommune, updateSimulationCritereValeur } =
-    simulationCommuneSlice.actions;
+export const {
+    hydrateSimulationCommune,
+    updateSimulationCritereValeur,
+    resetSimulationCommune,
+} = simulationCommuneSlice.actions;
 
 const selectSelf = (state: RootState) => state[simulationCommuneSlice.name];
 
