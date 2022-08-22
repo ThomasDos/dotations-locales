@@ -2,7 +2,11 @@
     "name": "dotations-locales-app",
     "version": "0.1.0",
     "description": "Dotations Locales app",
-    "private": true,
+    "license": "AGPL-3.0-or-later",
+    "author": {
+      "name": "Dotations Locales",
+      "email": "contact-dotations-locales@anct.gouv.fr"
+    },
     "scripts": {
         "dev": "next dev",
         "build": "next build",
