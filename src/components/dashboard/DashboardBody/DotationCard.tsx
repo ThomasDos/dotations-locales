@@ -84,7 +84,7 @@ const DotationCard = ({
                             <StyledSpanTotalNumber>
                                 {dotationTotalFormatted} €
                             </StyledSpanTotalNumber>
-                            <div className="relative">
+                            <div className="relative flex items-center">
                                 <div className="absolute r-0 ml-3">
                                     <IconCopyWithSuccess
                                         toCopy={currentYearTotal}
