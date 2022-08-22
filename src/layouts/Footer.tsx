@@ -54,8 +54,8 @@ const FooterContainer = () => {
                 <FooterLink href="/">
                     <Image
                         src="/icons/half-sun.svg"
-                        height="14.67px"
-                        width="14.67px"
+                        height="16px"
+                        width="16px"
                         alt="icon paramètre d'affichage"
                         layout="fixed"
                     />

@@ -32,17 +32,17 @@ const LabelText = ({
 }: LabelTextProps) => {
     return (
         <StyledLabelText
-            className="py-1 px-2 flex justify-center items-center text-sm"
+            className="py-1 px-4 flex justify-center items-center text-sm"
             backgroundColor={backgroundColor}
             color={color}
             borderColor={borderColor}
         >
             {icon && (
-                <div>
+                <div className="flex items-center">
                     <Image
                         src={`/icons/${icon}`}
-                        height="8.5px"
-                        width="8.5px"
+                        height="12px"
+                        width="12px"
                         alt="icone croix"
                     />
                 </div>

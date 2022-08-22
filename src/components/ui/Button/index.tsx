@@ -26,7 +26,7 @@ const Button = ({ text, icon, onClick }: Buttonprops) => {
                 <div>
                     <Image
                         src={`/icons/${icon}.svg`}
-                        width="20.8px"
+                        width="24px"
                         height="24px"
                         layout="fixed"
                         alt={`icone ${text}`}
