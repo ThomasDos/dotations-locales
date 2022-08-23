@@ -1,4 +1,4 @@
-import { dotationsMocked } from "__fixtures__/dotationsMocked";
+import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 
 import DotationCard from "../DotationCard";
@@ -10,25 +10,33 @@ interface SubTabProps {
 }
 
 const SubTab = ({ dotation }: SubTabProps) => {
-    const { sousDotations } = dotation;
-    const { dotationForfaitaire: dotationMocked } = dotationsMocked;
+    const { sousDotations, criteres } = dotation;
 
     return (
         <div className="pt-10">
             {sousDotations ? (
                 <SubTabSousDotations
                     dotation={dotation}
-                    dotationMocked={dotationMocked}
                     sousDotations={sousDotations}
                 />
             ) : (
                 <div className="pt-10">
-                    <DotationCard
-                        dotation={dotation}
-                        borderTop={true}
-                        backgroundColor={true}
-                    />
-                    <ParameterCard parameter={dotationMocked} />
+                    <>
+                        <DotationCard
+                            dotation={dotation}
+                            borderTop={true}
+                            backgroundColor={true}
+                        />
+                        {!_.isEmpty(criteres) &&
+                            Object.keys(criteres).map((criteresKey: string) => {
+                                return (
+                                    <ParameterCard
+                                        key={criteresKey}
+                                        parameter={criteres[criteresKey]}
+                                    />
+                                );
+                            })}
+                    </>
                 </div>
             )}
         </div>

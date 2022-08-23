@@ -47,6 +47,8 @@ export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
 
         newObjectDotations[keyCamelCase] = {
             annees: rawDotations[key].annees,
+            //TODO: créer serializer criteres
+            criteres: rawDotations[key].criteres,
             description: dotationsMap[keyCamelCase].description,
             title: dotationsMap[keyCamelCase].title,
 

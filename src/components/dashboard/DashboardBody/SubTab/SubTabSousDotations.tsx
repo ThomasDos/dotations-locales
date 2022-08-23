@@ -1,3 +1,4 @@
+import _ from "lodash";
 import type {
     Dotation,
     Dotations,
@@ -10,14 +11,14 @@ import ParameterCard from "./ParameterCard";
 interface SubTabSousDotationsProps {
     dotation: Dotation;
     sousDotations: SousDotations;
-    dotationMocked: Dotation;
 }
 
 const SubTabSousDotations = ({
     dotation,
     sousDotations,
-    dotationMocked,
 }: SubTabSousDotationsProps) => {
+    const { criteres } = dotation;
+
     return (
         <>
             <DotationCard dotation={dotation} borderTop />
@@ -27,12 +28,22 @@ const SubTabSousDotations = ({
                     sousDotationRecord[Object.keys(sousDotationRecord)[0]];
                 return (
                     <div className="pt-10" key={sousDotation.title}>
-                        <DotationCard
-                            dotation={sousDotation}
-                            borderTop={true}
-                            backgroundColor={true}
-                        />
-                        <ParameterCard parameter={dotationMocked} />
+                        <>
+                            <DotationCard
+                                dotation={sousDotation}
+                                borderTop={true}
+                                backgroundColor={true}
+                            />
+                            {!_.isEmpty(criteres) &&
+                                Object.keys(criteres).map(
+                                    (criteresKey: string) => (
+                                        <ParameterCard
+                                            key={criteresKey}
+                                            parameter={criteres[criteresKey]}
+                                        />
+                                    )
+                                )}
+                        </>
                     </div>
                 );
             })}

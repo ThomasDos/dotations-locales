@@ -1,9 +1,4 @@
-import {
-    IconInformation,
-    LabelGreyCustomCrossIcon,
-    LabelPercentage,
-} from "components/ui";
-import type { Dotation } from "models/commune/commune.interface";
+import { IconInformation } from "components/ui";
 import styled from "styled-components";
 
 const StyledParameterCard = styled.div<{
@@ -27,7 +22,7 @@ const StyledCardTitle = styled.span`
 
 interface ParameterCardProps {
     hasInformation?: boolean;
-    parameter: Dotation;
+    parameter: { valeur: string; unite: string | null };
     backgroundColor?: boolean;
 }
 
@@ -36,13 +31,7 @@ const ParameterCard = ({
     hasInformation = true,
     backgroundColor = false,
 }: ParameterCardProps) => {
-    const currentYearTotal = parameter.annees[0][new Date().getFullYear()];
-    const lastYear = parameter.annees[1][new Date().getFullYear() - 1];
-
-    const percentageEvolution = Number(
-        ((currentYearTotal / lastYear - 1) * 100).toFixed(2)
-    );
-    const { title, description } = parameter;
+    const { valeur } = parameter;
 
     return (
         <StyledParameterCard backgroundColor={backgroundColor}>
@@ -50,7 +39,7 @@ const ParameterCard = ({
                 <div className="flex flex-col">
                     <div className="flex">
                         <StyledCardTitle className="mb-2 mr-1">
-                            {title}
+                            TITLE
                         </StyledCardTitle>
                         {hasInformation && (
                             <div className="cursor-help">
@@ -58,9 +47,9 @@ const ParameterCard = ({
                             </div>
                         )}
                     </div>
-                    <span className="text-xs">{description}</span>
+                    <span className="text-xs">{valeur}</span>
                 </div>
-                {currentYearTotal ? (
+                {/* {currentYearTotal ? (
                     <div className="flex flex-col items-end">
                         <div className="flex mb-2 items-center">
                             <LabelPercentage percentage={percentageEvolution} />
@@ -71,7 +60,7 @@ const ParameterCard = ({
                     <div>
                         <LabelGreyCustomCrossIcon text="Non éligible" />
                     </div>
-                )}
+                )} */}
             </div>
         </StyledParameterCard>
     );

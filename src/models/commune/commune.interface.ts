@@ -1,3 +1,4 @@
+//COMMUNE
 export interface CommuneDto {
     code_insee: string;
     dotations: DotationsDto;
@@ -10,17 +11,21 @@ export interface Commune {
     criteres: Criteres;
 }
 
+//DOTATIONS
+
 export type DotationsDto = Record<
     string,
     {
         annees: DotationAnnee[];
         sous_dotations?: SousDotationsDto;
+        criteres: CritereAnnee;
     }
 >;
 export type Dotations = Record<string, Dotation>;
 
 export interface Dotation {
     annees: DotationAnnee[];
+    criteres: CritereAnnee;
     sousDotations?: SousDotations;
     description: string;
     title: string;
@@ -31,6 +36,7 @@ export type SousDotations = Dotations[];
 
 type DotationAnnee = Record<string, number>;
 
+//CRITERES
 export type CriteresDto = Record<
     string,
     {

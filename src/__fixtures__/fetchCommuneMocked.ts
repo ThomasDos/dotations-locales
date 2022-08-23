@@ -142,6 +142,7 @@ export const fetchCommuneMocked: CommuneDto = {
                     "2021": 15993,
                 },
             ],
+            criteres: {},
         },
         dotation_solidarite_rurale: {
             annees: [
@@ -152,6 +153,7 @@ export const fetchCommuneMocked: CommuneDto = {
                     "2021": 8795,
                 },
             ],
+            criteres: {},
             sous_dotations: [
                 {
                     dsr_fraction_cible: {
@@ -163,6 +165,7 @@ export const fetchCommuneMocked: CommuneDto = {
                                 "2021": 0,
                             },
                         ],
+                        criteres: {},
                     },
                 },
                 {
@@ -175,6 +178,7 @@ export const fetchCommuneMocked: CommuneDto = {
                                 "2021": 8795,
                             },
                         ],
+                        criteres: {},
                     },
                 },
                 {
@@ -187,6 +191,7 @@ export const fetchCommuneMocked: CommuneDto = {
                                 "2021": 0,
                             },
                         ],
+                        criteres: {},
                     },
                 },
             ],
@@ -200,6 +205,7 @@ export const fetchCommuneMocked: CommuneDto = {
                     "2021": 0,
                 },
             ],
+            criteres: {},
         },
     },
 };
