@@ -17,10 +17,12 @@ const initialCommuneSlice = createSlice({
     reducers: {
         hydrateInitialCommune: (_, { payload }: PayloadAction<Commune>) =>
             payload,
+        resetInitialCommune: () => initialState,
     },
 });
 
-export const { hydrateInitialCommune } = initialCommuneSlice.actions;
+export const { hydrateInitialCommune, resetInitialCommune } =
+    initialCommuneSlice.actions;
 
 const selectSelf = (state: RootState) => state[initialCommuneSlice.name];
 

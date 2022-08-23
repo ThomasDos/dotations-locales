@@ -51,7 +51,7 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
                             copied ? "copy-success.svg" : "copy.svg"
                         }`}
                         height="16px"
-                        width="13.87px"
+                        width="16px"
                         alt="vecteur sous forme de flèche vers le haut"
                         layout="fixed"
                     />

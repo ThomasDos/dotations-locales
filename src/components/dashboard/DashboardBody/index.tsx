@@ -96,7 +96,7 @@ const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
 
                 <StyledTabs>
                     {/*@ts-ignore*/}
-                    <StyledTab index={1} activeTab={1} label="Résumé">
+                    <StyledTab label="Résumé">
                         <MainTab
                             currentYear={currentYear}
                             lastYear={lastYear}
@@ -104,17 +104,17 @@ const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
                     </StyledTab>
 
                     {/*@ts-ignore*/}
-                    <StyledTab index={2} activeTab={1} label="DF">
+                    <StyledTab label="DF">
                         <SubTab dotation={dotationForfaitaire} />
                     </StyledTab>
 
                     {/*@ts-ignore*/}
-                    <StyledTab index={3} activeTab={1} label="DSR">
+                    <StyledTab label="DSR">
                         <SubTab dotation={dotationSolidariteRurale} />
                     </StyledTab>
 
                     {/*@ts-ignore*/}
-                    <StyledTab index={4} activeTab={1} label="DNP">
+                    <StyledTab label="DNP">
                         <SubTab dotation={dotationNationalePerequation} />
                     </StyledTab>
                 </StyledTabs>

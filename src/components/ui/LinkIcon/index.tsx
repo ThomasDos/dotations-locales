@@ -22,16 +22,14 @@ const LinkIcon = ({ icon, text }: LinkIconProps) => {
         //TODO: update href when page is ready
         // <Link  href='/${path}'>
         <StyledLinkIcon className="flex items-center">
-            <div>
-                <Image
-                    src={`/icons/${icon}.svg`}
-                    width="14.43px"
-                    height="12px"
-                    layout="fixed"
-                    alt={`icone ${text}`}
-                />
-                <StyledSpan className="text-sm ml-2">{text}</StyledSpan>
-            </div>
+            <Image
+                src={`/icons/${icon}.svg`}
+                width="16px"
+                height="16px"
+                layout="fixed"
+                alt={`icone ${text}`}
+            />
+            <StyledSpan className="text-sm ml-2">{text}</StyledSpan>
         </StyledLinkIcon>
         // </Link>
     );

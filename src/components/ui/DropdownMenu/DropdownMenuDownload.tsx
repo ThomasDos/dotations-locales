@@ -7,14 +7,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const StyledDivider = styled(Divider)`
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
+    margin: 0 !important;
 `;
 
 const StyledCustomSpan = styled.span`
     color: var(--blue-france-sun-113-625);
     font-family: Marianne;
     font-weight: 300;
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+    padding: 0 !important;
 `;
 
 const MenuItemCustom = ({
@@ -27,10 +30,10 @@ const MenuItemCustom = ({
     icon: string;
 }) => {
     return (
-        <MenuItem onClick={handleClose}>
-            <div className="flex text-sm ">
+        <StyledMenuItem onClick={handleClose}>
+            <div className="flex text-sm my-2 w-44 justify-between items-center">
                 <StyledCustomSpan>{text}</StyledCustomSpan>
-                <div className="ml-2 ">
+                <div className="ml-2">
                     <Image
                         src={`/icons/${icon}.svg`}
                         width="16px"
@@ -40,7 +43,7 @@ const MenuItemCustom = ({
                     />
                 </div>
             </div>
-        </MenuItem>
+        </StyledMenuItem>
     );
 };
 
@@ -85,25 +88,31 @@ const DropdownMenuDownload = () => {
                     "aria-labelledby": "basic-button",
                 }}
             >
-                <div className="pt-1">
+                <div className="px-6 py-4">
                     <MenuItemCustom
                         handleClose={handleClose}
                         text="Fichier csv"
                         icon="file-csv"
                     />
+                    <StyledDivider
+                        sx={{ borderBottomWidth: 0 }}
+                        variant="middle"
+                    />
+                    <MenuItemCustom
+                        handleClose={handleClose}
+                        text="Fichier xls"
+                        icon="file-xls"
+                    />
+                    <StyledDivider
+                        sx={{ borderBottomWidth: 0 }}
+                        variant="middle"
+                    />
+                    <MenuItemCustom
+                        handleClose={handleClose}
+                        text="Fichier pdf"
+                        icon="file-pdf"
+                    />
                 </div>
-                <StyledDivider sx={{ borderBottomWidth: 0 }} variant="middle" />
-                <MenuItemCustom
-                    handleClose={handleClose}
-                    text="Fichier xls"
-                    icon="file-xls"
-                />
-                <StyledDivider sx={{ borderBottomWidth: 0 }} variant="middle" />
-                <MenuItemCustom
-                    handleClose={handleClose}
-                    text="Fichier pdf"
-                    icon="file-pdf"
-                />
             </Menu>
         </div>
     );

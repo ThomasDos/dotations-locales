@@ -13,11 +13,11 @@ interface LinkArrowProps {
 
 const LinkArrow = ({ textLink }: LinkArrowProps) => {
     return (
-        <div className="cursor-pointer">
+        <div className="cursor-pointer flex items-center">
             <Image
                 src="/icons/arrow-right.svg"
-                height="11"
-                width="11"
+                height="16px"
+                width="16px"
                 alt="icone fleche droite"
                 layout="fixed"
             />
