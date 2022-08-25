@@ -6,6 +6,7 @@ import {
 } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
 import styled from "styled-components";
+import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
 
 const StyledParameterCard = styled.div<{
@@ -43,7 +44,7 @@ const ParameterCard = ({
     const currentYear = critere.annees[0][new Date().getFullYear()];
     const lastYear = critere.annees[1][new Date().getFullYear() - 1];
 
-    const { valeur: currentYearValeur } = currentYear;
+    const { valeur: currentYearValeur, unite } = currentYear;
     const { valeur: lastYearValeur } = lastYear;
 
     const valeurToNumber = Number(currentYear.valeur);
@@ -79,6 +80,14 @@ const ParameterCard = ({
                 </div>
                 {currentYearValeur ? (
                     <div className="flex flex-col items-end">
+                        <div className="flex items-center">
+                            <span className="mr-2">
+                                {!valeurIsNotNumber &&
+                                    `${formatNumberWithSpace(
+                                        Number(currentYearValeur)
+                                    )} ${unite ? " " + unite : ""}`}
+                            </span>
+                        </div>
                         <div className="flex mb-2 items-center">
                             {valeurIsLabel ? (
                                 currentYearValeur === "Oui" ? (
