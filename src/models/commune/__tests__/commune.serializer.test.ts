@@ -11,13 +11,13 @@ describe("fetchCommuneSerializer", () => {
     it("should return serialized commune", () => {
         expect(fetchCommuneSerializer(fetchCommuneMocked)).toEqual({
             codeInsee: "42113",
-            criteres: {
+            criteresGeneraux: {
                 longueurVoirie: {
                     annees: [
                         { "2022": { unite: "km", valeur: "9290" } },
                         { "2021": { unite: "km", valeur: "9290" } },
                     ],
-                    description: "Longueur Voirie",
+                    description: "Longueur de voirie",
                 },
                 placesCaravanesAvantMajoration: {
                     annees: [
@@ -38,7 +38,7 @@ describe("fetchCommuneSerializer", () => {
                         { "2022": { unite: null, valeur: "43" } },
                         { "2021": { unite: null, valeur: "43" } },
                     ],
-                    description: "Population enfants",
+                    description: "Population 3 à 16 ans",
                 },
                 potentielFinancierParHabitant: {
                     annees: [
@@ -124,13 +124,15 @@ describe("fetchCommuneSerializer", () => {
 
 describe("criteresSerializer", () => {
     it("should return serialized criteres", () => {
-        expect(criteresSerializer(fetchCommuneMocked.criteres)).toEqual({
+        expect(
+            criteresSerializer(fetchCommuneMocked.criteres_generaux)
+        ).toEqual({
             longueurVoirie: {
                 annees: [
                     { "2022": { unite: "km", valeur: "9290" } },
                     { "2021": { unite: "km", valeur: "9290" } },
                 ],
-                description: "Longueur Voirie",
+                description: "Longueur de voirie",
             },
             placesCaravanesAvantMajoration: {
                 annees: [
@@ -151,7 +153,7 @@ describe("criteresSerializer", () => {
                     { "2022": { unite: null, valeur: "43" } },
                     { "2021": { unite: null, valeur: "43" } },
                 ],
-                description: "Population enfants",
+                description: "Population 3 à 16 ans",
             },
             potentielFinancierParHabitant: {
                 annees: [

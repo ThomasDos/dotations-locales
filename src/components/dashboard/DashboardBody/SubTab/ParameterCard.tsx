@@ -1,5 +1,12 @@
-import { IconInformation } from "components/ui";
+import {
+    IconInformation,
+    LabelGreenCustomCrossIcon,
+    LabelGreyCustomCrossIcon,
+    LabelPercentage,
+} from "components/ui";
+import type { Critere } from "models/commune/commune.interface";
 import styled from "styled-components";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 
 const StyledParameterCard = styled.div<{
     backgroundColor: boolean;
@@ -22,16 +29,38 @@ const StyledCardTitle = styled.span`
 
 interface ParameterCardProps {
     hasInformation?: boolean;
-    parameter: { valeur: string; unite: string | null };
+    critere: Critere;
     backgroundColor?: boolean;
 }
 
 const ParameterCard = ({
-    parameter,
+    critere,
     hasInformation = true,
     backgroundColor = false,
 }: ParameterCardProps) => {
-    const { valeur } = parameter;
+    const { description } = critere;
+
+    const currentYear = critere.annees[0][new Date().getFullYear()];
+    const lastYear = critere.annees[1][new Date().getFullYear() - 1];
+
+    const { valeur: currentYearValeur } = currentYear;
+    const { valeur: lastYearValeur } = lastYear;
+
+    const valeurToNumber = Number(currentYear.valeur);
+    const valeurIsNotNumber = isNaN(valeurToNumber);
+
+    const valeurIsLabel =
+        currentYearValeur === "Non" || currentYearValeur === "Oui";
+
+    // let totalEvolution = 0;
+    let percentageEvolution = 0;
+    if (!valeurIsNotNumber) {
+        // totalEvolution = Number(currentYearValeur) - Number(lastYearValeur);
+        percentageEvolution = getPercentageEvolution(
+            currentYearValeur as number,
+            lastYearValeur as number
+        );
+    }
 
     return (
         <StyledParameterCard backgroundColor={backgroundColor}>
@@ -39,7 +68,7 @@ const ParameterCard = ({
                 <div className="flex flex-col">
                     <div className="flex">
                         <StyledCardTitle className="mb-2 mr-1">
-                            TITLE
+                            {description}
                         </StyledCardTitle>
                         {hasInformation && (
                             <div className="cursor-help">
@@ -47,20 +76,41 @@ const ParameterCard = ({
                             </div>
                         )}
                     </div>
-                    <span className="text-xs">{valeur}</span>
                 </div>
-                {/* {currentYearTotal ? (
+                {currentYearValeur ? (
                     <div className="flex flex-col items-end">
                         <div className="flex mb-2 items-center">
-                            <LabelPercentage percentage={percentageEvolution} />
+                            {valeurIsLabel ? (
+                                currentYearValeur === "Oui" ? (
+                                    <LabelGreenCustomCrossIcon text="Oui" />
+                                ) : (
+                                    <LabelGreyCustomCrossIcon text="Non" />
+                                )
+                            ) : (
+                                percentageEvolution && (
+                                    <div className="flex items-center">
+                                        <LabelPercentage
+                                            percentage={percentageEvolution}
+                                        />
+                                    </div>
+                                )
+                            )}
                         </div>
-                        <span className="text-sm">valeur donnée par back</span>
+                        {/* {totalEvolution ? (
+                            <div className="flex items-center">
+                                <span className="mr-2">
+                                    {totalEvolution > 0 ? "+" : ""}
+                                    {formatNumberWithSpace(totalEvolution)}
+                                    {unite && " " + unite}
+                                </span>
+                            </div>
+                        ) : null} */}
                     </div>
                 ) : (
                     <div>
                         <LabelGreyCustomCrossIcon text="Non éligible" />
                     </div>
-                )} */}
+                )}
             </div>
         </StyledParameterCard>
     );

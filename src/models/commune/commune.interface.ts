@@ -2,13 +2,13 @@
 export interface CommuneDto {
     code_insee: string;
     dotations: DotationsDto;
-    criteres: CriteresDto;
+    criteres_generaux: CriteresDto;
 }
 
 export interface Commune {
     codeInsee: string;
     dotations: Dotations;
-    criteres: Criteres;
+    criteresGeneraux: Criteres;
 }
 
 //DOTATIONS
@@ -18,14 +18,14 @@ export type DotationsDto = Record<
     {
         annees: DotationAnnee[];
         sous_dotations?: SousDotationsDto;
-        criteres: CritereAnnee;
+        criteres: CriteresDto;
     }
 >;
 export type Dotations = Record<string, Dotation>;
 
 export interface Dotation {
     annees: DotationAnnee[];
-    criteres: CritereAnnee;
+    criteres: Criteres;
     sousDotations?: SousDotations;
     description: string;
     title: string;
@@ -54,6 +54,6 @@ export type CritereAnnee = Record<
     string,
     {
         unite: string | null;
-        valeur: string;
+        valeur: number | string;
     }
 >;

@@ -32,7 +32,7 @@ const SubTab = ({ dotation }: SubTabProps) => {
                                 return (
                                     <ParameterCard
                                         key={criteresKey}
-                                        parameter={criteres[criteresKey]}
+                                        critere={criteres[criteresKey]}
                                     />
                                 );
                             })}

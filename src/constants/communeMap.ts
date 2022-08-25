@@ -1,12 +1,36 @@
 export const criteresMap: Record<string, string> = {
-    longueurVoirie: "Longueur Voirie",
+    bureauCentralisateur: "Bureau centralisateur",
+    chefLieuArrondissement: "Chef-lieu d'arrondissement au 31 décembre 2014",
+    chefLieuDepartementDansAgglomeration:
+        "Appartenance à une agglomération avec le chef-lieu de département",
+    effortFiscal: "Effort fiscal",
+    insulaire: "Commune insulaire",
+    longueurVoirie: "Longueur de voirie",
+    nombreBeneficiairesAidesAuLogement:
+        "Nombre de bénéficiaires des aides au logement",
+
+    nombreLogements: "Nombre de logements",
+    nombreLogementsSociaux: "Nombre de logements sociaux",
+    partPopulationCanton:
+        "Pourcentage de la population communale dans le canton d'appartenance en 2014",
     placesCaravanesAvantMajoration: "Places caravanes avant majoration",
     populationDgf: "Population DGF",
-    populationEnfants: "Population enfants",
+    populationDgfAgglomeration:
+        "Population DGF des communes de l'agglomération",
+    populationDgfMajoree: "Population DGF majorée",
+    populationEnfants: "Population 3 à 16 ans",
+    populationInsee: "Population INSEE",
+    populationQpv: "Population QPV",
+    populationZfu: "Population ZFU",
+    potentielFinancier: "Potentiel financier",
     potentielFinancierParHabitant: "Potentiel financier par habitant",
+    potentielFiscal: "Potentiel fiscal",
+    recettesReellesFonctionnement: "Recettes réelles fonctionnement",
     residencesSecondaires: "Résidences secondaires",
+    revenuTotal: "Revenu total",
     superficie: "Superficie",
     zoneDeMontagne: "Zone de montagne",
+    zrr: "Commune située en ZRR",
 };
 
 export const dotationsMap: Record<

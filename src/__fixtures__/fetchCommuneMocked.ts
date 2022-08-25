@@ -2,7 +2,7 @@ import type { CommuneDto } from "src/models/commune/commune.interface";
 
 export const fetchCommuneMocked: CommuneDto = {
     code_insee: "42113",
-    criteres: {
+    criteres_generaux: {
         longueur_voirie: {
             annees: [
                 {

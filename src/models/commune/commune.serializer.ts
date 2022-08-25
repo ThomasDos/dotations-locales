@@ -3,6 +3,7 @@ import {
     dotationsMap,
     sousDotationsMap,
 } from "constants/communeMap";
+import _ from "lodash";
 import convertSnakeCaseToCamelCase from "utils/convertSnakeCaseToCamelCase";
 
 import type {
@@ -18,11 +19,12 @@ import type {
 
 export const fetchCommuneSerializer = (rawResult: CommuneDto): Commune => ({
     codeInsee: rawResult.code_insee,
-    criteres: criteresSerializer(rawResult.criteres),
+    criteresGeneraux: criteresSerializer(rawResult.criteres_generaux),
     dotations: dotationSerializer(rawResult.dotations),
 });
 
 export const criteresSerializer = (rawCriteres: CriteresDto): Criteres => {
+    if (_.isEmpty(rawCriteres)) return {};
     const rawCriteresKeys = Object.keys(rawCriteres);
 
     const newObjectCriteres: Criteres = {};
@@ -47,8 +49,7 @@ export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
 
         newObjectDotations[keyCamelCase] = {
             annees: rawDotations[key].annees,
-            //TODO: créer serializer criteres
-            criteres: rawDotations[key].criteres,
+            criteres: criteresSerializer(rawDotations[key].criteres),
             description: dotationsMap[keyCamelCase].description,
             title: dotationsMap[keyCamelCase].title,
 
@@ -76,6 +77,7 @@ export const sousDotationsSerializer = (
 
             newObjectSousDotations[keyCamelCase] = {
                 ...sousDotation[key],
+                criteres: criteresSerializer(sousDotation[key].criteres),
                 description: sousDotationsMap[keyCamelCase].description,
                 title: sousDotationsMap[keyCamelCase].title,
             };
