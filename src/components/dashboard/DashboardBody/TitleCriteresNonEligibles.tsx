@@ -13,12 +13,12 @@ const StyledContainer = styled.div`
 
 interface TitleCriteresNonEligiblesProps {
     showNonEligible: boolean;
-    setShowNonEligible: (showNonEligible: boolean) => void;
+    toggleShowNonEligible: () => void;
     countNonEligiblesCriteres: number;
 }
 
 function TitleCriteresNonEligibles({
-    setShowNonEligible,
+    toggleShowNonEligible,
     showNonEligible,
     countNonEligiblesCriteres,
 }: TitleCriteresNonEligiblesProps) {
@@ -31,9 +31,7 @@ function TitleCriteresNonEligibles({
             </span>
             <div
                 className="flex items-center cursor-pointer "
-                onClick={() => {
-                    setShowNonEligible(!showNonEligible);
-                }}
+                onClick={toggleShowNonEligible}
             >
                 <StyledSpanToggle>
                     {showNonEligible ? "Tout masquer" : "Afficher"}

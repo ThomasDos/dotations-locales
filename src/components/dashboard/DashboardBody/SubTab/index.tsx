@@ -53,7 +53,9 @@ const SubTab = ({ dotation }: SubTabProps) => {
                             <>
                                 <TitleCriteresNonEligibles
                                     showNonEligible={showNonEligible}
-                                    setShowNonEligible={setShowNonEligible}
+                                    toggleShowNonEligible={() => {
+                                        setShowNonEligible(!showNonEligible);
+                                    }}
                                     countNonEligiblesCriteres={
                                         countNonEligiblesCriteres
                                     }

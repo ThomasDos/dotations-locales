@@ -21,14 +21,21 @@ const SubTabSousDotations = ({
     dotation,
     sousDotations,
 }: SubTabSousDotationsProps) => {
-    const [showNonEligible, setShowNonEligible] = useState(false);
+    const [showNonEligible, setShowNonEligible] = useState({
+        dsrFractionBourgCentre: false,
+        dsrFractionCible: false,
+        dsrFractionPerequation: false,
+    });
     return (
         <>
             <DotationCard dotation={dotation} borderTop />
 
             {sousDotations.map((sousDotationRecord: Dotations) => {
-                const sousDotation: Dotation =
-                    sousDotationRecord[Object.keys(sousDotationRecord)[0]];
+                const keyName = Object.keys(sousDotationRecord)[0] as
+                    | "dsrFractionBourgCentre"
+                    | "dsrFractionCible"
+                    | "dsrFractionPerequation";
+                const sousDotation: Dotation = sousDotationRecord[keyName];
 
                 const { criteresEligibles, criteresNonEligibles } =
                     sortCriteresEligiblesOrNonEligibles(sousDotation.criteres);
@@ -61,14 +68,22 @@ const SubTabSousDotations = ({
                             {countNonEligiblesCriteres ? (
                                 <>
                                     <TitleCriteresNonEligibles
-                                        showNonEligible={showNonEligible}
-                                        setShowNonEligible={setShowNonEligible}
+                                        showNonEligible={
+                                            showNonEligible[keyName]
+                                        }
+                                        toggleShowNonEligible={() => {
+                                            setShowNonEligible({
+                                                ...showNonEligible,
+                                                [keyName]:
+                                                    !showNonEligible[keyName],
+                                            });
+                                        }}
                                         countNonEligiblesCriteres={
                                             countNonEligiblesCriteres
                                         }
                                     />
 
-                                    <Collapse in={showNonEligible}>
+                                    <Collapse in={showNonEligible[keyName]}>
                                         {Object.keys(criteresNonEligibles).map(
                                             (critereNonEligibleKey: string) => {
                                                 return (
