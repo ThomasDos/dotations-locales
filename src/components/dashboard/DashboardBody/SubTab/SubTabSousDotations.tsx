@@ -1,11 +1,15 @@
+import { Collapse } from "@mui/material";
 import _ from "lodash";
 import type {
     Dotation,
     Dotations,
     SousDotations,
 } from "models/commune/commune.interface";
+import { useState } from "react";
+import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
+import TitleCriteresNonEligibles from "../TitleCriteresNonEligibles";
 import ParameterCard from "./ParameterCard";
 
 interface SubTabSousDotationsProps {
@@ -17,8 +21,7 @@ const SubTabSousDotations = ({
     dotation,
     sousDotations,
 }: SubTabSousDotationsProps) => {
-    const { criteres } = dotation;
-
+    const [showNonEligible, setShowNonEligible] = useState(false);
     return (
         <>
             <DotationCard dotation={dotation} borderTop />
@@ -26,6 +29,12 @@ const SubTabSousDotations = ({
             {sousDotations.map((sousDotationRecord: Dotations) => {
                 const sousDotation: Dotation =
                     sousDotationRecord[Object.keys(sousDotationRecord)[0]];
+
+                const { criteresEligibles, criteresNonEligibles } =
+                    sortCriteresEligiblesOrNonEligibles(sousDotation.criteres);
+                const countNonEligiblesCriteres =
+                    !_.isEmpty(criteresNonEligibles) &&
+                    Object.keys(criteresNonEligibles).length;
                 return (
                     <div className="pt-10" key={sousDotation.title}>
                         <>
@@ -34,15 +43,52 @@ const SubTabSousDotations = ({
                                 borderTop={true}
                                 backgroundColor={true}
                             />
-                            {!_.isEmpty(criteres) &&
-                                Object.keys(criteres).map(
+
+                            {!_.isEmpty(criteresEligibles) &&
+                                Object.keys(criteresEligibles).map(
                                     (criteresKey: string) => (
                                         <ParameterCard
                                             key={criteresKey}
-                                            critere={criteres[criteresKey]}
+                                            critere={
+                                                sousDotation.criteres[
+                                                    criteresKey
+                                                ]
+                                            }
                                         />
                                     )
                                 )}
+
+                            {countNonEligiblesCriteres ? (
+                                <>
+                                    <TitleCriteresNonEligibles
+                                        showNonEligible={showNonEligible}
+                                        setShowNonEligible={setShowNonEligible}
+                                        countNonEligiblesCriteres={
+                                            countNonEligiblesCriteres
+                                        }
+                                    />
+
+                                    <Collapse in={showNonEligible}>
+                                        {Object.keys(criteresNonEligibles).map(
+                                            (critereNonEligibleKey: string) => {
+                                                return (
+                                                    <ParameterCard
+                                                        key={
+                                                            critereNonEligibleKey
+                                                        }
+                                                        critere={
+                                                            sousDotation
+                                                                .criteres[
+                                                                critereNonEligibleKey
+                                                            ]
+                                                        }
+                                                    />
+                                                );
+                                            }
+                                        )}
+                                    </Collapse>
+                                </>
+                            ) : null}
                         </>
                     </div>
                 );

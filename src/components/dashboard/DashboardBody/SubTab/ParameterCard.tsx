@@ -53,10 +53,8 @@ const ParameterCard = ({
     const valeurIsLabel =
         currentYearValeur === "Non" || currentYearValeur === "Oui";
 
-    // let totalEvolution = 0;
     let percentageEvolution = 0;
     if (!valeurIsNotNumber) {
-        // totalEvolution = Number(currentYearValeur) - Number(lastYearValeur);
         percentageEvolution = getPercentageEvolution(
             currentYearValeur as number,
             lastYearValeur as number
@@ -80,14 +78,6 @@ const ParameterCard = ({
                 </div>
                 {currentYearValeur ? (
                     <div className="flex flex-col items-end">
-                        <div className="flex items-center">
-                            <span className="mr-2">
-                                {!valeurIsNotNumber &&
-                                    `${formatNumberWithSpace(
-                                        Number(currentYearValeur)
-                                    )} ${unite ? " " + unite : ""}`}
-                            </span>
-                        </div>
                         <div className="flex mb-2 items-center">
                             {valeurIsLabel ? (
                                 currentYearValeur === "Oui" ? (
@@ -95,25 +85,17 @@ const ParameterCard = ({
                                 ) : (
                                     <LabelGreyCustomCrossIcon text="Non" />
                                 )
+                            ) : Number(currentYearValeur) === 0 ? (
+                                <LabelGreyCustomCrossIcon text="Non éligible" />
                             ) : (
-                                percentageEvolution && (
-                                    <div className="flex items-center">
-                                        <LabelPercentage
-                                            percentage={percentageEvolution}
-                                        />
-                                    </div>
-                                )
+                                <LabelPercentage
+                                    valeur={`${formatNumberWithSpace(
+                                        Number(currentYearValeur)
+                                    )} ${unite ? " " + unite : ""}`}
+                                    percentage={percentageEvolution}
+                                />
                             )}
                         </div>
-                        {/* {totalEvolution ? (
-                            <div className="flex items-center">
-                                <span className="mr-2">
-                                    {totalEvolution > 0 ? "+" : ""}
-                                    {formatNumberWithSpace(totalEvolution)}
-                                    {unite && " " + unite}
-                                </span>
-                            </div>
-                        ) : null} */}
                     </div>
                 ) : (
                     <div>
