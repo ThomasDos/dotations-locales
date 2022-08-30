@@ -2,6 +2,7 @@ import { Modal } from "@mui/material";
 import {
     LabelGreenCustomCrossIcon,
     LabelGreyCustomCrossIcon,
+    LabelPercentage,
 } from "components/ui";
 import Image from "next/image";
 import type { ChangeEvent } from "react";
@@ -10,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { updateSimulationCritereValeur } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 
 const StyledModalHeader = styled.div`
     background: var(--grey-975);
@@ -65,6 +67,7 @@ interface ValueProps {
     isSimulation: boolean;
     critereGeneralKey: string;
     valueIsModified: boolean;
+    initialLastYear: number | string;
 }
 
 const Value = ({
@@ -73,16 +76,24 @@ const Value = ({
     critereGeneralKey,
     initialCurrentYear,
     valueIsModified,
+    initialLastYear,
 }: ValueProps) => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
-    const { valeur } = currentYear;
+    const { valeur, unite } = currentYear;
     const valeurToNumber = Number(currentYear.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
     const [entityInput, setEntityInput] = useState<number | string>(
         valeurIsNotNumber ? valeur : valeurToNumber
     );
     const valeurIsLabel = valeur === "Non" || valeur === "Oui";
+    let percentageEvolution = 0;
+    if (!valeurIsNotNumber && valeur != 0) {
+        percentageEvolution = getPercentageEvolution(
+            valeur as number,
+            initialLastYear as number
+        );
+    }
 
     const handleModalClose = () => {
         setShowModal(false);
@@ -144,12 +155,16 @@ const Value = ({
     ) : (
         <div className="flex items-center">
             <span className="font-bold text-end">
-                {valeurIsNotNumber
-                    ? currentYear.valeur
-                    : formatNumberWithSpace(
-                          Math.round(Number(currentYear.valeur))
-                      )}
-                {currentYear.unite && " " + currentYear.unite}
+                {Number(valeur) === 0 ? (
+                    <span className="mr-2">{valeur}</span>
+                ) : (
+                    <LabelPercentage
+                        valeur={`${formatNumberWithSpace(Number(valeur))} ${
+                            unite ? " " + unite : ""
+                        }`}
+                        percentage={percentageEvolution}
+                    />
+                )}
             </span>
             {isSimulation && (
                 <div

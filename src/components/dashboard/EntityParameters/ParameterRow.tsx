@@ -1,5 +1,6 @@
 import { LabelText } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
+import { useMemo } from "react";
 
 import Value from "./Value";
 
@@ -18,9 +19,16 @@ const ParameterRow = ({
 }: EntityRowProps) => {
     const initialCurrentYear =
         initialCritereGeneral.annees[0][new Date().getFullYear()];
+    const { valeur: initialLastYear } =
+        initialCritereGeneral.annees[1][new Date().getFullYear() - 1];
     const currentYear = critereGeneral.annees[0][new Date().getFullYear()];
 
-    const valueIsModified = initialCurrentYear.valeur !== currentYear.valeur;
+    const valueIsModified = useMemo(
+        () => initialCurrentYear.valeur != currentYear.valeur,
+        [initialCurrentYear.valeur, currentYear.valeur]
+    );
+
+    if (initialCurrentYear.valeur === "Non") return null;
 
     return (
         <>
@@ -46,6 +54,7 @@ const ParameterRow = ({
                     isSimulation={isSimulation}
                     critereGeneralKey={critereGeneralKey}
                     initialCurrentYear={initialCurrentYear}
+                    initialLastYear={initialLastYear}
                     valueIsModified={valueIsModified}
                 />
             </div>
