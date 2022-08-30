@@ -41,25 +41,25 @@ const EntityParameters = ({
     const currentYear = new Date().getFullYear();
     const lastYear = new Date().getFullYear() - 1;
 
-    if (_.isEmpty(initialCommune.criteres)) return null;
+    if (_.isEmpty(initialCommune.criteresGeneraux)) return null;
 
-    const { criteres: initialCriteres } = initialCommune as {
-        criteres: Criteres;
+    const { criteresGeneraux: initialCriteresGeneraux } = initialCommune as {
+        criteresGeneraux: Criteres;
     };
-    const { criteres } = isSimulation
-        ? (simulationCommune as { criteres: Criteres })
-        : (initialCommune as { criteres: Criteres });
+    const { criteresGeneraux } = isSimulation
+        ? (simulationCommune as { criteresGeneraux: Criteres })
+        : (initialCommune as { criteresGeneraux: Criteres });
 
-    const criteresKeys = Object.keys(criteres);
+    const criteresGenerauxKeys = Object.keys(criteresGeneraux);
 
     const currentYearDotationPerHabitant = getDotationPerHabitant(
-        criteres,
+        criteresGeneraux,
         currentYear,
         currentYearTotal
     );
 
     const lastYearDotationPerHabitant = getDotationPerHabitant(
-        criteres,
+        criteresGeneraux,
         lastYear,
         lastYearTotal
     );
@@ -79,13 +79,17 @@ const EntityParameters = ({
                     </span>
                 </div>
                 <div>
-                    {criteresKeys.map((critereKey: string) => {
+                    {criteresGenerauxKeys.map((critereGeneralKey: string) => {
                         return (
                             <ParameterRow
-                                key={critereKey}
-                                critereKey={critereKey}
-                                critere={criteres[critereKey]}
-                                initialCritere={initialCriteres[critereKey]}
+                                key={critereGeneralKey}
+                                critereGeneralKey={critereGeneralKey}
+                                critereGeneral={
+                                    criteresGeneraux[critereGeneralKey]
+                                }
+                                initialCritereGeneral={
+                                    initialCriteresGeneraux[critereGeneralKey]
+                                }
                                 isSimulation={isSimulation}
                             />
                         );

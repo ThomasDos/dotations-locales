@@ -13,21 +13,23 @@ const StyledLabel = styled.div<LabelContainerProps>`
 
 interface LabelProps {
     percentage: number;
+    valeur?: string;
 }
 
-const LabelPercentage = ({ percentage }: LabelProps) => {
+const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
     const percentageFormatted = String(percentage).replace(".", ",");
     const percentageIsPositive = percentage >= 0;
+    const textLabel = valeur
+        ? valeur
+        : `${percentageIsPositive ? "+" : ""}${percentageFormatted}%`;
+
     return (
         <StyledLabel
             backgroundColor={percentageIsPositive ? "success-975" : "error-950"}
             className="text-sm flex"
         >
             {percentageIsPositive ? <IconVectorUp /> : <IconVectorDown />}
-            <span className="ml-1 font-bold">
-                {percentageIsPositive ? "+" : ""}
-                {percentageFormatted}%
-            </span>
+            <span className="ml-1 font-bold">{textLabel}</span>
         </StyledLabel>
     );
 };

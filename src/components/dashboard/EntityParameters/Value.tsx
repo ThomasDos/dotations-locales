@@ -3,7 +3,6 @@ import {
     LabelGreenCustomCrossIcon,
     LabelGreyCustomCrossIcon,
 } from "components/ui";
-import type { Critere } from "models/commune/commune.interface";
 import Image from "next/image";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
@@ -57,22 +56,21 @@ const StyledTitleEditor = styled.div`
 interface ValueProps {
     currentYear: {
         unite: string | null;
-        valeur: string;
+        valeur: number | string;
     };
     initialCurrentYear: {
         unite: string | null;
-        valeur: string;
+        valeur: number | string;
     };
     isSimulation: boolean;
-    critere: Critere;
-    critereKey: string;
+    critereGeneralKey: string;
     valueIsModified: boolean;
 }
 
 const Value = ({
     currentYear,
     isSimulation,
-    critereKey,
+    critereGeneralKey,
     initialCurrentYear,
     valueIsModified,
 }: ValueProps) => {
@@ -80,9 +78,9 @@ const Value = ({
     const dispatch = useDispatch();
     const { valeur } = currentYear;
     const valeurToNumber = Number(currentYear.valeur);
-    const valueIsNotNumber = isNaN(valeurToNumber);
+    const valeurIsNotNumber = isNaN(valeurToNumber);
     const [entityInput, setEntityInput] = useState<number | string>(
-        valueIsNotNumber ? valeur : valeurToNumber
+        valeurIsNotNumber ? valeur : valeurToNumber
     );
     const valeurIsLabel = valeur === "Non" || valeur === "Oui";
 
@@ -96,8 +94,8 @@ const Value = ({
         setEntityInput(value);
         dispatch(
             updateSimulationCritereValeur({
-                critereKey,
-                valeur: value,
+                critereGeneralKey,
+                valeur: Number(value),
             })
         );
     };
@@ -106,33 +104,33 @@ const Value = ({
         setEntityInput(initialCurrentYear.valeur);
         dispatch(
             updateSimulationCritereValeur({
-                critereKey,
-                valeur: initialCurrentYear.valeur,
+                critereGeneralKey,
+                valeur: Number(initialCurrentYear.valeur),
             })
         );
     };
 
     const handleInputIncrement = () => {
-        if (valueIsNotNumber) return;
+        if (valeurIsNotNumber) return;
         const value = Number(entityInput) + 1;
         setEntityInput(value);
         dispatch(
             updateSimulationCritereValeur({
-                critereKey,
-                valeur: String(value),
+                critereGeneralKey,
+                valeur: Number(value),
             })
         );
     };
 
     const handleInputDecrement = () => {
-        if (valueIsNotNumber) return;
+        if (valeurIsNotNumber) return;
         if (Number(entityInput) <= 0) return;
         const value = Number(entityInput) - 1;
         setEntityInput(value);
         dispatch(
             updateSimulationCritereValeur({
-                critereKey,
-                valeur: String(value),
+                critereGeneralKey,
+                valeur: Number(value),
             })
         );
     };
@@ -146,7 +144,7 @@ const Value = ({
     ) : (
         <div className="flex items-center">
             <span className="font-bold text-end">
-                {valueIsNotNumber
+                {valeurIsNotNumber
                     ? currentYear.valeur
                     : formatNumberWithSpace(
                           Math.round(Number(currentYear.valeur))
@@ -213,7 +211,7 @@ const Value = ({
                                     />
                                 </div>
                                 <StyledInput>
-                                    {!valueIsNotNumber && (
+                                    {!valeurIsNotNumber && (
                                         <input
                                             type="number"
                                             className="text-center"

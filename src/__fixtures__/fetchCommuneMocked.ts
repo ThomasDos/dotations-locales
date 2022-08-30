@@ -2,7 +2,7 @@ import type { CommuneDto } from "src/models/commune/commune.interface";
 
 export const fetchCommuneMocked: CommuneDto = {
     code_insee: "42113",
-    criteres: {
+    criteres_generaux: {
         longueur_voirie: {
             annees: [
                 {
@@ -142,6 +142,7 @@ export const fetchCommuneMocked: CommuneDto = {
                     "2021": 15993,
                 },
             ],
+            criteres: {},
         },
         dotation_solidarite_rurale: {
             annees: [
@@ -152,6 +153,7 @@ export const fetchCommuneMocked: CommuneDto = {
                     "2021": 8795,
                 },
             ],
+            criteres: {},
             sous_dotations: [
                 {
                     dsr_fraction_cible: {
@@ -163,6 +165,7 @@ export const fetchCommuneMocked: CommuneDto = {
                                 "2021": 0,
                             },
                         ],
+                        criteres: {},
                     },
                 },
                 {
@@ -175,6 +178,7 @@ export const fetchCommuneMocked: CommuneDto = {
                                 "2021": 8795,
                             },
                         ],
+                        criteres: {},
                     },
                 },
                 {
@@ -187,6 +191,7 @@ export const fetchCommuneMocked: CommuneDto = {
                                 "2021": 0,
                             },
                         ],
+                        criteres: {},
                     },
                 },
             ],
@@ -200,6 +205,7 @@ export const fetchCommuneMocked: CommuneDto = {
                     "2021": 0,
                 },
             ],
+            criteres: {},
         },
     },
 };

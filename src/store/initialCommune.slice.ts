@@ -7,7 +7,7 @@ import type { RootState } from ".";
 
 const initialState: Commune = {
     codeInsee: "",
-    criteres: {},
+    criteresGeneraux: {},
     dotations: {},
 };
 
@@ -28,9 +28,9 @@ const selectSelf = (state: RootState) => state[initialCommuneSlice.name];
 
 export const selectInitialCommune = createSelector(selectSelf, state => state);
 
-export const selectInitialCriteres = createSelector(
+export const selectInitialCriteresGeneraux = createSelector(
     selectSelf,
-    state => state.criteres
+    state => state.criteresGeneraux
 );
 export const selectInitialDotations = createSelector(
     selectSelf,

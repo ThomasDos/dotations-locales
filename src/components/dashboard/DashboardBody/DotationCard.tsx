@@ -7,6 +7,7 @@ import {
 import type { Dotation } from "models/commune/commune.interface";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 
 import SousDotationsContainer from "./SousDotationsContainer";
 
@@ -54,8 +55,9 @@ const DotationCard = ({
     const dotationTotalFormatted = formatNumberWithSpace(currentYearTotal);
 
     const totalEvolution = currentYearTotal - lastYear;
-    const percentageEvolution = Number(
-        ((currentYearTotal / lastYear - 1) * 100).toFixed(2)
+    const percentageEvolution = getPercentageEvolution(
+        currentYearTotal,
+        lastYear
     );
     const { title, description, sousDotations } = dotation;
 

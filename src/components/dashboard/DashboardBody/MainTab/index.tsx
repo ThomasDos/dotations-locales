@@ -38,6 +38,7 @@ const MainTab = ({ currentYear, lastYear }: MainTabProps) => {
             { [currentYear]: currentYearTotal },
             { [lastYear]: lastYearTotal },
         ],
+        criteres: {},
         description: "Evolution de votre montant total de dotations",
         title: "Dotations Générales de Fonctionnement (DGF)",
     };
