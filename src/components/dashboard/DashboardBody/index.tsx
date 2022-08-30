@@ -58,6 +58,7 @@ const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
         dotationForfaitaire,
         dotationSolidariteRurale,
         dotationNationalePerequation,
+        dsuMontant,
     } = dotations;
 
     const currentYear = new Date().getFullYear();
@@ -116,6 +117,10 @@ const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
                     {/*@ts-ignore*/}
                     <StyledTab label="DNP">
                         <SubTab dotation={dotationNationalePerequation} />
+                    </StyledTab>
+                    {/*@ts-ignore*/}
+                    <StyledTab label="DSU">
+                        <SubTab dotation={dsuMontant} />
                     </StyledTab>
                 </StyledTabs>
             </>

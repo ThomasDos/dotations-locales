@@ -4,21 +4,21 @@ import type { Critere } from "models/commune/commune.interface";
 import Value from "./Value";
 
 interface EntityRowProps {
-    critere: Critere;
-    initialCritere: Critere;
+    critereGeneral: Critere;
+    initialCritereGeneral: Critere;
     isSimulation: boolean;
-    critereKey: string;
+    critereGeneralKey: string;
 }
 
 const ParameterRow = ({
-    critere,
-    critereKey,
-    initialCritere,
+    critereGeneral,
+    critereGeneralKey,
+    initialCritereGeneral,
     isSimulation,
 }: EntityRowProps) => {
     const initialCurrentYear =
-        initialCritere.annees[0][new Date().getFullYear()];
-    const currentYear = critere.annees[0][new Date().getFullYear()];
+        initialCritereGeneral.annees[0][new Date().getFullYear()];
+    const currentYear = critereGeneral.annees[0][new Date().getFullYear()];
 
     const valueIsModified = initialCurrentYear.valeur !== currentYear.valeur;
 
@@ -27,7 +27,9 @@ const ParameterRow = ({
             <hr />
             <div className="flex justify-between my-3 text-sm items-center">
                 <div className="flex items-center">
-                    <span className="text-start">{critere.description}</span>
+                    <span className="text-start">
+                        {critereGeneral.description}
+                    </span>
                     {valueIsModified && (
                         <div className="ml-1">
                             <LabelText
@@ -42,8 +44,7 @@ const ParameterRow = ({
                 <Value
                     currentYear={currentYear}
                     isSimulation={isSimulation}
-                    critere={critere}
-                    critereKey={critereKey}
+                    critereGeneralKey={critereGeneralKey}
                     initialCurrentYear={initialCurrentYear}
                     valueIsModified={valueIsModified}
                 />

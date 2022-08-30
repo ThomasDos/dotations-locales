@@ -1,13 +1,13 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { Commune, Criteres } from "models/commune/commune.interface";
-import { selectInitialCriteres } from "store/initialCommune.slice";
+import { selectInitialCriteresGeneraux } from "store/initialCommune.slice";
 
 import type { RootState } from ".";
 
 const initialState: Commune = {
     codeInsee: "",
-    criteres: {},
+    criteresGeneraux: {},
     dotations: {},
 };
 
@@ -21,10 +21,10 @@ const simulationCommuneSlice = createSlice({
         updateSimulationCritereValeur: (
             state,
             {
-                payload: { critereKey, valeur },
-            }: PayloadAction<{ critereKey: string; valeur: string }>
+                payload: { critereGeneralKey, valeur },
+            }: PayloadAction<{ critereGeneralKey: string; valeur: number }>
         ) => {
-            state.criteres[critereKey].annees[0][
+            state.criteresGeneraux[critereGeneralKey].annees[0][
                 new Date().getFullYear()
             ].valeur = valeur;
         },
@@ -43,24 +43,29 @@ export const selectSimulationCommune = createSelector(
     selectSelf,
     state => state
 );
-const selectSimulationCriteres = createSelector(
+const selectSimulationCriteresGeneraux = createSelector(
     selectSelf,
-    state => state.criteres
+    state => state.criteresGeneraux
 );
 
 export const selectSimulationIsDifferentThanInitial = createSelector(
-    selectSimulationCriteres,
-    selectInitialCriteres,
-    (criteres: Criteres, initialCriteres: Criteres): boolean => {
-        const criteresKeys = Object.keys(criteres);
+    selectSimulationCriteresGeneraux,
+    selectInitialCriteresGeneraux,
+    (
+        simulationCriteresGeneraux: Criteres,
+        initialCriteresGeneraux: Criteres
+    ): boolean => {
+        const criteresGenerauxKeys = Object.keys(simulationCriteresGeneraux);
 
-        return !!criteresKeys.find((initialCritereKey: string) => {
+        return !!criteresGenerauxKeys.find((initialCritereKey: string) => {
             const initialCurrentYear =
-                initialCriteres[initialCritereKey].annees[0][
+                initialCriteresGeneraux[initialCritereKey].annees[0][
                     new Date().getFullYear()
                 ];
             const currentYear =
-                criteres[initialCritereKey].annees[0][new Date().getFullYear()];
+                simulationCriteresGeneraux[initialCritereKey].annees[0][
+                    new Date().getFullYear()
+                ];
 
             return initialCurrentYear.valeur !== currentYear.valeur;
         });

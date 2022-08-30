@@ -6,7 +6,7 @@
  */
 
 export default (numberToFormat: number): string => {
-    const formatted = String(numberToFormat).replace(
+    const formatted = String(Math.round(numberToFormat)).replace(
         /(.)(?=(\d{3})+$)/g,
         "$1 "
     );

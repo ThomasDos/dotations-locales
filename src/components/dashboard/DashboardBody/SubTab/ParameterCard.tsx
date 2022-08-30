@@ -1,10 +1,13 @@
 import {
     IconInformation,
+    LabelGreenCustomCrossIcon,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
-import type { Dotation } from "models/commune/commune.interface";
+import type { Critere } from "models/commune/commune.interface";
 import styled from "styled-components";
+import formatNumberWithSpace from "utils/formatNumberWithSpace";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 
 const StyledParameterCard = styled.div<{
     backgroundColor: boolean;
@@ -27,22 +30,36 @@ const StyledCardTitle = styled.span`
 
 interface ParameterCardProps {
     hasInformation?: boolean;
-    parameter: Dotation;
+    critere: Critere;
     backgroundColor?: boolean;
 }
 
 const ParameterCard = ({
-    parameter,
+    critere,
     hasInformation = true,
     backgroundColor = false,
 }: ParameterCardProps) => {
-    const currentYearTotal = parameter.annees[0][new Date().getFullYear()];
-    const lastYear = parameter.annees[1][new Date().getFullYear() - 1];
+    const { description } = critere;
 
-    const percentageEvolution = Number(
-        ((currentYearTotal / lastYear - 1) * 100).toFixed(2)
-    );
-    const { title, description } = parameter;
+    const currentYear = critere.annees[0][new Date().getFullYear()];
+    const lastYear = critere.annees[1][new Date().getFullYear() - 1];
+
+    const { valeur: currentYearValeur, unite } = currentYear;
+    const { valeur: lastYearValeur } = lastYear;
+
+    const valeurToNumber = Number(currentYear.valeur);
+    const valeurIsNotNumber = isNaN(valeurToNumber);
+
+    const valeurIsLabel =
+        currentYearValeur === "Non" || currentYearValeur === "Oui";
+
+    let percentageEvolution = 0;
+    if (!valeurIsNotNumber) {
+        percentageEvolution = getPercentageEvolution(
+            currentYearValeur as number,
+            lastYearValeur as number
+        );
+    }
 
     return (
         <StyledParameterCard backgroundColor={backgroundColor}>
@@ -50,7 +67,7 @@ const ParameterCard = ({
                 <div className="flex flex-col">
                     <div className="flex">
                         <StyledCardTitle className="mb-2 mr-1">
-                            {title}
+                            {description}
                         </StyledCardTitle>
                         {hasInformation && (
                             <div className="cursor-help">
@@ -58,14 +75,27 @@ const ParameterCard = ({
                             </div>
                         )}
                     </div>
-                    <span className="text-xs">{description}</span>
                 </div>
-                {currentYearTotal ? (
+                {currentYearValeur ? (
                     <div className="flex flex-col items-end">
                         <div className="flex mb-2 items-center">
-                            <LabelPercentage percentage={percentageEvolution} />
+                            {valeurIsLabel ? (
+                                currentYearValeur === "Oui" ? (
+                                    <LabelGreenCustomCrossIcon text="Oui" />
+                                ) : (
+                                    <LabelGreyCustomCrossIcon text="Non" />
+                                )
+                            ) : Number(currentYearValeur) === 0 ? (
+                                <LabelGreyCustomCrossIcon text="Non éligible" />
+                            ) : (
+                                <LabelPercentage
+                                    valeur={`${formatNumberWithSpace(
+                                        Number(currentYearValeur)
+                                    )} ${unite ? " " + unite : ""}`}
+                                    percentage={percentageEvolution}
+                                />
+                            )}
                         </div>
-                        <span className="text-sm">valeur donnée par back</span>
                     </div>
                 ) : (
                     <div>
