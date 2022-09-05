@@ -1,5 +1,4 @@
 import Image from "next/image";
-import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
 const StyledSpanToggle = styled.span`
@@ -8,7 +7,7 @@ const StyledSpanToggle = styled.span`
 
 interface TitleDotationsNonEligiblesProps {
     countNonEligibleDotations: number;
-    setShowNonEligible: Dispatch<SetStateAction<boolean>>;
+    setShowNonEligible: (showNowEligible: boolean) => void;
     showNonEligible: boolean;
 }
 const TitleDotationsNonEligibles = ({

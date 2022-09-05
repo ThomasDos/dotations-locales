@@ -1,6 +1,4 @@
-import { SimulationBanner } from "components/simulation";
 import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
-import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
 const StyledHeaderDashboard = styled.div`
@@ -10,16 +8,9 @@ const StyledHeaderDashboard = styled.div`
 interface SubHeaderProps {
     commune: string;
     codeInsee: string;
-    isSimulation: boolean;
-    setIsSimulation: Dispatch<SetStateAction<boolean>>;
 }
 
-const SubHeader = ({
-    commune,
-    codeInsee,
-    isSimulation,
-    setIsSimulation,
-}: SubHeaderProps) => {
+const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
     const communeWithCodeInsee = `${commune} (${codeInsee})`;
 
     return (
@@ -40,9 +31,6 @@ const SubHeader = ({
                     <LinkIcon icon="alerter" text="M'alerter" path="#" />
                 </div>
             </StyledHeaderDashboard>
-            {isSimulation && (
-                <SimulationBanner setIsSimulation={setIsSimulation} />
-            )}
             <hr />
         </>
     );
