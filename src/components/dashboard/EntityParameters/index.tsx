@@ -1,18 +1,28 @@
+import type { SelectChangeEvent } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import { Button, LabelPercentage } from "components/ui";
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
-import type { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
     selectCurrentYearTotal,
     selectInitialCommune,
     selectLastYearTotal,
 } from "store/initialCommune.slice";
-import { selectSimulationCommune } from "store/simulationCommune.slice";
+import {
+    selectSimulationCommune,
+    selectSimulationIsDifferentThanInitial,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
 import ParameterRow from "./ParameterRow";
+
+const StyledSelect = styled(Select)`
+    background: var(--grey-1000);
+    border-bottom: solid 2px #3a3a3a;
+`;
 
 const StyledEntityParameters = styled.div`
     width: 25%;
@@ -24,10 +34,23 @@ const StyledEntityParameters = styled.div`
     align-items: center;
 `;
 
+const StyledSpanSelect = styled.span`
+    font-family: Marianne;
+    line-height: 24px;
+    letter-spacing: 0em;
+`;
+
 interface EntityParametersProps {
     isSimulation: boolean;
-    setIsSimulation: Dispatch<SetStateAction<boolean>>;
+    setIsSimulation: (isSimulation: boolean) => void;
 }
+
+//TODO: remove by dynamic value
+const mockedSimulerAvec = [
+    "Projet de Loi de Finance 2023",
+    "Projet de Loi de Finance 2022",
+    "Projet de Loi de Finance 2021",
+];
 
 const EntityParameters = ({
     isSimulation,
@@ -37,6 +60,12 @@ const EntityParameters = ({
     const currentYearTotal = useSelector(selectCurrentYearTotal);
     const lastYearTotal = useSelector(selectLastYearTotal);
     const initialCommune = useSelector(selectInitialCommune);
+    const simulationIsDifferentThanInitial = useSelector(
+        selectSimulationIsDifferentThanInitial
+    );
+    const [selectedLaw, setSelectedLaw] = useState<string>(
+        mockedSimulerAvec[0]
+    );
 
     const currentYear = new Date().getFullYear();
     const lastYear = new Date().getFullYear() - 1;
@@ -70,12 +99,42 @@ const EntityParameters = ({
             100
         ).toFixed(2)
     );
+
+    const handleSelectChange = (event: SelectChangeEvent) => {
+        setSelectedLaw(event.target.value);
+    };
+
     return (
         <StyledEntityParameters>
             <div className="w-full text-center sticky top-16">
+                {isSimulation ? (
+                    <div className="mb-8">
+                        <span className="font-bold">Simuler avec :</span>
+                        <div className="mt-4">
+                            <StyledSelect
+                                value={selectedLaw}
+                                onChange={e => {
+                                    handleSelectChange(e as SelectChangeEvent);
+                                }}
+                            >
+                                {mockedSimulerAvec.map((data: string) => {
+                                    return (
+                                        <MenuItem value={data} key={data}>
+                                            <StyledSpanSelect>
+                                                {data}
+                                            </StyledSpanSelect>
+                                        </MenuItem>
+                                    );
+                                })}
+                            </StyledSelect>
+                        </div>
+                    </div>
+                ) : null}
                 <div className="mb-6">
                     <span className="font-bold">
-                        Données connues de votre commune
+                        {isSimulation
+                            ? "Données modifiables"
+                            : "Données connues de votre commune"}
                     </span>
                 </div>
                 <div>
@@ -95,18 +154,25 @@ const EntityParameters = ({
                         );
                     })}
                 </div>
-                <span className="flex font-bold mt-10">Synthèse</span>
-                <div className="bg-white rounded-lg py-4 px-16 my-6">
-                    <span className="text-sm">Dotation / habitant</span>
-                    <div className="flex justify-center mt-2">
-                        <span className="font-bold text-xl mr-2">
-                            {Math.round(currentYearDotationPerHabitant)}€
-                        </span>
-                        {!!percentageEvolution && (
-                            <LabelPercentage percentage={percentageEvolution} />
-                        )}
+                {(!isSimulation || simulationIsDifferentThanInitial) && (
+                    <div>
+                        <span className="flex font-bold mt-10">Synthèse</span>
+                        <div className="bg-white rounded-lg py-4 px-16 my-6">
+                            <span className="text-sm">Dotation / habitant</span>
+                            <div className="flex justify-center mt-2">
+                                <span className="font-bold text-xl mr-2">
+                                    {Math.round(currentYearDotationPerHabitant)}
+                                    €
+                                </span>
+                                {!!percentageEvolution && (
+                                    <LabelPercentage
+                                        percentage={percentageEvolution}
+                                    />
+                                )}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                )}
                 {!isSimulation && (
                     <div>
                         <Button

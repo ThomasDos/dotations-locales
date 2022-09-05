@@ -3,7 +3,6 @@ import "dayjs/locale/fr";
 import dayjs, { extend as dayjsExtend } from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
-import type { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
 import styled from "styled-components";
@@ -38,7 +37,7 @@ const StyledBannerButton = styled.div`
 `;
 
 interface SimulationBannerProps {
-    setIsSimulation: Dispatch<SetStateAction<boolean>>;
+    setIsSimulation: (isSimulation: boolean) => void;
 }
 
 const SimulationBanner = ({ setIsSimulation }: SimulationBannerProps) => {

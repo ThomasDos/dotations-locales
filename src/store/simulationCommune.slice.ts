@@ -67,7 +67,7 @@ export const selectSimulationIsDifferentThanInitial = createSelector(
                     new Date().getFullYear()
                 ];
 
-            return initialCurrentYear.valeur !== currentYear.valeur;
+            return initialCurrentYear.valeur != currentYear.valeur;
         });
     }
 );

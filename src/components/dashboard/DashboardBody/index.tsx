@@ -4,9 +4,11 @@ import _ from "lodash";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectInitialDotations } from "store/initialCommune.slice";
+import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 import MainTab from "./MainTab";
+import SimulationTutorial from "./Simulation/SimulationTutorial";
 import SubTab from "./SubTab";
 
 const StyledDashboardBody = styled.div`
@@ -41,18 +43,21 @@ const StyledTabs = styled(Tabs)`
 const StyledTab = styled(Tab)`
     padding: 0 !important;
 `;
-const StyledWarningMessage = styled.div`
-    background-color: var(--green-tilleul-verveine-975);
-    padding: 16px 32px;
-    margin: 40px;
-`;
 
 interface DashboardBodyProps {
     isSimulation: boolean;
+    setIsSimulation: (isSimulation: boolean) => void;
 }
 
-const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
+const DashboardBody = ({
+    isSimulation,
+    setIsSimulation,
+}: DashboardBodyProps) => {
     const dotations = useSelector(selectInitialDotations);
+    const simulationIsDifferentThanInitial = useSelector(
+        selectSimulationIsDifferentThanInitial
+    );
+
     if (_.isEmpty(dotations)) return null;
     const {
         dotationForfaitaire,
@@ -65,12 +70,10 @@ const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
     const lastYear = new Date().getFullYear() - 1;
     return (
         <StyledDashboardBody>
-            <>
-                {isSimulation ? (
-                    <StyledWarningMessage>
-                        👋 Message lorem ipsum dolores
-                    </StyledWarningMessage>
-                ) : (
+            {isSimulation && !simulationIsDifferentThanInitial ? (
+                <SimulationTutorial setIsSimulation={setIsSimulation} />
+            ) : (
+                <>
                     <StyledInfoDate className="px-8 py-4 mb-10 flex flex-col">
                         <div className="flex justify-between">
                             <span className="text-3xl font-bold">
@@ -93,37 +96,37 @@ const DashboardBody = ({ isSimulation }: DashboardBodyProps) => {
                             </div>
                         </StyledMajHours>
                     </StyledInfoDate>
-                )}
 
-                <StyledTabs>
-                    {/*@ts-ignore*/}
-                    <StyledTab label="Résumé">
-                        <MainTab
-                            currentYear={currentYear}
-                            lastYear={lastYear}
-                        />
-                    </StyledTab>
+                    <StyledTabs>
+                        {/*@ts-ignore*/}
+                        <StyledTab label="Résumé">
+                            <MainTab
+                                currentYear={currentYear}
+                                lastYear={lastYear}
+                            />
+                        </StyledTab>
 
-                    {/*@ts-ignore*/}
-                    <StyledTab label="DF">
-                        <SubTab dotation={dotationForfaitaire} />
-                    </StyledTab>
+                        {/*@ts-ignore*/}
+                        <StyledTab label="DF">
+                            <SubTab dotation={dotationForfaitaire} />
+                        </StyledTab>
 
-                    {/*@ts-ignore*/}
-                    <StyledTab label="DSR">
-                        <SubTab dotation={dotationSolidariteRurale} />
-                    </StyledTab>
+                        {/*@ts-ignore*/}
+                        <StyledTab label="DSR">
+                            <SubTab dotation={dotationSolidariteRurale} />
+                        </StyledTab>
 
-                    {/*@ts-ignore*/}
-                    <StyledTab label="DNP">
-                        <SubTab dotation={dotationNationalePerequation} />
-                    </StyledTab>
-                    {/*@ts-ignore*/}
-                    <StyledTab label="DSU">
-                        <SubTab dotation={dsuMontant} />
-                    </StyledTab>
-                </StyledTabs>
-            </>
+                        {/*@ts-ignore*/}
+                        <StyledTab label="DNP">
+                            <SubTab dotation={dotationNationalePerequation} />
+                        </StyledTab>
+                        {/*@ts-ignore*/}
+                        <StyledTab label="DSU">
+                            <SubTab dotation={dsuMontant} />
+                        </StyledTab>
+                    </StyledTabs>
+                </>
+            )}
         </StyledDashboardBody>
     );
 };
