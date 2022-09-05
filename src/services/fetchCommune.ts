@@ -7,7 +7,7 @@ export default async (codeInsee: string): Promise<Commune> => {
     const codeInseeFormatted = formatCodeInseeMetropole(codeInsee);
 
     return axios
-        .post("https://dotations-locales-back.osc-fr1.scalingo.io/commune/", {
+        .post(process.env.NEXT_PUBLIC_BACK_WEB_API_URL, {
             code_insee: codeInseeFormatted,
         })
         .then(({ data }: { data: CommuneDto }) => {
