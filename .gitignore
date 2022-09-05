@@ -23,8 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
+# local env files if they contain secrets
+# .env*.local
 
 # vercel
 .vercel
