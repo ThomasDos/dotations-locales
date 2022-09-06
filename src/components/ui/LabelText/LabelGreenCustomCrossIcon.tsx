@@ -7,9 +7,10 @@ interface LabelGreenCustomProps {
 const LabelGreenCustomCrossIcon = ({ text }: LabelGreenCustomProps) => {
     return (
         <LabelText
-            icon="valide-checked.svg"
+            icon="valid-checked.svg"
             text={text}
             backgroundColor="#B8FEC9"
+            fontWeight="700"
         />
     );
 };

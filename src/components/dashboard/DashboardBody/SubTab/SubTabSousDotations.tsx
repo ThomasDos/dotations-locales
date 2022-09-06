@@ -6,11 +6,16 @@ import type {
     SousDotations,
 } from "models/commune/commune.interface";
 import { useState } from "react";
+import styled from "styled-components";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
 import TitleCriteresNonEligibles from "../TitleCriteresNonEligibles";
 import ParameterCard from "./ParameterCard";
+
+const StyledContainerNonEligible = styled.div`
+    border-bottom: 1px solid var(--blue-france-850);
+`;
 
 interface SubTabSousDotationsProps {
     dotation: Dotation;
@@ -84,23 +89,29 @@ const SubTabSousDotations = ({
                                     />
 
                                     <Collapse in={showNonEligible[keyName]}>
-                                        {Object.keys(criteresNonEligibles).map(
-                                            (critereNonEligibleKey: string) => {
-                                                return (
-                                                    <ParameterCard
-                                                        key={
-                                                            critereNonEligibleKey
-                                                        }
-                                                        critere={
-                                                            sousDotation
-                                                                .criteres[
+                                        <StyledContainerNonEligible>
+                                            {Object.keys(
+                                                criteresNonEligibles
+                                            ).map(
+                                                (
+                                                    critereNonEligibleKey: string
+                                                ) => {
+                                                    return (
+                                                        <ParameterCard
+                                                            key={
                                                                 critereNonEligibleKey
-                                                            ]
-                                                        }
-                                                    />
-                                                );
-                                            }
-                                        )}
+                                                            }
+                                                            critere={
+                                                                sousDotation
+                                                                    .criteres[
+                                                                    critereNonEligibleKey
+                                                                ]
+                                                            }
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </StyledContainerNonEligible>
                                     </Collapse>
                                 </>
                             ) : null}

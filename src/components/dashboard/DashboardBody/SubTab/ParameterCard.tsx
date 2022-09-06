@@ -17,6 +17,7 @@ const StyledParameterCard = styled.div<{
     flex-direction: column;
 
     border: 1px solid var(--blue-france-850);
+    border-bottom: 1px solid var(--grey-950);
     border-top: none;
     background-color: ${({ backgroundColor }) =>
         backgroundColor ? "var(--blue-france-975)" : "none"};
