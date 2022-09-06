@@ -42,6 +42,7 @@ const StyledTabs = styled(Tabs)`
 
 const StyledTab = styled(Tab)`
     padding: 0 !important;
+    border-bottom: 1px solid var(--blue-france-850);
 `;
 
 interface DashboardBodyProps {

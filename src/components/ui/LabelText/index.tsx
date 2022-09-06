@@ -7,12 +7,14 @@ interface LabelTextProps {
     borderColor?: string;
     icon?: string;
     color?: string;
+    fontWeight?: string;
 }
 
 interface LabelTextContainerProps {
     backgroundColor: string;
     color: string;
     borderColor: string | undefined;
+    fontWeight: string | undefined;
 }
 
 const StyledLabelText = styled.div<LabelTextContainerProps>`
@@ -21,6 +23,7 @@ const StyledLabelText = styled.div<LabelTextContainerProps>`
     color: ${props => props.color};
     border: ${({ borderColor }) =>
         borderColor ? `${borderColor} solid 1px` : "none"};
+    font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "normal")};
 `;
 
 const LabelText = ({
@@ -29,6 +32,7 @@ const LabelText = ({
     backgroundColor = "#eeeeee",
     color = "#000000",
     borderColor,
+    fontWeight,
 }: LabelTextProps) => {
     return (
         <StyledLabelText
@@ -36,6 +40,7 @@ const LabelText = ({
             backgroundColor={backgroundColor}
             color={color}
             borderColor={borderColor}
+            fontWeight={fontWeight}
         >
             {icon && (
                 <div className="flex items-center">

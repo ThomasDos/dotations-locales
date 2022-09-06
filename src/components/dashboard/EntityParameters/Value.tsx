@@ -1,7 +1,7 @@
 import {
     LabelGreenCustomCrossIcon,
     LabelGreyCustomCrossIcon,
-    LabelPercentage,
+    TagData,
 } from "components/ui";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
@@ -40,7 +40,7 @@ const Value = ({ currentYear, initialLastYear }: ValueProps) => {
                 {Number(valeur) === 0 ? (
                     <span className="mr-2">{valeur}</span>
                 ) : (
-                    <LabelPercentage
+                    <TagData
                         valeur={`${formatNumberWithSpace(Number(valeur))} ${
                             unite ? " " + unite : ""
                         }`}

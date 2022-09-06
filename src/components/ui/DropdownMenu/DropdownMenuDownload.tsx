@@ -23,11 +23,9 @@ const StyledMenuItem = styled(MenuItem)`
 const MenuItemCustom = ({
     handleClose,
     text,
-    icon,
 }: {
     handleClose: () => void;
     text: string;
-    icon: string;
 }) => {
     return (
         <StyledMenuItem onClick={handleClose}>
@@ -35,7 +33,7 @@ const MenuItemCustom = ({
                 <StyledCustomSpan>{text}</StyledCustomSpan>
                 <div className="ml-2">
                     <Image
-                        src={`/icons/${icon}.svg`}
+                        src={`/icons/file-download.svg`}
                         width="16px"
                         height="16px"
                         alt="icone exporter"
@@ -92,7 +90,6 @@ const DropdownMenuDownload = () => {
                     <MenuItemCustom
                         handleClose={handleClose}
                         text="Fichier csv"
-                        icon="file-csv"
                     />
                     <StyledDivider
                         sx={{ borderBottomWidth: 0 }}
@@ -101,7 +98,6 @@ const DropdownMenuDownload = () => {
                     <MenuItemCustom
                         handleClose={handleClose}
                         text="Fichier xls"
-                        icon="file-xls"
                     />
                     <StyledDivider
                         sx={{ borderBottomWidth: 0 }}
@@ -110,7 +106,6 @@ const DropdownMenuDownload = () => {
                     <MenuItemCustom
                         handleClose={handleClose}
                         text="Fichier pdf"
-                        icon="file-pdf"
                     />
                 </div>
             </Menu>

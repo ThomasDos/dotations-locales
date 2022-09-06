@@ -2,12 +2,17 @@ import { Collapse } from "@mui/material";
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import { useState } from "react";
+import styled from "styled-components";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
 import TitleCriteresNonEligibles from "../TitleCriteresNonEligibles";
 import ParameterCard from "./ParameterCard";
 import SubTabSousDotations from "./SubTabSousDotations";
+
+const StyledContainerNonEligible = styled.div`
+    border-bottom: 1px solid var(--blue-france-850);
+`;
 
 interface SubTabProps {
     dotation: Dotation;
@@ -62,20 +67,24 @@ const SubTab = ({ dotation }: SubTabProps) => {
                                 />
 
                                 <Collapse in={showNonEligible}>
-                                    {Object.keys(criteresNonEligibles).map(
-                                        (critereNonEligibleKey: string) => {
-                                            return (
-                                                <ParameterCard
-                                                    key={critereNonEligibleKey}
-                                                    critere={
-                                                        criteres[
+                                    <StyledContainerNonEligible>
+                                        {Object.keys(criteresNonEligibles).map(
+                                            (critereNonEligibleKey: string) => {
+                                                return (
+                                                    <ParameterCard
+                                                        key={
                                                             critereNonEligibleKey
-                                                        ]
-                                                    }
-                                                />
-                                            );
-                                        }
-                                    )}
+                                                        }
+                                                        critere={
+                                                            criteres[
+                                                                critereNonEligibleKey
+                                                            ]
+                                                        }
+                                                    />
+                                                );
+                                            }
+                                        )}
+                                    </StyledContainerNonEligible>
                                 </Collapse>
                             </>
                         ) : null}
