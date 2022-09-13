@@ -5,18 +5,12 @@ import {
 } from "components/dashboard";
 import { SimulationBanner } from "components/simulation";
 import { Spinner } from "components/ui";
+import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-    hydrateInitialCommune,
-    resetInitialCommune,
-} from "store/initialCommune.slice";
-import {
-    hydrateSimulationCommune,
-    resetSimulationCommune,
-} from "store/simulationCommune.slice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectIsSimulation } from "store/appSettings.slice";
 
 const Dashboard = () => {
     const { commune, codeInsee } = useRouter().query as {
@@ -24,9 +18,7 @@ const Dashboard = () => {
         codeInsee: string;
     };
 
-    const [isSimulation, setIsSimulation] = useState<boolean>(false);
-
-    const dispatch = useDispatch();
+    const isSimulation = useSelector(selectIsSimulation);
 
     const {
         data: fetchCommuneData,
@@ -34,16 +26,7 @@ const Dashboard = () => {
         isLoading: fetchCommuneIsLoading,
     } = useFetchCommune(codeInsee, !!codeInsee);
 
-    useEffect(() => {
-        if (!fetchCommuneData) return;
-
-        dispatch(hydrateInitialCommune(fetchCommuneData));
-        dispatch(hydrateSimulationCommune(fetchCommuneData));
-        return () => {
-            dispatch(resetSimulationCommune());
-            dispatch(resetInitialCommune());
-        };
-    }, [fetchCommuneData, dispatch]);
+    useDashboardInit(fetchCommuneData);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -67,19 +50,13 @@ const Dashboard = () => {
     return (
         <>
             {isSimulation ? (
-                <SimulationBanner setIsSimulation={setIsSimulation} />
+                <SimulationBanner />
             ) : (
                 <SubHeader commune={commune} codeInsee={codeInsee} />
             )}
             <div className="flex pb-0.5">
-                <DashboardBody
-                    isSimulation={isSimulation}
-                    setIsSimulation={setIsSimulation}
-                />
-                <EntityParameters
-                    isSimulation={isSimulation}
-                    setIsSimulation={setIsSimulation}
-                />
+                <DashboardBody />
+                <EntityParameters />
             </div>
         </>
     );

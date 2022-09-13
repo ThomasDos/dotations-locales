@@ -2,6 +2,8 @@ import { Collapse } from "@mui/material";
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentYear } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
@@ -20,11 +22,12 @@ interface SubTabProps {
 
 const SubTab = ({ dotation }: SubTabProps) => {
     const [showNonEligible, setShowNonEligible] = useState(false);
+    const currentYear = useSelector(selectCurrentYear);
 
     const { sousDotations, criteres } = dotation;
 
     const { criteresEligibles, criteresNonEligibles } =
-        sortCriteresEligiblesOrNonEligibles(criteres);
+        sortCriteresEligiblesOrNonEligibles(criteres, currentYear);
     const countNonEligiblesCriteres =
         !_.isEmpty(criteresNonEligibles) &&
         Object.keys(criteresNonEligibles).length;

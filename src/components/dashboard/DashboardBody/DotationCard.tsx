@@ -5,6 +5,11 @@ import {
     LabelPercentage,
 } from "components/ui";
 import type { Dotation } from "models/commune/commune.interface";
+import { useSelector } from "react-redux";
+import {
+    selectCurrentYear,
+    selectLastYear,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
@@ -50,14 +55,17 @@ const DotationCard = ({
     borderTop,
     backgroundColor = false,
 }: DotationCardProps) => {
-    const currentYearTotal = dotation.annees[0][new Date().getFullYear()];
-    const lastYear = dotation.annees[1][new Date().getFullYear() - 1];
-    const dotationTotalFormatted = formatNumberWithSpace(currentYearTotal);
+    const currentYear = useSelector(selectCurrentYear);
+    const lastYear = useSelector(selectLastYear);
 
-    const totalEvolution = currentYearTotal - lastYear;
+    const currentYearDotation = dotation.annees[0][currentYear];
+    const lastYearDotation = dotation.annees[1][lastYear];
+    const dotationTotalFormatted = formatNumberWithSpace(currentYearDotation);
+
+    const totalEvolution = currentYearDotation - lastYearDotation;
     const percentageEvolution = getPercentageEvolution(
-        currentYearTotal,
-        lastYear
+        currentYearDotation,
+        lastYearDotation
     );
     const { title, description, sousDotations } = dotation;
 
@@ -80,7 +88,7 @@ const DotationCard = ({
                     </div>
                     <span>{description}</span>
                 </div>
-                {currentYearTotal ? (
+                {currentYearDotation ? (
                     <div className="flex flex-col items-end">
                         <div className="flex mb-2">
                             <StyledSpanTotalNumber>
@@ -89,7 +97,7 @@ const DotationCard = ({
                             <div className="relative flex items-center">
                                 <div className="absolute r-0 ml-3">
                                     <IconCopyWithSuccess
-                                        toCopy={currentYearTotal}
+                                        toCopy={currentYearDotation}
                                     />
                                 </div>
                             </div>

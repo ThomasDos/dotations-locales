@@ -1,12 +1,12 @@
 import { Collapse } from "@mui/material";
-import type { Dotation } from "models/commune/commune.interface";
+import type { Dotation, Dotations } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
-    selectCurrentYearTotal,
-    selectInitialDotations,
-    selectLastYearTotal,
-} from "store/initialCommune.slice";
+    selectCurrentYear,
+    selectLastYear,
+} from "store/simulationCommune.slice";
+import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
@@ -14,18 +14,19 @@ import TitleDotationsEligibles from "../TitleDotationsEligibles";
 import TitleDotationsNonEligibles from "../TitleDotationsNonEligibles";
 
 interface MainTabProps {
-    currentYear: number;
-    lastYear: number;
+    dotations: Dotations;
 }
 
-const MainTab = ({ currentYear, lastYear }: MainTabProps) => {
+const MainTab = ({ dotations }: MainTabProps) => {
+    const currentYear = useSelector(selectCurrentYear);
+    const lastYear = useSelector(selectLastYear);
     const [showNonEligible, setShowNonEligible] = useState(false);
-    const dotations = useSelector(selectInitialDotations);
-    const currentYearTotal = useSelector(selectCurrentYearTotal);
-    const lastYearTotal = useSelector(selectLastYearTotal);
+
+    const currentYearTotal = getTotalDotations(dotations, currentYear);
+    const lastYearTotal = getTotalDotations(dotations, lastYear);
 
     const { dotationsEligibles, dotationsNonEligibles } =
-        sortDotationsEligiblesOrNonEligibles(dotations);
+        sortDotationsEligiblesOrNonEligibles(dotations, currentYear);
     const dotationsEligiblesKeys = Object.keys(dotationsEligibles);
     const dotationsNonEligiblesKeys = Object.keys(dotationsNonEligibles);
 

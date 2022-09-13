@@ -49,11 +49,11 @@ const StyledTitleEditor = styled.div`
 `;
 
 interface ModalParameterSimulationProps {
-    initialCurrentYear: {
+    currentYearCritereGeneralInitial: {
         unite: string | null;
         valeur: number | string;
     };
-    currentYear: {
+    currentYearCritereGeneralSimulation: {
         unite: string | null;
         valeur: number | string;
     };
@@ -64,15 +64,15 @@ interface ModalParameterSimulationProps {
 
 function ModalParameterSimulation({
     critereGeneralKey,
-    initialCurrentYear,
-    currentYear,
+    currentYearCritereGeneralInitial,
+    currentYearCritereGeneralSimulation,
     setShowModal,
     showModal,
 }: ModalParameterSimulationProps) {
     const dispatch = useDispatch();
 
-    const { valeur } = currentYear;
-    const valeurToNumber = Number(currentYear.valeur);
+    const { valeur } = currentYearCritereGeneralSimulation;
+    const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
 
     const [entityInput, setEntityInput] = useState<number | string>(
@@ -96,11 +96,11 @@ function ModalParameterSimulation({
     };
 
     const handleInputReset = () => {
-        setEntityInput(initialCurrentYear.valeur);
+        setEntityInput(currentYearCritereGeneralInitial.valeur);
         dispatch(
             updateSimulationCritereValeur({
                 critereGeneralKey,
-                valeur: Number(initialCurrentYear.valeur),
+                valeur: Number(currentYearCritereGeneralInitial.valeur),
             })
         );
     };

@@ -3,13 +3,16 @@ import {
     LabelGreyCustomCrossIcon,
 } from "components/ui";
 import type { SousDotations } from "models/commune/commune.interface";
+import { useSelector } from "react-redux";
+import { selectCurrentYear } from "store/simulationCommune.slice";
 
 interface SousDotationsProps {
     sousDotations: SousDotations;
 }
 
 const SousDotationsContainer = ({ sousDotations }: SousDotationsProps) => {
-    const currentYear = String(new Date().getFullYear());
+    const currentYear = useSelector(selectCurrentYear);
+
     return (
         <div className="flex space mt-4 space-x-4">
             {sousDotations.map(sousDot => {

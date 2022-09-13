@@ -6,6 +6,8 @@ import type {
     SousDotations,
 } from "models/commune/commune.interface";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentYear } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
@@ -26,6 +28,7 @@ const SubTabSousDotations = ({
     dotation,
     sousDotations,
 }: SubTabSousDotationsProps) => {
+    const currentYear = useSelector(selectCurrentYear);
     const [showNonEligible, setShowNonEligible] = useState({
         dsrFractionBourgCentre: false,
         dsrFractionCible: false,
@@ -43,7 +46,10 @@ const SubTabSousDotations = ({
                 const sousDotation: Dotation = sousDotationRecord[keyName];
 
                 const { criteresEligibles, criteresNonEligibles } =
-                    sortCriteresEligiblesOrNonEligibles(sousDotation.criteres);
+                    sortCriteresEligiblesOrNonEligibles(
+                        sousDotation.criteres,
+                        currentYear
+                    );
                 const countNonEligiblesCriteres =
                     !_.isEmpty(criteresNonEligibles) &&
                     Object.keys(criteresNonEligibles).length;

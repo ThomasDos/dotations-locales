@@ -1,6 +1,13 @@
 import { LabelText } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
 import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectIsSimulation } from "store/appSettings.slice";
+import { selectInitialCurrentYear } from "store/initialCommune.slice";
+import {
+    selectCurrentYear,
+    selectLastYear,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 import ModalParameterSimulation from "./ModalParameterSimulation";
@@ -20,7 +27,6 @@ const StyledParameterRowContainer = styled.div`
 interface EntityRowProps {
     critereGeneral: Critere;
     initialCritereGeneral: Critere;
-    isSimulation: boolean;
     critereGeneralKey: string;
 }
 
@@ -28,24 +34,33 @@ const ParameterRow = ({
     critereGeneral,
     critereGeneralKey,
     initialCritereGeneral,
-    isSimulation,
 }: EntityRowProps) => {
     const [showModal, setShowModal] = useState(false);
-    const initialCurrentYear =
-        initialCritereGeneral.annees[0][new Date().getFullYear()];
-    const { valeur: initialLastYear } =
-        initialCritereGeneral.annees[1][new Date().getFullYear() - 1];
-    const currentYear = critereGeneral.annees[0][new Date().getFullYear()];
+    const isSimulation = useSelector(selectIsSimulation);
+    const currentYear = useSelector(selectCurrentYear);
+    const lastYear = useSelector(selectLastYear);
+    const initialCurrentYear = useSelector(selectInitialCurrentYear);
+
+    const currentYearCritereGeneralSimulation =
+        critereGeneral.annees[0][currentYear];
+    const currentYearCritereGeneralInitial =
+        initialCritereGeneral.annees[0][initialCurrentYear];
+    const { valeur: lastYearValeur } = critereGeneral.annees[1][lastYear];
 
     const valueIsModified = useMemo(
-        () => initialCurrentYear.valeur != currentYear.valeur,
-        [initialCurrentYear.valeur, currentYear.valeur]
+        () =>
+            currentYearCritereGeneralSimulation.valeur !=
+            currentYearCritereGeneralInitial.valeur,
+        [
+            currentYearCritereGeneralSimulation.valeur,
+            currentYearCritereGeneralInitial.valeur,
+        ]
     );
 
-    const valeurToNumber = Number(currentYear.valeur);
+    const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
 
-    if (initialCurrentYear.valeur === "Non") return null;
+    if (currentYearCritereGeneralSimulation.valeur === "Non") return null;
 
     return (
         <>
@@ -58,8 +73,10 @@ const ParameterRow = ({
                         </span>
                     </div>
                     <Value
-                        currentYear={currentYear}
-                        initialLastYear={initialLastYear}
+                        currentYearCritereGeneralSimulation={
+                            currentYearCritereGeneralSimulation
+                        }
+                        lastYearValeur={lastYearValeur}
                     />
                 </div>
                 {isSimulation && (
@@ -70,12 +87,18 @@ const ParameterRow = ({
                         }}
                     >
                         <div className="ml-1">
-                            {valueIsModified && (
+                            {valueIsModified ? (
                                 <LabelText
                                     text="SIMU"
                                     backgroundColor="var(--grey-975)"
                                     color="#FC5D00"
                                     borderColor="#FC5D00"
+                                />
+                            ) : (
+                                <LabelText
+                                    text={currentYear}
+                                    backgroundColor="var(--grey-950)"
+                                    color="var(--grey-50)"
                                 />
                             )}
                         </div>
@@ -88,10 +111,14 @@ const ParameterRow = ({
                 )}
             </StyledParameterRowContainer>
             <ModalParameterSimulation
-                initialCurrentYear={initialCurrentYear}
+                currentYearCritereGeneralInitial={
+                    currentYearCritereGeneralInitial
+                }
                 showModal={showModal}
                 setShowModal={setShowModal}
-                currentYear={currentYear}
+                currentYearCritereGeneralSimulation={
+                    currentYearCritereGeneralSimulation
+                }
                 critereGeneralKey={critereGeneralKey}
             />
         </>

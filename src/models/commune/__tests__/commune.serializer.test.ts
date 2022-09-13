@@ -10,6 +10,7 @@ import {
 describe("fetchCommuneSerializer", () => {
     it("should return serialized commune", () => {
         expect(fetchCommuneSerializer(fetchCommuneMocked)).toEqual({
+            annees: ["2022", "2021"],
             codeInsee: "42113",
             criteresGeneraux: {
                 longueurVoirie: {

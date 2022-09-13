@@ -3,7 +3,8 @@ import "dayjs/locale/fr";
 import dayjs, { extend as dayjsExtend } from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateIsSimulationFalse } from "store/appSettings.slice";
 import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
 import styled from "styled-components";
 
@@ -36,11 +37,8 @@ const StyledBannerButton = styled.div`
     cursor: pointer;
 `;
 
-interface SimulationBannerProps {
-    setIsSimulation: (isSimulation: boolean) => void;
-}
-
-const SimulationBanner = ({ setIsSimulation }: SimulationBannerProps) => {
+const SimulationBanner = () => {
+    const dispatch = useDispatch();
     const timeCreated = dayjs();
     const hoursCreated = dayjs(timeCreated).format("HH[h]mm");
     const dayCreated = dayjs(timeCreated).locale("fr").format("ddddd");
@@ -76,7 +74,7 @@ const SimulationBanner = ({ setIsSimulation }: SimulationBannerProps) => {
             <div className="flex">
                 <StyledBannerButton
                     onClick={() => {
-                        setIsSimulation(false);
+                        dispatch(updateIsSimulationFalse());
                     }}
                 >
                     Abandonner

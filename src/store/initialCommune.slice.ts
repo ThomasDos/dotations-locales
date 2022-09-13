@@ -1,11 +1,16 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import type { Commune, Dotations } from "models/commune/commune.interface";
+import type {
+    Commune,
+    CommuneAnnee,
+    Dotations,
+} from "models/commune/commune.interface";
 import getTotalDotations from "utils/getTotalDotations";
 
 import type { RootState } from ".";
 
 const initialState: Commune = {
+    annees: [],
     codeInsee: "",
     criteresGeneraux: {},
     dotations: {},
@@ -32,9 +37,15 @@ export const selectInitialCriteresGeneraux = createSelector(
     selectSelf,
     state => state.criteresGeneraux
 );
+
 export const selectInitialDotations = createSelector(
     selectSelf,
     state => state.dotations
+);
+
+export const selectInitialAnnees = createSelector(
+    selectSelf,
+    state => state.annees
 );
 
 export const selectInitialCodeInsee = createSelector(
@@ -44,17 +55,29 @@ export const selectInitialCodeInsee = createSelector(
 
 export const selectCurrentYearTotal = createSelector(
     selectInitialDotations,
-    (dotations: Dotations) => {
-        const currentYear = new Date().getFullYear();
+    selectInitialAnnees,
+    (dotations: Dotations, annees: CommuneAnnee) => {
+        const currentYear = annees[0];
         return getTotalDotations(dotations, String(currentYear));
     }
 );
 export const selectLastYearTotal = createSelector(
     selectInitialDotations,
-    (dotations: Dotations) => {
-        const lastYear = new Date().getFullYear() - 1;
+    selectInitialAnnees,
+    (dotations: Dotations, annees: CommuneAnnee) => {
+        const lastYear = annees[0];
         return getTotalDotations(dotations, String(lastYear));
     }
+);
+
+export const selectInitialCurrentYear = createSelector(
+    selectInitialAnnees,
+    initialAnnees => initialAnnees[0]
+);
+
+export const selectInitialLastYear = createSelector(
+    selectInitialAnnees,
+    initialAnnees => initialAnnees[1]
 );
 
 export default initialCommuneSlice.reducer;
