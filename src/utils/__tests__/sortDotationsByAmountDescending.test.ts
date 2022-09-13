@@ -60,8 +60,8 @@ describe("sortDotationsByAmountDescending", () => {
     };
 
     it("should return two objects of dotations sorted, eligibles and nonEligibles", () => {
-        expect(sortDotationsByAmountDescending(dotationsMocked)).toEqual(
-            expectedResult
-        );
+        expect(
+            sortDotationsByAmountDescending(dotationsMocked, "2022")
+        ).toEqual(expectedResult);
     });
 });

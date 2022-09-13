@@ -3,7 +3,8 @@ import type { Dotations } from "models/commune/commune.interface";
 import sortDotationsByAmountDescending from "./sortDotationsByAmountDescending";
 
 export default (
-    dotations: Dotations
+    dotations: Dotations,
+    currentYear: string
 ): {
     dotationsEligibles: Dotations;
     dotationsNonEligibles: Dotations;
@@ -21,7 +22,7 @@ export default (
 
     dotationsKeys.forEach((dotationKey: string) => {
         const dotation = dotations[dotationKey];
-        const dotationAmout = dotation.annees[0][new Date().getFullYear()];
+        const dotationAmout = dotation.annees[0][currentYear];
         if (dotationAmout) {
             dotationsEligibles[dotationKey] = dotation;
         } else {
@@ -29,8 +30,10 @@ export default (
         }
     });
 
-    const dotationsEligiblesSorted =
-        sortDotationsByAmountDescending(dotationsEligibles);
+    const dotationsEligiblesSorted = sortDotationsByAmountDescending(
+        dotationsEligibles,
+        currentYear
+    );
     return {
         dotationsEligibles: dotationsEligiblesSorted,
         dotationsNonEligibles,

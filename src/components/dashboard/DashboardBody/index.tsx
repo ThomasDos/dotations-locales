@@ -3,8 +3,13 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import _ from "lodash";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import { selectIsSimulation } from "store/appSettings.slice";
 import { selectInitialDotations } from "store/initialCommune.slice";
-import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
+import {
+    selectCurrentYear,
+    selectSimulationDotations,
+    selectSimulationIsDifferentThanInitial,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 import MainTab from "./MainTab";
@@ -45,19 +50,15 @@ const StyledTab = styled(Tab)`
     border-bottom: 1px solid var(--blue-france-850);
 `;
 
-interface DashboardBodyProps {
-    isSimulation: boolean;
-    setIsSimulation: (isSimulation: boolean) => void;
-}
-
-const DashboardBody = ({
-    isSimulation,
-    setIsSimulation,
-}: DashboardBodyProps) => {
-    const dotations = useSelector(selectInitialDotations);
+const DashboardBody = () => {
+    const isSimulation = useSelector(selectIsSimulation);
+    const simulationDotations = useSelector(selectSimulationDotations);
+    const initialDotations = useSelector(selectInitialDotations);
+    const dotations = isSimulation ? simulationDotations : initialDotations;
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
+    const currentYear = useSelector(selectCurrentYear);
 
     if (_.isEmpty(dotations)) return null;
     const {
@@ -67,12 +68,10 @@ const DashboardBody = ({
         dsuMontant,
     } = dotations;
 
-    const currentYear = new Date().getFullYear();
-    const lastYear = new Date().getFullYear() - 1;
     return (
         <StyledDashboardBody>
             {isSimulation && !simulationIsDifferentThanInitial ? (
-                <SimulationTutorial setIsSimulation={setIsSimulation} />
+                <SimulationTutorial />
             ) : (
                 <>
                     <StyledInfoDate className="px-8 py-4 mb-10 flex flex-col">
@@ -101,10 +100,7 @@ const DashboardBody = ({
                     <StyledTabs>
                         {/*@ts-ignore*/}
                         <StyledTab label="Résumé">
-                            <MainTab
-                                currentYear={currentYear}
-                                lastYear={lastYear}
-                            />
+                            <MainTab dotations={dotations} />
                         </StyledTab>
 
                         {/*@ts-ignore*/}

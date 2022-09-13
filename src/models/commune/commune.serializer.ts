@@ -8,6 +8,7 @@ import convertSnakeCaseToCamelCase from "utils/convertSnakeCaseToCamelCase";
 
 import type {
     Commune,
+    CommuneAnnee,
     CommuneDto,
     Criteres,
     CriteresDto,
@@ -18,10 +19,19 @@ import type {
 } from "./commune.interface";
 
 export const fetchCommuneSerializer = (rawResult: CommuneDto): Commune => ({
+    annees: anneesSerializer(rawResult),
     codeInsee: rawResult.code_insee,
     criteresGeneraux: criteresSerializer(rawResult.criteres_generaux),
     dotations: dotationSerializer(rawResult.dotations),
 });
+
+export const anneesSerializer = (rawResult: CommuneDto): CommuneAnnee => {
+    const [firstDotation] = Object.keys(rawResult.dotations);
+
+    return rawResult.dotations[firstDotation].annees.map(
+        annee => Object.keys(annee)[0]
+    );
+};
 
 export const criteresSerializer = (rawCriteres: CriteresDto): Criteres => {
     if (_.isEmpty(rawCriteres)) return {};

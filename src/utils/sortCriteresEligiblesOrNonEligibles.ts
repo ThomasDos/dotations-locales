@@ -3,7 +3,8 @@ import type { Criteres } from "models/commune/commune.interface";
 import sortCriteresByAmountDescending from "./sortCriteresByAmountDescending";
 
 export default (
-    Criteres: Criteres
+    Criteres: Criteres,
+    currentYear: string
 ): {
     criteresEligibles: Criteres;
     criteresNonEligibles: Criteres;
@@ -21,8 +22,7 @@ export default (
 
     criteresKeys.forEach((critereKey: string) => {
         const critere = Criteres[critereKey];
-        const critereAmount =
-            critere.annees[0][new Date().getFullYear()].valeur;
+        const critereAmount = critere.annees[0][currentYear].valeur;
         if (critereAmount && critereAmount != 0 && critereAmount != "Non") {
             criteresEligibles[critereKey] = critere;
         } else {
@@ -30,8 +30,10 @@ export default (
         }
     });
 
-    const criteresEligiblesSorted =
-        sortCriteresByAmountDescending(criteresEligibles);
+    const criteresEligiblesSorted = sortCriteresByAmountDescending(
+        criteresEligibles,
+        currentYear
+    );
 
     return {
         criteresEligibles: criteresEligiblesSorted,

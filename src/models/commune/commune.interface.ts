@@ -9,8 +9,10 @@ export interface Commune {
     codeInsee: string;
     dotations: Dotations;
     criteresGeneraux: Criteres;
+    annees: CommuneAnnee;
 }
 
+export type CommuneAnnee = string[];
 //DOTATIONS
 
 export type DotationsDto = Record<

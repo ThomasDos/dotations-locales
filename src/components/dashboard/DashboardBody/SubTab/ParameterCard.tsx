@@ -5,6 +5,11 @@ import {
     LabelPercentage,
 } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
+import { useSelector } from "react-redux";
+import {
+    selectCurrentYear,
+    selectLastYear,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
@@ -42,13 +47,16 @@ const ParameterCard = ({
 }: ParameterCardProps) => {
     const { description } = critere;
 
-    const currentYear = critere.annees[0][new Date().getFullYear()];
-    const lastYear = critere.annees[1][new Date().getFullYear() - 1];
+    const currentYear = useSelector(selectCurrentYear);
+    const lastYear = useSelector(selectLastYear);
 
-    const { valeur: currentYearValeur, unite } = currentYear;
-    const { valeur: lastYearValeur } = lastYear;
+    const currentYearCritere = critere.annees[0][currentYear];
+    const lastYearCritere = critere.annees[1][lastYear];
 
-    const valeurToNumber = Number(currentYear.valeur);
+    const { valeur: currentYearValeur, unite } = currentYearCritere;
+    const { valeur: lastYearValeur } = lastYearCritere;
+
+    const valeurToNumber = Number(currentYearCritere.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
 
     const valeurIsLabel =

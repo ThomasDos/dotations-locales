@@ -4,7 +4,7 @@ import type { Criteres } from "models/commune/commune.interface";
 
 export default (
     criteres: Criteres,
-    year: number,
+    year: string,
     yearTotal: number
 ): number => {
     if (_.isEmpty(criteres)) return 0;
@@ -16,7 +16,10 @@ export default (
         annee => Object.keys(annee)[0] === String(year)
     );
 
-    const { valeur } = annees[getHabitantsIndex][year];
+    let valeur = null;
+    if (~getHabitantsIndex) {
+        valeur = annees[getHabitantsIndex][year].valeur;
+    }
 
     if (!valeur) return 0;
     return yearTotal / Number(valeur);

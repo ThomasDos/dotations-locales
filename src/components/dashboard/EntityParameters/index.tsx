@@ -1,16 +1,23 @@
 import type { SelectChangeEvent } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
 import { Button, LabelPercentage } from "components/ui";
+import usePostSimulation from "hooks/usePostSimulation";
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    selectIsSimulation,
+    updateIsSimulationTrue,
+} from "store/appSettings.slice";
 import {
     selectCurrentYearTotal,
     selectInitialCommune,
     selectLastYearTotal,
 } from "store/initialCommune.slice";
 import {
+    selectCurrentYear,
+    selectLastYear,
     selectSimulationCommune,
     selectSimulationIsDifferentThanInitial,
 } from "store/simulationCommune.slice";
@@ -40,11 +47,6 @@ const StyledSpanSelect = styled.span`
     letter-spacing: 0em;
 `;
 
-interface EntityParametersProps {
-    isSimulation: boolean;
-    setIsSimulation: (isSimulation: boolean) => void;
-}
-
 //TODO: remove by dynamic value
 const mockedSimulerAvec = [
     "Projet de Loi de Finance 2023",
@@ -52,23 +54,23 @@ const mockedSimulerAvec = [
     "Projet de Loi de Finance 2021",
 ];
 
-const EntityParameters = ({
-    isSimulation,
-    setIsSimulation,
-}: EntityParametersProps) => {
+const EntityParameters = () => {
+    const dispatch = useDispatch();
     const simulationCommune = useSelector(selectSimulationCommune);
     const currentYearTotal = useSelector(selectCurrentYearTotal);
     const lastYearTotal = useSelector(selectLastYearTotal);
     const initialCommune = useSelector(selectInitialCommune);
+    const isSimulation = useSelector(selectIsSimulation);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
+    const currentYear = useSelector(selectCurrentYear);
+    const lastYear = useSelector(selectLastYear);
     const [selectedLaw, setSelectedLaw] = useState<string>(
         mockedSimulerAvec[0]
     );
 
-    const currentYear = new Date().getFullYear();
-    const lastYear = new Date().getFullYear() - 1;
+    const { mutate } = usePostSimulation(simulationCommune.codeInsee);
 
     if (_.isEmpty(initialCommune.criteresGeneraux)) return null;
 
@@ -149,7 +151,6 @@ const EntityParameters = ({
                                 initialCritereGeneral={
                                     initialCriteresGeneraux[critereGeneralKey]
                                 }
-                                isSimulation={isSimulation}
                             />
                         );
                     })}
@@ -173,13 +174,23 @@ const EntityParameters = ({
                         </div>
                     </div>
                 )}
-                {!isSimulation && (
+                {!isSimulation ? (
                     <div>
                         <Button
                             icon="calculator"
                             text="Créer une simulation"
                             onClick={() => {
-                                setIsSimulation(true);
+                                dispatch(updateIsSimulationTrue());
+                            }}
+                        />
+                    </div>
+                ) : (
+                    <div>
+                        <Button
+                            icon="calculator"
+                            text="Faire la simulation"
+                            onClick={() => {
+                                mutate(simulationCommune);
                             }}
                         />
                     </div>

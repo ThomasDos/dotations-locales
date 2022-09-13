@@ -7,24 +7,27 @@ import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
 
 interface ValueProps {
-    currentYear: {
+    currentYearCritereGeneralSimulation: {
         unite: string | null;
         valeur: number | string;
     };
 
-    initialLastYear: number | string;
+    lastYearValeur: number | string;
 }
 
-const Value = ({ currentYear, initialLastYear }: ValueProps) => {
-    const { valeur, unite } = currentYear;
-    const valeurToNumber = Number(currentYear.valeur);
+const Value = ({
+    currentYearCritereGeneralSimulation,
+    lastYearValeur,
+}: ValueProps) => {
+    const { valeur, unite } = currentYearCritereGeneralSimulation;
+    const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
     const valeurIsLabel = valeur === "Non" || valeur === "Oui";
     let percentageEvolution = 0;
     if (!valeurIsNotNumber && valeur != 0) {
         percentageEvolution = getPercentageEvolution(
             valeur as number,
-            initialLastYear as number
+            lastYearValeur as number
         );
     }
 

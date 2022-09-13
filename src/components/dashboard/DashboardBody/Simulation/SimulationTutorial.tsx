@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { updateIsSimulationFalse } from "store/appSettings.slice";
 import styled from "styled-components";
 
 const StyledSpanTitle = styled.span`
@@ -12,11 +14,8 @@ const StyledCancelSimulation = styled.span`
     color: var(--blue-france-113);
 `;
 
-interface SimulationTutorialProps {
-    setIsSimulation: (isSimulation: boolean) => void;
-}
-
-function SimulationTutorial({ setIsSimulation }: SimulationTutorialProps) {
+function SimulationTutorial() {
+    const dispatch = useDispatch();
     return (
         <div className="flex items-center justify-center flex-col">
             <div>
@@ -43,7 +42,7 @@ function SimulationTutorial({ setIsSimulation }: SimulationTutorialProps) {
             <div
                 className="mt-9 flex items-center cursor-pointer"
                 onClick={() => {
-                    setIsSimulation(false);
+                    dispatch(updateIsSimulationFalse());
                 }}
             >
                 <div className="flex items-center">
