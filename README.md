@@ -31,7 +31,8 @@ Celle-ci doit s'achever sans erreur.
 #### Configuration
 
 Par défaut, aucune configuration supplémentaire n'est nécessaire pour démarrer l'application `dotations-locales-app`. Néanmoins, celle-ci s'appuie sur quelques autres services web définis dans le fichier `.env` :
-* pour les données et les calculs de dotations, `dotations-locales-app` fait appel à l'API web Dotations Locales dont le code source est disponible sur [dotations-locales-back](https://gitlab.com/incubateur-territoires/startups/dotations-locales/dotations-locales-back).
+* pour la recherche des territoires, un appel est fait à l'API web des territoires dont le code source est disponible sur [le dépôt Territoires](https://git.leximpact.dev/leximpact/territoires),
+* pour les critères des territoires et les calculs de dotations, un appel est fait à l'API web des dotations dont le code source est disponible sur [le dépôt dotations-locales-back](https://gitlab.com/incubateur-territoires/startups/dotations-locales/dotations-locales-back).
 
 ### Démarrer l'application en mode développement
 
