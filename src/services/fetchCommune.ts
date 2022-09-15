@@ -7,7 +7,7 @@ export default async (codeInsee: string): Promise<Commune> => {
     const codeInseeFormatted = formatCodeInseeMetropole(codeInsee);
 
     return axios
-        .post(process.env.NEXT_PUBLIC_BACK_WEB_API_URL, {
+        .post(`${process.env.NEXT_PUBLIC_BACK_WEB_API_URL}`, {
             code_insee: codeInseeFormatted,
         })
         .then(({ data }: { data: CommuneDto }) => {
