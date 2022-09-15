@@ -28,6 +28,11 @@ yarn
 
 Celle-ci doit s'achever sans erreur.
 
+#### Configuration
+
+Par défaut, aucune configuration supplémentaire n'est nécessaire pour démarrer l'application `dotations-locales-app`. Néanmoins, celle-ci s'appuie sur quelques autres services web définis dans le fichier `.env` :
+* pour les données et les calculs de dotations, `dotations-locales-app` fait appel à l'API web Dotations Locales dont le code source est disponible sur [dotations-locales-back](https://gitlab.com/incubateur-territoires/startups/dotations-locales/dotations-locales-back).
+
 ### Démarrer l'application en mode développement
 
 En local et dans le répertoire `dotations-locales-app/`, exécuter le code en mode développement avec la commande suivante :
@@ -37,7 +42,5 @@ yarn dev
 ```
 
 L'application est alors disponible dans un navigateur à l'adresse indiquée dans le terminal (http://localhost:3000).
-
-Pour les données et les calculs de dotations, celle-ci fait appel à l'API web Dotations Locales dont le code source est disponible sur [dotations-locales-back](https://gitlab.com/incubateur-territoires/startups/dotations-locales/dotations-locales-back).
 
 🎉 Bravo, vous êtes maintenant prêt à utiliser et contribuer à `dotations-locales-app` !
