@@ -76,6 +76,8 @@ describe("fetchCommuneSerializer", () => {
                     criteres: {},
                     description:
                         "Votre dotation forfaitaire est stable par rapport à l’année 2021",
+                    label: "DF",
+
                     title: "Dotations Forfaitaire (DF)",
                 },
                 dotationSolidariteRurale: {
@@ -83,12 +85,14 @@ describe("fetchCommuneSerializer", () => {
                     criteres: {},
                     description:
                         "Légère augmentation en 2022 dû à la part Bourg Centre",
+                    label: "DSR",
                     sousDotations: [
                         {
                             dsrFractionCible: {
                                 annees: [{ "2022": 0 }, { "2021": 0 }],
                                 criteres: {},
                                 description: "Non éligible à la Part Cible",
+                                label: "",
                                 title: "Part Cible",
                             },
                         },
@@ -98,6 +102,7 @@ describe("fetchCommuneSerializer", () => {
                                 criteres: {},
                                 description:
                                     "Montant de la commune éligible à la Péréquation",
+                                label: "",
                                 title: "Part Péréquation",
                             },
                         },
@@ -106,6 +111,7 @@ describe("fetchCommuneSerializer", () => {
                                 annees: [{ "2022": 0 }, { "2021": 0 }],
                                 criteres: {},
                                 description: "Montant de la commune éligible",
+                                label: "",
                                 title: "Part Bourg Centre",
                             },
                         },
@@ -116,6 +122,7 @@ describe("fetchCommuneSerializer", () => {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
                     criteres: {},
                     description: "Dotation pour les communes urbaines",
+                    label: "DSU",
                     title: "Dotations Solidarité Urbaine (DSU)",
                 },
             },
@@ -195,6 +202,7 @@ describe("dotationSerializer", () => {
                 criteres: {},
                 description:
                     "Votre dotation forfaitaire est stable par rapport à l’année 2021",
+                label: "DF",
                 title: "Dotations Forfaitaire (DF)",
             },
             dotationSolidariteRurale: {
@@ -202,12 +210,14 @@ describe("dotationSerializer", () => {
                 criteres: {},
                 description:
                     "Légère augmentation en 2022 dû à la part Bourg Centre",
+                label: "DSR",
                 sousDotations: [
                     {
                         dsrFractionCible: {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
                             criteres: {},
                             description: "Non éligible à la Part Cible",
+                            label: "",
                             title: "Part Cible",
                         },
                     },
@@ -217,6 +227,7 @@ describe("dotationSerializer", () => {
                             criteres: {},
                             description:
                                 "Montant de la commune éligible à la Péréquation",
+                            label: "",
                             title: "Part Péréquation",
                         },
                     },
@@ -225,6 +236,7 @@ describe("dotationSerializer", () => {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
                             criteres: {},
                             description: "Montant de la commune éligible",
+                            label: "",
                             title: "Part Bourg Centre",
                         },
                     },
@@ -235,6 +247,7 @@ describe("dotationSerializer", () => {
                 annees: [{ "2022": 0 }, { "2021": 0 }],
                 criteres: {},
                 description: "Dotation pour les communes urbaines",
+                label: "DSU",
                 title: "Dotations Solidarité Urbaine (DSU)",
             },
         });
@@ -254,6 +267,7 @@ describe("sousDotationsSerializer", () => {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
                     criteres: {},
                     description: "Non éligible à la Part Cible",
+                    label: "",
                     title: "Part Cible",
                 },
             },
@@ -263,6 +277,7 @@ describe("sousDotationsSerializer", () => {
                     criteres: {},
                     description:
                         "Montant de la commune éligible à la Péréquation",
+                    label: "",
                     title: "Part Péréquation",
                 },
             },
@@ -271,6 +286,7 @@ describe("sousDotationsSerializer", () => {
                     annees: [{ "2022": 0 }, { "2021": 0 }],
                     criteres: {},
                     description: "Montant de la commune éligible",
+                    label: "",
                     title: "Part Bourg Centre",
                 },
             },

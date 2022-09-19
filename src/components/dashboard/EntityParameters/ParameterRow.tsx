@@ -20,8 +20,9 @@ const StyledSpanSimulation = styled.span`
     text-decoration: underline;
 `;
 
-const StyledParameterRowContainer = styled.div`
-    background: white;
+const StyledParameterRowContainer = styled.div<{ isSimulation: boolean }>`
+    background: ${({ isSimulation }) =>
+        isSimulation ? "var(--grey-1000)" : ""};
     padding: 16px 20px;
 `;
 interface EntityRowProps {
@@ -65,7 +66,7 @@ const ParameterRow = ({
     return (
         <>
             <hr />
-            <StyledParameterRowContainer>
+            <StyledParameterRowContainer isSimulation={isSimulation}>
                 <div className="flex justify-between my-3 text-sm items-center">
                     <div className="flex items-center">
                         <span className="text-start">

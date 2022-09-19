@@ -19,7 +19,7 @@ export const FooterMain = styled(Footer)`
 const FooterContainer = () => {
     return (
         <FooterMain>
-            <FooterBody description="Texte optionnel 3 lignes maximum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur et vel quam auctor semper. Cras si amet mollis dolor.">
+            <FooterBody description="𝐃𝐨𝐭𝐚𝐭𝐢𝐨𝐧𝐬 𝐥𝐨𝐜𝐚𝐥𝐞𝐬 est une Startup d’État en construction incubée par l’Incubateur des Territoires de l’Agence Nationale de la Cohésion des Territoires (ANCT).">
                 <Logo splitCharacter={10}>RÉPUBLIQUE FRANÇAISE</Logo>
                 <FooterOperator>
                     <Image

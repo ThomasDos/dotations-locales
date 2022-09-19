@@ -35,42 +35,49 @@ export const criteresMap: Record<string, string> = {
 
 export const dotationsMap: Record<
     string,
-    { description: string; title: string }
+    { description: string; title: string; label: string }
 > = {
     dotationForfaitaire: {
         //TODO: text dynamique
         description:
             "Votre dotation forfaitaire est stable par rapport à l’année 2021",
+        label: "DF",
         title: "Dotations Forfaitaire (DF)",
     },
     dotationNationalePerequation: {
         description: "Lorem Ipsum DNP",
+        label: "DNP",
         title: "Dotations Nationale de Péréquation (DNP)",
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
+        label: "DSR",
         title: "Dotations Solidarité Rurale (DSR)",
     },
     dsuMontant: {
         description: "Dotation pour les communes urbaines",
+        label: "DSU",
         title: "Dotations Solidarité Urbaine (DSU)",
     },
 };
 
 export const sousDotationsMap: Record<
     string,
-    { description: string; title: string }
+    { description: string; title: string; label: string }
 > = {
     dsrFractionBourgCentre: {
         description: "Montant de la commune éligible",
+        label: "",
         title: "Part Bourg Centre",
     },
     dsrFractionCible: {
         description: "Non éligible à la Part Cible",
+        label: "",
         title: "Part Cible",
     },
     dsrFractionPerequation: {
         description: "Montant de la commune éligible à la Péréquation",
+        label: "",
         title: "Part Péréquation",
     },
 };

@@ -9,11 +9,15 @@ const StyledSpan = styled.span`
 
 interface LinkArrowProps {
     textLink: string;
+    handleOnClick: () => void;
 }
 
-const LinkArrow = ({ textLink }: LinkArrowProps) => {
+const LinkArrow = ({ textLink, handleOnClick }: LinkArrowProps) => {
     return (
-        <div className="cursor-pointer flex items-center">
+        <div
+            className="cursor-pointer flex items-center"
+            onClick={handleOnClick}
+        >
             <Image
                 src="/icons/arrow-right.svg"
                 height="16px"

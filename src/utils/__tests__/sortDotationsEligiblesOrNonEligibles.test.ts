@@ -10,6 +10,7 @@ describe("sortDotationsEligiblesOrNonEligibles", () => {
                 criteres: {},
                 description:
                     "Votre dotation forfaitaire est stable par rapport à l’année 2021",
+                label: "DF",
                 title: "Dotations Forfaitaire (DF)",
             },
             dotationSolidariteRurale: {
@@ -17,12 +18,14 @@ describe("sortDotationsEligiblesOrNonEligibles", () => {
                 criteres: {},
                 description:
                     "Légère augmentation en 2022 dû à la part Bourg Centre",
+                label: "DSR",
                 sousDotations: [
                     {
                         dsrFractionCible: {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
                             criteres: {},
                             description: "",
+                            label: "",
                             title: "Part Cible",
                         },
                     },
@@ -31,6 +34,7 @@ describe("sortDotationsEligiblesOrNonEligibles", () => {
                             annees: [{ "2022": 90671 }, { "2021": 86048 }],
                             criteres: {},
                             description: "",
+                            label: "",
                             title: "Part Péréquation",
                         },
                     },
@@ -39,6 +43,7 @@ describe("sortDotationsEligiblesOrNonEligibles", () => {
                             annees: [{ "2022": 0 }, { "2021": 0 }],
                             criteres: {},
                             description: "",
+                            label: "",
                             title: "Part Bourg Centre",
                         },
                     },
@@ -51,17 +56,18 @@ describe("sortDotationsEligiblesOrNonEligibles", () => {
                 annees: [{ "2022": 0 }, { "2021": 0 }],
                 criteres: {},
                 description: "Lorem Ipsum DNP",
+                label: "DNP",
                 title: "Dotations Nationale de Péréquation (DNP)",
             },
             dsuMontant: {
                 annees: [{ "2022": 0 }, { "2021": 0 }],
                 criteres: {},
                 description: "Dotation pour les communes urbaines",
+                label: "DSU",
                 title: "Dotations Solidarité Urbaine (DSU)",
             },
         },
     };
-
     it("should return an object sorted descending", () => {
         expect(
             sortDotationsEligiblesOrNonEligibles(dotationsMocked, "2022")

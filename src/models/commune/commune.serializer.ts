@@ -61,6 +61,7 @@ export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
             annees: rawDotations[key].annees,
             criteres: criteresSerializer(rawDotations[key].criteres),
             description: dotationsMap[keyCamelCase].description,
+            label: dotationsMap[keyCamelCase].label,
             title: dotationsMap[keyCamelCase].title,
 
             ...(rawDotations[key].sous_dotations && {
@@ -89,6 +90,7 @@ export const sousDotationsSerializer = (
                 ...sousDotation[key],
                 criteres: criteresSerializer(sousDotation[key].criteres),
                 description: sousDotationsMap[keyCamelCase].description,
+                label: sousDotationsMap[keyCamelCase].label,
                 title: sousDotationsMap[keyCamelCase].title,
             };
         });

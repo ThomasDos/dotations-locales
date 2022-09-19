@@ -7,21 +7,26 @@ const StyledSpan = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
-const StyledLinkIcon = styled.div`
+const StyledLinkIcon = styled.div<{ disabled?: boolean }>`
     padding: 4px 12px 4px 8px;
+    opacity: ${({ disabled }) => (disabled ? "50%" : "")};
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;
 
 interface LinkIconProps {
     icon: string;
-    path: string;
     text: string;
+    disabled?: boolean;
+    handleClick?: () => void;
 }
 
-const LinkIcon = ({ icon, text }: LinkIconProps) => {
+const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
     return (
-        //TODO: update href when page is ready
-        // <Link  href='/${path}'>
-        <StyledLinkIcon className="flex items-center">
+        <StyledLinkIcon
+            className="flex items-center"
+            onClick={handleClick}
+            disabled={disabled}
+        >
             <Image
                 src={`/icons/${icon}.svg`}
                 width="16px"
@@ -31,7 +36,6 @@ const LinkIcon = ({ icon, text }: LinkIconProps) => {
             />
             <StyledSpan className="text-sm ml-2">{text}</StyledSpan>
         </StyledLinkIcon>
-        // </Link>
     );
 };
 

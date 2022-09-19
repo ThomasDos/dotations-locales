@@ -31,6 +31,7 @@ export interface Dotation {
     sousDotations?: SousDotations;
     description: string;
     title: string;
+    label: string;
 }
 
 export type SousDotationsDto = DotationsDto[];

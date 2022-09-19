@@ -11,6 +11,8 @@ import {
     selectSimulationIsDifferentThanInitial,
 } from "store/simulationCommune.slice";
 import styled from "styled-components";
+import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
+import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescending";
 
 import MainTab from "./MainTab";
 import SimulationTutorial from "./Simulation/SimulationTutorial";
@@ -35,13 +37,26 @@ const StyledMajHours = styled.div`
     margin-top: 16px;
 `;
 
-const StyledTabs = styled(Tabs)`
+const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
     ul {
         align-items: center !important;
     }
     &::before {
         height: 1px;
     }
+    ${({ dotationsNonEligibles }) =>
+        dotationsNonEligibles.map((dotationNonEligible: number) => {
+            return `li:nth-child(${dotationNonEligible}) {
+        button {
+            background: var(--grey-950);
+            color: var(--grey-625-425);
+            &:hover{
+                background: var(--grey-850)
+            }
+        }
+    }`;
+        })}
+
     padding: 0 32px !important;
 `;
 
@@ -61,12 +76,15 @@ const DashboardBody = () => {
     const currentYear = useSelector(selectCurrentYear);
 
     if (_.isEmpty(dotations)) return null;
-    const {
-        dotationForfaitaire,
-        dotationSolidariteRurale,
-        dotationNationalePerequation,
-        dsuMontant,
-    } = dotations;
+
+    const dotationsByAmountDescending = sortDotationsByAmountDescending(
+        dotations,
+        currentYear
+    );
+    const tabIndexDotationsNonEligibles = getTabIndexDotationsNonEligibles(
+        dotationsByAmountDescending,
+        currentYear
+    );
 
     return (
         <StyledDashboardBody>
@@ -97,30 +115,29 @@ const DashboardBody = () => {
                         </StyledMajHours>
                     </StyledInfoDate>
 
-                    <StyledTabs>
+                    <StyledTabs
+                        dotationsNonEligibles={tabIndexDotationsNonEligibles}
+                    >
                         {/*@ts-ignore*/}
                         <StyledTab label="Résumé">
                             <MainTab dotations={dotations} />
                         </StyledTab>
 
-                        {/*@ts-ignore*/}
-                        <StyledTab label="DF">
-                            <SubTab dotation={dotationForfaitaire} />
-                        </StyledTab>
-
-                        {/*@ts-ignore*/}
-                        <StyledTab label="DSR">
-                            <SubTab dotation={dotationSolidariteRurale} />
-                        </StyledTab>
-
-                        {/*@ts-ignore*/}
-                        <StyledTab label="DNP">
-                            <SubTab dotation={dotationNationalePerequation} />
-                        </StyledTab>
-                        {/*@ts-ignore*/}
-                        <StyledTab label="DSU">
-                            <SubTab dotation={dsuMontant} />
-                        </StyledTab>
+                        {Object.keys(dotationsByAmountDescending).map(
+                            (dotationKey: string) => {
+                                const dotation =
+                                    dotationsByAmountDescending[dotationKey];
+                                return (
+                                    <StyledTab
+                                        //@ts-ignore
+                                        label={dotation.label}
+                                        key={dotation.title}
+                                    >
+                                        <SubTab dotation={dotation} />
+                                    </StyledTab>
+                                );
+                            }
+                        )}
                     </StyledTabs>
                 </>
             )}
