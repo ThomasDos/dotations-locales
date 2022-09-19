@@ -4,7 +4,8 @@ import "styles/variables.css";
 
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { hotjar } from "react-hotjar";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -23,6 +24,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 },
             })
     );
+
+    useEffect(() => {
+        hotjar.initialize(3163600, 6);
+    }, []);
+
     return (
         <ReduxProvider store={store}>
             <PersistGate loading={null} persistor={persistor}>
