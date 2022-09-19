@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Autocompletion } from "src/models/autocompletion/autocompletion.interface";
 import styled from "styled-components";
+import formatCodeInseeMetropole from "utils/formatCodeInseeMetropole";
 
 const StyledDropdownRow = styled.div`
     cursor: pointer;
@@ -21,13 +22,14 @@ const DropdownRow = ({ ...entity }: Autocompletion) => {
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
     const { LIBELLE: commune } = entity.commune;
+    const codeInseeFormatted = formatCodeInseeMetropole(codeInsee);
 
     return (
-        <Link href={{ pathname: `/${codeInsee}`, query: { commune } }}>
+        <Link href={{ pathname: `/${codeInseeFormatted}`, query: { commune } }}>
             <div>
                 <StyledDropdownRow className="flex justify-between px-6 py-4">
                     <span>
-                        {commune} ({codeInsee})
+                        {commune} ({codeInseeFormatted})
                     </span>
                     <span>{codePostal}</span>
                 </StyledDropdownRow>

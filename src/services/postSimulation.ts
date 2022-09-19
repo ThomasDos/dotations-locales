@@ -9,7 +9,7 @@ export default async (simulationCommune: Commune): Promise<Commune> => {
     //TODO: changer url pour endpoint
     return axios
         .post(
-            "https://dotations-locales-back-pr18.osc-fr1.scalingo.io/simulation/",
+            "https://dotations-locales-back.osc-fr1.scalingo.io/simulation/",
             simulationDeserialized
         )
         .then(({ data }: { data: CommuneDto }) => {

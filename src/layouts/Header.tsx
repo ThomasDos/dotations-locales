@@ -12,6 +12,7 @@ const StyledHeaderBody = styled.div`
 `;
 
 const HeaderContainer = () => {
+    const win: Window = window;
     return (
         <div>
             <StyledHeaderBody className="w-full flex justify-between">
@@ -41,11 +42,23 @@ const HeaderContainer = () => {
                 <div>
                     <div className="flex ml-8 py-5">
                         <div>
-                            <LinkArrow textLink="Notre mission" />
+                            <LinkArrow
+                                textLink="Notre mission"
+                                handleOnClick={() => {
+                                    win.location =
+                                        "https://beta.gouv.fr/startups/dotations-locales.html";
+                                }}
+                            />
                         </div>
                         <HorizontalSeparator />
                         <div>
-                            <LinkArrow textLink="Contact" />
+                            <LinkArrow
+                                textLink="Contact"
+                                handleOnClick={() => {
+                                    win.location =
+                                        "mailto:contact-dotations-locales@anct.gouv.fr";
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

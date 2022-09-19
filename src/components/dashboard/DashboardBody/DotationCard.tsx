@@ -67,7 +67,7 @@ const DotationCard = ({
         currentYearDotation,
         lastYearDotation
     );
-    const { title, description, sousDotations } = dotation;
+    const { title, sousDotations } = dotation;
 
     return (
         <StyledDotationCard
@@ -86,7 +86,9 @@ const DotationCard = ({
                             </div>
                         )}
                     </div>
-                    <span>{description}</span>
+                    <span>
+                        Évolution du montant {lastYear} / {currentYear}.
+                    </span>
                 </div>
                 {currentYearDotation ? (
                     <div className="flex flex-col items-end">

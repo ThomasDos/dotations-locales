@@ -14,6 +14,7 @@ const StyledSearchButton = styled.div`
 `;
 
 const StyledCollapseContent = styled.div`
+    filter: drop-shadow(0px 16px 32px rgba(0, 0, 0, 0.16));
     width: 792px;
 `;
 

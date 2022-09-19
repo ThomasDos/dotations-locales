@@ -41,6 +41,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
         ],
         criteres: {},
         description: "Evolution de votre montant total de dotations",
+        label: "Résumé",
         title: "Dotations Générales de Fonctionnement (DGF)",
     };
 
