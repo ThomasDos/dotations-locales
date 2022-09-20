@@ -1,6 +1,11 @@
 import { HomeRowImageText, SearchInput } from "components/home";
 import type { NextPage } from "next";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateIsSimulationFalse } from "store/appSettings.slice";
+import { resetInitialCommune } from "store/initialCommune.slice";
+import { resetSimulationCommune } from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 const MainBottom = styled.div`
@@ -13,6 +18,14 @@ const MainBottomBody = styled.div`
 `;
 
 const Home: NextPage = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(resetSimulationCommune());
+        dispatch(resetInitialCommune());
+        dispatch(updateIsSimulationFalse());
+    }, [dispatch]);
+
     return (
         <div className="flex flex-col items-center ">
             <div className="pt-20 text-center">

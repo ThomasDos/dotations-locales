@@ -1,6 +1,10 @@
 import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { updateIsSimulationTrue } from "store/appSettings.slice";
+import {
+    updateIsSimulationFalse,
+    updateIsSimulationTrue,
+} from "store/appSettings.slice";
 import styled from "styled-components";
 
 const StyledHeaderDashboard = styled.div`
@@ -15,6 +19,7 @@ interface SubHeaderProps {
 const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
     const communeWithCodeInsee = `${commune} (${codeInsee})`;
     const dispatch = useDispatch();
+    const router = useRouter();
 
     return (
         <>
@@ -29,11 +34,34 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                 </div>
                 <div className="flex right-header mt-8">
                     <LinkIcon
+                        icon="euro"
+                        text="Dotations"
+                        handleClick={async () => {
+                            dispatch(updateIsSimulationFalse());
+                            return router.push(
+                                `/${codeInsee}?commune=${commune}`
+                            );
+                        }}
+                    />
+                    <LinkIcon
                         icon="simulation"
                         text="Simulation"
-                        handleClick={() => dispatch(updateIsSimulationTrue())}
+                        handleClick={async () => {
+                            dispatch(updateIsSimulationTrue());
+                            return router.push(
+                                `/${codeInsee}?commune=${commune}`
+                            );
+                        }}
                     />
-                    <LinkIcon icon="historique" text="Historique" disabled />
+                    <LinkIcon
+                        icon="historique"
+                        text="Historique"
+                        handleClick={async () =>
+                            router.push(
+                                `/${codeInsee}/historique?commune=${commune}`
+                            )
+                        }
+                    />
                     <LinkIcon icon="comparer" text="Comparer" disabled />
                     <LinkIcon icon="alerter" text="M'alerter" disabled />
                 </div>
