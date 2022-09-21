@@ -7,11 +7,11 @@ import type { Dotation } from "models/commune/commune.interface";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { selectInitialDotations } from "store/initialCommune.slice";
 import {
-    selectCurrentYear,
-    selectLastYear,
-} from "store/simulationCommune.slice";
+    selectInitialAnnees,
+    selectInitialDotations,
+} from "store/initialCommune.slice";
+import { selectCurrentYear } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
 import getTotalDotations from "utils/getTotalDotations";
@@ -73,7 +73,7 @@ const HistoriquePage = () => {
     const dotations = useSelector(selectInitialDotations);
 
     const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
+    const annees = useSelector(selectInitialAnnees);
 
     if (_.isEmpty(dotations)) return null;
 
@@ -86,14 +86,13 @@ const HistoriquePage = () => {
         currentYear
     );
 
-    const currentYearTotal = getTotalDotations(dotations, currentYear);
-    const lastYearTotal = getTotalDotations(dotations, lastYear);
+    const anneesDotationsTotal = annees.map((annee: string) => {
+        const yearTotal = getTotalDotations(dotations, annee);
+        return { [annee]: yearTotal };
+    });
 
     const dotationDGF: Dotation = {
-        annees: [
-            { [currentYear]: currentYearTotal },
-            { [lastYear]: lastYearTotal },
-        ],
+        annees: anneesDotationsTotal,
         criteres: {},
         description: "",
         label: "Résumé",

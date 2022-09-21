@@ -1,5 +1,6 @@
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import type { Dotation } from "models/commune/commune.interface";
+import { historiqueSerializer } from "models/historique/historique.serializer";
 import { useRouter } from "next/router";
 import { Bar, BarChart, LabelList, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
@@ -20,11 +21,8 @@ interface BarsChartProps {
 }
 
 export default function BarsChart({ dotation }: BarsChartProps) {
-    const myData = [
-        { label: "845.8K€", name: "2021", value: 845.8 },
-        { label: "853.1K€", name: "2022", value: 853.1 },
-        { label: "870.2K€", name: "2023", value: 870.2 },
-    ];
+    const historiqueData = historiqueSerializer(dotation);
+
     const { title } = dotation;
 
     const { commune, codeInsee } = useRouter().query as {
@@ -45,7 +43,7 @@ export default function BarsChart({ dotation }: BarsChartProps) {
             <ResponsiveContainer width={"100%"} height={320}>
                 <BarChart
                     barCategoryGap={"15%"}
-                    data={myData}
+                    data={historiqueData}
                     margin={{ bottom: 30, left: 120, right: 120, top: 5 }}
                 >
                     <defs>
@@ -68,7 +66,7 @@ export default function BarsChart({ dotation }: BarsChartProps) {
                             dy={10}
                         />
                         <LabelList
-                            dataKey="name"
+                            dataKey="year"
                             position="bottom"
                             fill="#161616"
                             dy={10}
