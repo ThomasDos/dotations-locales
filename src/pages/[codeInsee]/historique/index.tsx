@@ -149,7 +149,9 @@ const HistoriquePage = () => {
                                         //@ts-ignore
                                         label={dotation.label}
                                         key={dotation.title}
-                                    ></StyledTab>
+                                    >
+                                        <HistoriqueTab dotation={dotation} />
+                                    </StyledTab>
                                 );
                             }
                         )}
