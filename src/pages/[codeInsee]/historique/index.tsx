@@ -6,6 +6,7 @@ import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
     selectInitialAnnees,
@@ -65,17 +66,21 @@ const StyledTab = styled(Tab)`
 `;
 
 const HistoriquePage = () => {
-    const { commune, codeInsee } = useRouter().query as {
+    const router = useRouter();
+    const { commune, codeInsee } = router.query as {
         commune: string;
         codeInsee: string;
     };
 
     const dotations = useSelector(selectInitialDotations);
-
     const currentYear = useSelector(selectCurrentYear);
     const annees = useSelector(selectInitialAnnees);
 
-    if (_.isEmpty(dotations)) return null;
+    useEffect(() => {
+        if (_.isEmpty(dotations)) {
+            void router.push(`/${codeInsee}?commune=${commune}`);
+        }
+    }, [dotations, codeInsee, commune, router]);
 
     const dotationsByAmountDescending = sortDotationsByAmountDescending(
         dotations,
