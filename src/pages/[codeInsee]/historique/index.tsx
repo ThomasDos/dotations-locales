@@ -1,15 +1,20 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
 import { SubHeader } from "components/dashboard";
-import Historique from "components/dashboard/DashboardBody/HistoriqueTab";
+import HistoriqueTab from "components/dashboard/DashboardBody/HistoriqueTab";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
+import type { Dotation } from "models/commune/commune.interface";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectInitialDotations } from "store/initialCommune.slice";
-import { selectCurrentYear } from "store/simulationCommune.slice";
+import {
+    selectCurrentYear,
+    selectLastYear,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
+import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescending";
 
 const StyledDashboardBody = styled.div`
@@ -68,6 +73,7 @@ const HistoriquePage = () => {
     const dotations = useSelector(selectInitialDotations);
 
     const currentYear = useSelector(selectCurrentYear);
+    const lastYear = useSelector(selectLastYear);
 
     if (_.isEmpty(dotations)) return null;
 
@@ -79,6 +85,20 @@ const HistoriquePage = () => {
         dotationsByAmountDescending,
         currentYear
     );
+
+    const currentYearTotal = getTotalDotations(dotations, currentYear);
+    const lastYearTotal = getTotalDotations(dotations, lastYear);
+
+    const dotationDGF: Dotation = {
+        annees: [
+            { [currentYear]: currentYearTotal },
+            { [lastYear]: lastYearTotal },
+        ],
+        criteres: {},
+        description: "",
+        label: "Résumé",
+        title: "Dotations Générales de Fonctionnement (DGF)",
+    };
 
     return (
         <>
@@ -113,7 +133,7 @@ const HistoriquePage = () => {
                     >
                         {/*@ts-ignore*/}
                         <StyledTab label="Résumé">
-                            <Historique />
+                            <HistoriqueTab dotation={dotationDGF} />
                         </StyledTab>
 
                         {Object.keys(dotationsByAmountDescending).map(

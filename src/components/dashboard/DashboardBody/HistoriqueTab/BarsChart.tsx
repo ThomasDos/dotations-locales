@@ -1,3 +1,6 @@
+import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
+import type { Dotation } from "models/commune/commune.interface";
+import { useRouter } from "next/router";
 import { Bar, BarChart, LabelList, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
 
@@ -6,14 +9,39 @@ const StyledChartContainer = styled.div`
     padding: 32px 48px 18px 32px;
 `;
 
-export default function BarsChart() {
+const StyledCardTitle = styled.span`
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 700;
+`;
+
+interface BarsChartProps {
+    dotation: Dotation;
+}
+
+export default function BarsChart({ dotation }: BarsChartProps) {
     const myData = [
-        { label: "243K€", name: "2021", value: 243 },
-        { label: "213K€", name: "2022", value: 213 },
-        { label: "253K€", name: "2023", value: 253 },
+        { label: "845.8K€", name: "2021", value: 845.8 },
+        { label: "853.1K€", name: "2022", value: 853.1 },
+        { label: "870.2K€", name: "2023", value: 870.2 },
     ];
+    const { title } = dotation;
+
+    const { commune, codeInsee } = useRouter().query as {
+        commune: string;
+        codeInsee: string;
+    };
     return (
         <StyledChartContainer className="mt-10">
+            <div className="flex flex-col mb-10">
+                <div className="flex items-center justify-between">
+                    <StyledCardTitle>{title}</StyledCardTitle>
+                    <DropdownMenuDownload />
+                </div>
+                <span>
+                    {commune} ({codeInsee})
+                </span>
+            </div>
             <ResponsiveContainer width={"100%"} height={320}>
                 <BarChart
                     barCategoryGap={"15%"}

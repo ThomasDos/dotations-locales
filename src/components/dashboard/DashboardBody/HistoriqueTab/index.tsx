@@ -1,9 +1,15 @@
+import type { Dotation } from "models/commune/commune.interface";
+
 import BarsChart from "./BarsChart";
 
-export default function index() {
+interface HistoriqueTabProps {
+    dotation: Dotation;
+}
+
+export default function HistoriqueTab({ dotation }: HistoriqueTabProps) {
     return (
         <>
-            <BarsChart />
+            <BarsChart dotation={dotation} />
         </>
     );
 }
