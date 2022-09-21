@@ -1,6 +1,6 @@
 export interface PostSimulation {
     code_insee: string;
-    periode: string;
+    periode_loi: string;
     data: PostSimulationData;
 }
 

@@ -63,12 +63,12 @@ const DropdownMenuDownload = () => {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
-                endIcon={
-                    <div>
+                startIcon={
+                    <div className="flex items-center">
                         <Image
-                            src="/icons/file-download.svg"
-                            width="16px"
-                            height="16px"
+                            src="/icons/dropdown-download.svg"
+                            width="24px"
+                            height="24px"
                             alt="icone exporter"
                             layout="fixed"
                         />

@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     );
 
     useEffect(() => {
-        hotjar.initialize(3163600, 6);
+        hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
     }, []);
 
     return (
