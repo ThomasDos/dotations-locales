@@ -151,7 +151,7 @@ describe("simulation deserializer", () => {
                     superficie: 622,
                     zone_de_montagne: true,
                 },
-                periode: "2022",
+                periode_loi: "2022",
             });
         });
     });

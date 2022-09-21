@@ -14,7 +14,7 @@ export const postSimulationDeserializer = (
             simulationCommune.criteresGeneraux
         ),
         //TODO : dynamique quand tableau annees loi dispo
-        periode: String(new Date().getFullYear()),
+        periode_loi: String(new Date().getFullYear()),
     };
 };
 
