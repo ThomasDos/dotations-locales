@@ -117,11 +117,20 @@ const Home: NextPage = () => {
             <MainBottom className="w-full py-20 px-60 flex justify-center items-center">
                 <MainBottomBody className="w-screen max-w-4xl flex justify-center items-center">
                     <div className="mr-14">
+                        <div className="mb-4">
+                            <Image
+                                src="/icons/france-relance.svg"
+                                height="116px"
+                                width="116px"
+                                alt="icone france relance"
+                                layout="fixed"
+                            />
+                        </div>
                         <Image
-                            src="/icons/france-relance.svg"
-                            height="116px"
-                            width="116px"
-                            alt="icone france relance"
+                            src="/images/financé-ue.svg"
+                            height="41.5px"
+                            width="140px"
+                            alt="icone union européenne"
                             layout="fixed"
                         />
                     </div>
