@@ -185,7 +185,7 @@ const EntityParameters = () => {
                         />
                     </div>
                 ) : (
-                    <div>
+                    <div className="mt-4">
                         <Button
                             icon="calculator"
                             text="Faire la simulation"

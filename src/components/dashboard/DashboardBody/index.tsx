@@ -88,7 +88,9 @@ const DashboardBody = () => {
 
     return (
         <StyledDashboardBody>
-            {isSimulation && !simulationIsDifferentThanInitial ? (
+            {isSimulation &&
+            currentYear !== "simulation" &&
+            !simulationIsDifferentThanInitial ? (
                 <SimulationTutorial />
             ) : (
                 <>

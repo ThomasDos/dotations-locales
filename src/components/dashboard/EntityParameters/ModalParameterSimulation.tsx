@@ -60,6 +60,7 @@ interface ModalParameterSimulationProps {
     critereGeneralKey: string;
     setShowModal: (showModal: boolean) => void;
     showModal: boolean;
+    description: string;
 }
 
 function ModalParameterSimulation({
@@ -68,6 +69,7 @@ function ModalParameterSimulation({
     currentYearCritereGeneralSimulation,
     setShowModal,
     showModal,
+    description,
 }: ModalParameterSimulationProps) {
     const dispatch = useDispatch();
 
@@ -155,7 +157,7 @@ function ModalParameterSimulation({
                 <StyledModalBody>
                     <StyledModalEditor>
                         <StyledTitleEditor className="mb-12 text-lg font-bold">
-                            Nombre d&apos;habitants de la commune
+                            {description}
                         </StyledTitleEditor>
                         <div className="flex items-center mb-12">
                             <div

@@ -121,6 +121,7 @@ const ParameterRow = ({
                     currentYearCritereGeneralSimulation
                 }
                 critereGeneralKey={critereGeneralKey}
+                description={critereGeneral.description}
             />
         </>
     );

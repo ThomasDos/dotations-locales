@@ -1,6 +1,6 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
 import { SubHeader } from "components/dashboard";
-import HistoriqueTab from "components/dashboard/DashboardBody/HistoriqueTab";
+import HistoriqueTab from "components/historique";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";

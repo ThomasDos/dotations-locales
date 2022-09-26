@@ -13,6 +13,7 @@ export const criteresMap: Record<string, string> = {
     nombreLogementsSociaux: "Nombre de logements sociaux",
     partPopulationCanton:
         "Pourcentage de la population communale dans le canton d'appartenance en 2014",
+    placesCaravanesApresMajoration: "Places caravanes après majoration",
     placesCaravanesAvantMajoration: "Places caravanes avant majoration",
     populationDgf: "Population DGF",
     populationDgfAgglomeration:
