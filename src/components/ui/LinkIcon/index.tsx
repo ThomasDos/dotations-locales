@@ -1,5 +1,6 @@
 // import Link from "next/link";
 
+import { Tooltip } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -22,20 +23,39 @@ interface LinkIconProps {
 
 const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
     return (
-        <StyledLinkIcon
-            className="flex items-center"
-            onClick={handleClick}
-            disabled={disabled}
+        <Tooltip
+            title={disabled ? "En construction..." : ""}
+            placement="top"
+            arrow
+            componentsProps={{
+                arrow: {
+                    sx: {
+                        color: "#f5f5fe",
+                    },
+                },
+                tooltip: {
+                    sx: {
+                        bgcolor: "#f5f5fe",
+                        color: "#000091 ",
+                    },
+                },
+            }}
         >
-            <Image
-                src={`/icons/${icon}.svg`}
-                width="16px"
-                height="16px"
-                layout="fixed"
-                alt={`icone ${text}`}
-            />
-            <StyledSpan className="text-sm ml-2">{text}</StyledSpan>
-        </StyledLinkIcon>
+            <StyledLinkIcon
+                className="flex items-center"
+                onClick={handleClick}
+                disabled={disabled}
+            >
+                <Image
+                    src={`/icons/${icon}.svg`}
+                    width="16px"
+                    height="16px"
+                    layout="fixed"
+                    alt={`icone ${text}`}
+                />
+                <StyledSpan className="text-sm ml-2">{text}</StyledSpan>
+            </StyledLinkIcon>
+        </Tooltip>
     );
 };
 
