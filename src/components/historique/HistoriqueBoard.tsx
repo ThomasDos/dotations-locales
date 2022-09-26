@@ -108,14 +108,16 @@ export default function HistoriqueBoard({
                         Montant DGF
                     </StyledBodyBoardRowDescription>
                     <StyledBodyBoardRowAnnees>
-                        {historiqueData.map(({ value }: HistoriqueDotation) => (
-                            <StyledBodyBoardRowAnnee
-                                key={value}
-                                className="font-bold"
-                            >
-                                {formatNumberWithSpace(value)}€
-                            </StyledBodyBoardRowAnnee>
-                        ))}
+                        {historiqueData.map(
+                            ({ value, year }: HistoriqueDotation) => (
+                                <StyledBodyBoardRowAnnee
+                                    key={year}
+                                    className="font-bold"
+                                >
+                                    {formatNumberWithSpace(value)}€
+                                </StyledBodyBoardRowAnnee>
+                            )
+                        )}
                     </StyledBodyBoardRowAnnees>
                 </StyledBodyBoardRow>
                 <StyledBodyBoardRow>
@@ -126,11 +128,14 @@ export default function HistoriqueBoard({
                         {historiqueData.map(
                             (annee: HistoriqueDotation, index: number) => {
                                 const evolutionAnnee =
-                                    historiqueData[index - 1]?.value -
-                                    annee.value;
+                                    !!annee.value &&
+                                    annee.value -
+                                        historiqueData[index - 1]?.value;
+
                                 return (
-                                    <StyledBodyBoardRowAnnee key={annee.value}>
+                                    <StyledBodyBoardRowAnnee key={annee.year}>
                                         {!!index &&
+                                            !!evolutionAnnee &&
                                             `${
                                                 evolutionAnnee > 0 ? "+" : ""
                                             } ${formatNumberWithSpace(
@@ -153,8 +158,8 @@ export default function HistoriqueBoard({
                                     annee.value /
                                     historiqueData[index - 1]?.value;
                                 return (
-                                    <StyledBodyBoardRowAnnee key={annee.value}>
-                                        {!!index && (
+                                    <StyledBodyBoardRowAnnee key={annee.year}>
+                                        {!!index && !!evolutionAnnee && (
                                             <TagData
                                                 position="end"
                                                 percentage={Number(
