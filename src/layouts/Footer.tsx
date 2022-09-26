@@ -31,16 +31,32 @@ const FooterContainer = () => {
                     />
                 </FooterOperator>
                 <FooterBodyItem>
-                    <Link href="https://legifrance.gouv.fr" className="mr-3">
+                    <Link
+                        href="https://legifrance.gouv.fr"
+                        className="mr-3"
+                        target="_"
+                    >
                         legifrance.gouv.fr
                     </Link>
-                    <Link href="https://gouvernement.fr" className="mx-3">
+                    <Link
+                        href="https://gouvernement.fr"
+                        className="mx-3"
+                        target="_"
+                    >
                         gouvernement.fr
                     </Link>
-                    <Link href="https://service-public.fr" className="mx-3">
+                    <Link
+                        href="https://service-public.fr"
+                        className="mx-3"
+                        target="_"
+                    >
                         service-public.fr
                     </Link>
-                    <Link href="https://data.gouv.fr" className="ml-3">
+                    <Link
+                        href="https://data.gouv.fr"
+                        className="ml-3"
+                        target="_"
+                    >
                         data.gouv.fr
                     </Link>
                 </FooterBodyItem>
