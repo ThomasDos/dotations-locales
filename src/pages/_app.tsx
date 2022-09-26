@@ -2,6 +2,7 @@ import "styles/dsfr.local-overwrite.css";
 import "styles/globals.css";
 import "styles/variables.css";
 
+import { init as matomoInit } from "@socialgouv/matomo-next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -26,7 +27,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     );
 
     useEffect(() => {
+        const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? "";
+        const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
+
         hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
+        matomoInit({
+            siteId: matomoSiteId,
+            url: matomoUrl,
+        });
     }, []);
 
     return (

@@ -25,19 +25,19 @@ describe("simulation deserializer", () => {
                             ],
                             description: "Places caravanes avant majoration",
                         },
-                        populationDgf: {
-                            annees: [
-                                { "2022": { unite: null, valeur: "248" } },
-                                { "2021": { unite: null, valeur: "248" } },
-                            ],
-                            description: "Population DGF",
-                        },
                         populationEnfants: {
                             annees: [
                                 { "2022": { unite: null, valeur: "43" } },
                                 { "2021": { unite: null, valeur: "43" } },
                             ],
                             description: "Population 3 à 16 ans",
+                        },
+                        populationInsee: {
+                            annees: [
+                                { "2022": { unite: null, valeur: "248" } },
+                                { "2021": { unite: null, valeur: "248" } },
+                            ],
+                            description: "Population DGF",
                         },
                         potentielFinancierParHabitant: {
                             annees: [
@@ -144,8 +144,8 @@ describe("simulation deserializer", () => {
                 data: {
                     longueur_voirie: 9290,
                     places_caravanes_avant_majoration: 0,
-                    population_dgf: 248,
                     population_enfants: 43,
+                    population_insee: 248,
                     potentiel_financier_par_habitant: 742.818548,
                     residences_secondaires: 14,
                     superficie: 622,
@@ -174,19 +174,19 @@ describe("simulation deserializer", () => {
                         ],
                         description: "Places caravanes avant majoration",
                     },
-                    populationDgf: {
-                        annees: [
-                            { "2022": { unite: null, valeur: "248" } },
-                            { "2021": { unite: null, valeur: "248" } },
-                        ],
-                        description: "Population DGF",
-                    },
                     populationEnfants: {
                         annees: [
                             { "2022": { unite: null, valeur: "43" } },
                             { "2021": { unite: null, valeur: "43" } },
                         ],
                         description: "Population 3 à 16 ans",
+                    },
+                    populationInsee: {
+                        annees: [
+                            { "2022": { unite: null, valeur: "248" } },
+                            { "2021": { unite: null, valeur: "248" } },
+                        ],
+                        description: "Population DGF",
                     },
                     potentielFinancierParHabitant: {
                         annees: [
@@ -220,8 +220,8 @@ describe("simulation deserializer", () => {
             ).toEqual({
                 longueur_voirie: 9290,
                 places_caravanes_avant_majoration: 0,
-                population_dgf: 248,
                 population_enfants: 43,
+                population_insee: 248,
                 potentiel_financier_par_habitant: 742.818548,
                 residences_secondaires: 14,
                 superficie: 622,

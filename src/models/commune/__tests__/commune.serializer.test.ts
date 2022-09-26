@@ -77,7 +77,6 @@ describe("fetchCommuneSerializer", () => {
                     description:
                         "Votre dotation forfaitaire est stable par rapport à l’année 2021",
                     label: "DF",
-
                     title: "Dotations Forfaitaire (DF)",
                 },
                 dotationSolidariteRurale: {
