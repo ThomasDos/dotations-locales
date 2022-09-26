@@ -1,45 +1,34 @@
-import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
-import type { Dotation } from "models/commune/commune.interface";
-import { historiqueSerializer } from "models/historique/historique.serializer";
+import type { HistoriqueDotations } from "models/historique/historique.serializer";
 import { useRouter } from "next/router";
 import { Bar, BarChart, LabelList, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
+
+import HistoriqueCardHeader from "./HistoriqueCardHeader";
 
 const StyledChartContainer = styled.div`
     border: 1px solid var(--blue-france-850);
     padding: 32px 48px 18px 32px;
 `;
 
-const StyledCardTitle = styled.span`
-    font-size: 22px;
-    line-height: 28px;
-    font-weight: 700;
-`;
-
 interface BarsChartProps {
-    dotation: Dotation;
+    dotationTitle: string;
+    historiqueData: HistoriqueDotations;
 }
 
-export default function BarsChart({ dotation }: BarsChartProps) {
-    const historiqueData = historiqueSerializer(dotation);
-
-    const { title } = dotation;
-
+export default function BarsChart({
+    dotationTitle,
+    historiqueData,
+}: BarsChartProps) {
     const { commune, codeInsee } = useRouter().query as {
         commune: string;
         codeInsee: string;
     };
     return (
         <StyledChartContainer className="mt-10">
-            <div className="flex flex-col mb-10">
-                <div className="flex items-center justify-between">
-                    <StyledCardTitle>{title}</StyledCardTitle>
-                    <DropdownMenuDownload />
-                </div>
-                <span>
-                    {commune} ({codeInsee})
-                </span>
-            </div>
+            <HistoriqueCardHeader
+                title={dotationTitle}
+                subtitle={`${commune} (${codeInsee})`}
+            />
             <ResponsiveContainer width={"100%"} height={320}>
                 <BarChart
                     barCategoryGap={"15%"}

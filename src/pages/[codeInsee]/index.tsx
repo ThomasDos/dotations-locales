@@ -3,6 +3,7 @@ import {
     EntityParameters,
     SubHeader,
 } from "components/dashboard";
+import DashboardFooter from "components/dashboard/DashboardFooter";
 import { SimulationBanner } from "components/simulation";
 import { Spinner } from "components/ui";
 import useDashboardInit from "hooks/useDashboardInit";
@@ -58,6 +59,7 @@ const Dashboard = () => {
                 <DashboardBody />
                 <EntityParameters />
             </div>
+            <DashboardFooter />
         </>
     );
 };

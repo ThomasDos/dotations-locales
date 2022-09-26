@@ -7,8 +7,8 @@ describe("Historique serializer", () => {
         expect(
             historiqueSerializer(dotationsMocked.dotationForfaitaire)
         ).toEqual([
-            { label: "264 940K€", value: 264940, year: "2021" },
-            { label: "263 676K€", value: 263676, year: "2022" },
+            { label: "265K€", value: 264940, year: "2021" },
+            { label: "264K€", value: 263676, year: "2022" },
         ]);
     });
 });

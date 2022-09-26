@@ -2,12 +2,12 @@ import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
-interface HistoriqueDotation {
+export interface HistoriqueDotation {
     year: string;
     label: string;
     value: number;
 }
-type HistoriqueDotations = HistoriqueDotation[];
+export type HistoriqueDotations = HistoriqueDotation[];
 
 export const historiqueSerializer = (
     dotation: Dotation
@@ -18,7 +18,7 @@ export const historiqueSerializer = (
         .map(annee => {
             const [year] = Object.keys(annee);
             return {
-                label: `${formatNumberWithSpace(annee[year])}K€`,
+                label: `${formatNumberWithSpace(annee[year] / 1000)}K€`,
                 value: annee[year],
                 year,
             };

@@ -9,7 +9,7 @@ export default (
 ): number => {
     if (_.isEmpty(criteres)) return 0;
     const {
-        populationDgf: { annees },
+        populationInsee: { annees },
     } = criteres;
     if (!annees) return 0;
     const getHabitantsIndex = annees.findIndex(
