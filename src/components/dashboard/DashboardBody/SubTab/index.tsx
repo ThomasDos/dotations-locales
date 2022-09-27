@@ -3,6 +3,7 @@ import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { matomoTrackEvent } from "services/matomo";
 import { selectCurrentYear } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
@@ -62,6 +63,11 @@ const SubTab = ({ dotation }: SubTabProps) => {
                                 <TitleCriteresNonEligibles
                                     showNonEligible={showNonEligible}
                                     toggleShowNonEligible={() => {
+                                        matomoTrackEvent([
+                                            "fonction",
+                                            "afficher non éligibles",
+                                            "criteres",
+                                        ]);
                                         setShowNonEligible(!showNonEligible);
                                     }}
                                     countNonEligiblesCriteres={

@@ -47,12 +47,14 @@ interface DotationCardProps {
     dotation: Dotation;
     borderTop: boolean;
     backgroundColor?: boolean;
+    handleClick?: () => void;
 }
 
 const DotationCard = ({
     dotation,
     hasInformation = true,
     borderTop,
+    handleClick,
     backgroundColor = false,
 }: DotationCardProps) => {
     const currentYear = useSelector(selectCurrentYear);
@@ -77,14 +79,13 @@ const DotationCard = ({
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <div className="flex">
-                        <StyledCardTitle className="mb-2 mr-1">
+                        <StyledCardTitle
+                            className="mb-2 mr-1"
+                            onClick={handleClick}
+                        >
                             {title}
                         </StyledCardTitle>
-                        {hasInformation && (
-                            <div className="cursor-help">
-                                <IconInformation />
-                            </div>
-                        )}
+                        {hasInformation && <IconInformation />}
                     </div>
                     <span>
                         Évolution du montant {lastYear} / {currentYear}.

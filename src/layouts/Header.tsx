@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
 import HorizontalSeparator from "./HorizontalSeparator";
@@ -19,7 +20,15 @@ const HeaderContainer = () => {
                 <div className="flex">
                     <div>
                         <Link href="/">
-                            <div>
+                            <div
+                                onClick={() => {
+                                    matomoTrackEvent([
+                                        "header",
+                                        "clique",
+                                        "logo home",
+                                    ]);
+                                }}
+                            >
                                 <Image
                                     src="/icons/marianne-text-header.svg"
                                     height="90px"

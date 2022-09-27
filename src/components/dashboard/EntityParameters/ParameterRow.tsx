@@ -2,6 +2,7 @@ import { LabelText } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { matomoTrackEvent } from "services/matomo";
 import { selectIsSimulation } from "store/appSettings.slice";
 import { selectInitialCurrentYear } from "store/initialCommune.slice";
 import {
@@ -104,7 +105,15 @@ const ParameterRow = ({
                             )}
                         </div>
                         {!valeurIsNotNumber && (
-                            <StyledSpanSimulation>
+                            <StyledSpanSimulation
+                                onClick={() => {
+                                    matomoTrackEvent([
+                                        "simulation",
+                                        "modifier",
+                                        critereGeneral.description,
+                                    ]);
+                                }}
+                            >
                                 Modifier
                             </StyledSpanSimulation>
                         )}
