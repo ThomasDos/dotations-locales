@@ -3,7 +3,9 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
 const StyledDivider = styled(Divider)`
@@ -28,7 +30,12 @@ const MenuItemCustom = ({
     text: string;
 }) => {
     return (
-        <StyledMenuItem onClick={handleClose}>
+        <StyledMenuItem
+            onClick={() => {
+                matomoTrackEvent(["fonction", "export", text]);
+                handleClose();
+            }}
+        >
             <div className="flex text-sm my-2 w-44 justify-between items-center">
                 <StyledCustomSpan>{text}</StyledCustomSpan>
                 <div className="ml-2">
@@ -48,7 +55,9 @@ const MenuItemCustom = ({
 const DropdownMenuDownload = () => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
+    const { pathname } = useRouter();
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        matomoTrackEvent(["fonction", "export", "clique", pathname]);
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {

@@ -97,7 +97,10 @@ const SearchInput = () => {
                             Code postal
                         </StyledSpanCodePostal>
                     </div>
-                    <DropdownSearch autocompletion={autocompletion} />
+                    <DropdownSearch
+                        autocompletion={autocompletion}
+                        search={search}
+                    />
                 </StyledCollapseContent>
             </Collapse>
         </div>

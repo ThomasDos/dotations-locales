@@ -1,8 +1,14 @@
 import Image from "next/image";
+import { matomoTrackEvent } from "services/matomo";
 
 const IconInformation = () => {
     return (
-        <div>
+        <div
+            className="cursor-help"
+            onClick={() => {
+                matomoTrackEvent(["fonction", "info icone", "clique"]);
+            }}
+        >
             <Image
                 src="/icons/information.svg"
                 height="16px"

@@ -17,9 +17,16 @@ const StyledDropdownRow = styled.div`
 
 interface DropdownSearchProps {
     autocompletion: Autocompletion[] | undefined;
+    search: string;
 }
 
-const DropdownRow = ({ entity }: { entity: Autocompletion }) => {
+const DropdownRow = ({
+    entity,
+    search,
+}: {
+    entity: Autocompletion;
+    search: string;
+}) => {
     const { codeCommuneInsee: codeInsee, codePostal: codePostal } =
         entity.distributionsPostales[0];
     const { LIBELLE: commune } = entity.commune;
@@ -34,6 +41,7 @@ const DropdownRow = ({ entity }: { entity: Autocompletion }) => {
                         "clique résultat",
                         commune,
                     ]);
+                    matomoTrackEvent(["autocompletion", "recherche", search]);
                 }}
             >
                 <StyledDropdownRow className="flex justify-between px-6 py-4">
@@ -47,12 +55,16 @@ const DropdownRow = ({ entity }: { entity: Autocompletion }) => {
     );
 };
 
-const DropdownSearch = ({ autocompletion }: DropdownSearchProps) => {
+const DropdownSearch = ({ autocompletion, search }: DropdownSearchProps) => {
     return (
         <>
             {!!autocompletion &&
                 autocompletion.map((entity: Autocompletion) => (
-                    <DropdownRow entity={entity} key={entity.code} />
+                    <DropdownRow
+                        entity={entity}
+                        key={entity.code}
+                        search={search}
+                    />
                 ))}
         </>
     );

@@ -1,6 +1,7 @@
 import { Tooltip } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import { matomoTrackEvent } from "services/matomo";
 
 interface IconCopyProps {
     toCopy: number | string;
@@ -20,6 +21,8 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
     return (
         <div
             onClick={async () => {
+                matomoTrackEvent(["fonction", "copier"]);
+
                 onCopy();
                 return navigator.clipboard.writeText(String(toCopy));
             }}
