@@ -4,6 +4,7 @@ import dayjs, { extend as dayjsExtend } from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
+import { matomoTrackEvent } from "services/matomo";
 import { updateIsSimulationFalse } from "store/appSettings.slice";
 import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
 import styled from "styled-components";
@@ -74,6 +75,11 @@ const SimulationBanner = () => {
             <div className="flex">
                 <StyledBannerButton
                     onClick={() => {
+                        matomoTrackEvent([
+                            "simulation",
+                            "clique",
+                            "Abandonner",
+                        ]);
                         dispatch(updateIsSimulationFalse());
                     }}
                 >
@@ -81,10 +87,28 @@ const SimulationBanner = () => {
                 </StyledBannerButton>
                 {simulationIsDifferentThanInitial && (
                     <>
-                        <StyledBannerButton className="ml-4">
+                        <StyledBannerButton
+                            className="ml-4"
+                            onClick={() => {
+                                matomoTrackEvent([
+                                    "simulation",
+                                    "clique",
+                                    "Exporter",
+                                ]);
+                            }}
+                        >
                             Exporter
                         </StyledBannerButton>
-                        <StyledBannerButton className="ml-4">
+                        <StyledBannerButton
+                            className="ml-4"
+                            onClick={() => {
+                                matomoTrackEvent([
+                                    "simulation",
+                                    "clique",
+                                    "Enregistrer",
+                                ]);
+                            }}
+                        >
                             Enregistrer
                         </StyledBannerButton>
                     </>

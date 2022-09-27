@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { matomoTrackEvent } from "services/matomo";
 import { updateSimulationCritereValeur } from "store/simulationCommune.slice";
 import styled from "styled-components";
 
@@ -89,6 +90,7 @@ function ModalParameterSimulation({
         target: { value },
     }: ChangeEvent<HTMLInputElement>) => {
         setEntityInput(value);
+        matomoTrackEvent(["simulation", "modifier data", description, value]);
         dispatch(
             updateSimulationCritereValeur({
                 critereGeneralKey,
@@ -110,6 +112,12 @@ function ModalParameterSimulation({
     const handleInputIncrement = () => {
         if (valeurIsNotNumber) return;
         const value = Number(entityInput) + 1;
+        matomoTrackEvent([
+            "simulation",
+            "modifier data",
+            description,
+            String(value),
+        ]);
         setEntityInput(value);
         dispatch(
             updateSimulationCritereValeur({
@@ -123,6 +131,12 @@ function ModalParameterSimulation({
         if (valeurIsNotNumber) return;
         if (Number(entityInput) <= 0) return;
         const value = Number(entityInput) - 1;
+        matomoTrackEvent([
+            "simulation",
+            "modifier data",
+            description,
+            String(value),
+        ]);
         setEntityInput(value);
         dispatch(
             updateSimulationCritereValeur({

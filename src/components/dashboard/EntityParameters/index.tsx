@@ -6,6 +6,7 @@ import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { matomoTrackEvent } from "services/matomo";
 import {
     selectIsSimulation,
     updateIsSimulationTrue,
@@ -122,7 +123,15 @@ const EntityParameters = () => {
                                 {mockedSimulerAvec.map((data: string) => {
                                     return (
                                         <MenuItem value={data} key={data}>
-                                            <StyledSpanSelect>
+                                            <StyledSpanSelect
+                                                onClick={() => {
+                                                    matomoTrackEvent([
+                                                        "simulation",
+                                                        "select loi",
+                                                        data,
+                                                    ]);
+                                                }}
+                                            >
                                                 {data}
                                             </StyledSpanSelect>
                                         </MenuItem>
@@ -180,6 +189,13 @@ const EntityParameters = () => {
                             icon="calculator"
                             text="Créer une simulation"
                             onClick={() => {
+                                matomoTrackEvent([
+                                    "dashboard",
+                                    "fonction",
+                                    "simulation",
+                                    "button",
+                                ]);
+
                                 dispatch(updateIsSimulationTrue());
                             }}
                         />

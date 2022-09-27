@@ -2,6 +2,7 @@
 
 import { Tooltip } from "@mui/material";
 import Image from "next/image";
+import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
 const StyledSpan = styled.span`
@@ -43,7 +44,10 @@ const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
         >
             <StyledLinkIcon
                 className="flex items-center"
-                onClick={handleClick}
+                onClick={() => {
+                    matomoTrackEvent(["fonction", text]);
+                    handleClick?.();
+                }}
                 disabled={disabled}
             >
                 <Image

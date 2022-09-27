@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
 const StyledSpanToggle = styled.span`
@@ -25,6 +26,11 @@ const TitleDotationsNonEligibles = ({
             <div
                 className="flex items-center cursor-pointer "
                 onClick={() => {
+                    matomoTrackEvent([
+                        "fonction",
+                        "afficher non éligibles",
+                        "dotations",
+                    ]);
                     setShowNonEligible(!showNonEligible);
                 }}
             >
