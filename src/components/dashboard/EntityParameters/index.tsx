@@ -49,7 +49,7 @@ const StyledSpanSelect = styled.span`
 `;
 
 //TODO: remove by dynamic value
-const mockedSimulerAvec = ["Projet de Loi de Finance 2022"];
+const mockedSimulerAvec = ["Loi en vigueur 2022"];
 
 const EntityParameters = () => {
     const dispatch = useDispatch();
