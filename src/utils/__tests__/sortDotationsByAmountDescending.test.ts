@@ -11,7 +11,7 @@ describe("sortDotationsByAmountDescending", () => {
             description:
                 "Votre dotation forfaitaire est stable par rapport à l’année 2021",
             label: "DF",
-            title: "Dotations Forfaitaire (DF)",
+            title: "Dotation Forfaitaire (DF)",
         },
         dotationNationalePerequation: {
             annees: [{ "2022": 0 }, { "2021": 0 }],
@@ -55,14 +55,14 @@ describe("sortDotationsByAmountDescending", () => {
                     },
                 },
             ],
-            title: "Dotations Solidarité Rurale (DSR)",
+            title: "Dotation Solidarité Rurale (DSR)",
         },
         dsuMontant: {
             annees: [{ "2022": 0 }, { "2021": 0 }],
             criteres: {},
             description: "Dotation pour les communes urbaines",
             label: "DSU",
-            title: "Dotations Solidarité Urbaine (DSU)",
+            title: "Dotation Solidarité Urbaine (DSU)",
         },
     };
 

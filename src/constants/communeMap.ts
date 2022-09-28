@@ -39,26 +39,25 @@ export const dotationsMap: Record<
     { description: string; title: string; label: string }
 > = {
     dotationForfaitaire: {
-        //TODO: text dynamique
         description:
             "Votre dotation forfaitaire est stable par rapport à l’année 2021",
         label: "DF",
-        title: "Dotations Forfaitaire (DF)",
+        title: "Dotation Forfaitaire (DF)",
     },
     dotationNationalePerequation: {
         description: "Lorem Ipsum DNP",
         label: "DNP",
-        title: "Dotations Nationale de Péréquation (DNP)",
+        title: "Dotation Nationale de Péréquation (DNP)",
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
         label: "DSR",
-        title: "Dotations Solidarité Rurale (DSR)",
+        title: "Dotation Solidarité Rurale (DSR)",
     },
     dsuMontant: {
         description: "Dotation pour les communes urbaines",
         label: "DSU",
-        title: "Dotations Solidarité Urbaine (DSU)",
+        title: "Dotation Solidarité Urbaine (DSU)",
     },
 };
 

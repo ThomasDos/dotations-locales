@@ -1,5 +1,5 @@
 export default (codeInsee: string): string => {
-    const isMetropole = codeInsee.match(/^75|13|69/gm);
+    const isMetropole = codeInsee.match(/^75|^13|^69/gm);
 
     if (isMetropole) {
         switch (isMetropole[0]) {
