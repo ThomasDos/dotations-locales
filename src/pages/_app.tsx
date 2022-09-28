@@ -32,7 +32,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
         hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
         matomoInit({
-            excludeUrlsPatterns: [/^localhost:+/g],
+            excludeUrlsPatterns: [/^localhost:.+/g],
             siteId: matomoSiteId,
             url: matomoUrl,
         });
