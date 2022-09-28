@@ -6,6 +6,7 @@ import type {
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 
 import HistoriqueCardHeader from "./HistoriqueCardHeader";
 
@@ -155,8 +156,12 @@ export default function HistoriqueBoard({
                         {historiqueData.map(
                             (annee: HistoriqueDotation, index: number) => {
                                 const evolutionAnnee =
-                                    annee.value /
-                                    historiqueData[index - 1]?.value;
+                                    historiqueData[index - 1]?.value &&
+                                    getPercentageEvolution(
+                                        annee.value,
+                                        historiqueData[index - 1]?.value
+                                    );
+
                                 return (
                                     <StyledBodyBoardRowAnnee key={annee.year}>
                                         {!!index && !!evolutionAnnee && (
