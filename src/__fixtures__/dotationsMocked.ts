@@ -14,7 +14,7 @@ export const dotationsMocked: Dotations = {
         description:
             "Votre dotation forfaitaire est stable par rapport à l’année 2021",
         label: "DF",
-        title: "Dotations Forfaitaire (DF)",
+        title: "Dotation Forfaitaire (DF)",
     },
     dotationNationalePerequation: {
         annees: [
@@ -92,7 +92,7 @@ export const dotationsMocked: Dotations = {
                 },
             },
         ],
-        title: "Dotations Solidarité Rurale (DSR)",
+        title: "Dotation Solidarité Rurale (DSR)",
     },
     dsuMontant: {
         annees: [
@@ -106,6 +106,6 @@ export const dotationsMocked: Dotations = {
         criteres: {},
         description: "Dotation pour les communes urbaines",
         label: "DSU",
-        title: "Dotations Solidarité Urbaine (DSU)",
+        title: "Dotation Solidarité Urbaine (DSU)",
     },
 };
