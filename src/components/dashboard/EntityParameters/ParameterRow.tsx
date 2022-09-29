@@ -19,6 +19,7 @@ const StyledSpanSimulation = styled.span`
     font-weight: 500;
     color: #fc5d00;
     text-decoration: underline;
+    cursor: pointer;
 `;
 
 const StyledParameterRowContainer = styled.div<{ isSimulation: boolean }>`
@@ -82,12 +83,7 @@ const ParameterRow = ({
                     />
                 </div>
                 {isSimulation && (
-                    <div
-                        className="flex items-center mr-1 cursor-pointer justify-between"
-                        onClick={() => {
-                            setShowModal(true);
-                        }}
-                    >
+                    <div className="flex items-center mr-1 justify-between">
                         <div className="ml-1">
                             {valueIsModified ? (
                                 <LabelText
@@ -112,6 +108,7 @@ const ParameterRow = ({
                                         "modifier",
                                         critereGeneral.description,
                                     ]);
+                                    setShowModal(true);
                                 }}
                             >
                                 Modifier
