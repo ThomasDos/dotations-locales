@@ -102,6 +102,18 @@ function ModalParameterSimulation({
         setShowModal(false);
     };
 
+    const handleSubmit = () => {
+        matomoTrackEvent(["simulation", "modifier data", description]);
+        dispatch(
+            updateSimulationCritereValeur({
+                critereGeneralKey,
+                valeur: Number(entityInput),
+            })
+        );
+        setFetchsimulation(true);
+        handleModalClose();
+    };
+
     const handleInputChange = ({
         target: { value },
     }: ChangeEvent<HTMLInputElement>) => {
@@ -201,21 +213,7 @@ function ModalParameterSimulation({
                                         ? "Simulation en cours..."
                                         : "Appliquer"
                                 }
-                                onClick={() => {
-                                    matomoTrackEvent([
-                                        "simulation",
-                                        "modifier data",
-                                        description,
-                                    ]);
-                                    dispatch(
-                                        updateSimulationCritereValeur({
-                                            critereGeneralKey,
-                                            valeur: Number(entityInput),
-                                        })
-                                    );
-                                    setFetchsimulation(true);
-                                    handleModalClose();
-                                }}
+                                onClick={handleSubmit}
                             />
                         </div>
                     </StyledModalEditor>
