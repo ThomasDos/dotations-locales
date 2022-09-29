@@ -1,7 +1,6 @@
 import type { SelectChangeEvent } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
 import { Button, LabelPercentage } from "components/ui";
-import usePostSimulation from "hooks/usePostSimulation";
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
 import { useState } from "react";
@@ -66,8 +65,6 @@ const EntityParameters = () => {
     const [selectedLaw, setSelectedLaw] = useState<string>(
         mockedSimulerAvec[0]
     );
-
-    const { mutate } = usePostSimulation(simulationCommune.codeInsee);
 
     if (_.isEmpty(initialCommune.criteresGeneraux)) return null;
 
@@ -179,7 +176,7 @@ const EntityParameters = () => {
                         </div>
                     </div>
                 )}
-                {!isSimulation ? (
+                {!isSimulation && (
                     <div>
                         <Button
                             icon="calculator"
@@ -193,16 +190,6 @@ const EntityParameters = () => {
                                 ]);
 
                                 dispatch(updateIsSimulationTrue());
-                            }}
-                        />
-                    </div>
-                ) : (
-                    <div className="mt-4">
-                        <Button
-                            icon="calculator"
-                            text="Faire la simulation"
-                            onClick={() => {
-                                mutate(simulationCommune);
                             }}
                         />
                     </div>
