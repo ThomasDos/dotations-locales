@@ -1,10 +1,16 @@
 import { Modal } from "@mui/material";
+import { Button } from "components/ui";
+import usePostSimulation from "hooks/usePostSimulation";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import type { ChangeEvent } from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
-import { updateSimulationCritereValeur } from "store/simulationCommune.slice";
+import {
+    selectSimulationCommune,
+    updateSimulationCritereValeur,
+} from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 const StyledModalHeader = styled.div`
@@ -73,6 +79,10 @@ function ModalParameterSimulation({
     description,
 }: ModalParameterSimulationProps) {
     const dispatch = useDispatch();
+    const { codeInsee } = useRouter().query;
+    const { mutate, isLoading } = usePostSimulation(`${codeInsee}`);
+    const simulationCommune = useSelector(selectSimulationCommune);
+    const [fetchSimulation, setFetchsimulation] = useState(false);
 
     const { valeur } = currentYearCritereGeneralSimulation;
     const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
@@ -82,6 +92,12 @@ function ModalParameterSimulation({
         valeurIsNotNumber ? valeur : valeurToNumber
     );
 
+    useEffect(() => {
+        if (fetchSimulation) {
+            mutate(simulationCommune);
+            setFetchsimulation(false);
+        }
+    }, [simulationCommune]);
     const handleModalClose = () => {
         setShowModal(false);
     };
@@ -90,60 +106,23 @@ function ModalParameterSimulation({
         target: { value },
     }: ChangeEvent<HTMLInputElement>) => {
         setEntityInput(value);
-        matomoTrackEvent(["simulation", "modifier data", description, value]);
-        dispatch(
-            updateSimulationCritereValeur({
-                critereGeneralKey,
-                valeur: Number(value),
-            })
-        );
     };
 
     const handleInputReset = () => {
         setEntityInput(currentYearCritereGeneralInitial.valeur);
-        dispatch(
-            updateSimulationCritereValeur({
-                critereGeneralKey,
-                valeur: Number(currentYearCritereGeneralInitial.valeur),
-            })
-        );
     };
 
     const handleInputIncrement = () => {
         if (valeurIsNotNumber) return;
         const value = Number(entityInput) + 1;
-        matomoTrackEvent([
-            "simulation",
-            "modifier data",
-            description,
-            String(value),
-        ]);
         setEntityInput(value);
-        dispatch(
-            updateSimulationCritereValeur({
-                critereGeneralKey,
-                valeur: Number(value),
-            })
-        );
     };
 
     const handleInputDecrement = () => {
         if (valeurIsNotNumber) return;
         if (Number(entityInput) <= 0) return;
         const value = Number(entityInput) - 1;
-        matomoTrackEvent([
-            "simulation",
-            "modifier data",
-            description,
-            String(value),
-        ]);
         setEntityInput(value);
-        dispatch(
-            updateSimulationCritereValeur({
-                critereGeneralKey,
-                valeur: Number(value),
-            })
-        );
     };
 
     return (
@@ -214,6 +193,30 @@ function ModalParameterSimulation({
                             onClick={handleInputReset}
                         >
                             Réinitialiser
+                        </div>
+                        <div className="mt-4">
+                            <Button
+                                text={
+                                    isLoading
+                                        ? "Simulation en cours..."
+                                        : "Appliquer"
+                                }
+                                onClick={() => {
+                                    matomoTrackEvent([
+                                        "simulation",
+                                        "modifier data",
+                                        description,
+                                    ]);
+                                    dispatch(
+                                        updateSimulationCritereValeur({
+                                            critereGeneralKey,
+                                            valeur: Number(entityInput),
+                                        })
+                                    );
+                                    setFetchsimulation(true);
+                                    handleModalClose();
+                                }}
+                            />
                         </div>
                     </StyledModalEditor>
                 </StyledModalBody>
