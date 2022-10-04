@@ -25,7 +25,6 @@ import ParameterRow from "./ParameterRow";
 
 const StyledEntityParameters = styled.div`
     width: 25%;
-    background: var(--grey-975-75);
     z-index: 1;
     padding: 56px 40px;
     display: flex;
@@ -33,7 +32,15 @@ const StyledEntityParameters = styled.div`
     align-items: center;
 `;
 
-const EntityParameters = () => {
+interface EntityParametersProps {
+    setIsCriteresGenerauxSimulation: (
+        isCriteresGenerauxSimulation: boolean
+    ) => void;
+}
+
+const EntityParameters = ({
+    setIsCriteresGenerauxSimulation,
+}: EntityParametersProps) => {
     const dispatch = useDispatch();
     const simulationCommune = useSelector(selectSimulationCommune);
     const currentYearTotal = useSelector(selectCurrentYearTotal);
@@ -102,7 +109,18 @@ const EntityParameters = () => {
                         );
                     })}
                 </div>
-                {!isSimulation && (
+                {isSimulation ? (
+                    <div>
+                        <Button
+                            text="Modifier les données"
+                            onClick={() => {
+                                matomoTrackEvent(["simulation", "modifier"]);
+
+                                setIsCriteresGenerauxSimulation(true);
+                            }}
+                        />
+                    </div>
+                ) : (
                     <div>
                         <Button
                             icon="calculator"

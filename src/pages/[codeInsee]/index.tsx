@@ -4,12 +4,13 @@ import {
     SubHeader,
 } from "components/dashboard";
 import DashboardFooter from "components/dashboard/DashboardFooter";
-import { SimulationBanner } from "components/simulation";
+import CriteresGenerauxSimulation from "components/simulation/CriteresGenerauxSimulation";
+import SimulationBanner from "components/simulation/SimulationBanner";
 import { Spinner } from "components/ui";
 import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
 
@@ -20,6 +21,8 @@ const Dashboard = () => {
     };
 
     const isSimulation = useSelector(selectIsSimulation);
+    const [isCriteresGenerauxSimulation, setIsCriteresGenerauxSimulation] =
+        useState(false);
 
     const {
         data: fetchCommuneData,
@@ -55,11 +58,25 @@ const Dashboard = () => {
             ) : (
                 <SubHeader commune={commune} codeInsee={codeInsee} />
             )}
-            <div className="flex pb-0.5">
-                <DashboardBody />
-                <EntityParameters />
-            </div>
-            <DashboardFooter />
+            {isCriteresGenerauxSimulation ? (
+                <CriteresGenerauxSimulation
+                    setIsCriteresGenerauxSimulation={
+                        setIsCriteresGenerauxSimulation
+                    }
+                />
+            ) : (
+                <>
+                    <div className="flex pb-0.5">
+                        <DashboardBody />
+                        <EntityParameters
+                            setIsCriteresGenerauxSimulation={
+                                setIsCriteresGenerauxSimulation
+                            }
+                        />
+                    </div>
+                    <DashboardFooter />
+                </>
+            )}
         </>
     );
 };
