@@ -1,9 +1,6 @@
-import type { SelectChangeEvent } from "@mui/material";
-import { MenuItem, Select } from "@mui/material";
 import { Button, LabelPercentage } from "components/ui";
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
@@ -26,11 +23,6 @@ import getDotationPerHabitant from "utils/getDotationPerHabitant";
 
 import ParameterRow from "./ParameterRow";
 
-const StyledSelect = styled(Select)`
-    background: var(--grey-1000);
-    border-bottom: solid 2px #3a3a3a;
-`;
-
 const StyledEntityParameters = styled.div`
     width: 25%;
     background: var(--grey-975-75);
@@ -40,15 +32,6 @@ const StyledEntityParameters = styled.div`
     flex-direction: column;
     align-items: center;
 `;
-
-const StyledSpanSelect = styled.span`
-    font-family: Marianne;
-    line-height: 24px;
-    letter-spacing: 0em;
-`;
-
-//TODO: remove by dynamic value
-const mockedSimulerAvec = ["Loi en vigueur 2022"];
 
 const EntityParameters = () => {
     const dispatch = useDispatch();
@@ -62,9 +45,6 @@ const EntityParameters = () => {
     );
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
-    const [selectedLaw, setSelectedLaw] = useState<string>(
-        mockedSimulerAvec[0]
-    );
 
     if (_.isEmpty(initialCommune.criteresGeneraux)) return null;
 
@@ -96,44 +76,9 @@ const EntityParameters = () => {
         ).toFixed(2)
     );
 
-    const handleSelectChange = (event: SelectChangeEvent) => {
-        setSelectedLaw(event.target.value);
-    };
-
     return (
         <StyledEntityParameters>
             <div className="w-full text-center sticky top-16">
-                {isSimulation ? (
-                    <div className="mb-8">
-                        <span className="font-bold">Simuler avec :</span>
-                        <div className="mt-4">
-                            <StyledSelect
-                                value={selectedLaw}
-                                onChange={e => {
-                                    handleSelectChange(e as SelectChangeEvent);
-                                }}
-                            >
-                                {mockedSimulerAvec.map((data: string) => {
-                                    return (
-                                        <MenuItem value={data} key={data}>
-                                            <StyledSpanSelect
-                                                onClick={() => {
-                                                    matomoTrackEvent([
-                                                        "simulation",
-                                                        "select loi",
-                                                        data,
-                                                    ]);
-                                                }}
-                                            >
-                                                {data}
-                                            </StyledSpanSelect>
-                                        </MenuItem>
-                                    );
-                                })}
-                            </StyledSelect>
-                        </div>
-                    </div>
-                ) : null}
                 <div className="mb-6">
                     <span className="font-bold">
                         {isSimulation
@@ -157,6 +102,25 @@ const EntityParameters = () => {
                         );
                     })}
                 </div>
+                {!isSimulation && (
+                    <div>
+                        <Button
+                            icon="calculator"
+                            text="Créer une simulation"
+                            onClick={() => {
+                                matomoTrackEvent([
+                                    "dashboard",
+                                    "fonction",
+                                    "simulation",
+                                    "button",
+                                ]);
+
+                                dispatch(updateIsSimulationTrue());
+                            }}
+                        />
+                    </div>
+                )}
+
                 {(!isSimulation || simulationIsDifferentThanInitial) && (
                     <div>
                         <span className="flex font-bold mt-10">Synthèse</span>
@@ -174,24 +138,6 @@ const EntityParameters = () => {
                                 )}
                             </div>
                         </div>
-                    </div>
-                )}
-                {!isSimulation && (
-                    <div>
-                        <Button
-                            icon="calculator"
-                            text="Créer une simulation"
-                            onClick={() => {
-                                matomoTrackEvent([
-                                    "dashboard",
-                                    "fonction",
-                                    "simulation",
-                                    "button",
-                                ]);
-
-                                dispatch(updateIsSimulationTrue());
-                            }}
-                        />
                     </div>
                 )}
             </div>

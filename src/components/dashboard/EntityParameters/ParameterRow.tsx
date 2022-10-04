@@ -85,18 +85,12 @@ const ParameterRow = ({
                 {isSimulation && (
                     <div className="flex items-center mr-1 justify-between">
                         <div className="ml-1">
-                            {valueIsModified ? (
+                            {valueIsModified && (
                                 <LabelText
                                     text="SIMU"
                                     backgroundColor="var(--grey-975)"
                                     color="#FC5D00"
                                     borderColor="#FC5D00"
-                                />
-                            ) : (
-                                <LabelText
-                                    text={currentYear}
-                                    backgroundColor="var(--grey-950)"
-                                    color="var(--grey-50)"
                                 />
                             )}
                         </div>
