@@ -54,7 +54,11 @@ const Dashboard = () => {
     return (
         <>
             {isSimulation ? (
-                <SimulationBanner />
+                <SimulationBanner
+                    setIsCriteresGenerauxSimulation={
+                        setIsCriteresGenerauxSimulation
+                    }
+                />
             ) : (
                 <SubHeader commune={commune} codeInsee={codeInsee} />
             )}

@@ -38,7 +38,15 @@ const StyledBannerButton = styled.div`
     cursor: pointer;
 `;
 
-const SimulationBanner = () => {
+interface SimulationBannerProps {
+    setIsCriteresGenerauxSimulation: (
+        isCriteresGenerauxSimulation: boolean
+    ) => void;
+}
+
+const SimulationBanner = ({
+    setIsCriteresGenerauxSimulation,
+}: SimulationBannerProps) => {
     const dispatch = useDispatch();
     const timeCreated = dayjs();
     const hoursCreated = dayjs(timeCreated).format("HH[h]mm");
@@ -81,6 +89,7 @@ const SimulationBanner = () => {
                             "Abandonner",
                         ]);
                         dispatch(updateIsSimulationFalse());
+                        setIsCriteresGenerauxSimulation(false);
                     }}
                 >
                     Abandonner

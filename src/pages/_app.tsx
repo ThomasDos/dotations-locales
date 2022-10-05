@@ -6,6 +6,7 @@ import { init as matomoInit } from "@socialgouv/matomo-next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { hotjar } from "react-hotjar";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider as ReduxProvider } from "react-redux";
@@ -48,6 +49,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                     <Layout>
                         <Component {...pageProps} />
                     </Layout>
+                    <Toaster />
                 </QueryClientProvider>
             </PersistGate>
         </ReduxProvider>
