@@ -26,6 +26,7 @@ export default function BarsChart({
     return (
         <StyledChartContainer className="mt-10">
             <HistoriqueCardHeader
+                anneesLength={historiqueData.length}
                 title={dotationTitle}
                 subtitle={`${commune} (${codeInsee})`}
             />

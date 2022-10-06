@@ -2,31 +2,15 @@ import { LabelText } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { matomoTrackEvent } from "services/matomo";
-import { selectIsSimulation } from "store/appSettings.slice";
 import { selectInitialCurrentYear } from "store/initialCommune.slice";
 import {
     selectCurrentYear,
     selectLastYear,
 } from "store/simulationCommune.slice";
-import styled from "styled-components";
 
 import ModalParameterSimulation from "./ModalParameterSimulation";
 import Value from "./Value";
 
-const StyledSpanSimulation = styled.span`
-    font-size: 14px;
-    font-weight: 500;
-    color: #fc5d00;
-    text-decoration: underline;
-    cursor: pointer;
-`;
-
-const StyledParameterRowContainer = styled.div<{ isSimulation: boolean }>`
-    background: ${({ isSimulation }) =>
-        isSimulation ? "var(--grey-1000)" : ""};
-    padding: 16px 20px;
-`;
 interface EntityRowProps {
     critereGeneral: Critere;
     initialCritereGeneral: Critere;
@@ -39,7 +23,6 @@ const ParameterRow = ({
     initialCritereGeneral,
 }: EntityRowProps) => {
     const [showModal, setShowModal] = useState(false);
-    const isSimulation = useSelector(selectIsSimulation);
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
     const initialCurrentYear = useSelector(selectInitialCurrentYear);
@@ -60,63 +43,33 @@ const ParameterRow = ({
         ]
     );
 
-    const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
-    const valeurIsNotNumber = isNaN(valeurToNumber);
-
     if (currentYearCritereGeneralSimulation.valeur === "Non") return null;
 
     return (
         <>
             <hr />
-            <StyledParameterRowContainer isSimulation={isSimulation}>
-                <div className="flex justify-between my-3 text-sm items-center">
-                    <div className="flex items-center">
-                        <span className="text-start">
-                            {critereGeneral.description}
-                        </span>
-                    </div>
-                    <Value
-                        currentYearCritereGeneralSimulation={
-                            currentYearCritereGeneralSimulation
-                        }
-                        lastYearValeur={lastYearValeur}
-                    />
-                </div>
-                {isSimulation && (
-                    <div className="flex items-center mr-1 justify-between">
-                        <div className="ml-1">
-                            {valueIsModified ? (
-                                <LabelText
-                                    text="SIMU"
-                                    backgroundColor="var(--grey-975)"
-                                    color="#FC5D00"
-                                    borderColor="#FC5D00"
-                                />
-                            ) : (
-                                <LabelText
-                                    text={currentYear}
-                                    backgroundColor="var(--grey-950)"
-                                    color="var(--grey-50)"
-                                />
-                            )}
-                        </div>
-                        {!valeurIsNotNumber && (
-                            <StyledSpanSimulation
-                                onClick={() => {
-                                    matomoTrackEvent([
-                                        "simulation",
-                                        "modifier",
-                                        critereGeneral.description,
-                                    ]);
-                                    setShowModal(true);
-                                }}
-                            >
-                                Modifier
-                            </StyledSpanSimulation>
+            <div className="flex justify-between my-3 text-sm items-center">
+                <div className="flex items-center">
+                    <span className="text-start">
+                        {critereGeneral.description}
+                    </span>
+                    <div className="ml-1">
+                        {valueIsModified && (
+                            <LabelText
+                                text="SIMU"
+                                backgroundColor="#FFE8E5"
+                                color="#FC5D00"
+                            />
                         )}
                     </div>
-                )}
-            </StyledParameterRowContainer>
+                </div>
+                <Value
+                    currentYearCritereGeneralSimulation={
+                        currentYearCritereGeneralSimulation
+                    }
+                    lastYearValeur={lastYearValeur}
+                />
+            </div>
             <ModalParameterSimulation
                 currentYearCritereGeneralInitial={
                     currentYearCritereGeneralInitial

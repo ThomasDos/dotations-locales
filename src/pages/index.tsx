@@ -36,7 +36,7 @@ const Home: NextPage = () => {
             </div>
             <div className="my-6 text-center">
                 <span className="text-lg font-bold">
-                    Accédez facilement aux données des dotations générales de
+                    Accédez facilement aux données de la dotation générale de
                     fonctionnement (DGF)
                     <br /> pour construire et anticiper le budget de votre
                     collectivité.
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
                 >
                     L’ensemble des données de votre collectivité sont collectées
                     automatiquement à partir des plateformes publiques
-                    <strong>Data.gouv.fr.</strong>
+                    <strong> Data.gouv.fr.</strong>
                 </HomeRowImageText>
             </div>
 

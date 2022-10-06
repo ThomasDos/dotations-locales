@@ -38,6 +38,14 @@ const simulationCommuneSlice = createSlice({
                 currentYear
             ].valeur = valeur;
         },
+        updateSimulationCriteresGeneraux: (
+            state,
+            {
+                payload: { criteresGeneraux },
+            }: PayloadAction<{ criteresGeneraux: Criteres }>
+        ) => {
+            state.criteresGeneraux = criteresGeneraux;
+        },
     },
 });
 
@@ -45,6 +53,7 @@ export const {
     hydrateSimulationCommune,
     updateSimulationCritereValeur,
     resetSimulationCommune,
+    updateSimulationCriteresGeneraux,
 } = simulationCommuneSlice.actions;
 
 const selectSelf = (state: RootState) => state[simulationCommuneSlice.name];

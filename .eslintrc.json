@@ -21,7 +21,8 @@
                 "@typescript-eslint/no-unsafe-return": "off",
                 "@typescript-eslint/ban-ts-comment": "off",
                 "@typescript-eslint/prefer-ts-expect-error": "off",
-                "react-hooks/exhaustive-deps": "off"
+                "react-hooks/exhaustive-deps": "off",
+                "@typescript-eslint/no-dynamic-delete": "off"
             }
         },
         {

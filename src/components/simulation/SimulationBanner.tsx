@@ -1,15 +1,10 @@
-import "dayjs/locale/fr";
-
-import dayjs, { extend as dayjsExtend } from "dayjs";
-import isToday from "dayjs/plugin/isToday";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { updateIsSimulationFalse } from "store/appSettings.slice";
 import { selectSimulationIsDifferentThanInitial } from "store/simulationCommune.slice";
 import styled from "styled-components";
-
-dayjsExtend(isToday);
 
 const StyledSimulationBanner = styled.div`
     background: rgb(0, 0, 145);
@@ -38,17 +33,21 @@ const StyledBannerButton = styled.div`
     cursor: pointer;
 `;
 
-const SimulationBanner = () => {
-    const dispatch = useDispatch();
-    const timeCreated = dayjs();
-    const hoursCreated = dayjs(timeCreated).format("HH[h]mm");
-    const dayCreated = dayjs(timeCreated).locale("fr").format("ddddd");
+interface SimulationBannerProps {
+    setIsCriteresGenerauxSimulation: (
+        isCriteresGenerauxSimulation: boolean
+    ) => void;
+}
 
-    const timeCreatedIsToday = dayjs(timeCreated).isToday();
+const SimulationBanner = ({
+    setIsCriteresGenerauxSimulation,
+}: SimulationBannerProps) => {
+    const dispatch = useDispatch();
 
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
+    const { codeInsee, commune } = useRouter().query;
 
     return (
         <StyledSimulationBanner>
@@ -64,12 +63,9 @@ const SimulationBanner = () => {
                 </div>
                 <div className="flex flex-col ml-3">
                     <StyledBannerTitle>
-                        Simulation de dotation
+                        {commune} ({codeInsee})
                     </StyledBannerTitle>
-                    <span className="text-sm">
-                        Créé {timeCreatedIsToday ? "aujourd'hui" : dayCreated},{" "}
-                        à {hoursCreated}
-                    </span>
+                    <span className="text-sm">Simulation de dotations</span>
                 </div>
             </div>
             <div className="flex">
@@ -81,6 +77,7 @@ const SimulationBanner = () => {
                             "Abandonner",
                         ]);
                         dispatch(updateIsSimulationFalse());
+                        setIsCriteresGenerauxSimulation(false);
                     }}
                 >
                     Abandonner
