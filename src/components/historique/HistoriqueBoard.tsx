@@ -3,22 +3,15 @@ import type {
     HistoriqueDotation,
     HistoriqueDotations,
 } from "models/historique/historique.serializer";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
-
-import HistoriqueCardHeader from "./HistoriqueCardHeader";
 
 const StyledHistoriqueBoard = styled.div`
     margin-top: 40px;
     margin-bottom: 120px;
     border: 1px solid var(--blue-france-850);
     padding: 32px 48px 56px 32px;
-`;
-
-const StyledBodyBoard = styled.div`
-    margin-top: 40px;
 `;
 
 const StyledBodyBoardHeader = styled.div`
@@ -80,108 +73,96 @@ export default function HistoriqueBoard({
     historiqueData,
     dotationTitle,
 }: HistoriqueBoardProps) {
-    const lengthAnnees = historiqueData.length;
-    const { commune, codeInsee } = useRouter().query as {
-        commune: string;
-        codeInsee: string;
-    };
     return (
         <StyledHistoriqueBoard>
-            <HistoriqueCardHeader
-                title={`${commune} (${codeInsee})`}
-                subtitle={`Historique sur ${lengthAnnees} années`}
-            />
-            <StyledBodyBoard>
-                <StyledBodyBoardHeader>
-                    <StyledBodyBoardHeaderTitle>
-                        {dotationTitle}
-                    </StyledBodyBoardHeaderTitle>
-                    <StyledBodyBoardHeaderAnnees>
-                        {historiqueData.map(({ year }: HistoriqueDotation) => (
-                            <StyledBodyBoardHeaderAnnee key={year}>
-                                {year}
-                            </StyledBodyBoardHeaderAnnee>
-                        ))}
-                    </StyledBodyBoardHeaderAnnees>
-                </StyledBodyBoardHeader>
-                <StyledBodyBoardRow>
-                    <StyledBodyBoardRowDescription>
-                        Montant DGF
-                    </StyledBodyBoardRowDescription>
-                    <StyledBodyBoardRowAnnees>
-                        {historiqueData.map(
-                            ({ value, year }: HistoriqueDotation) => (
-                                <StyledBodyBoardRowAnnee
-                                    key={year}
-                                    className="font-bold"
-                                >
-                                    {formatNumberWithSpace(value)}€
+            <StyledBodyBoardHeader>
+                <StyledBodyBoardHeaderTitle>
+                    {dotationTitle}
+                </StyledBodyBoardHeaderTitle>
+                <StyledBodyBoardHeaderAnnees>
+                    {historiqueData.map(({ year }: HistoriqueDotation) => (
+                        <StyledBodyBoardHeaderAnnee key={year}>
+                            {year}
+                        </StyledBodyBoardHeaderAnnee>
+                    ))}
+                </StyledBodyBoardHeaderAnnees>
+            </StyledBodyBoardHeader>
+            <StyledBodyBoardRow>
+                <StyledBodyBoardRowDescription>
+                    Montant DGF
+                </StyledBodyBoardRowDescription>
+                <StyledBodyBoardRowAnnees>
+                    {historiqueData.map(
+                        ({ value, year }: HistoriqueDotation) => (
+                            <StyledBodyBoardRowAnnee
+                                key={year}
+                                className="font-bold"
+                            >
+                                {formatNumberWithSpace(value)}€
+                            </StyledBodyBoardRowAnnee>
+                        )
+                    )}
+                </StyledBodyBoardRowAnnees>
+            </StyledBodyBoardRow>
+            <StyledBodyBoardRow>
+                <StyledBodyBoardRowDescription>
+                    Evolution DGF
+                </StyledBodyBoardRowDescription>
+                <StyledBodyBoardRowAnnees>
+                    {historiqueData.map(
+                        (annee: HistoriqueDotation, index: number) => {
+                            const evolutionAnnee =
+                                !!annee.value &&
+                                annee.value - historiqueData[index - 1]?.value;
+
+                            return (
+                                <StyledBodyBoardRowAnnee key={annee.year}>
+                                    {!!index &&
+                                        !!evolutionAnnee &&
+                                        `${
+                                            evolutionAnnee > 0 ? "+" : ""
+                                        } ${formatNumberWithSpace(
+                                            evolutionAnnee
+                                        )}€`}
                                 </StyledBodyBoardRowAnnee>
-                            )
-                        )}
-                    </StyledBodyBoardRowAnnees>
-                </StyledBodyBoardRow>
-                <StyledBodyBoardRow>
-                    <StyledBodyBoardRowDescription>
-                        Evolution DGF
-                    </StyledBodyBoardRowDescription>
-                    <StyledBodyBoardRowAnnees>
-                        {historiqueData.map(
-                            (annee: HistoriqueDotation, index: number) => {
-                                const evolutionAnnee =
-                                    !!annee.value &&
-                                    annee.value -
-                                        historiqueData[index - 1]?.value;
-
-                                return (
-                                    <StyledBodyBoardRowAnnee key={annee.year}>
-                                        {!!index &&
-                                            !!evolutionAnnee &&
-                                            `${
-                                                evolutionAnnee > 0 ? "+" : ""
-                                            } ${formatNumberWithSpace(
-                                                evolutionAnnee
-                                            )}€`}
-                                    </StyledBodyBoardRowAnnee>
+                            );
+                        }
+                    )}
+                </StyledBodyBoardRowAnnees>
+            </StyledBodyBoardRow>
+            <StyledBodyBoardRow>
+                <StyledBodyBoardRowDescription>
+                    Evolution de la commune %
+                </StyledBodyBoardRowDescription>
+                <StyledBodyBoardRowAnnees>
+                    {historiqueData.map(
+                        (annee: HistoriqueDotation, index: number) => {
+                            const evolutionAnnee =
+                                historiqueData[index - 1]?.value &&
+                                getPercentageEvolution(
+                                    annee.value,
+                                    historiqueData[index - 1]?.value
                                 );
-                            }
-                        )}
-                    </StyledBodyBoardRowAnnees>
-                </StyledBodyBoardRow>
-                <StyledBodyBoardRow>
-                    <StyledBodyBoardRowDescription>
-                        Evolution de la commune %
-                    </StyledBodyBoardRowDescription>
-                    <StyledBodyBoardRowAnnees>
-                        {historiqueData.map(
-                            (annee: HistoriqueDotation, index: number) => {
-                                const evolutionAnnee =
-                                    historiqueData[index - 1]?.value &&
-                                    getPercentageEvolution(
-                                        annee.value,
-                                        historiqueData[index - 1]?.value
-                                    );
 
-                                return (
-                                    <StyledBodyBoardRowAnnee key={annee.year}>
-                                        {!!index && !!evolutionAnnee && (
-                                            <TagData
-                                                position="end"
-                                                percentage={Number(
-                                                    evolutionAnnee.toFixed(2)
-                                                )}
-                                                valeur={`${evolutionAnnee.toFixed(
-                                                    2
-                                                )}%`}
-                                            />
-                                        )}
-                                    </StyledBodyBoardRowAnnee>
-                                );
-                            }
-                        )}
-                    </StyledBodyBoardRowAnnees>
-                </StyledBodyBoardRow>
-            </StyledBodyBoard>
+                            return (
+                                <StyledBodyBoardRowAnnee key={annee.year}>
+                                    {!!index && !!evolutionAnnee && (
+                                        <TagData
+                                            position="end"
+                                            percentage={Number(
+                                                evolutionAnnee.toFixed(2)
+                                            )}
+                                            valeur={`${evolutionAnnee.toFixed(
+                                                2
+                                            )}%`}
+                                        />
+                                    )}
+                                </StyledBodyBoardRowAnnee>
+                            );
+                        }
+                    )}
+                </StyledBodyBoardRowAnnees>
+            </StyledBodyBoardRow>
         </StyledHistoriqueBoard>
     );
 }
