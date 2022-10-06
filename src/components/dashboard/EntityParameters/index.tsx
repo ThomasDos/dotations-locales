@@ -20,6 +20,7 @@ import {
 } from "store/simulationCommune.slice";
 import styled from "styled-components";
 import getDotationPerHabitant from "utils/getDotationPerHabitant";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 
 import ParameterRow from "./ParameterRow";
 
@@ -30,6 +31,7 @@ const StyledEntityParameters = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--grey-975);
 `;
 
 interface EntityParametersProps {
@@ -76,17 +78,15 @@ const EntityParameters = ({
         lastYearTotal
     );
 
-    const percentageEvolution = Number(
-        (
-            (currentYearDotationPerHabitant / lastYearDotationPerHabitant - 1) *
-            100
-        ).toFixed(2)
+    const percentageEvolution = getPercentageEvolution(
+        currentYearDotationPerHabitant,
+        lastYearDotationPerHabitant
     );
 
     return (
         <StyledEntityParameters>
-            <div className="w-full text-center sticky top-16">
-                <div className="mb-6">
+            <div className="w-full sticky top-16">
+                <div className="mb-4">
                     <span className="font-bold">
                         {isSimulation
                             ? "Données modifiables"
@@ -140,11 +140,11 @@ const EntityParameters = ({
                 )}
 
                 {(!isSimulation || simulationIsDifferentThanInitial) && (
-                    <div>
+                    <div className="text-center">
                         <span className="flex font-bold mt-10">Synthèse</span>
                         <div className="bg-white rounded-lg py-4 px-16 my-6">
                             <span className="text-sm">Dotation / habitant</span>
-                            <div className="flex justify-center mt-2">
+                            <div className="flex justify-center mt-2 items-center">
                                 <span className="font-bold text-xl mr-2">
                                     {Math.round(currentYearDotationPerHabitant)}
                                     €

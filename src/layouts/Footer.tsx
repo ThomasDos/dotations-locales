@@ -3,7 +3,6 @@ import {
     FooterBody,
     FooterBodyItem,
     FooterBottom,
-    FooterCopy,
     FooterLink,
     FooterOperator,
     Link,
@@ -19,7 +18,7 @@ export const FooterMain = styled(Footer)`
 const FooterContainer = () => {
     return (
         <FooterMain>
-            <FooterBody description="𝐃𝐨𝐭𝐚𝐭𝐢𝐨𝐧𝐬 𝐥𝐨𝐜𝐚𝐥𝐞𝐬 est une Startup d’État en construction incubée par l’Incubateur des Territoires de l’Agence Nationale de la Cohésion des Territoires (ANCT).">
+            <FooterBody description="Dotations Locales est une Startup d’État en construction incubée par l’Incubateur des Territoires de l’Agence Nationale de la Cohésion des Territoires (ANCT).">
                 <Logo splitCharacter={10}>RÉPUBLIQUE FRANÇAISE</Logo>
                 <FooterOperator>
                     <Image
@@ -62,25 +61,18 @@ const FooterContainer = () => {
                 </FooterBodyItem>
             </FooterBody>
             <FooterBottom>
-                <FooterLink href="/">Plan du site</FooterLink>
-                <FooterLink href="/">Accessibilité</FooterLink>
-                <FooterLink href="/">Mentions légales</FooterLink>
-                <FooterLink href="/">Données personnelles</FooterLink>
-                <FooterLink href="/">Gestion des cookies</FooterLink>
-                <FooterLink href="/">
-                    <Image
-                        src="/icons/half-sun.svg"
-                        height="16px"
-                        width="16px"
-                        alt="icon paramètre d'affichage"
-                        layout="fixed"
-                    />
-
-                    <span className="ml-2">Paramètres d&apos;affichage</span>
+                <FooterLink
+                    href="https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText"
+                    target="_"
+                >
+                    licence AGPL3
                 </FooterLink>
-
-                {/* TODO:LINK TO REPLACE : https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText  */}
-                <FooterCopy>licence AGPL3</FooterCopy>
+                <FooterLink
+                    href="https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=259&period=range&date=previous30#?period=range&date=previous30&category=Dashboard_Dashboard&subcategory=1&idSite=259"
+                    target="_"
+                >
+                    statistiques
+                </FooterLink>
             </FooterBottom>
         </FooterMain>
     );
