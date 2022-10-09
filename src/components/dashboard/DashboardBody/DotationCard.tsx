@@ -1,6 +1,5 @@
 import {
     IconCopyWithSuccess,
-    IconInformation,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
@@ -52,7 +51,7 @@ interface DotationCardProps {
 
 const DotationCard = ({
     dotation,
-    hasInformation = true,
+    // hasInformation = true,
     borderTop,
     handleClick,
     backgroundColor = false,
@@ -85,7 +84,10 @@ const DotationCard = ({
                         >
                             {title}
                         </StyledCardTitle>
-                        {hasInformation && <IconInformation />}
+
+                        {/* 
+                        //TODO: réactiver quand feature info prête
+                        {hasInformation && <IconInformation />} */}
                     </div>
                     <span>
                         Évolution du montant {lastYear} / {currentYear}.

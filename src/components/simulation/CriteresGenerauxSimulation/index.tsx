@@ -36,6 +36,28 @@ interface CriteresGenerauxSimulationProps {
     ) => void;
 }
 
+export interface LawAvailable {
+    disabled: boolean;
+    value: string;
+}
+
+const initialLoiSimulationValue = (
+    lawAvailable: LawAvailable[]
+): LawAvailable => {
+    if (lawAvailable.length === 1) {
+        return lawAvailable[0];
+    }
+
+    const hasLawAvailable = lawAvailable.filter(law => !law.disabled);
+    const hasOnlyOneLawAvailable = hasLawAvailable.length === 1;
+
+    if (hasOnlyOneLawAvailable) {
+        return hasLawAvailable[0];
+    }
+
+    return { disabled: false, value: "" };
+};
+
 export default function CriteresGenerauxSimulation({
     setIsCriteresGenerauxSimulation,
 }: CriteresGenerauxSimulationProps) {
@@ -67,10 +89,13 @@ export default function CriteresGenerauxSimulation({
     const [criteres, setCriteres] = useState(criteresGenerauxSimulation);
 
     //TODO: remplacer en valeur dynamique back
-    const radioButtonLawAvailable = ["2021", "2022"];
+    const radioButtonLawAvailable: LawAvailable[] = [
+        { disabled: false, value: "2022" },
+        { disabled: true, value: "2023" },
+    ];
 
     const [selectLoiSimulation, setSelectLoiSimulation] = useState(
-        radioButtonLawAvailable.length === 1 ? radioButtonLawAvailable[0] : ""
+        initialLoiSimulationValue(radioButtonLawAvailable)
     );
 
     return (
@@ -79,7 +104,7 @@ export default function CriteresGenerauxSimulation({
                 <SpanTitleStyled>1. Simuler avec :</SpanTitleStyled>
                 <RadioGroupContainer
                     radioButtonLawAvailable={radioButtonLawAvailable}
-                    selectLoiSimulation={selectLoiSimulation}
+                    selectLoiSimulation={selectLoiSimulation.value}
                     setSelectLoiSimulation={setSelectLoiSimulation}
                 />
             </div>
