@@ -107,7 +107,7 @@ const DotationCard = ({
                                 </div>
                             </div>
                         </div>
-                        {totalEvolution ? (
+                        {!!Math.round(totalEvolution) && (
                             <div className="flex items-center">
                                 <span className="mr-2">{`${
                                     totalEvolution > 0 ? "+" : ""
@@ -118,7 +118,7 @@ const DotationCard = ({
                                     percentage={percentageEvolution}
                                 />
                             </div>
-                        ) : null}
+                        )}
                     </div>
                 ) : (
                     <div>

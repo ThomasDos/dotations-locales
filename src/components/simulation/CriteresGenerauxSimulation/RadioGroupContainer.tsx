@@ -86,7 +86,12 @@ export default function RadioGroupContainer({
                                             }}
                                         />
                                         <div className="flex flex-1 items-center justify-between">
-                                            <span>Loi en vigueur {value}</span>
+                                            <span>
+                                                {disabled
+                                                    ? "Projet de loi"
+                                                    : "Loi en vigueur"}{" "}
+                                                {value}
+                                            </span>
                                             {disabled && (
                                                 <ProchainementStyled>
                                                     Prochainement

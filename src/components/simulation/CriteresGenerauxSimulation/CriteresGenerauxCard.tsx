@@ -35,6 +35,7 @@ const InputBoxStyled = styled.div`
     background-color: var(--grey-975);
     justify-content: space-between;
     align-items: center;
+    border: solid 2px #fff;
     &:hover {
         border: solid 2px var(--blue-france-113);
         color: var(--blue-france-113);
@@ -59,6 +60,13 @@ const SpanDeltaStyled = styled.span`
     color: var(--grey-625-425);
 `;
 
+const CounterActionStyled = styled.div`
+    user-select: none;
+    &:active {
+        transform: scale(1.2);
+    }
+`;
+
 interface CriteresGenerauxCardProps {
     criteres: Criteres;
     setCriteres: (criteresModified: Criteres) => void;
@@ -68,9 +76,8 @@ export default function CriteresGenerauxCard({
     criteres,
     setCriteres,
 }: CriteresGenerauxCardProps) {
-    const criteresKeys = Object.keys(criteres);
-
     const initialCriteresGeneraux = useSelector(selectInitialCriteresGeneraux);
+    const criteresKeys = Object.keys(criteres);
 
     return (
         <CriteresCardStyled className="py-3">
@@ -127,7 +134,7 @@ export default function CriteresGenerauxCard({
                                     )}`}
                             </SpanDeltaStyled>
                             <InputBoxStyled>
-                                <div
+                                <CounterActionStyled
                                     className="cursor-pointer text-3xl"
                                     onClick={() => {
                                         const valueNumber =
@@ -138,7 +145,7 @@ export default function CriteresGenerauxCard({
                                     }}
                                 >
                                     -
-                                </div>
+                                </CounterActionStyled>
                                 <InputStyled>
                                     <input
                                         style={{
@@ -164,7 +171,7 @@ export default function CriteresGenerauxCard({
                                         }}
                                     />
                                 </InputStyled>
-                                <div
+                                <CounterActionStyled
                                     className="cursor-pointer text-xl"
                                     onClick={() => {
                                         const valueNumber =
@@ -175,7 +182,7 @@ export default function CriteresGenerauxCard({
                                     }}
                                 >
                                     +
-                                </div>
+                                </CounterActionStyled>
                             </InputBoxStyled>
                         </div>
                     </div>
