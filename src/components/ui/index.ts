@@ -1,3 +1,4 @@
+export { default as BaseCalculLoi } from "./BaseCalculLoi";
 export { default as BreadCrumbsThreeLinks } from "./BreadCrumbs/BreadCrumbsThreeLinks";
 export { default as BreadCrumbsTwoLinks } from "./BreadCrumbs/BreadCrumbsTwoLinks";
 export { default as Button } from "./Button";

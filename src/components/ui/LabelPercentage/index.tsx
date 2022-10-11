@@ -1,8 +1,11 @@
 import { IconVectorDown, IconVectorUp } from "components/ui";
+import { useMemo } from "react";
 import styled from "styled-components";
 
+type BackgroundColorLabel = "blue-france-950" | "error-950" | "success-975";
+
 interface LabelContainerProps {
-    backgroundColor: "error-950" | "success-975";
+    backgroundColor: BackgroundColorLabel;
 }
 
 const StyledLabel = styled.div<LabelContainerProps>`
@@ -18,17 +21,44 @@ interface LabelProps {
 
 const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
     const percentageFormatted = String(percentage).replace(".", ",");
-    const percentageIsPositive = percentage >= 0;
+    const percentageLabelData: {
+        backgroundColor: BackgroundColorLabel;
+        icon: JSX.Element | null;
+        startUnit: string;
+    } = useMemo(() => {
+        if (percentage > 0) {
+            return {
+                backgroundColor: "success-975",
+                icon: <IconVectorUp />,
+                startUnit: "+",
+            };
+        }
+
+        if (percentage < 0) {
+            return {
+                backgroundColor: "error-950",
+                icon: <IconVectorDown />,
+                startUnit: "",
+            };
+        }
+
+        return {
+            backgroundColor: "blue-france-950",
+            icon: null,
+            startUnit: "",
+        };
+    }, [percentage]);
+
     const textLabel = valeur
         ? valeur
-        : `${percentageIsPositive ? "+" : ""}${percentageFormatted}%`;
+        : `${percentageLabelData.startUnit}${percentageFormatted}%`;
 
     return (
         <StyledLabel
-            backgroundColor={percentageIsPositive ? "success-975" : "error-950"}
+            backgroundColor={percentageLabelData.backgroundColor}
             className="text-sm flex"
         >
-            {percentageIsPositive ? <IconVectorUp /> : <IconVectorDown />}
+            {percentageLabelData.icon}
             <span className="ml-1 font-bold">{textLabel}</span>
         </StyledLabel>
     );
