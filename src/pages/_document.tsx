@@ -26,6 +26,7 @@ export default function Document() {
                     href="/favicon/manifest.webmanifest"
                     crossOrigin="use-credentials"
                 />
+                <script async src="https://tally.so/widgets/embed.js"></script>
             </Head>
             <body>
                 <Main />

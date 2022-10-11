@@ -1,5 +1,4 @@
 import {
-    IconInformation,
     LabelGreenCustomCrossIcon,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
@@ -42,7 +41,7 @@ interface ParameterCardProps {
 
 const ParameterCard = ({
     critere,
-    hasInformation = true,
+    // hasInformation = true,
     backgroundColor = false,
 }: ParameterCardProps) => {
     const { description } = critere;
@@ -78,11 +77,13 @@ const ParameterCard = ({
                         <StyledCardTitle className="mb-2 mr-1">
                             {description}
                         </StyledCardTitle>
+                        {/* 
+                        //TODO: réactiver quand feature info prête
                         {hasInformation && (
                             <div className="cursor-help">
                                 <IconInformation />
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
                 {currentYearValeur ? (

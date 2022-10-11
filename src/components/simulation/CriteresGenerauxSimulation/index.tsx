@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     selectSimulationCommune,
     selectSimulationCriteresGeneraux,
+    selectSimulationIsDifferentThanInitial,
     updateSimulationCriteresGeneraux,
 } from "store/simulationCommune.slice";
 import styled from "styled-components";
-import toastSuccess from "utils/toastSuccess";
+import { toastError, toastSuccess } from "utils/customToasts";
 
 import CriteresGenerauxCard from "./CriteresGenerauxCard";
 import RadioGroupContainer from "./RadioGroupContainer";
@@ -23,11 +24,14 @@ const SpanTitleStyled = styled.h3`
     margin-bottom: 16px;
 `;
 
-const SpanModeAvancéStyled = styled.span`
+const SpanTextLinkTitleStyled = styled.span`
     font-size: 14px;
     color: var(--blue-france-113);
     text-decoration: underline;
-    cursor: not-allowed;
+    user-select: none;
+    &:active {
+        color: var(--blue-france-main-525);
+    }
 `;
 
 interface CriteresGenerauxSimulationProps {
@@ -36,16 +40,56 @@ interface CriteresGenerauxSimulationProps {
     ) => void;
 }
 
+export interface LawAvailable {
+    disabled: boolean;
+    value: string;
+}
+
+const initialLoiSimulationValue = (
+    lawAvailable: LawAvailable[]
+): LawAvailable => {
+    if (lawAvailable.length === 1) {
+        return lawAvailable[0];
+    }
+
+    const hasLawAvailable = lawAvailable.filter(law => !law.disabled);
+    const hasOnlyOneLawAvailable = hasLawAvailable.length === 1;
+
+    if (hasOnlyOneLawAvailable) {
+        return hasLawAvailable[0];
+    }
+
+    return { disabled: false, value: "" };
+};
+
+//TODO: remplacer en valeur dynamique back
+const radioButtonLawAvailable: LawAvailable[] = [
+    { disabled: false, value: "2022" },
+    { disabled: true, value: "2023" },
+];
+
 export default function CriteresGenerauxSimulation({
     setIsCriteresGenerauxSimulation,
 }: CriteresGenerauxSimulationProps) {
+    const dispatch = useDispatch();
     const { codeInsee } = useRouter().query;
     const { mutate } = usePostSimulation(`${codeInsee}`);
     const simulationCommune = useSelector(selectSimulationCommune);
+    const simulationIsDifferentThanInitial = useSelector(
+        selectSimulationIsDifferentThanInitial
+    );
+    const criteresGenerauxSimulation = useSelector(
+        selectSimulationCriteresGeneraux
+    );
+
     const [fetchSimulation, setFetchsimulation] = useState(false);
+    const [criteres, setCriteres] = useState(criteresGenerauxSimulation);
+    const [selectLoiSimulation, setSelectLoiSimulation] = useState(
+        initialLoiSimulationValue(radioButtonLawAvailable)
+    );
 
     useEffect(() => {
-        if (fetchSimulation) {
+        if (fetchSimulation && simulationIsDifferentThanInitial) {
             mutate({
                 ...simulationCommune,
                 criteresGeneraux: {
@@ -54,24 +98,21 @@ export default function CriteresGenerauxSimulation({
                 },
             });
             setIsCriteresGenerauxSimulation(false);
-            toastSuccess("Votre simulation est prête !!");
+            toastSuccess("Votre simulation est prête !");
             window.scrollTo(0, 0);
         }
-    }, [fetchSimulation]);
 
-    const criteresGenerauxSimulation = useSelector(
-        selectSimulationCriteresGeneraux
-    );
-    const dispatch = useDispatch();
+        if (fetchSimulation && !simulationIsDifferentThanInitial) {
+            toastError(
+                "Merci de modifier les données pour créer une simulation."
+            );
+            setFetchsimulation(false);
+        }
+    }, [fetchSimulation, simulationIsDifferentThanInitial]);
 
-    const [criteres, setCriteres] = useState(criteresGenerauxSimulation);
-
-    //TODO: remplacer en valeur dynamique back
-    const radioButtonLawAvailable = ["2021", "2022"];
-
-    const [selectLoiSimulation, setSelectLoiSimulation] = useState(
-        radioButtonLawAvailable.length === 1 ? radioButtonLawAvailable[0] : ""
-    );
+    const handleReset = () => {
+        setCriteres(criteresGenerauxSimulation);
+    };
 
     return (
         <div className="py-14 flex flex-col md:w-5/12 m-auto px-2 md:px-0">
@@ -79,7 +120,7 @@ export default function CriteresGenerauxSimulation({
                 <SpanTitleStyled>1. Simuler avec :</SpanTitleStyled>
                 <RadioGroupContainer
                     radioButtonLawAvailable={radioButtonLawAvailable}
-                    selectLoiSimulation={selectLoiSimulation}
+                    selectLoiSimulation={selectLoiSimulation.value}
                     setSelectLoiSimulation={setSelectLoiSimulation}
                 />
             </div>
@@ -89,28 +130,36 @@ export default function CriteresGenerauxSimulation({
                     <SpanTitleStyled className="mb-4">
                         2.modifier les données
                     </SpanTitleStyled>
-                    <Tooltip
-                        title={"En construction..."}
-                        placement="top"
-                        arrow
-                        componentsProps={{
-                            arrow: {
-                                sx: {
-                                    color: "#f5f5fe",
+                    <div>
+                        <SpanTextLinkTitleStyled
+                            className="mr-2 cursor-pointer"
+                            onClick={handleReset}
+                        >
+                            Réinitialiser
+                        </SpanTextLinkTitleStyled>
+                        <Tooltip
+                            title={"En construction..."}
+                            placement="top"
+                            arrow
+                            componentsProps={{
+                                arrow: {
+                                    sx: {
+                                        color: "#f5f5fe",
+                                    },
                                 },
-                            },
-                            tooltip: {
-                                sx: {
-                                    bgcolor: "#f5f5fe",
-                                    color: "#000091 ",
+                                tooltip: {
+                                    sx: {
+                                        bgcolor: "#f5f5fe",
+                                        color: "#000091 ",
+                                    },
                                 },
-                            },
-                        }}
-                    >
-                        <SpanModeAvancéStyled>
-                            Mode avancée
-                        </SpanModeAvancéStyled>
-                    </Tooltip>
+                            }}
+                        >
+                            <SpanTextLinkTitleStyled className="cursor-not-allowed">
+                                Mode avancée
+                            </SpanTextLinkTitleStyled>
+                        </Tooltip>
+                    </div>
                 </div>
                 <CriteresGenerauxCard
                     criteres={criteres}

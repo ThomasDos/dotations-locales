@@ -1,10 +1,10 @@
 import { Tab, Tabs } from "@dataesr/react-dsfr";
 import { SubHeader } from "components/dashboard";
 import HistoriqueTab from "components/historique";
+import { BaseCalculLoi } from "components/ui";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -25,16 +25,6 @@ const StyledDashboardBody = styled.div`
 
 const StyledInfoDate = styled.div`
     width: 100%;
-`;
-
-const StyledSpanMaj = styled.span`
-    color: var(--blue-france-sun-113-625);
-`;
-
-const StyledMajHours = styled.div`
-    border-top: solid 1px var(--blue-france-925);
-    padding-top: 16px;
-    margin-top: 16px;
 `;
 
 const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
@@ -116,20 +106,7 @@ const HistoriquePage = () => {
                             </span>
                             <DropdownMenuDownload />
                         </div>
-                        <StyledMajHours className="flex items-center justify-end">
-                            <StyledSpanMaj className="mr-1 text-sm">
-                                Mise à jour hier à 08h45
-                            </StyledSpanMaj>
-                            <div>
-                                <Image
-                                    src="/icons/clock.svg"
-                                    height="16px"
-                                    width="16px"
-                                    layout="fixed"
-                                    alt="icone horloge"
-                                />
-                            </div>
-                        </StyledMajHours>
+                        <BaseCalculLoi />
                     </StyledInfoDate>
 
                     <StyledTabs

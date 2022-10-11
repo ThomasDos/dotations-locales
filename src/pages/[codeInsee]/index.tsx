@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     const isSimulation = useSelector(selectIsSimulation);
     const [isCriteresGenerauxSimulation, setIsCriteresGenerauxSimulation] =
-        useState(false);
+        useState(true);
 
     const {
         data: fetchCommuneData,
@@ -62,7 +62,7 @@ const Dashboard = () => {
             ) : (
                 <SubHeader commune={commune} codeInsee={codeInsee} />
             )}
-            {isCriteresGenerauxSimulation ? (
+            {isCriteresGenerauxSimulation && isSimulation ? (
                 <CriteresGenerauxSimulation
                     setIsCriteresGenerauxSimulation={
                         setIsCriteresGenerauxSimulation
