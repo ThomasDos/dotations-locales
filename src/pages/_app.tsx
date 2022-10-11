@@ -32,7 +32,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
 
         //@ts-ignore
-        window.Tally.openPopup(process.env.NEXT_PUBLIC_API_TALLY, {
+        window.Tally?.openPopup(process.env.NEXT_PUBLIC_API_TALLY, {
             autoClose: 3000,
             doNotShowAfterSubmit: true,
             emoji: {
