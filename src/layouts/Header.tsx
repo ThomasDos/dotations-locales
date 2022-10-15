@@ -9,7 +9,9 @@ import LinkArrow from "./LinkArrow";
 const StyledHeaderBody = styled.div`
     display: flex;
     align-items: center;
-    padding: 12px 120px;
+    @media (min-width: 768px) {
+        padding: 12px 120px;
+    }
 `;
 
 const HeaderContainer = () => {
@@ -40,7 +42,7 @@ const HeaderContainer = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="ml-10 py-5">
+                    <div className="ml-10 py-5 md:block hidden">
                         <h6 className="p-0 m-0">Dotations Locales</h6>
                         <span>
                             Tout savoir sur les dotations d&apos;état de votre

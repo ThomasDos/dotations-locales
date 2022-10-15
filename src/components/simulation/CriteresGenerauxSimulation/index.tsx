@@ -128,7 +128,7 @@ export default function CriteresGenerauxSimulation({
             <div className="flex flex-col">
                 <div className="flex justify-between items-center">
                     <SpanTitleStyled className="mb-4">
-                        2.modifier les données
+                        2. Modifier les données
                     </SpanTitleStyled>
                     <div>
                         <SpanTextLinkTitleStyled

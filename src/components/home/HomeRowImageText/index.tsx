@@ -1,6 +1,7 @@
 import { Title } from "@dataesr/react-dsfr";
 import Image from "next/image";
 import type { ReactNode } from "react";
+import styled from "styled-components";
 
 interface HomeRowImageTextProps {
     reverse?: boolean;
@@ -11,6 +12,14 @@ interface HomeRowImageTextProps {
     titleContent: string;
     children: ReactNode;
 }
+
+const StyledImageContainer = styled.div<{ imageWidth: string }>`
+    max-width: 80vw;
+    min-width: ${({ imageWidth }) => imageWidth};
+    @media (max-width: 768px) {
+        min-width: 40vw;
+    }
+`;
 
 const HomeRowImageText = ({
     reverse = false,
@@ -23,23 +32,24 @@ const HomeRowImageText = ({
 }: HomeRowImageTextProps) => {
     return (
         <div
-            className={`my-20 max-w-5xl flex items-center z-0 ${
-                reverse ? "flex-row-reverse" : ""
+            className={`my-20 max-w-5xl flex items-center z-0 flex-col md:flex-row ${
+                reverse ? "md:flex-row-reverse" : ""
             }`}
         >
-            <div className={`flex flex-col ${reverse ? "ml-14" : "mr-14"}`}>
+            <div
+                className={`flex flex-col ${reverse ? "md:ml-14" : "md:mr-14"}`}
+            >
                 <Title as="h1">{titleContent}</Title>
                 <div>{children}</div>
             </div>
-            <div>
+            <StyledImageContainer imageWidth={imageWidth}>
                 <Image
                     src={src}
-                    height={imageHeight}
-                    width={imageWidth}
                     alt={imageAlt}
-                    layout="fixed"
+                    width={imageWidth}
+                    height={imageHeight}
                 />
-            </div>
+            </StyledImageContainer>
         </div>
     );
 };

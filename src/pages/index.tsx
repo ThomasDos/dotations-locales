@@ -14,7 +14,9 @@ const MainBottom = styled.div`
 `;
 const MainBottomBody = styled.div`
     background-color: var(--grey-1000);
-    padding: 50px 40px;
+    @media (min-width: 768px) {
+        padding: 50px 40px;
+    }
 `;
 
 const Home: NextPage = () => {
@@ -43,7 +45,7 @@ const Home: NextPage = () => {
                 </span>
             </div>
             <SearchInput />
-            <div className="mx-60 mt-20">
+            <div className="md:mx-60 mt-20 text-center md:text-left">
                 <HomeRowImageText
                     src="/images/landing-1.svg"
                     imageHeight="444px"
@@ -114,7 +116,7 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
             </div>
 
-            <MainBottom className="w-full py-20 px-60 flex justify-center items-center">
+            <MainBottom className="w-full py-20 md:px-60 flex justify-center items-center">
                 <MainBottomBody className="w-screen max-w-4xl flex justify-center items-center">
                     <div className="mr-14">
                         <div className="mb-4">
