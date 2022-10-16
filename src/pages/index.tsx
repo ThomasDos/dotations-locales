@@ -14,7 +14,12 @@ const MainBottom = styled.div`
 `;
 const MainBottomBody = styled.div`
     background-color: var(--grey-1000);
-    padding: 50px 40px;
+    padding: 32px;
+    text-align: center;
+    @media (min-width: 768px) {
+        padding: 50px 40px;
+        text-align: left;
+    }
 `;
 
 const Home: NextPage = () => {
@@ -27,15 +32,15 @@ const Home: NextPage = () => {
     }, [dispatch]);
 
     return (
-        <div className="flex flex-col items-center ">
-            <div className="pt-20 text-center">
+        <div className="flex flex-col items-center px-2 md:px-0">
+            <div className="pt-5 md:pt-20 text-center">
                 <h1 className="p-0 m-0">
                     Évaluez le montant des dotations locales <br />
                     de votre collectivité territoriale
                 </h1>
             </div>
-            <div className="my-6 text-center">
-                <span className="text-lg font-bold">
+            <div className="my-6 text-center px-10 md:px-0">
+                <span className="text-lg md:font-bold">
                     Accédez facilement aux données de la dotation générale de
                     fonctionnement (DGF)
                     <br /> pour construire et anticiper le budget de votre
@@ -43,7 +48,7 @@ const Home: NextPage = () => {
                 </span>
             </div>
             <SearchInput />
-            <div className="mx-60 mt-20">
+            <div className="md:mx-60 mt-10 md:mt-20 text-center md:text-left">
                 <HomeRowImageText
                     src="/images/landing-1.svg"
                     imageHeight="444px"
@@ -114,9 +119,9 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
             </div>
 
-            <MainBottom className="w-full py-20 px-60 flex justify-center items-center">
-                <MainBottomBody className="w-screen max-w-4xl flex justify-center items-center">
-                    <div className="mr-14">
+            <MainBottom className="w-full p-5 md:py-20 md:px-60 flex justify-center items-center">
+                <MainBottomBody className="w-screen max-w-4xl flex flex-col md:flex-row justify-center items-center">
+                    <div className="md:mr-14 mb-14 md:mb-0">
                         <div className="mb-4">
                             <Image
                                 src="/icons/france-relance.svg"

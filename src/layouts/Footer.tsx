@@ -11,23 +11,31 @@ import {
 import Image from "next/image";
 import styled from "styled-components";
 
-export const FooterMain = styled(Footer)`
+const FooterMain = styled(Footer)`
     z-index: 100 !important;
+`;
+
+const StyledLogo = styled(Logo)`
+    background-image: none;
 `;
 
 const FooterContainer = () => {
     return (
         <FooterMain>
             <FooterBody description="Dotations Locales est une Startup d’État en construction incubée par l’Incubateur des Territoires de l’Agence Nationale de la Cohésion des Territoires (ANCT).">
-                <Logo splitCharacter={10}>RÉPUBLIQUE FRANÇAISE</Logo>
                 <FooterOperator>
-                    <Image
-                        src="/icons/incubateur-territoires.svg"
-                        height="90px"
-                        width="160px"
-                        alt="logo incubateur territoires"
-                        layout="fixed"
-                    />
+                    <StyledLogo splitCharacter={10}>
+                        RÉPUBLIQUE FRANÇAISE
+                    </StyledLogo>
+                    <div className="ml-5">
+                        <Image
+                            src="/icons/incubateur-territoires.svg"
+                            height="90px"
+                            width="160px"
+                            alt="logo incubateur territoires"
+                            layout="fixed"
+                        />
+                    </div>
                 </FooterOperator>
                 <FooterBodyItem>
                     <Link

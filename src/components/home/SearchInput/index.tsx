@@ -15,11 +15,14 @@ const StyledSearchButton = styled.div`
 
 const StyledCollapseContent = styled.div`
     filter: drop-shadow(0px 16px 32px rgba(0, 0, 0, 0.16));
-    width: 792px;
+    width: calc(100% - 2rem);
+
+    @media (min-width: 768px) {
+        width: 760px;
+    }
 `;
 
 const StyledSearchInput = styled.div`
-    width: 792px;
     border-bottom: 2px solid var(--blue-france-sun-113-625);
 `;
 
@@ -27,7 +30,7 @@ const StyledSpanButton = styled.span`
     color: var(--blue-france-975);
 `;
 const StyledInput = styled.input`
-    width: 100%;
+    flex: 1;
     background: var(--grey-950);
     color: var(--grey-425);
     font-style: italic;
@@ -40,6 +43,17 @@ const StyledSpanCodePostal = styled.span`
     color: #666666;
 `;
 
+const StyledSearchInputContainer = styled.div`
+    width: 100%;
+    @media (min-width: 768px) {
+        width: 760px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 0 0.5rem;
+    }
+`;
+
 const SearchInput = () => {
     const [search, setSearch] = useState<string>("");
 
@@ -47,11 +61,13 @@ const SearchInput = () => {
         useFetchAutocompletion(search);
 
     return (
-        <div>
+        <StyledSearchInputContainer>
             <StyledSearchInput className="flex">
                 <StyledInput
                     type="text"
-                    placeholder="Nom de la collectivité ou code insee"
+                    placeholder={`${
+                        window.innerWidth > 480 ? "Nom de la c" : "C"
+                    }ollectivité ou code insee`}
                     className="pl-4"
                     value={search}
                     onChange={e => {
@@ -59,7 +75,7 @@ const SearchInput = () => {
                     }}
                 />
                 <button type="button" role="button">
-                    <StyledSearchButton className="flex justify-center items-center py-3 px-8">
+                    <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
                         <div className="flex items-center space-x-2">
                             {searchResultIsLoading ? (
                                 <Spinner />
@@ -74,7 +90,7 @@ const SearchInput = () => {
                                     />
                                 </div>
                             )}
-                            <StyledSpanButton className="text-xl font-normal">
+                            <StyledSpanButton className="text-sm md:text-xl font-normal">
                                 Rechercher
                             </StyledSpanButton>
                         </div>
@@ -103,7 +119,7 @@ const SearchInput = () => {
                     />
                 </StyledCollapseContent>
             </Collapse>
-        </div>
+        </StyledSearchInputContainer>
     );
 };
 
