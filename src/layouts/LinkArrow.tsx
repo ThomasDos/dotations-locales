@@ -18,14 +18,15 @@ const LinkArrow = ({ textLink, handleOnClick }: LinkArrowProps) => {
             className="cursor-pointer flex items-center"
             onClick={handleOnClick}
         >
-            <Image
-                src="/icons/arrow-right.svg"
-                height="16px"
-                width="16px"
-                alt="icone fleche droite"
-                layout="fixed"
-            />
-
+            <div>
+                <Image
+                    src="/icons/arrow-right.svg"
+                    height="16px"
+                    width="16px"
+                    alt="icone fleche droite"
+                    layout="fixed"
+                />
+            </div>
             <StyledSpan>{textLink}</StyledSpan>
         </div>
     );
