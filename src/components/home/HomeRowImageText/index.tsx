@@ -18,6 +18,7 @@ const StyledImageContainer = styled.div<{ imageWidth: string }>`
     min-width: ${({ imageWidth }) => imageWidth};
     @media (max-width: 768px) {
         min-width: 40vw;
+        margin-top: 24px;
     }
 `;
 
@@ -37,7 +38,9 @@ const HomeRowImageText = ({
             }`}
         >
             <div
-                className={`flex flex-col ${reverse ? "md:ml-14" : "md:mr-14"}`}
+                className={`flex flex-col mx-4 ${
+                    reverse ? "md:ml-14" : "md:mr-14"
+                }`}
             >
                 <Title as="h1">{titleContent}</Title>
                 <div>{children}</div>

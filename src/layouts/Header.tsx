@@ -1,3 +1,4 @@
+import { BurgerMenu } from "components/ui";
 import Image from "next/image";
 import Link from "next/link";
 import { matomoTrackEvent } from "services/matomo";
@@ -9,6 +10,7 @@ import LinkArrow from "./LinkArrow";
 const StyledHeaderBody = styled.div`
     display: flex;
     align-items: center;
+    padding: 4px 12px;
     @media (min-width: 768px) {
         padding: 12px 120px;
     }
@@ -31,14 +33,26 @@ const HeaderContainer = () => {
                                     ]);
                                 }}
                             >
-                                <Image
-                                    src="/icons/marianne-text-header.svg"
-                                    height="90px"
-                                    width="88px"
-                                    layout="fixed"
-                                    alt="Logo de la marianne qui redirige vers l'accueil"
-                                    className="cursor-pointer"
-                                />
+                                <div className="hidden sm:block">
+                                    <Image
+                                        src="/images/marianne-text-header-lg.svg"
+                                        height="90px"
+                                        width="88px"
+                                        layout="fixed"
+                                        alt="Logo de la marianne qui redirige vers l'accueil"
+                                        className="cursor-pointer"
+                                    />
+                                </div>
+                                <div className="block sm:hidden">
+                                    <Image
+                                        src="/images/marianne-text-header-sm.svg"
+                                        height="78px"
+                                        width="174px"
+                                        layout="fixed"
+                                        alt="Logo de la marianne qui redirige vers l'accueil"
+                                        className="cursor-pointer"
+                                    />
+                                </div>
                             </div>
                         </Link>
                     </div>
@@ -51,7 +65,7 @@ const HeaderContainer = () => {
                     </div>
                 </div>
                 <div>
-                    <div className="flex ml-8 py-5">
+                    <div className="hidden sm:flex items-center ml-8 py-5">
                         <div>
                             <LinkArrow
                                 textLink="Notre mission"
@@ -71,6 +85,9 @@ const HeaderContainer = () => {
                                 }}
                             />
                         </div>
+                    </div>
+                    <div className="block sm:hidden">
+                        <BurgerMenu />
                     </div>
                 </div>
             </StyledHeaderBody>

@@ -1,6 +1,7 @@
 export { default as BaseCalculLoi } from "./BaseCalculLoi";
 export { default as BreadCrumbsThreeLinks } from "./BreadCrumbs/BreadCrumbsThreeLinks";
 export { default as BreadCrumbsTwoLinks } from "./BreadCrumbs/BreadCrumbsTwoLinks";
+export { default as BurgerMenu } from "./BurgerMenu";
 export { default as Button } from "./Button";
 export { default as IconCopyWithSuccess } from "./IconCopyWithSuccess";
 export { default as IconInformation } from "./icons/IconInformation";
