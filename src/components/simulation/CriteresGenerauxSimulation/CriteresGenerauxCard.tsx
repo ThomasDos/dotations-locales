@@ -110,7 +110,7 @@ export default function CriteresGenerauxCard({
                 return (
                     <div
                         key={critereKey}
-                        className="flex justify-between py-3 px-6 items-center"
+                        className="flex flex-col sm:flex-row justify-between py-3 px-6 items-center"
                     >
                         <CardLeftStyled>
                             <DescriptionStyled>{description}</DescriptionStyled>

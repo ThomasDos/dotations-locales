@@ -13,6 +13,9 @@ const StyledLinkIcon = styled.div<{ disabled?: boolean }>`
     padding: 4px 12px 4px 8px;
     opacity: ${({ disabled }) => (disabled ? "50%" : "")};
     cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    @media (max-width: 900px) {
+        padding: 2px 6px 2px 4px;
+    }
 `;
 
 interface LinkIconProps {

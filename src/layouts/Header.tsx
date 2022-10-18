@@ -43,7 +43,7 @@ const HeaderContainer = () => {
                                         className="cursor-pointer"
                                     />
                                 </div>
-                                <div className="block sm:hidden">
+                                <div className="sm:hidden">
                                     <Image
                                         src="/images/marianne-text-header-sm.svg"
                                         height="78px"
@@ -86,7 +86,7 @@ const HeaderContainer = () => {
                             />
                         </div>
                     </div>
-                    <div className="block sm:hidden">
+                    <div className="sm:hidden">
                         <BurgerMenu />
                     </div>
                 </div>

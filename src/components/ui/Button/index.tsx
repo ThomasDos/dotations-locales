@@ -11,8 +11,10 @@ const StyledButton = styled.button`
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: var(--blue-france-113);
     padding: 12px 66px;
+    margin-top: 16px;
     color: var(--blue-france-975);
     :hover {
         background-color: var(--blue-france-113) !important;
