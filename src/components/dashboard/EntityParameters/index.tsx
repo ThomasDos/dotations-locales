@@ -31,13 +31,14 @@ const StyledEntityParameters = styled.div<{
     display: ${({ displayMobileCriteresGeneraux }) =>
         displayMobileCriteresGeneraux ? "block" : "none"};
     z-index: 1;
-    padding: 56px 40px;
     flex-direction: column;
     align-items: center;
     background: var(--grey-975);
     width: 100%;
+    padding: 32px;
 
     @media (min-width: 640px) {
+        padding: 56px 40px;
         width: 25%;
         display: flex;
     }
