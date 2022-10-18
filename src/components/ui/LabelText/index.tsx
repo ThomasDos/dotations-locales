@@ -36,7 +36,7 @@ const LabelText = ({
 }: LabelTextProps) => {
     return (
         <StyledLabelText
-            className="py-1 px-4 flex justify-center items-center text-sm"
+            className="py-1 px-2 sm:px-4 flex justify-center items-center text-xs sm:text-sm"
             backgroundColor={backgroundColor}
             color={color}
             borderColor={borderColor}
@@ -49,6 +49,7 @@ const LabelText = ({
                         height="12px"
                         width="12px"
                         alt="icone croix"
+                        layout="fixed"
                     />
                 </div>
             )}

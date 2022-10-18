@@ -59,7 +59,9 @@ const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
             className="text-sm flex"
         >
             {percentageLabelData.icon}
-            <span className="ml-1 font-bold">{textLabel}</span>
+            <span className="ml-1 font-bold whitespace-nowrap">
+                {textLabel}
+            </span>
         </StyledLabel>
     );
 };

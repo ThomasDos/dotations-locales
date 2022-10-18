@@ -2,6 +2,7 @@ import { Tab, Tabs } from "@dataesr/react-dsfr";
 import { BaseCalculLoi } from "components/ui";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
+import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
 import { selectInitialDotations } from "store/initialCommune.slice";
@@ -16,9 +17,20 @@ import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescendi
 import MainTab from "./MainTab";
 import SubTab from "./SubTab";
 
-const StyledDashboardBody = styled.div`
-    width: 75%;
-    padding: 56px 80px 120px 120px;
+const StyledDashboardBody = styled.div<{
+    displayMobileCriteresGeneraux: boolean;
+}>`
+    display: ${({ displayMobileCriteresGeneraux }) =>
+        displayMobileCriteresGeneraux ? "none" : "block"};
+    width: 100%;
+    padding: 0 16px;
+    @media (min-width: 640px) {
+        display: block;
+    }
+    @media (min-width: 900px) {
+        padding: 56px 80px 120px 120px;
+        width: 75%;
+    }
 `;
 
 const StyledInfoDate = styled.div`
@@ -45,7 +57,9 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
     }`;
         })}
 
-    padding: 0 32px !important;
+    @media (min-width: 640px) {
+        padding: 0 32px !important;
+    }
 `;
 
 const StyledTab = styled(Tab)`
@@ -53,7 +67,15 @@ const StyledTab = styled(Tab)`
     border-bottom: 1px solid var(--blue-france-850);
 `;
 
-const DashboardBody = () => {
+interface DashboardBodyProps {
+    setDisplayMobileCriteresGeneraux: (displayMobile: boolean) => void;
+    displayMobileCriteresGeneraux: boolean;
+}
+
+const DashboardBody = ({
+    setDisplayMobileCriteresGeneraux,
+    displayMobileCriteresGeneraux,
+}: DashboardBodyProps) => {
     const isSimulation = useSelector(selectIsSimulation);
     const simulationDotations = useSelector(selectSimulationDotations);
     const initialDotations = useSelector(selectInitialDotations);
@@ -72,16 +94,34 @@ const DashboardBody = () => {
     );
 
     return (
-        <StyledDashboardBody>
+        <StyledDashboardBody
+            displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
+        >
             <>
-                <StyledInfoDate className="px-8 py-4 mb-10 flex flex-col">
-                    <div className="flex justify-between">
+                <StyledInfoDate className="sm:px-8 sm:py-4 my-6 sm:mb-10 flex flex-col">
+                    <div className="hidden sm:flex justify-between">
                         <span className="text-3xl font-bold">
                             Dotations pour {currentYear}
                         </span>
                         <DropdownMenuDownload />
                     </div>
-                    <BaseCalculLoi />
+                    <div className="flex w-full items-center justify-between">
+                        <BaseCalculLoi />
+                        <div
+                            className="flex-1 sm:hidden text-end"
+                            onClick={() => {
+                                setDisplayMobileCriteresGeneraux(true);
+                            }}
+                        >
+                            <Image
+                                layout="fixed"
+                                src="/icons/settings-mobile.svg"
+                                alt="Configuration des critères généraux"
+                                width="48px"
+                                height="48px"
+                            />
+                        </div>
+                    </div>
                 </StyledInfoDate>
 
                 <StyledTabs

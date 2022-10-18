@@ -23,7 +23,7 @@ const SousDotationsContainer = ({ sousDotations }: SousDotationsProps) => {
                 );
 
                 return (
-                    <div key={title} className="mx-1">
+                    <div key={title} className="mx-1 flex-1">
                         {currentYearTotal ? (
                             <LabelGreenCustomCrossIcon text={title} />
                         ) : (

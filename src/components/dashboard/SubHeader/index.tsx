@@ -1,5 +1,7 @@
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
     updateIsSimulationFalse,
@@ -8,7 +10,10 @@ import {
 import styled from "styled-components";
 
 const StyledHeaderDashboard = styled.div`
-    padding: 32px 40px 32px 120px;
+    padding: 12px 20px;
+    @media (min-width: 900px) {
+        padding: 32px 40px 32px 120px;
+    }
 `;
 
 interface SubHeaderProps {
@@ -20,19 +25,24 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
     const communeWithCodeInsee = `${commune} (${codeInsee})`;
     const dispatch = useDispatch();
     const router = useRouter();
+    const [modeSelected, setModeSelected] = useState(
+        router.pathname.includes("historique") ? "Historique" : "Dotations"
+    );
 
     return (
         <>
-            <StyledHeaderDashboard className="flex justify-between">
+            <StyledHeaderDashboard className="flex flex-col sm:flex-row justify-between">
                 <div className="flex flex-col">
                     <BreadCrumbsTwoLinks
                         firstLink="Accueil"
                         secondLink={communeWithCodeInsee}
                     />
 
-                    <h2 className="p-0 m-0 ">{communeWithCodeInsee}</h2>
+                    <span className="font-bold lg:text-2xl text-xl">
+                        {communeWithCodeInsee}
+                    </span>
                 </div>
-                <div className="flex right-header mt-8">
+                <div className="hidden sm:flex mt-8">
                     <LinkIcon
                         icon="euro"
                         text="Dotations"
@@ -65,8 +75,82 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     <LinkIcon icon="comparer" text="Comparer" disabled />
                     <LinkIcon icon="alerter" text="M'alerter" disabled />
                 </div>
+                <div className="w-full sm:hidden">
+                    <FormControl
+                        variant="filled"
+                        sx={{
+                            m: "12px 0 24px 0",
+                            width: "100%",
+                        }}
+                    >
+                        <Select
+                            id="select-mode"
+                            value={modeSelected}
+                            onChange={e => {
+                                setModeSelected(e.target.value);
+                            }}
+                            sx={{
+                                "& .css-d9oaum-MuiSelect-select-MuiInputBase-input-MuiFilledInput-input":
+                                    {
+                                        paddingTop: "16px",
+                                    },
+                                borderBottom: "solid 2px #000091",
+                                color: "#000091",
+                                outline: "none",
+                                width: "100%",
+                            }}
+                        >
+                            <MenuItem
+                                value="Dotations"
+                                onClick={async () => {
+                                    dispatch(updateIsSimulationFalse());
+                                    return router.push(
+                                        `/${codeInsee}?commune=${commune}`
+                                    );
+                                }}
+                            >
+                                <LinkIcon icon="euro" text="Dotations" />
+                            </MenuItem>
+                            <MenuItem
+                                value="Simulation"
+                                onClick={async () => {
+                                    dispatch(updateIsSimulationTrue());
+                                    return router.push(
+                                        `/${codeInsee}?commune=${commune}`
+                                    );
+                                }}
+                            >
+                                <LinkIcon icon="simulation" text="Simulation" />
+                            </MenuItem>
+                            <MenuItem
+                                value="Historique"
+                                onClick={async () =>
+                                    router.push(
+                                        `/${codeInsee}/historique?commune=${commune}`
+                                    )
+                                }
+                            >
+                                <LinkIcon icon="historique" text="Historique" />
+                            </MenuItem>
+                            <MenuItem value="Comparer" disabled>
+                                <LinkIcon
+                                    icon="comparer"
+                                    text="Comparer"
+                                    disabled
+                                />
+                            </MenuItem>
+                            <MenuItem value="M'alerter" disabled>
+                                <LinkIcon
+                                    icon="alerter"
+                                    text="M'alerter"
+                                    disabled
+                                />
+                            </MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
             </StyledHeaderDashboard>
-            <hr />
+            <hr className="hidden sm:flex" />
         </>
     );
 };

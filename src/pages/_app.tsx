@@ -31,16 +31,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? "";
         const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
 
-        //@ts-ignore
-        window.Tally?.openPopup(process.env.NEXT_PUBLIC_API_TALLY, {
-            autoClose: 3000,
-            doNotShowAfterSubmit: true,
-            emoji: {
-                animation: "wave",
-                text: "👋",
-            },
-        });
-
         hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
         matomoInit({
             excludeUrlsPatterns: [/^localhost:.+/g],
