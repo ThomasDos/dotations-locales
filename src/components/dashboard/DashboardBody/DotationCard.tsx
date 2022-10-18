@@ -19,14 +19,17 @@ const StyledDotationCard = styled.div<{
     borderTop: boolean;
     backgroundColor: boolean;
 }>`
-    padding: 32px 48px 32px 32px;
     display: flex;
     flex-direction: column;
-
+    padding: 20px;
     border: 1px solid var(--blue-france-850);
     border-top: ${({ borderTop }) => (borderTop ? "" : "none")};
     background-color: ${({ backgroundColor }) =>
         backgroundColor ? "var(--blue-france-975)" : "none"};
+
+    @media (min-width: 640px) {
+        padding: 32px 48px 32px 32px;
+    }
 `;
 
 const StyledSpanTotalNumber = styled.span`
@@ -39,6 +42,10 @@ const StyledCardTitle = styled.span`
     font-size: 22px;
     line-height: 28px;
     font-weight: 700;
+
+    @media (max-width: 640px) {
+        text-align: center;
+    }
 `;
 
 interface DotationCardProps {
@@ -75,8 +82,8 @@ const DotationCard = ({
             borderTop={borderTop}
             backgroundColor={backgroundColor}
         >
-            <div className="flex justify-between">
-                <div className="flex flex-col">
+            <div className="flex flex-col sm:flex-row items-center sm:justify-between">
+                <div className="flex flex-col items-center sm:items-start">
                     <div className="flex">
                         <StyledCardTitle
                             className="mb-2 mr-1"
@@ -94,12 +101,12 @@ const DotationCard = ({
                     </span>
                 </div>
                 {currentYearDotation ? (
-                    <div className="flex flex-col items-end">
+                    <div className="flex flex-col sm:items-end">
                         <div className="flex mb-2">
                             <StyledSpanTotalNumber>
                                 {dotationTotalFormatted} €
                             </StyledSpanTotalNumber>
-                            <div className="relative flex items-center">
+                            <div className="hidden relative sm:flex items-center">
                                 <div className="absolute r-0 ml-3">
                                     <IconCopyWithSuccess
                                         toCopy={currentYearDotation}
@@ -109,7 +116,7 @@ const DotationCard = ({
                         </div>
                         {!!Math.round(totalEvolution) && (
                             <div className="flex items-center">
-                                <span className="mr-2">{`${
+                                <span className="mr-2 whitespace-nowrap">{`${
                                     totalEvolution > 0 ? "+" : ""
                                 } ${formatNumberWithSpace(
                                     totalEvolution

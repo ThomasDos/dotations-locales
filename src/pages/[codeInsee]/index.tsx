@@ -23,6 +23,8 @@ const Dashboard = () => {
     const isSimulation = useSelector(selectIsSimulation);
     const [isCriteresGenerauxSimulation, setIsCriteresGenerauxSimulation] =
         useState(true);
+    const [displayMobileCriteresGeneraux, setDisplayMobileCriteresGeneraux] =
+        useState(false);
 
     const {
         data: fetchCommuneData,
@@ -35,6 +37,19 @@ const Dashboard = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [isSimulation]);
+
+    useEffect(() => {
+        //@ts-ignore
+        window.Tally?.openPopup(process.env.NEXT_PUBLIC_API_TALLY, {
+            autoClose: 3000,
+            doNotShowAfterSubmit: true,
+            emoji: {
+                animation: "wave",
+                text: "👋",
+            },
+            hideTitle: true,
+        });
+    }, []);
 
     if (
         !fetchCommuneData ||
@@ -71,10 +86,23 @@ const Dashboard = () => {
             ) : (
                 <>
                     <div className="flex pb-0.5">
-                        <DashboardBody />
+                        <DashboardBody
+                            setDisplayMobileCriteresGeneraux={
+                                setDisplayMobileCriteresGeneraux
+                            }
+                            displayMobileCriteresGeneraux={
+                                displayMobileCriteresGeneraux
+                            }
+                        />
                         <EntityParameters
                             setIsCriteresGenerauxSimulation={
                                 setIsCriteresGenerauxSimulation
+                            }
+                            setDisplayMobileCriteresGeneraux={
+                                setDisplayMobileCriteresGeneraux
+                            }
+                            displayMobileCriteresGeneraux={
+                                displayMobileCriteresGeneraux
                             }
                         />
                     </div>

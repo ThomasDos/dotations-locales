@@ -31,7 +31,7 @@ const BreadCrumbsTwoLinks = ({
                     </Link>
                 </li>
 
-                <li aria-current="page">
+                <li aria-current="page" className="pb-0">
                     <div className="flex items-center">
                         <svg
                             className="w-4 h-4"

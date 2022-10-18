@@ -1,6 +1,7 @@
 import { Button, LabelPercentage } from "components/ui";
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
@@ -24,24 +25,36 @@ import getPercentageEvolution from "utils/getPercentageEvolution";
 
 import ParameterRow from "./ParameterRow";
 
-const StyledEntityParameters = styled.div`
-    width: 25%;
+const StyledEntityParameters = styled.div<{
+    displayMobileCriteresGeneraux: boolean;
+}>`
+    display: ${({ displayMobileCriteresGeneraux }) =>
+        displayMobileCriteresGeneraux ? "block" : "none"};
     z-index: 1;
     padding: 56px 40px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     background: var(--grey-975);
+    width: 100%;
+
+    @media (min-width: 640px) {
+        width: 25%;
+        display: flex;
+    }
 `;
 
 interface EntityParametersProps {
     setIsCriteresGenerauxSimulation: (
         isCriteresGenerauxSimulation: boolean
     ) => void;
+    displayMobileCriteresGeneraux: boolean;
+    setDisplayMobileCriteresGeneraux: (displayMobile: boolean) => void;
 }
 
 const EntityParameters = ({
     setIsCriteresGenerauxSimulation,
+    displayMobileCriteresGeneraux,
+    setDisplayMobileCriteresGeneraux,
 }: EntityParametersProps) => {
     const dispatch = useDispatch();
     const simulationCommune = useSelector(selectSimulationCommune);
@@ -84,14 +97,30 @@ const EntityParameters = ({
     );
 
     return (
-        <StyledEntityParameters>
+        <StyledEntityParameters
+            displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
+        >
             <div className="w-full sticky top-16">
-                <div className="mb-4">
+                <div className="mb-4 flex justify-between">
                     <span className="font-bold">
                         {isSimulation
                             ? "Données modifiables"
                             : "Données connues de votre commune"}
                     </span>
+                    <div
+                        className="sm:hidden"
+                        onClick={() => {
+                            setDisplayMobileCriteresGeneraux(false);
+                        }}
+                    >
+                        <Image
+                            src="/icons/cross-filled.svg"
+                            height="48px"
+                            width="48px"
+                            layout="fixed"
+                            alt="Fermer les critères générax"
+                        />
+                    </div>
                 </div>
                 <div>
                     {criteresGenerauxKeys.map((critereGeneralKey: string) => {

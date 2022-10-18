@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 const StyledFooter = styled.div`
     background: var(--green-tilleul-verveine-975);
-    margin: 40px 120px;
     padding: 24px 32px;
+    margin: 20px;
     text-align: center;
+    @media (min-width: 640px) {
+        margin: 40px 120px;
+    }
 `;
 
 export default function DashboardFooter() {
