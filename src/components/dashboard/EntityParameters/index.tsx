@@ -38,9 +38,13 @@ const StyledEntityParameters = styled.div<{
     padding: 32px;
 
     @media (min-width: 640px) {
+        padding: 32px;
+        width: 30%;
+        display: flex;
+    }
+    @media (min-width: 940px) {
         padding: 56px 40px;
         width: 25%;
-        display: flex;
     }
 `;
 

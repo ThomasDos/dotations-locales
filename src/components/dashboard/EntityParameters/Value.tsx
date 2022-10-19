@@ -38,7 +38,7 @@ const Value = ({
             <LabelGreyCustomCrossIcon text="Non" />
         )
     ) : (
-        <div className="flex items-center">
+        <div className="flex items-center whitespace-nowrap sm:ml-1">
             <span className="font-bold text-end">
                 {Number(valeur) === 0 ? (
                     <span className="mr-2">{valeur}</span>
