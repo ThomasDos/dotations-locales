@@ -31,10 +31,16 @@ const StyledSimulationBanner = styled.div`
         rgba(0, 0, 145, 1) 0%,
         rgba(252, 93, 0, 1) 100%
     );
-    padding: 32px 40px 32px 120px;
     color: var(--grey-1000);
     display: flex;
     justify-content: space-between;
+    padding: 16px;
+    @media (min-width: 640px) {
+        padding: 32px;
+    }
+    @media (min-width: 1024px) {
+        padding: 32px 40px 32px 120px;
+    }
 `;
 
 const StyledBannerTitle = styled.span`
@@ -43,12 +49,16 @@ const StyledBannerTitle = styled.span`
 `;
 
 const StyledBannerButton = styled.div`
-    padding: 8px 24px;
     border: 1px #fff solid;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 8px;
+    text-align: center;
+    @media (min-width: 1024px) {
+        padding: 8px 24px;
+    }
 `;
 
 interface SimulationBannerProps {
@@ -73,7 +83,7 @@ const SimulationBanner = ({
         <>
             <StyledSimulationBanner>
                 <div className="flex">
-                    <div>
+                    <div className="hidden md:block">
                         <Image
                             src={`/icons/calculator-banner.svg`}
                             width="48px"
@@ -104,7 +114,7 @@ const SimulationBanner = ({
                         Abandonner
                     </StyledBannerButton>
                     {simulationIsDifferentThanInitial && (
-                        <>
+                        <div className="hidden sm:flex">
                             <StyledBannerButton
                                 className="ml-4"
                                 onClick={() => {
@@ -137,7 +147,7 @@ const SimulationBanner = ({
                             >
                                 Enregistrer
                             </StyledBannerButton>
-                        </>
+                        </div>
                     )}
                 </div>
             </StyledSimulationBanner>

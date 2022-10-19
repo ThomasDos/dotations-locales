@@ -26,8 +26,9 @@ const StyledDashboardBody = styled.div<{
     padding: 0 16px;
     @media (min-width: 640px) {
         display: block;
+        width: 70%;
     }
-    @media (min-width: 900px) {
+    @media (min-width: 940px) {
         padding: 56px 80px 120px 120px;
         width: 75%;
     }
@@ -44,6 +45,17 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
     &::before {
         height: 1px;
     }
+    @media (max-width: 480px) {
+        button {
+            padding: 12px !important;
+        }
+    }
+    @media (max-width: 420px) {
+        button {
+            padding: 10px !important;
+        }
+    }
+
     ${({ dotationsNonEligibles }) =>
         dotationsNonEligibles.map((dotationNonEligible: number) => {
             return `li:nth-child(${dotationNonEligible}) {

@@ -40,6 +40,10 @@ const InputBoxStyled = styled.div`
         border: solid 2px var(--blue-france-113);
         color: var(--blue-france-113);
     }
+    @media (max-width: 640px) {
+        width: 100%;
+        margin-bottom: 12px;
+    }
 `;
 
 const InputStyled = styled.div`
@@ -49,9 +53,13 @@ const InputStyled = styled.div`
 
 const CardLeftStyled = styled.div`
     display: flex;
-    flex-direction: column;
     flex: 1;
-    padding-right: 2%;
+    width: 100%;
+    justify-content: space-between;
+    @media (min-width: 640px) {
+        padding-right: 2%;
+        flex-direction: column;
+    }
 `;
 
 const SpanDeltaStyled = styled.span`
@@ -110,7 +118,7 @@ export default function CriteresGenerauxCard({
                 return (
                     <div
                         key={critereKey}
-                        className="flex flex-col sm:flex-row justify-between py-3 px-6 items-center"
+                        className="flex flex-col sm:flex-row justify-between w-full p-3 sm:py-3 sm:px-6 items-center"
                     >
                         <CardLeftStyled>
                             <DescriptionStyled>{description}</DescriptionStyled>
@@ -126,8 +134,8 @@ export default function CriteresGenerauxCard({
                                 </ResetStyled>
                             )}
                         </CardLeftStyled>
-                        <div className="flex flex-1 justify-end">
-                            <SpanDeltaStyled className="mr-4 flex items-center">
+                        <div className="w-full flex flex-1 flex-col-reverse sm:flex-row items-center sm:justify-end">
+                            <SpanDeltaStyled className="sm:mr-4 flex items-center">
                                 {!!deltaValue &&
                                     `${deltaValue > 0 ? "+" : ""}${Math.round(
                                         deltaValue

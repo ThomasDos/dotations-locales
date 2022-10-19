@@ -26,6 +26,11 @@ const ProchainementStyled = styled.div`
     padding: 3px 10px 4px;
     gap: 4px;
     border-radius: 30px;
+    flex: 1;
+`;
+
+const StyledLoiSpan = styled.span`
+    flex: 2;
 `;
 
 interface RadioGroupContainerProps {
@@ -49,13 +54,21 @@ export default function RadioGroupContainer({
     };
 
     return (
-        <div className="pl-2">
+        <div className="pl-4 sm:pl-2">
             <FormControl fullWidth>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue=""
                     name="radio-buttons-group"
                     row
+                    sx={{
+                        "@media (max-width: 640px)": {
+                            flexDirection: "column !important",
+                            gap: "16px",
+                            width: "100%",
+                        },
+                        display: "flex",
+                    }}
                 >
                     {radioButtonLawAvailable.map(
                         ({ value, disabled }: LawAvailable) => (
@@ -86,12 +99,12 @@ export default function RadioGroupContainer({
                                             }}
                                         />
                                         <div className="flex flex-1 items-center justify-between">
-                                            <span>
+                                            <StyledLoiSpan>
                                                 {disabled
                                                     ? "Projet de loi"
                                                     : "Loi en vigueur"}{" "}
                                                 {value}
-                                            </span>
+                                            </StyledLoiSpan>
                                             {disabled && (
                                                 <ProchainementStyled>
                                                     Prochainement
