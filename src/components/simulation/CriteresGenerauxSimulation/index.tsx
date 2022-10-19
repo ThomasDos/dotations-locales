@@ -38,6 +38,7 @@ interface CriteresGenerauxSimulationProps {
     setIsCriteresGenerauxSimulation: (
         isCriteresGenerauxSimulation: boolean
     ) => void;
+    setDisplayMobileCriteresGeneraux: (display: boolean) => void;
 }
 
 export interface LawAvailable {
@@ -70,6 +71,7 @@ const radioButtonLawAvailable: LawAvailable[] = [
 
 export default function CriteresGenerauxSimulation({
     setIsCriteresGenerauxSimulation,
+    setDisplayMobileCriteresGeneraux,
 }: CriteresGenerauxSimulationProps) {
     const dispatch = useDispatch();
     const { codeInsee } = useRouter().query;
@@ -90,6 +92,7 @@ export default function CriteresGenerauxSimulation({
 
     useEffect(() => {
         if (fetchSimulation && simulationIsDifferentThanInitial) {
+            setDisplayMobileCriteresGeneraux(false);
             mutate({
                 ...simulationCommune,
                 criteresGeneraux: {
@@ -115,8 +118,8 @@ export default function CriteresGenerauxSimulation({
     };
 
     return (
-        <div className="py-14 flex flex-col md:w-5/12 m-auto px-2 md:px-0">
-            <div className="flex flex-col mb-20">
+        <div className="flex flex-col w-full sm:w-10/12 md:w-9/12 lg:w-8/12 py-4 sm:py-14 px-5 sm:px-2 md:px-0 m-auto">
+            <div className="flex flex-col mb-12 sm:mb-20">
                 <SpanTitleStyled>1. Simuler avec :</SpanTitleStyled>
                 <RadioGroupContainer
                     radioButtonLawAvailable={radioButtonLawAvailable}
@@ -167,7 +170,7 @@ export default function CriteresGenerauxSimulation({
                 />
             </div>
 
-            <div className="max-w-xs self-center">
+            <div className="w-full sm:max-w-xs self-center mb-14">
                 <Button
                     text="Estimer mes dotations"
                     onClick={() => {

@@ -101,7 +101,7 @@ const DotationCard = ({
                     </span>
                 </div>
                 {currentYearDotation ? (
-                    <div className="flex flex-col sm:items-end">
+                    <div className="flex flex-col items-center sm:items-end">
                         <div className="flex mb-2">
                             <StyledSpanTotalNumber>
                                 {dotationTotalFormatted} €

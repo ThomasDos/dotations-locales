@@ -48,7 +48,7 @@ const ParameterRow = ({
     return (
         <>
             <hr />
-            <div className="flex justify-between my-3 text-sm items-center">
+            <div className="flex sm:flex-col md:flex-row justify-between my-3 text-sm items-center">
                 <div className="flex items-center">
                     <span className="text-start">
                         {critereGeneral.description}

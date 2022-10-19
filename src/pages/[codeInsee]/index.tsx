@@ -82,6 +82,9 @@ const Dashboard = () => {
                     setIsCriteresGenerauxSimulation={
                         setIsCriteresGenerauxSimulation
                     }
+                    setDisplayMobileCriteresGeneraux={
+                        setDisplayMobileCriteresGeneraux
+                    }
                 />
             ) : (
                 <>
