@@ -35,7 +35,7 @@ const StyledEntityParameters = styled.div<{
     align-items: center;
     background: var(--grey-975);
     width: 100%;
-    padding: 32px;
+    padding: 32px 16px;
 
     @media (min-width: 640px) {
         padding: 32px;

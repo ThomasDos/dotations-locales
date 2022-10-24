@@ -14,4 +14,6 @@ export { default as LabelGreenCustomCrossIcon } from "./LabelText/LabelGreenCust
 export { default as LabelGreyCustomCrossIcon } from "./LabelText/LabelGreyCustomCrossIcon";
 export { default as LinkIcon } from "./LinkIcon";
 export { default as Spinner } from "./Spinner";
+export { default as Tab } from "./Tab";
+export { default as Tabs } from "./Tabs";
 export { default as TagData } from "./TagData";
