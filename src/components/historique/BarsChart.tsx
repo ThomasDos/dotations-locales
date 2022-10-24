@@ -1,3 +1,4 @@
+import useResize from "hooks/useResize";
 import type { HistoriqueDotations } from "models/historique/historique.serializer";
 import { useRouter } from "next/router";
 import { Bar, BarChart, LabelList, ResponsiveContainer } from "recharts";
@@ -6,8 +7,10 @@ import styled from "styled-components";
 import HistoriqueCardHeader from "./HistoriqueCardHeader";
 
 const StyledChartContainer = styled.div`
-    border: 1px solid var(--blue-france-850);
-    padding: 32px 48px 18px 32px;
+    @media (min-width: 640px) {
+        border: 1px solid var(--blue-france-850);
+        padding: 32px 48px 18px 32px;
+    }
 `;
 
 interface BarsChartProps {
@@ -23,6 +26,9 @@ export default function BarsChart({
         commune: string;
         codeInsee: string;
     };
+    const { windowWidth } = useResize();
+    const screenIsSmall = windowWidth < 640;
+
     return (
         <StyledChartContainer className="mt-10">
             <HistoriqueCardHeader
@@ -32,9 +38,18 @@ export default function BarsChart({
             />
             <ResponsiveContainer width={"100%"} height={320}>
                 <BarChart
-                    barCategoryGap={"15%"}
+                    barCategoryGap={screenIsSmall ? "3%" : "15%"}
+                    margin={
+                        screenIsSmall
+                            ? undefined
+                            : {
+                                  bottom: 30,
+                                  left: 60,
+                                  right: 60,
+                                  top: 5,
+                              }
+                    }
                     data={historiqueData}
-                    margin={{ bottom: 30, left: 120, right: 120, top: 5 }}
                 >
                     <defs>
                         <linearGradient
@@ -48,7 +63,11 @@ export default function BarsChart({
                             <stop offset="100%" stopColor="#3737EE" />
                         </linearGradient>
                     </defs>
-                    <Bar dataKey="value" fill="url(#colorUv)">
+                    <Bar
+                        dataKey="value"
+                        fill="url(#colorUv)"
+                        radius={[6, 6, 0, 0]}
+                    >
                         <LabelList
                             dataKey="label"
                             position="insideTop"

@@ -2,9 +2,15 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import styled from "styled-components";
 
 const StyledCardTitle = styled.span`
-    font-size: 22px;
-    line-height: 28px;
     font-weight: 700;
+    width: 50%;
+    text-align: center;
+    @media (min-width: 640px) {
+        font-size: 22px;
+        line-height: 28px;
+        width: 100%;
+        text-align: left;
+    }
 `;
 
 interface HistoriqueCardHeaderProps {
@@ -18,12 +24,14 @@ export default function HistoriqueCardHeader({
     anneesLength,
 }: HistoriqueCardHeaderProps) {
     return (
-        <div className="flex flex-col mb-10">
-            <div className="flex items-center justify-between">
+        <div className="flex flex-col mb-2 sm:mb-10">
+            <div className="flex items-center justify-center sm:justify-between">
                 <StyledCardTitle>{title}</StyledCardTitle>
-                <DropdownMenuDownload />
+                <div className="hidden sm:block">
+                    <DropdownMenuDownload />
+                </div>
             </div>
-            <span>
+            <span className="hidden sm:block">
                 {subtitle}, historique sur {anneesLength} an
                 {anneesLength > 1 && "s"}
             </span>

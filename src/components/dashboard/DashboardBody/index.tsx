@@ -1,5 +1,4 @@
-import { Tab, Tabs } from "@dataesr/react-dsfr";
-import { BaseCalculLoi } from "components/ui";
+import { BaseCalculLoi, Tab, Tabs } from "components/ui";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import Image from "next/image";
@@ -34,51 +33,6 @@ const StyledDashboardBody = styled.div<{
     }
 `;
 
-const StyledInfoDate = styled.div`
-    width: 100%;
-`;
-
-const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
-    ul {
-        align-items: center !important;
-    }
-    &::before {
-        height: 1px;
-    }
-    @media (max-width: 480px) {
-        button {
-            padding: 12px !important;
-        }
-    }
-    @media (max-width: 420px) {
-        button {
-            padding: 10px !important;
-        }
-    }
-
-    ${({ dotationsNonEligibles }) =>
-        dotationsNonEligibles.map((dotationNonEligible: number) => {
-            return `li:nth-child(${dotationNonEligible}) {
-        button {
-            background: var(--grey-950);
-            color: var(--grey-625-425);
-            &:hover{
-                background: var(--grey-850)
-            }
-        }
-    }`;
-        })}
-
-    @media (min-width: 640px) {
-        padding: 0 32px !important;
-    }
-`;
-
-const StyledTab = styled(Tab)`
-    padding: 0 !important;
-    border-bottom: 1px solid var(--blue-france-850);
-`;
-
 interface DashboardBodyProps {
     setDisplayMobileCriteresGeneraux: (displayMobile: boolean) => void;
     displayMobileCriteresGeneraux: boolean;
@@ -110,7 +64,7 @@ const DashboardBody = ({
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
         >
             <>
-                <StyledInfoDate className="sm:px-8 sm:py-4 my-6 sm:mb-10 flex flex-col">
+                <div className="w-full sm:px-8 sm:py-4 my-6 sm:mb-10 flex flex-col">
                     <div className="hidden sm:flex justify-between">
                         <span className="text-3xl font-bold">
                             Dotations pour {currentYear}
@@ -134,32 +88,30 @@ const DashboardBody = ({
                             />
                         </div>
                     </div>
-                </StyledInfoDate>
+                </div>
 
-                <StyledTabs
-                    dotationsNonEligibles={tabIndexDotationsNonEligibles}
-                >
+                <Tabs dotationsNonEligibles={tabIndexDotationsNonEligibles}>
                     {/*@ts-ignore*/}
-                    <StyledTab label="Résumé">
+                    <Tab label="Résumé">
                         <MainTab dotations={dotations} />
-                    </StyledTab>
+                    </Tab>
 
                     {Object.keys(dotationsByAmountDescending).map(
                         (dotationKey: string) => {
                             const dotation =
                                 dotationsByAmountDescending[dotationKey];
                             return (
-                                <StyledTab
+                                <Tab
                                     //@ts-ignore
                                     label={dotation.label}
                                     key={dotation.title}
                                 >
                                     <SubTab dotation={dotation} />
-                                </StyledTab>
+                                </Tab>
                             );
                         }
                     )}
-                </StyledTabs>
+                </Tabs>
             </>
         </StyledDashboardBody>
     );

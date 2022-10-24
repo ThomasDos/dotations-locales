@@ -1,4 +1,5 @@
 import { TagData } from "components/ui";
+import useResize from "hooks/useResize";
 import type {
     HistoriqueDotation,
     HistoriqueDotations,
@@ -9,28 +10,40 @@ import getPercentageEvolution from "utils/getPercentageEvolution";
 
 const StyledHistoriqueBoard = styled.div`
     margin-top: 40px;
-    margin-bottom: 120px;
+    margin-bottom: 40px;
     border: 1px solid var(--blue-france-850);
-    padding: 32px 48px 56px 32px;
+    padding: 4px;
+    @media (min-width: 640px) {
+        margin-bottom: 120px;
+        padding: 32px 48px 56px 32px;
+    }
 `;
 
 const StyledBodyBoardHeader = styled.div`
     display: flex;
-    padding: 12px 16px;
+    padding: 8px;
     justify-content: space-between;
     border-bottom: solid 1px var(--blue-france-925);
     align-items: center;
+    @media (min-width: 640px) {
+        padding: 12px 16px;
+    }
 `;
 const StyledBodyBoardHeaderTitle = styled.div`
-    flex: 2;
-    font-size: 20px;
     font-weight: 700;
-    line-height: 32px;
-    letter-spacing: 0em;
+    flex: 2;
+    @media (min-width: 640px) {
+        font-size: 20px;
+        line-height: 32px;
+        letter-spacing: 0em;
+    }
 `;
 const StyledBodyBoardHeaderAnnees = styled.div`
     display: flex;
-    flex: 1;
+    flex: 3;
+    @media (min-width: 640px) {
+        flex: 1;
+    }
 `;
 const StyledBodyBoardHeaderAnnee = styled.div`
     font-size: 14px;
@@ -41,20 +54,31 @@ const StyledBodyBoardHeaderAnnee = styled.div`
     flex: 1;
     text-align: right;
 `;
-const StyledBodyBoardRow = styled.div`
-    padding: 16px 8px 16px 16px;
+const StyledBodyBoardRow = styled.div<{ isLastRow?: boolean }>`
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--grey-925);
+    border-bottom: ${({ isLastRow }) =>
+        isLastRow ? "" : "1px solid var(--grey-925)"};
+    padding: 8px;
+    @media (min-width: 640px) {
+        padding: 16px 8px 16px 16px;
+    }
 `;
 const StyledBodyBoardRowDescription = styled.div`
     flex: 2;
+    @media (max-width: 640px) {
+        font-size: 14px;
+    }
 `;
 
 const StyledBodyBoardRowAnnees = styled.div`
-    flex: 1;
     display: flex;
+    flex: 3;
     justify-content: space-around;
+    white-space: nowrap;
+    @media (min-width: 640px) {
+        flex: 1;
+    }
 `;
 const StyledBodyBoardRowAnnee = styled.div`
     flex: 1;
@@ -67,17 +91,20 @@ const StyledBodyBoardRowAnnee = styled.div`
 interface HistoriqueBoardProps {
     historiqueData: HistoriqueDotations;
     dotationTitle: string;
+    dotationLabel: string;
 }
 
 export default function HistoriqueBoard({
     historiqueData,
     dotationTitle,
+    dotationLabel,
 }: HistoriqueBoardProps) {
+    const { windowWidth } = useResize();
     return (
         <StyledHistoriqueBoard>
             <StyledBodyBoardHeader>
                 <StyledBodyBoardHeaderTitle>
-                    {dotationTitle}
+                    {windowWidth > 640 ? dotationTitle : dotationLabel}
                 </StyledBodyBoardHeaderTitle>
                 <StyledBodyBoardHeaderAnnees>
                     {historiqueData.map(({ year }: HistoriqueDotation) => (
@@ -89,7 +116,7 @@ export default function HistoriqueBoard({
             </StyledBodyBoardHeader>
             <StyledBodyBoardRow>
                 <StyledBodyBoardRowDescription>
-                    Montant DGF
+                    Montant {dotationLabel}
                 </StyledBodyBoardRowDescription>
                 <StyledBodyBoardRowAnnees>
                     {historiqueData.map(
@@ -106,7 +133,7 @@ export default function HistoriqueBoard({
             </StyledBodyBoardRow>
             <StyledBodyBoardRow>
                 <StyledBodyBoardRowDescription>
-                    Evolution DGF
+                    Evolution {dotationLabel}
                 </StyledBodyBoardRowDescription>
                 <StyledBodyBoardRowAnnees>
                     {historiqueData.map(
@@ -130,7 +157,7 @@ export default function HistoriqueBoard({
                     )}
                 </StyledBodyBoardRowAnnees>
             </StyledBodyBoardRow>
-            <StyledBodyBoardRow>
+            <StyledBodyBoardRow isLastRow>
                 <StyledBodyBoardRowDescription>
                     Evolution de la commune %
                 </StyledBodyBoardRowDescription>
