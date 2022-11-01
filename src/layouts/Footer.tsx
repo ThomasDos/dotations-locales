@@ -30,10 +30,9 @@ const FooterContainer = () => {
                     <div className="ml-5">
                         <Image
                             src="/icons/incubateur-territoires.svg"
-                            height="90px"
-                            width="160px"
+                            height={90}
+                            width={160}
                             alt="logo incubateur territoires"
-                            layout="fixed"
                         />
                     </div>
                 </FooterOperator>

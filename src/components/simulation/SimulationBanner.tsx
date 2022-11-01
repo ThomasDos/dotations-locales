@@ -86,9 +86,8 @@ const SimulationBanner = ({
                     <div className="hidden md:block">
                         <Image
                             src={`/icons/calculator-banner.svg`}
-                            width="48px"
-                            height="48px"
-                            layout="fixed"
+                            width={48}
+                            height={48}
                             alt="image de la simulation"
                         />
                     </div>

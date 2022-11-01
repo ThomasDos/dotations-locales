@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const StyledLink = styled.div`
     color: var(--grey-main-525);
-    text-decoration: underline;
     :hover {
         color: var(--grey-425);
     }

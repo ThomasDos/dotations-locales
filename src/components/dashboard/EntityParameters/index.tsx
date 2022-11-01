@@ -120,9 +120,8 @@ const EntityParameters = ({
                     >
                         <Image
                             src="/icons/cross-filled.svg"
-                            height="48px"
-                            width="48px"
-                            layout="fixed"
+                            height={48}
+                            width={48}
                             alt="Fermer les critères générax"
                         />
                     </div>

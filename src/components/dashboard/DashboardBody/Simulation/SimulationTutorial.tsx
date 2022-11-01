@@ -21,9 +21,8 @@ function SimulationTutorial() {
             <div>
                 <Image
                     src="/images/simulation-tutorial.svg"
-                    height="240px"
-                    width="240px"
-                    layout="fixed"
+                    height={240}
+                    width={240}
                     alt="Descriptif du mode simulation"
                 />
             </div>
@@ -45,14 +44,12 @@ function SimulationTutorial() {
                     dispatch(updateIsSimulationFalse());
                 }}
             >
-                <div className="flex items-center">
+                <div className="flex items-center rotate-180">
                     <Image
                         src="/icons/arrow-right.svg"
-                        height="16px"
-                        width="16px"
+                        height={16}
+                        width={16}
                         alt="icone fleche gauche"
-                        layout="fixed"
-                        className={"rotate-180"}
                     />
                 </div>
                 <StyledCancelSimulation>Abandonner</StyledCancelSimulation>

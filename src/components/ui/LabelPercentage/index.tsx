@@ -56,9 +56,9 @@ const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
     return (
         <StyledLabel
             backgroundColor={percentageLabelData.backgroundColor}
-            className="text-sm flex"
+            className="text-sm flex items-center"
         >
-            {percentageLabelData.icon}
+            <div>{percentageLabelData.icon}</div>
             <span className="ml-1 font-bold whitespace-nowrap">
                 {textLabel}
             </span>

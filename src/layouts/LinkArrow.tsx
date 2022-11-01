@@ -21,10 +21,9 @@ const LinkArrow = ({ textLink, handleOnClick }: LinkArrowProps) => {
             <div>
                 <Image
                     src="/icons/arrow-right.svg"
-                    height="16px"
-                    width="16px"
+                    height={16}
+                    width={16}
                     alt="icone fleche droite"
-                    layout="fixed"
                 />
             </div>
             <StyledSpan>{textLink}</StyledSpan>

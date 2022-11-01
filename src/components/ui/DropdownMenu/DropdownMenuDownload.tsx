@@ -41,10 +41,9 @@ const MenuItemCustom = ({
                 <div className="ml-2">
                     <Image
                         src={`/icons/file-download.svg`}
-                        width="16px"
-                        height="16px"
+                        width={16}
+                        height={16}
                         alt="icone exporter"
-                        layout="fixed"
                     />
                 </div>
             </div>
@@ -76,10 +75,9 @@ const DropdownMenuDownload = () => {
                     <div className="flex items-center">
                         <Image
                             src="/icons/dropdown-download.svg"
-                            width="24px"
-                            height="24px"
+                            width={24}
+                            height={24}
                             alt="icone exporter"
-                            layout="fixed"
                         />
                     </div>
                 }

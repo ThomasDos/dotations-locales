@@ -36,14 +36,12 @@ function TitleCriteresNonEligibles({
                 <StyledSpanToggle>
                     {showNonEligible ? "Tout masquer" : "Afficher"}
                 </StyledSpanToggle>
-                <div>
+                <div className={showNonEligible ? "" : "rotate-180"}>
                     <Image
                         src="/icons/arrow-up.svg"
-                        height="24px"
-                        width="24px"
-                        layout="fixed"
+                        height={24}
+                        width={24}
                         alt="Fleche vers le haut pour ouvrir les critères non éligibles"
-                        className={showNonEligible ? "" : "rotate-180"}
                     />
                 </div>
             </div>
