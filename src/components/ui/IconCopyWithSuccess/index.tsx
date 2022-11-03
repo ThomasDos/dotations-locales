@@ -22,7 +22,6 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
         <div
             onClick={async () => {
                 matomoTrackEvent(["fonction", "copier"]);
-
                 onCopy();
                 return navigator.clipboard.writeText(String(toCopy));
             }}
@@ -46,7 +45,7 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
                     },
                 }}
             >
-                <div>
+                <div className="min-w-[16px] min-h-[16px]">
                     <Image
                         data-tip
                         data-for="tooltip-copy"
