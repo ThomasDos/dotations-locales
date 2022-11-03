@@ -53,10 +53,9 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
                         src={`/icons/${
                             copied ? "copy-success.svg" : "copy.svg"
                         }`}
-                        height="16px"
-                        width="16px"
+                        height={16}
+                        width={16}
                         alt="vecteur sous forme de flèche vers le haut"
-                        layout="fixed"
                     />
                 </div>
             </Tooltip>

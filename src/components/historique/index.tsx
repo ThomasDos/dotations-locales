@@ -27,12 +27,11 @@ export default function HistoriqueTab({ dotation }: HistoriqueTabProps) {
                 <div className="pb-10">
                     Cette dotation n&apos;est pas éligible
                 </div>
-                <div className="animate-bounce">
+                <div className="animate-bounce flex justify-center">
                     <Image
                         alt="france coeur moustache"
-                        layout="fixed"
-                        width="128px"
-                        height="128px"
+                        width={128}
+                        height={128}
                         src="/images/france-moustache.png"
                     />
                 </div>

@@ -2,13 +2,12 @@ import Image from "next/image";
 
 const IconVectorUp = () => {
     return (
-        <div>
+        <div className="flex items-center">
             <Image
                 src="/icons/vector-up.png"
-                height="8px"
-                width="10px"
+                height={8}
+                width={10}
                 alt="vecteur sous forme de flèche vers le haut"
-                layout="fixed"
             />
         </div>
     );

@@ -33,24 +33,24 @@ const HeaderContainer = () => {
                                     ]);
                                 }}
                             >
-                                <div className="hidden sm:block">
+                                <div className="hidden sm:block cursor-pointer min-w-[88px] min-h-[90px]">
                                     <Image
                                         src="/images/marianne-text-header-lg.svg"
-                                        height="90px"
-                                        width="88px"
-                                        layout="fixed"
+                                        height={90}
+                                        width={88}
                                         alt="Logo de la marianne qui redirige vers l'accueil"
-                                        className="cursor-pointer"
+                                        quality={100}
+                                        priority
                                     />
                                 </div>
-                                <div className="sm:hidden">
+                                <div className="sm:hidden cursor-pointer min-w-[174px] min-h-[78px]">
                                     <Image
                                         src="/images/marianne-text-header-sm.svg"
-                                        height="78px"
-                                        width="174px"
-                                        layout="fixed"
+                                        height={78}
+                                        width={174}
                                         alt="Logo de la marianne qui redirige vers l'accueil"
-                                        className="cursor-pointer"
+                                        quality={100}
+                                        priority
                                     />
                                 </div>
                             </div>

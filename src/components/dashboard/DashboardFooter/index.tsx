@@ -16,9 +16,7 @@ export default function DashboardFooter() {
         <StyledFooter>
             Les montants des dotations sont calculés sur la base de la{" "}
             <Link href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044637640">
-                <a rel="noopener noreferrer" target="_">
-                    loi de finances 2022{" "}
-                </a>
+                loi de finances 2022{" "}
             </Link>
             avec les{" "}
             <Link
@@ -26,9 +24,7 @@ export default function DashboardFooter() {
                 rel="noopener noreferrer"
                 target="_"
             >
-                <a rel="noopener noreferrer" target="_">
-                    critères de répartitions 2022.
-                </a>
+                critères de répartitions 2022.
             </Link>
             <br />
             Pour rappel, seule la notification officielle de la DGF fait foi.

@@ -55,9 +55,8 @@ const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
             >
                 <Image
                     src={`/icons/${icon}.svg`}
-                    width="16px"
-                    height="16px"
-                    layout="fixed"
+                    width={16}
+                    height={16}
                     alt={`icone ${text}`}
                 />
                 <StyledSpan className="text-sm ml-2">{text}</StyledSpan>

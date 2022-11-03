@@ -25,12 +25,11 @@ const Button = ({ text, icon, onClick }: Buttonprops) => {
     return (
         <StyledButton type="button" onClick={onClick}>
             {icon && (
-                <div className="flex">
+                <div className="flex min-w-[24px] min-h-[24px]">
                     <Image
                         src={`/icons/${icon}.svg`}
-                        width="24px"
-                        height="24px"
-                        layout="fixed"
+                        width={24}
+                        height={24}
                         alt={`icone ${text}`}
                     />
                 </div>
