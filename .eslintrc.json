@@ -4,7 +4,7 @@
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
     },
-    "extends": ["plugin:@next/next/recommended"],
+    "extends": ["next/core-web-vitals"],
     "overrides": [
         {
             "files": ["*.ts", "*.tsx"],
