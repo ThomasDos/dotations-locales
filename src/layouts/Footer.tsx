@@ -68,6 +68,9 @@ const FooterContainer = () => {
                 </FooterBodyItem>
             </FooterBody>
             <FooterBottom>
+                <FooterLink href="/mentions-legales">
+                    Mentions Légales
+                </FooterLink>
                 <FooterLink
                     href="https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText"
                     target="_"
