@@ -16,7 +16,8 @@ const MainBottomBody = styled.div`
     background-color: var(--grey-1000);
     padding: 32px;
     text-align: center;
-    @media (min-width: 768px) {
+
+    @media (min-width: 940px) {
         padding: 50px 40px;
         text-align: left;
     }
@@ -51,8 +52,8 @@ const Home: NextPage = () => {
             <div className="md:mx-60 mt-10 md:mt-20 text-center md:text-left">
                 <HomeRowImageText
                     src="/images/landing-1.svg"
-                    imageHeight="444px"
-                    imageWidth="444px"
+                    imageHeight={444}
+                    imageWidth={444}
                     imageAlt="first row image"
                     titleContent="Améliorons la connaissance sur les dotations d'état"
                 >
@@ -66,8 +67,8 @@ const Home: NextPage = () => {
                 <HomeRowImageText
                     src="/images/landing-2.svg"
                     reverse
-                    imageHeight="444px"
-                    imageWidth="444px"
+                    imageHeight={444}
+                    imageWidth={444}
                     imageAlt="second row image"
                     titleContent="Les données utiles pour construire votre budget"
                 >
@@ -81,8 +82,8 @@ const Home: NextPage = () => {
 
                 <HomeRowImageText
                     src="/images/landing-3.svg"
-                    imageHeight="320px"
-                    imageWidth="320px"
+                    imageHeight={320}
+                    imageWidth={320}
                     imageAlt="third row image"
                     titleContent="Simuler, comparer et analyser l’évolution de vos dotations locales"
                 >
@@ -94,8 +95,8 @@ const Home: NextPage = () => {
                 <HomeRowImageText
                     src="/images/landing-4.svg"
                     reverse
-                    imageHeight="256px"
-                    imageWidth="256px"
+                    imageHeight={256}
+                    imageWidth={256}
                     imageAlt="fourth row image"
                     titleContent="Sur la base du moteur de calcul OpenFisca"
                 >
@@ -108,8 +109,8 @@ const Home: NextPage = () => {
 
                 <HomeRowImageText
                     src="/images/landing-5.svg"
-                    imageHeight="256px"
-                    imageWidth="256px"
+                    imageHeight={256}
+                    imageWidth={256}
                     imageAlt="fifth row image"
                     titleContent="Des données libres et partagées en Open Data"
                 >
@@ -119,25 +120,25 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
             </div>
 
-            <MainBottom className="w-full p-5 md:py-20 md:px-60 flex justify-center items-center">
+            <MainBottom className="w-full p-5 md:py-20 md:px-40 lg:px-60 flex justify-center items-center">
                 <MainBottomBody className="w-screen max-w-4xl flex flex-col md:flex-row justify-center items-center">
                     <div className="md:mr-14 mb-14 md:mb-0">
-                        <div className="mb-4">
+                        <div className="mb-4 min-w-[116px] min-h-[116px]">
                             <Image
                                 src="/icons/france-relance.svg"
-                                height="116px"
-                                width="116px"
+                                height={116}
+                                width={116}
                                 alt="icone france relance"
-                                layout="fixed"
                             />
                         </div>
-                        <Image
-                            src="/images/financé-ue.svg"
-                            height="41.5px"
-                            width="140px"
-                            alt="icone union européenne"
-                            layout="fixed"
-                        />
+                        <div className="min-w-[140px] min-h-[41px]">
+                            <Image
+                                src="/images/financé-ue.svg"
+                                height={41.5}
+                                width={140}
+                                alt="icone union européenne"
+                            />
+                        </div>
                     </div>
 
                     <div>

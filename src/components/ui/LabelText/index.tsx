@@ -43,13 +43,12 @@ const LabelText = ({
             fontWeight={fontWeight}
         >
             {icon && (
-                <div className="flex items-center">
+                <div className="flex items-center min-w-[12px] min-h-[12px]">
                     <Image
                         src={`/icons/${icon}`}
-                        height="12px"
-                        width="12px"
+                        height={12}
+                        width={12}
                         alt="icone croix"
-                        layout="fixed"
                     />
                 </div>
             )}

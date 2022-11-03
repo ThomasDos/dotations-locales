@@ -147,14 +147,12 @@ function ModalParameterSimulation({
         >
             <div className="bg-white">
                 <StyledModalHeader onClick={handleModalClose}>
-                    <div className="flex items-center cursor-pointer">
+                    <div className="flex items-center cursor-pointer rotate-180">
                         <Image
                             src={`/icons/arrow-right.svg`}
-                            width="16px"
-                            height="16px"
-                            layout="fixed"
+                            width={16}
+                            height={16}
                             alt="Fermer la modal et revenir à la simulation"
-                            className="rotate-180"
                         />
                     </div>
                     <span className="ml-2">Données de votre commune</span>
@@ -171,9 +169,8 @@ function ModalParameterSimulation({
                             >
                                 <Image
                                     src={`/icons/substract.svg`}
-                                    width="56px"
-                                    height="56px"
-                                    layout="fixed"
+                                    width={56}
+                                    height={56}
                                     alt="Fermer la modal et revenir à la simulation"
                                 />
                             </div>
@@ -193,9 +190,8 @@ function ModalParameterSimulation({
                             >
                                 <Image
                                     src={`/icons/add.svg`}
-                                    width="56px"
-                                    height="56px"
-                                    layout="fixed"
+                                    width={56}
+                                    height={56}
                                     alt="Fermer la modal et revenir à la simulation"
                                 />
                             </div>

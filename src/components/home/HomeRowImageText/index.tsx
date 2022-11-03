@@ -6,16 +6,16 @@ import styled from "styled-components";
 interface HomeRowImageTextProps {
     reverse?: boolean;
     src: string;
-    imageHeight: string;
-    imageWidth: string;
+    imageHeight: number;
+    imageWidth: number;
     imageAlt: string;
     titleContent: string;
     children: ReactNode;
 }
 
-const StyledImageContainer = styled.div<{ imageWidth: string }>`
+const StyledImageContainer = styled.div<{ imageWidth: number }>`
     max-width: 80vw;
-    min-width: ${({ imageWidth }) => imageWidth};
+    min-width: ${({ imageWidth }) => `${imageWidth}px`};
     @media (max-width: 768px) {
         min-width: 40vw;
         margin-top: 24px;

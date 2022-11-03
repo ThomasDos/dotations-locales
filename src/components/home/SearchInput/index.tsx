@@ -83,10 +83,9 @@ const SearchInput = () => {
                                 <div className="flex">
                                     <Image
                                         src="/icons/search.svg"
-                                        height="24px"
-                                        width="24px"
+                                        height={24}
+                                        width={24}
                                         alt="icone rechercher"
-                                        layout="fixed"
                                     />
                                 </div>
                             )}
