@@ -1,6 +1,4 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 import { dotationsMocked } from "__fixtures__/dotationsMocked";
-
 import sortDotationsByAmountDescending from "../sortDotationsByAmountDescending";
 
 describe("sortDotationsByAmountDescending", () => {

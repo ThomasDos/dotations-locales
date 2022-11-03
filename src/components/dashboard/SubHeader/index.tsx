@@ -46,7 +46,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     <LinkIcon
                         icon="euro"
                         text="Dotations"
-                        handleClick={async () => {
+                        handleClick={() => {
                             dispatch(updateIsSimulationFalse());
                             return router.push(
                                 `/${codeInsee}?commune=${commune}`
@@ -56,7 +56,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     <LinkIcon
                         icon="simulation"
                         text="Simulation"
-                        handleClick={async () => {
+                        handleClick={() => {
                             dispatch(updateIsSimulationTrue());
                             return router.push(
                                 `/${codeInsee}?commune=${commune}`
@@ -66,7 +66,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     <LinkIcon
                         icon="historique"
                         text="Historique"
-                        handleClick={async () =>
+                        handleClick={() =>
                             router.push(
                                 `/${codeInsee}/historique?commune=${commune}`
                             )
@@ -102,7 +102,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                         >
                             <MenuItem
                                 value="Dotations"
-                                onClick={async () => {
+                                onClick={() => {
                                     dispatch(updateIsSimulationFalse());
                                     return router.push(
                                         `/${codeInsee}?commune=${commune}`
@@ -113,7 +113,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             </MenuItem>
                             <MenuItem
                                 value="Simulation"
-                                onClick={async () => {
+                                onClick={() => {
                                     dispatch(updateIsSimulationTrue());
                                     return router.push(
                                         `/${codeInsee}?commune=${commune}`
@@ -124,7 +124,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             </MenuItem>
                             <MenuItem
                                 value="Historique"
-                                onClick={async () =>
+                                onClick={() =>
                                     router.push(
                                         `/${codeInsee}/historique?commune=${commune}`
                                     )

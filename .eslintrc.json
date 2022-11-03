@@ -1,16 +1,13 @@
 {
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
+    "plugins": ["@typescript-eslint", "jest"],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
     },
+    "extends": ["next/core-web-vitals"],
     "overrides": [
         {
             "files": ["*.ts", "*.tsx"],
-            "extends": [
-                "next/core-web-vitals",
-                "@socialgouv/eslint-config-typescript"
-            ],
             "parserOptions": {
                 "project": ["./tsconfig.json"]
             },
@@ -27,10 +24,6 @@
         },
         {
             "files": ["*.test.ts", "*.test.tsx"],
-            "extends": [
-                "next/core-web-vitals",
-                "@socialgouv/eslint-config-typescript"
-            ],
             "parserOptions": {
                 "project": ["./tsconfig.json"]
             },
