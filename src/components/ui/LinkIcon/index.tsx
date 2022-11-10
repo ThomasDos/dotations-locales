@@ -48,6 +48,7 @@ const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
             <StyledLinkIcon
                 className="flex items-center"
                 onClick={() => {
+                    if (disabled) return;
                     matomoTrackEvent(["fonction", text]);
                     handleClick?.();
                 }}

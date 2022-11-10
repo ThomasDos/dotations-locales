@@ -11,6 +11,7 @@ const StyledSearchButton = styled.div`
     background-color: var(--blue-france-sun-113-625);
     border-top-right-radius: 4px;
     gap: 8px;
+    cursor: default;
 `;
 
 const StyledCollapseContent = styled.div`
