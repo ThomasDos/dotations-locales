@@ -24,6 +24,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: false,
         }),
+
     reducer: persistedReducer,
 });
 
