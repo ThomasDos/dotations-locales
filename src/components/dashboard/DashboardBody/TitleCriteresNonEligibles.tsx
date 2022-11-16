@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
 
 const StyledSpanToggle = styled.span`
@@ -8,7 +8,10 @@ const StyledSpanToggle = styled.span`
 const StyledContainer = styled.div`
     border: var(--blue-france-850) 1px solid;
     border-top: none;
-    padding: 16px 48px 16px 32px;
+    padding: 16px;
+    @media (min-width: 640px) {
+        padding: 16px 48px 16px 32px;
+    }
 `;
 
 interface TitleCriteresNonEligiblesProps {
@@ -30,20 +33,20 @@ function TitleCriteresNonEligibles({
                 {ifPluralS} non éligible{ifPluralS}
             </span>
             <div
-                className="flex items-center cursor-pointer "
+                className="flex items-center cursor-pointer justify-end"
                 onClick={toggleShowNonEligible}
             >
                 <StyledSpanToggle>
                     {showNonEligible ? "Tout masquer" : "Afficher"}
                 </StyledSpanToggle>
-                <div className={showNonEligible ? "" : "rotate-180"}>
-                    <Image
-                        src="/icons/arrow-up.svg"
-                        height={24}
-                        width={24}
-                        alt="Fleche vers le haut pour ouvrir les critères non éligibles"
-                    />
-                </div>
+
+                <ImageFixed
+                    className={showNonEligible ? "" : "rotate-180"}
+                    width={24}
+                    height={24}
+                    alt="Fleche vers le haut pour ouvrir les critères non éligibles"
+                    src="/icons/arrow-up.svg"
+                />
             </div>
         </StyledContainer>
     );

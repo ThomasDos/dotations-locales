@@ -1,15 +1,13 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 
 const IconVectorUp = () => {
     return (
-        <div className="flex items-center">
-            <Image
-                src="/icons/vector-up.png"
-                height={8}
-                width={10}
-                alt="vecteur sous forme de flèche vers le haut"
-            />
-        </div>
+        <ImageFixed
+            src="/icons/vector-up.png"
+            height={8}
+            width={10}
+            alt="vecteur sous forme de flèche vers le haut"
+        />
     );
 };
 

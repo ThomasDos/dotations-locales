@@ -1,5 +1,5 @@
 import { Tooltip } from "@mui/material";
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { useState } from "react";
 import { matomoTrackEvent } from "services/matomo";
 
@@ -45,18 +45,14 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
                     },
                 }}
             >
-                <div className="min-w-[16px] min-h-[16px]">
-                    <Image
-                        data-tip
-                        data-for="tooltip-copy"
-                        src={`/icons/${
-                            copied ? "copy-success.svg" : "copy.svg"
-                        }`}
-                        height={16}
-                        width={16}
-                        alt="vecteur sous forme de flèche vers le haut"
-                    />
-                </div>
+                <ImageFixed
+                    dataTip
+                    dataFor="tooltip-copy"
+                    src={`/icons/${copied ? "copy-success.svg" : "copy.svg"}`}
+                    height={16}
+                    width={16}
+                    alt="vecteur sous forme de flèche vers le haut"
+                />
             </Tooltip>
         </div>
     );

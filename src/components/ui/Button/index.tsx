@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
 
 interface Buttonprops {
@@ -25,14 +25,12 @@ const Button = ({ text, icon, onClick }: Buttonprops) => {
     return (
         <StyledButton type="button" onClick={onClick}>
             {icon && (
-                <div className="flex min-w-[24px] min-h-[24px]">
-                    <Image
-                        src={`/icons/${icon}.svg`}
-                        width={24}
-                        height={24}
-                        alt={`icone ${text}`}
-                    />
-                </div>
+                <ImageFixed
+                    src={`/icons/${icon}.svg`}
+                    width={24}
+                    height={24}
+                    alt={`icone ${text}`}
+                />
             )}
             <span className={icon ? "ml-2" : ""}>{text}</span>
         </StyledButton>

@@ -1,6 +1,6 @@
+import ImageFixed from "components/ui/ImageFixed";
 import type { Dotation } from "models/commune/commune.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
-import Image from "next/image";
 import { useMemo } from "react";
 
 import BarsChart from "./BarsChart";
@@ -27,14 +27,14 @@ export default function HistoriqueTab({ dotation }: HistoriqueTabProps) {
                 <div className="pb-10">
                     Cette dotation n&apos;est pas éligible
                 </div>
-                <div className="animate-bounce flex justify-center">
-                    <Image
-                        alt="france coeur moustache"
-                        width={128}
-                        height={128}
-                        src="/images/france-moustache.png"
-                    />
-                </div>
+
+                <ImageFixed
+                    alt="un coeur avec une moustache et les couleurs de la France"
+                    width={128}
+                    height={128}
+                    src="/images/france-moustache.png"
+                    className="animate-bounce flex justify-center"
+                />
             </div>
         );
     }

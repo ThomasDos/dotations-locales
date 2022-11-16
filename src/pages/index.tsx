@@ -1,6 +1,6 @@
 import { HomeRowImageText, SearchInput } from "components/home";
+import ImageFixed from "components/ui/ImageFixed";
 import type { NextPage } from "next";
-import Image from "next/image";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateIsSimulationFalse } from "store/appSettings.slice";
@@ -123,22 +123,19 @@ const Home: NextPage = () => {
             <MainBottom className="w-full p-5 md:py-20 md:px-40 lg:px-60 flex justify-center items-center">
                 <MainBottomBody className="w-screen max-w-4xl flex flex-col md:flex-row justify-center items-center">
                     <div className="md:mr-14 mb-14 md:mb-0">
-                        <div className="mb-4 min-w-[116px] min-h-[116px]">
-                            <Image
-                                src="/icons/france-relance.svg"
-                                height={116}
-                                width={116}
-                                alt="icone france relance"
-                            />
-                        </div>
-                        <div className="min-w-[140px] min-h-[41px]">
-                            <Image
-                                src="/images/financé-ue.svg"
-                                height={41.5}
-                                width={140}
-                                alt="icone union européenne"
-                            />
-                        </div>
+                        <ImageFixed
+                            className="mb-4"
+                            src="/icons/france-relance.svg"
+                            height={116}
+                            width={116}
+                            alt="icone france relance"
+                        />
+                        <ImageFixed
+                            src="/images/financé-ue.svg"
+                            height={41.5}
+                            width={140}
+                            alt="icone union européenne"
+                        />
                     </div>
 
                     <div>

@@ -1,7 +1,7 @@
 // import Link from "next/link";
 
 import { Tooltip } from "@mui/material";
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
@@ -54,7 +54,7 @@ const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
                 }}
                 disabled={disabled}
             >
-                <Image
+                <ImageFixed
                     src={`/icons/${icon}.svg`}
                     width={16}
                     height={16}

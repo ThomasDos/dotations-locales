@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { useDispatch } from "react-redux";
 import { updateIsSimulationFalse } from "store/appSettings.slice";
 import styled from "styled-components";
@@ -18,14 +18,12 @@ function SimulationTutorial() {
     const dispatch = useDispatch();
     return (
         <div className="flex items-center justify-center flex-col">
-            <div>
-                <Image
-                    src="/images/simulation-tutorial.svg"
-                    height={240}
-                    width={240}
-                    alt="Descriptif du mode simulation"
-                />
-            </div>
+            <ImageFixed
+                src="/images/simulation-tutorial.svg"
+                height={240}
+                width={240}
+                alt="Descriptif du mode simulation"
+            />
             <StyledSpanTitle className="mt-8 font-bold">
                 Pour créer une simulation, vous devez :
             </StyledSpanTitle>
@@ -44,14 +42,13 @@ function SimulationTutorial() {
                     dispatch(updateIsSimulationFalse());
                 }}
             >
-                <div className="flex items-center rotate-180">
-                    <Image
-                        src="/icons/arrow-right.svg"
-                        height={16}
-                        width={16}
-                        alt="icone fleche gauche"
-                    />
-                </div>
+                <ImageFixed
+                    className="flex items-center rotate-180"
+                    src="/icons/arrow-right.svg"
+                    height={16}
+                    width={16}
+                    alt="icone fleche gauche"
+                />
                 <StyledCancelSimulation>Abandonner</StyledCancelSimulation>
             </div>
         </div>

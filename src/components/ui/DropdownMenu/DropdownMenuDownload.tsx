@@ -2,11 +2,11 @@ import { Divider } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
+import ImageFixed from "../ImageFixed";
 
 const StyledDivider = styled(Divider)`
     margin: 0 !important;
@@ -38,14 +38,13 @@ const MenuItemCustom = ({
         >
             <div className="flex text-sm my-2 w-44 justify-between items-center">
                 <StyledCustomSpan>{text}</StyledCustomSpan>
-                <div className="ml-2">
-                    <Image
-                        src={`/icons/file-download.svg`}
-                        width={16}
-                        height={16}
-                        alt="icone exporter"
-                    />
-                </div>
+                <ImageFixed
+                    src={`/icons/file-download.svg`}
+                    width={16}
+                    height={16}
+                    alt="icone pour exporter"
+                    className="ml-2"
+                />
             </div>
         </StyledMenuItem>
     );
@@ -72,14 +71,12 @@ const DropdownMenuDownload = () => {
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
                 startIcon={
-                    <div className="flex items-center">
-                        <Image
-                            src="/icons/dropdown-download.svg"
-                            width={24}
-                            height={24}
-                            alt="icone exporter"
-                        />
-                    </div>
+                    <ImageFixed
+                        src="/icons/dropdown-download.svg"
+                        width={24}
+                        height={24}
+                        alt="icone pour exporter"
+                    />
                 }
             >
                 <StyledCustomSpan>Exporter</StyledCustomSpan>

@@ -14,7 +14,7 @@ const SousDotationsContainer = ({ sousDotations }: SousDotationsProps) => {
     const currentYear = useSelector(selectCurrentYear);
 
     return (
-        <div className="flex space mt-4 space-x-4">
+        <div className="flex justify-between sm:justify-start space mt-4 sm:space-x-4">
             {sousDotations.map(sousDot => {
                 const dotationKey: string = Object.keys(sousDot)[0];
                 const { annees, title } = sousDot[dotationKey];

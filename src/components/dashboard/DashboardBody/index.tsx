@@ -1,7 +1,7 @@
 import { BaseCalculLoi, Tab, Tabs } from "components/ui";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
+import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
 import { selectInitialDotations } from "store/initialCommune.slice";
@@ -73,19 +73,16 @@ const DashboardBody = ({
                     </div>
                     <div className="flex w-full items-center justify-between">
                         <BaseCalculLoi />
-                        <div
+                        <ImageFixed
                             className="flex flex-1 sm:hidden justify-end"
+                            width={48}
+                            height={48}
+                            alt="Configuration des critères généraux"
+                            src="/icons/settings-mobile.svg"
                             onClick={() => {
                                 setDisplayMobileCriteresGeneraux(true);
                             }}
-                        >
-                            <Image
-                                src="/icons/settings-mobile.svg"
-                                alt="Configuration des critères généraux"
-                                width={48}
-                                height={48}
-                            />
-                        </div>
+                        />
                     </div>
                 </div>
 
