@@ -1,9 +1,12 @@
 import {
     IconCopyWithSuccess,
+    IconInformation,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
+import InfoModal from "components/ui/InfoModal";
 import type { Dotation } from "models/commune/commune.interface";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
     selectCurrentYear,
@@ -17,15 +20,15 @@ import SousDotationsContainer from "./SousDotationsContainer";
 
 const StyledDotationCard = styled.div<{
     borderTop: boolean;
-    backgroundColor: boolean;
+    hasBackgroundColor: boolean;
 }>`
     display: flex;
     flex-direction: column;
     padding: 20px;
     border: 1px solid var(--blue-france-850);
-    border-top: ${({ borderTop }) => (borderTop ? "" : "none")};
-    background-color: ${({ backgroundColor }) =>
-        backgroundColor ? "var(--blue-france-975)" : "none"};
+    border-top: ${({ borderTop }) => !borderTop && "none"};
+    background-color: ${({ hasBackgroundColor }) =>
+        hasBackgroundColor && "var(--blue-france-975)"};
 
     @media (min-width: 640px) {
         padding: 32px 48px 32px 32px;
@@ -52,17 +55,19 @@ interface DotationCardProps {
     hasInformation?: boolean;
     dotation: Dotation;
     borderTop: boolean;
-    backgroundColor?: boolean;
+    hasBackgroundColor?: boolean;
     handleClick?: () => void;
 }
 
 const DotationCard = ({
     dotation,
-    // hasInformation = true,
+    //TODO: passer en true quand feature info est prête
+    hasInformation = false,
     borderTop,
     handleClick,
-    backgroundColor = false,
+    hasBackgroundColor = false,
 }: DotationCardProps) => {
+    const [showInfoModal, setShowInfoModal] = useState(false);
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
 
@@ -78,66 +83,75 @@ const DotationCard = ({
     const { title, sousDotations } = dotation;
 
     return (
-        <StyledDotationCard
-            borderTop={borderTop}
-            backgroundColor={backgroundColor}
-        >
-            <div className="flex flex-col sm:flex-row items-center sm:justify-between">
-                <div className="flex flex-col items-center sm:items-start">
-                    <div className="flex">
-                        <StyledCardTitle
-                            className="mb-2 mr-1"
-                            onClick={handleClick}
-                        >
-                            {title}
-                        </StyledCardTitle>
+        <>
+            <StyledDotationCard
+                borderTop={borderTop}
+                hasBackgroundColor={hasBackgroundColor}
+            >
+                <div className="flex flex-col sm:flex-row items-center sm:justify-between">
+                    <div className="flex flex-col items-center sm:items-start">
+                        <div className="flex">
+                            <StyledCardTitle
+                                className="mb-2 mr-1"
+                                onClick={handleClick}
+                            >
+                                {title}
+                            </StyledCardTitle>
 
-                        {/* 
-                        //TODO: réactiver quand feature info prête
-                        {hasInformation && <IconInformation />} */}
+                            {hasInformation && (
+                                <IconInformation
+                                    setShowInfoModal={setShowInfoModal}
+                                />
+                            )}
+                        </div>
+                        <span>
+                            Évolution du montant {lastYear} / {currentYear}.
+                        </span>
                     </div>
-                    <span>
-                        Évolution du montant {lastYear} / {currentYear}.
-                    </span>
-                </div>
-                {currentYearDotation ? (
-                    <div className="flex flex-col items-center sm:items-end">
-                        <div className="flex mb-2">
-                            <StyledSpanTotalNumber>
-                                {dotationTotalFormatted} €
-                            </StyledSpanTotalNumber>
-                            <div className="hidden relative sm:flex items-center">
-                                <div className="absolute r-0 ml-3">
-                                    <IconCopyWithSuccess
-                                        toCopy={currentYearDotation}
-                                    />
+                    {currentYearDotation ? (
+                        <div className="flex flex-col items-center sm:items-end">
+                            <div className="flex mb-2">
+                                <StyledSpanTotalNumber>
+                                    {dotationTotalFormatted} €
+                                </StyledSpanTotalNumber>
+                                <div className="hidden relative sm:flex items-center">
+                                    <div className="absolute r-0 ml-3">
+                                        <IconCopyWithSuccess
+                                            toCopy={currentYearDotation}
+                                        />
+                                    </div>
                                 </div>
                             </div>
+                            {!!Math.round(totalEvolution) && (
+                                <div className="flex items-center">
+                                    <span className="mr-2 whitespace-nowrap">{`${
+                                        totalEvolution > 0 ? "+" : ""
+                                    } ${formatNumberWithSpace(
+                                        totalEvolution
+                                    )}€`}</span>
+                                    <LabelPercentage
+                                        percentage={percentageEvolution}
+                                    />
+                                </div>
+                            )}
                         </div>
-                        {!!Math.round(totalEvolution) && (
-                            <div className="flex items-center">
-                                <span className="mr-2 whitespace-nowrap">{`${
-                                    totalEvolution > 0 ? "+" : ""
-                                } ${formatNumberWithSpace(
-                                    totalEvolution
-                                )}€`}</span>
-                                <LabelPercentage
-                                    percentage={percentageEvolution}
-                                />
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <div>
-                        <LabelGreyCustomCrossIcon text="Non éligible" />
-                    </div>
-                )}
-            </div>
+                    ) : (
+                        <div>
+                            <LabelGreyCustomCrossIcon text="Non éligible" />
+                        </div>
+                    )}
+                </div>
 
-            {sousDotations && (
-                <SousDotationsContainer sousDotations={sousDotations} />
-            )}
-        </StyledDotationCard>
+                {sousDotations && (
+                    <SousDotationsContainer sousDotations={sousDotations} />
+                )}
+            </StyledDotationCard>
+            <InfoModal
+                showInfoModal={showInfoModal}
+                setShowInfoModal={setShowInfoModal}
+                dotation={dotation}
+            />
+        </>
     );
 };
 

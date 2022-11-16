@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
@@ -37,14 +37,14 @@ const TitleDotationsNonEligibles = ({
                 <StyledSpanToggle>
                     {showNonEligible ? "Tout masquer" : "Tout voir"}
                 </StyledSpanToggle>
-                <div className={showNonEligible ? "" : "rotate-180"}>
-                    <Image
-                        src="/icons/arrow-up.svg"
-                        height={24}
-                        width={24}
-                        alt="Fleche vers le haut pour ouvrir les dotations non éligibles"
-                    />
-                </div>
+
+                <ImageFixed
+                    className={showNonEligible ? "" : "rotate-180"}
+                    height={24}
+                    width={24}
+                    alt="Fleche vers le haut pour ouvrir les dotations non éligibles"
+                    src="/icons/arrow-up.svg"
+                />
             </div>
         </div>
     );

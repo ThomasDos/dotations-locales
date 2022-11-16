@@ -1,5 +1,5 @@
 import { Tooltip } from "@mui/material";
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { useState } from "react";
 import { matomoTrackEvent } from "services/matomo";
 
@@ -25,7 +25,7 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
                 onCopy();
                 return navigator.clipboard.writeText(String(toCopy));
             }}
-            className=" cursor-pointer"
+            className="cursor-pointer"
         >
             <Tooltip
                 title={copied ? "Copié !" : "Copier le montant"}
@@ -45,10 +45,10 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
                     },
                 }}
             >
-                <div className="min-w-[16px] min-h-[16px]">
-                    <Image
-                        data-tip
-                        data-for="tooltip-copy"
+                <div>
+                    <ImageFixed
+                        dataTip
+                        dataFor="tooltip-copy"
                         src={`/icons/${
                             copied ? "copy-success.svg" : "copy.svg"
                         }`}

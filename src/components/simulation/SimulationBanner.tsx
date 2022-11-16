@@ -1,6 +1,6 @@
 import { Box, Modal } from "@mui/material";
 import { Button } from "components/ui";
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -83,14 +83,13 @@ const SimulationBanner = ({
         <>
             <StyledSimulationBanner>
                 <div className="flex">
-                    <div className="hidden md:block">
-                        <Image
-                            src={`/icons/calculator-banner.svg`}
-                            width={48}
-                            height={48}
-                            alt="image de la simulation"
-                        />
-                    </div>
+                    <ImageFixed
+                        className="hidden md:block"
+                        src={`/icons/calculator-banner.svg`}
+                        width={48}
+                        height={48}
+                        alt="image de la simulation"
+                    />
                     <div className="flex flex-col ml-3">
                         <StyledBannerTitle>
                             {commune} ({codeInsee})
@@ -178,6 +177,8 @@ const SimulationBanner = ({
                         </div>
                         <div className="flex-1">
                             <Button
+                                backgroundColor="var(--red-marianne-main-472)"
+                                backgroundColorHover="var(--red-marianne-425)"
                                 text="Non"
                                 onClick={() => {
                                     setResetModal(false);

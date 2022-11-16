@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 
 interface AlertRowIconProps {
     text: string;
@@ -7,14 +7,13 @@ interface AlertRowIconProps {
 export default function AlertRowIcon({ text }: AlertRowIconProps) {
     return (
         <div className="my-6 flex">
-            <div className="min-w-[32px] min-h-[22px] mr-1">
-                <Image
-                    src="/icons/valid-checked-with-background.svg"
-                    width={32}
-                    height={22}
-                    alt="un icon de validation"
-                />
-            </div>
+            <ImageFixed
+                className="mr-1"
+                src="/icons/valid-checked-with-background.svg"
+                width={32}
+                height={22}
+                alt="une icone de validation"
+            />
             <div className="font-bold">{text}</div>
         </div>
     );

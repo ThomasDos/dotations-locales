@@ -42,7 +42,7 @@ export default function EmailForm({
                 text={`Mise à jour de mes dotations (${commune} ${codeInsee})`}
             />
             <AlertRowIcon
-                text=" Simulation mes dotations avec les Projets de Lois de
+                text="Simulation mes dotations avec les Projets de Lois de
                     Finances (PLF)"
             />
             <AlertRowIcon text="Accès en exclusivité à de nouvelles fonctionnalités" />

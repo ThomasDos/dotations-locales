@@ -73,7 +73,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
                             return (
                                 <DotationCard
                                     key={dotationEligibleKey}
-                                    hasInformation={false}
                                     dotation={
                                         dotationsEligibles[dotationEligibleKey]
                                     }
@@ -110,7 +109,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
                                 return (
                                     <DotationCard
                                         key={dotationNonEligibleKey}
-                                        hasInformation={false}
                                         dotation={
                                             dotationsNonEligibles[
                                                 dotationNonEligibleKey

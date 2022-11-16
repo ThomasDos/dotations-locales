@@ -45,8 +45,8 @@ const SubTab = ({ dotation }: SubTabProps) => {
                     <>
                         <DotationCard
                             dotation={dotation}
-                            borderTop={true}
-                            backgroundColor={true}
+                            borderTop
+                            hasBackgroundColor
                         />
                         {!_.isEmpty(criteresEligibles) &&
                             Object.keys(criteresEligibles).map(

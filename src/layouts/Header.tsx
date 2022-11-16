@@ -1,5 +1,5 @@
 import { BurgerMenu } from "components/ui";
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import Link from "next/link";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
@@ -33,26 +33,25 @@ const HeaderContainer = () => {
                                     ]);
                                 }}
                             >
-                                <div className="hidden sm:block cursor-pointer min-w-[88px] min-h-[90px]">
-                                    <Image
-                                        src="/images/marianne-text-header-lg.svg"
-                                        height={90}
-                                        width={88}
-                                        alt="Logo de la marianne qui redirige vers l'accueil"
-                                        quality={100}
-                                        priority
-                                    />
-                                </div>
-                                <div className="sm:hidden cursor-pointer min-w-[174px] min-h-[78px]">
-                                    <Image
-                                        src="/images/marianne-text-header-sm.svg"
-                                        height={78}
-                                        width={174}
-                                        alt="Logo de la marianne qui redirige vers l'accueil"
-                                        quality={100}
-                                        priority
-                                    />
-                                </div>
+                                <ImageFixed
+                                    className="hidden sm:block cursor-pointer"
+                                    src="/images/marianne-text-header-lg.svg"
+                                    height={90}
+                                    width={88}
+                                    alt="Logo de la marianne qui redirige vers l'accueil"
+                                    quality={100}
+                                    priority
+                                />
+
+                                <ImageFixed
+                                    className="sm:hidden cursor-pointer"
+                                    src="/images/marianne-text-header-sm.svg"
+                                    height={78}
+                                    width={174}
+                                    alt="Logo de la marianne qui redirige vers l'accueil"
+                                    quality={100}
+                                    priority
+                                />
                             </div>
                         </Link>
                     </div>

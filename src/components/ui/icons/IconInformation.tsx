@@ -1,21 +1,23 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import { matomoTrackEvent } from "services/matomo";
 
-const IconInformation = () => {
+interface IconInformationProps {
+    setShowInfoModal(show: boolean): void;
+}
+
+const IconInformation = ({ setShowInfoModal }: IconInformationProps) => {
     return (
-        <div
-            className="cursor-help flex items-center"
+        <ImageFixed
+            className="cursor-help"
             onClick={() => {
                 matomoTrackEvent(["fonction", "info icone", "clique"]);
+                setShowInfoModal(true);
             }}
-        >
-            <Image
-                src="/icons/information.svg"
-                height={16}
-                width={16}
-                alt="vecteur sous forme de flèche vers le bas"
-            />
-        </div>
+            src="/icons/information.svg"
+            height={16}
+            width={16}
+            alt="vecteur sous forme de flèche vers le bas"
+        />
     );
 };
 

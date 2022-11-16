@@ -8,7 +8,7 @@ import {
     Link,
     Logo,
 } from "@dataesr/react-dsfr";
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
 
 const FooterMain = styled(Footer)`
@@ -27,14 +27,14 @@ const FooterContainer = () => {
                     <StyledLogo splitCharacter={10}>
                         RÉPUBLIQUE FRANÇAISE
                     </StyledLogo>
-                    <div className="ml-5">
-                        <Image
-                            src="/icons/incubateur-territoires.svg"
-                            height={90}
-                            width={160}
-                            alt="logo incubateur territoires"
-                        />
-                    </div>
+
+                    <ImageFixed
+                        className="ml-5"
+                        src="/icons/incubateur-territoires.svg"
+                        height={90}
+                        width={160}
+                        alt="logo incubateur territoires"
+                    />
                 </FooterOperator>
                 <FooterBodyItem>
                     <Link
