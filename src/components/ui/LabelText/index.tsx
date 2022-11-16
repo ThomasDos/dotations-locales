@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
 
 interface LabelTextProps {
@@ -43,14 +43,12 @@ const LabelText = ({
             fontWeight={fontWeight}
         >
             {icon && (
-                <div className="flex items-center min-w-[12px] min-h-[12px]">
-                    <Image
-                        src={`/icons/${icon}`}
-                        height={12}
-                        width={12}
-                        alt="icone croix"
-                    />
-                </div>
+                <ImageFixed
+                    src={`/icons/${icon}`}
+                    height={12}
+                    width={12}
+                    alt="icone croix"
+                />
             )}
             <span className={`${icon ? "ml-2" : ""}`}>{text}</span>
         </StyledLabelText>

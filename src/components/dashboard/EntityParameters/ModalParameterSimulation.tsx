@@ -1,7 +1,7 @@
 import { Modal } from "@mui/material";
 import { Button } from "components/ui";
+import ImageFixed from "components/ui/ImageFixed";
 import usePostSimulation from "hooks/usePostSimulation";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
@@ -147,14 +147,13 @@ function ModalParameterSimulation({
         >
             <div className="bg-white">
                 <StyledModalHeader onClick={handleModalClose}>
-                    <div className="flex items-center cursor-pointer rotate-180">
-                        <Image
-                            src={`/icons/arrow-right.svg`}
-                            width={16}
-                            height={16}
-                            alt="Fermer la modal et revenir à la simulation"
-                        />
-                    </div>
+                    <ImageFixed
+                        className="flex items-center cursor-pointer rotate-180"
+                        src={`/icons/arrow-right.svg`}
+                        width={16}
+                        height={16}
+                        alt="Une fleche vers la droite pour fermer la modal et revenir à la simulation"
+                    />
                     <span className="ml-2">Données de votre commune</span>
                 </StyledModalHeader>
                 <StyledModalBody>
@@ -163,17 +162,14 @@ function ModalParameterSimulation({
                             {description}
                         </StyledTitleEditor>
                         <div className="flex items-center mb-12">
-                            <div
+                            <ImageFixed
                                 className="flex items-center cursor-pointer"
                                 onClick={handleInputDecrement}
-                            >
-                                <Image
-                                    src={`/icons/substract.svg`}
-                                    width={56}
-                                    height={56}
-                                    alt="Fermer la modal et revenir à la simulation"
-                                />
-                            </div>
+                                src={`/icons/substract.svg`}
+                                width={56}
+                                height={56}
+                                alt="Icone moins pour diminuer le critère"
+                            />
                             <StyledInput>
                                 {!valeurIsNotNumber && (
                                     <input
@@ -184,17 +180,15 @@ function ModalParameterSimulation({
                                     />
                                 )}
                             </StyledInput>
-                            <div
+
+                            <ImageFixed
                                 className="flex items-center cursor-pointer"
                                 onClick={handleInputIncrement}
-                            >
-                                <Image
-                                    src={`/icons/add.svg`}
-                                    width={56}
-                                    height={56}
-                                    alt="Fermer la modal et revenir à la simulation"
-                                />
-                            </div>
+                                src={`/icons/add.svg`}
+                                width={56}
+                                height={56}
+                                alt="Icone plus pour augmenter le critère"
+                            />
                         </div>
                         <div
                             className="cursor-pointer text-sm"

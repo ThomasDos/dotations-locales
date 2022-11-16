@@ -39,6 +39,8 @@ const Dashboard = () => {
     }, [isSimulation]);
 
     useEffect(() => {
+        const tallyHasOpen = window.sessionStorage.getItem("tallyHasOpen");
+        if (tallyHasOpen) return;
         //@ts-ignore
         window.Tally?.openPopup(process.env.NEXT_PUBLIC_API_TALLY, {
             autoClose: 3000,
@@ -49,6 +51,7 @@ const Dashboard = () => {
             },
             hideTitle: true,
         });
+        window.sessionStorage.setItem("tallyHasOpen", "true");
     }, []);
 
     if (

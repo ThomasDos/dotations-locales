@@ -59,8 +59,8 @@ const SubTabSousDotations = ({
                         <>
                             <DotationCard
                                 dotation={sousDotation}
-                                borderTop={true}
-                                backgroundColor={true}
+                                borderTop
+                                hasBackgroundColor
                             />
 
                             {!_.isEmpty(criteresEligibles) &&

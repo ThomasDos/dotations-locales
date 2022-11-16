@@ -1,7 +1,7 @@
 import { Collapse } from "@mui/material";
 import { LabelText, Spinner } from "components/ui";
+import ImageFixed from "components/ui/ImageFixed";
 import useFetchAutocompletion from "hooks/useFetchAutocompletion";
-import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -11,11 +11,13 @@ const StyledSearchButton = styled.div`
     background-color: var(--blue-france-sun-113-625);
     border-top-right-radius: 4px;
     gap: 8px;
+    cursor: default;
 `;
 
 const StyledCollapseContent = styled.div`
     filter: drop-shadow(0px 16px 32px rgba(0, 0, 0, 0.16));
     width: calc(100% - 2rem);
+    background-color: var(--grey-1000);
 
     @media (min-width: 768px) {
         width: 760px;
@@ -80,14 +82,12 @@ const SearchInput = () => {
                             {searchResultIsLoading ? (
                                 <Spinner />
                             ) : (
-                                <div className="flex">
-                                    <Image
-                                        src="/icons/search.svg"
-                                        height={24}
-                                        width={24}
-                                        alt="icone rechercher"
-                                    />
-                                </div>
+                                <ImageFixed
+                                    src="/icons/search.svg"
+                                    height={24}
+                                    width={24}
+                                    alt="icone rechercher"
+                                />
                             )}
                             <StyledSpanButton className="text-sm md:text-xl font-normal">
                                 Rechercher
@@ -97,7 +97,7 @@ const SearchInput = () => {
                 </button>
             </StyledSearchInput>
             <Collapse in={!!autocompletion?.length && !!search}>
-                <StyledCollapseContent className="absolute bg-white z-10">
+                <StyledCollapseContent className="absolute z-10">
                     <div className="flex justify-between px-6 py-4">
                         <div>
                             <LabelText

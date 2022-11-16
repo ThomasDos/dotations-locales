@@ -1,7 +1,7 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
     updateIsSimulationFalse,
@@ -25,9 +25,18 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
     const communeWithCodeInsee = `${commune} (${codeInsee})`;
     const dispatch = useDispatch();
     const router = useRouter();
-    const [modeSelected, setModeSelected] = useState(
-        router.pathname.includes("historique") ? "Historique" : "Dotations"
-    );
+
+    const pathnameFiltered = useMemo(() => {
+        if (router.pathname.includes("historique")) {
+            return "Historique";
+        }
+        if (router.pathname.includes("alerter")) {
+            return "M'alerter";
+        }
+
+        return "Dotations";
+    }, [router.pathname]);
+    const [modeSelected, setModeSelected] = useState(pathnameFiltered);
 
     return (
         <>
@@ -72,8 +81,17 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             )
                         }
                     />
+                    <LinkIcon
+                        icon="alerter"
+                        text="M'alerter"
+                        handleClick={() =>
+                            router.push(
+                                `/${codeInsee}/alerter?commune=${commune}`
+                            )
+                        }
+                        disabled
+                    />
                     <LinkIcon icon="comparer" text="Comparer" disabled />
-                    <LinkIcon icon="alerter" text="M'alerter" disabled />
                 </div>
                 <div className="w-full sm:hidden">
                     <FormControl
@@ -132,17 +150,22 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             >
                                 <LinkIcon icon="historique" text="Historique" />
                             </MenuItem>
+
+                            <MenuItem
+                                value="M'alerter"
+                                onClick={() =>
+                                    router.push(
+                                        `/${codeInsee}/alerter?commune=${commune}`
+                                    )
+                                }
+                                disabled
+                            >
+                                <LinkIcon icon="alerter" text="M'alerter" />
+                            </MenuItem>
                             <MenuItem value="Comparer" disabled>
                                 <LinkIcon
                                     icon="comparer"
                                     text="Comparer"
-                                    disabled
-                                />
-                            </MenuItem>
-                            <MenuItem value="M'alerter" disabled>
-                                <LinkIcon
-                                    icon="alerter"
-                                    text="M'alerter"
                                     disabled
                                 />
                             </MenuItem>

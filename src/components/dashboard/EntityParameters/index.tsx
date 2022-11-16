@@ -1,7 +1,7 @@
 import { Button, LabelPercentage } from "components/ui";
+import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
@@ -112,19 +112,17 @@ const EntityParameters = ({
                             ? "Données modifiables"
                             : "Données connues de votre commune"}
                     </span>
-                    <div
+
+                    <ImageFixed
+                        src="/icons/cross-filled.svg"
+                        height={48}
+                        width={48}
+                        alt="Icone de croix pour fermer les critères généraux"
                         className="sm:hidden"
                         onClick={() => {
                             setDisplayMobileCriteresGeneraux(false);
                         }}
-                    >
-                        <Image
-                            src="/icons/cross-filled.svg"
-                            height={48}
-                            width={48}
-                            alt="Fermer les critères générax"
-                        />
-                    </div>
+                    />
                 </div>
                 <div>
                     {criteresGenerauxKeys.map((critereGeneralKey: string) => {
