@@ -1,6 +1,6 @@
 # Dotations Locales App
 
-Bienvenue sur `dotations-locales-app`, l'interface web de [dotations.incubateur.anct.gouv.fr](http://dotations.incubateur.anct.gouv.fr) !
+Bienvenue sur `dotations-locales-app`, l'interface web de [dotations.incubateur.anct.gouv.fr](https://dotations.incubateur.anct.gouv.fr) !
 
 ## Installation
 
@@ -12,7 +12,7 @@ Pour `Next.js` et le gestionnaire de dépendances, installer l'interpréteur Jav
 
 ### Installation du gestionnaire de dépendances Yarn
 
-Vous pouvez installer les dépendances de ce dépôt avec le gestionnaire de dépendances [Yarn v2+](https://yarnpkg.com).  
+Vous pouvez installer les dépendances de ce dépôt avec le gestionnaire de dépendances [Yarn v2+](https://yarnpkg.com).
 
 Vous retrouverez les étapes d'installation de Yarn et de ses propres dépendances est dans sa [documentation officielle](https://yarnpkg.com/getting-started/install).
 
@@ -31,8 +31,9 @@ Celle-ci doit s'achever sans erreur.
 ## Configuration
 
 Par défaut, aucune configuration supplémentaire n'est nécessaire pour démarrer l'application `dotations-locales-app`. Néanmoins, celle-ci s'appuie sur quelques autres services web définis dans le fichier `.env` :
-* pour la recherche des territoires, un appel est fait à l'API web des territoires dont le code source est disponible sur [le dépôt Territoires](https://git.leximpact.dev/leximpact/territoires),
-* pour les critères des territoires et les calculs de dotations, un appel est fait à l'API web des dotations dont le code source est disponible sur [le dépôt dotations-locales-back](https://gitlab.com/incubateur-territoires/startups/dotations-locales/dotations-locales-back).
+
+-   pour la recherche des territoires, un appel est fait à l'API web des territoires dont le code source est disponible sur [le dépôt Territoires](https://git.leximpact.dev/leximpact/territoires),
+-   pour les critères des territoires et les calculs de dotations, un appel est fait à l'API web des dotations dont le code source est disponible sur [le dépôt dotations-locales-back](https://gitlab.com/incubateur-territoires/startups/dotations-locales/dotations-locales-back).
 
 ## Démarrer l'application en mode développement
 
