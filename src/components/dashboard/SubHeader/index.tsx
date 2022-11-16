@@ -89,6 +89,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                                 `/${codeInsee}/alerter?commune=${commune}`
                             )
                         }
+                        disabled
                     />
                     <LinkIcon icon="comparer" text="Comparer" disabled />
                 </div>
@@ -157,6 +158,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                                         `/${codeInsee}/alerter?commune=${commune}`
                                     )
                                 }
+                                disabled
                             >
                                 <LinkIcon icon="alerter" text="M'alerter" />
                             </MenuItem>
