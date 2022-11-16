@@ -1,5 +1,5 @@
+import ImageFixed from "components/ui/ImageFixed";
 import { matomoTrackEvent } from "services/matomo";
-import ImageFixed from "../ImageFixed";
 
 interface IconInformationProps {
     setShowInfoModal(show: boolean): void;

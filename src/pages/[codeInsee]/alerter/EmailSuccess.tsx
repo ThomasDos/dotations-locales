@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
 
 const StyledMerci = styled.div`
@@ -33,14 +33,13 @@ export default function EmailSuccess({
 
     return (
         <div className="text-center">
-            <div className="min-w-[65px] min-h-[72px] flex justify-center select-none">
-                <Image
-                    src="/icons/email-success.svg"
-                    width={65}
-                    height={72}
-                    alt="icone de l'email correctement enregistré"
-                />
-            </div>
+            <ImageFixed
+                className="select-none flex justify-center"
+                src="/icons/email-success.svg"
+                width={65}
+                height={72}
+                alt="icone de l'email correctement enregistré"
+            />
             <StyledMerci className="my-4">Merci</StyledMerci>
             <StyledValidationText className="mb-4 text-lg">
                 <div>Inscription transmise</div>

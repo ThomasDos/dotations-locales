@@ -26,24 +26,22 @@ export default function ImageFixed({
     quality,
 }: ImageFixedProps) {
     return (
-        <div>
-            <div
-                className={`relative flex min-w-[${width}px] min-h-[${height}px] ${
-                    className ? className : ""
-                }`}
-                onClick={onClick}
-            >
-                <Image
-                    width={width}
-                    height={height}
-                    alt={alt}
-                    src={src}
-                    data-tip={dataTip}
-                    data-for={dataFor}
-                    priority={priority}
-                    quality={quality}
-                />
-            </div>
+        <div
+            className={`relative flex min-w-[${width}px] min-h-[${height}px] min-w-max ${
+                className ? className : ""
+            }`}
+            onClick={onClick}
+        >
+            <Image
+                width={width}
+                height={height}
+                alt={alt}
+                src={src}
+                data-tip={dataTip}
+                data-for={dataFor}
+                priority={priority}
+                quality={quality}
+            />
         </div>
     );
 }

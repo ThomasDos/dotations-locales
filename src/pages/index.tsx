@@ -122,7 +122,7 @@ const Home: NextPage = () => {
 
             <MainBottom className="w-full p-5 md:py-20 md:px-40 lg:px-60 flex justify-center items-center">
                 <MainBottomBody className="w-screen max-w-4xl flex flex-col md:flex-row justify-center items-center">
-                    <div className="md:mr-14 mb-14 md:mb-0">
+                    <div className="md:mr-14 mb-14 md:mb-0 flex flex-col items-center">
                         <ImageFixed
                             className="mb-4"
                             src="/icons/france-relance.svg"

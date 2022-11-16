@@ -5,25 +5,43 @@ interface Buttonprops {
     text: string;
     icon?: string;
     onClick?: () => void;
+    backgroundColor?: string;
+    backgroundColorHover?: string;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{
+    backgroundColor?: string;
+    backgroundColorHover?: string;
+}>`
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--blue-france-113);
+    background-color: ${({ backgroundColor }) =>
+        backgroundColor || "var(--blue-france-113)"};
     padding: 12px 66px;
     margin-top: 16px;
     color: var(--blue-france-975);
     :hover {
-        background-color: var(--blue-france-113) !important;
+        background-color: ${({ backgroundColorHover }) =>
+            backgroundColorHover || "#000091df"} !important;
         color: var(--blue-france-975);
     }
 `;
-const Button = ({ text, icon, onClick }: Buttonprops) => {
+const Button = ({
+    text,
+    icon,
+    onClick,
+    backgroundColor,
+    backgroundColorHover,
+}: Buttonprops) => {
     return (
-        <StyledButton type="button" onClick={onClick}>
+        <StyledButton
+            type="button"
+            onClick={onClick}
+            backgroundColor={backgroundColor}
+            backgroundColorHover={backgroundColorHover}
+        >
             {icon && (
                 <ImageFixed
                     src={`/icons/${icon}.svg`}

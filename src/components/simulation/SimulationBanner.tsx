@@ -177,6 +177,8 @@ const SimulationBanner = ({
                         </div>
                         <div className="flex-1">
                             <Button
+                                backgroundColor="var(--red-marianne-main-472)"
+                                backgroundColorHover="var(--red-marianne-425)"
                                 text="Non"
                                 onClick={() => {
                                     setResetModal(false);

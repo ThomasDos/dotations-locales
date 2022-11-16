@@ -2,11 +2,11 @@ import { Divider } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import ImageFixed from "components/ui/ImageFixed";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
-import ImageFixed from "../ImageFixed";
 
 const StyledDivider = styled(Divider)`
     margin: 0 !important;
