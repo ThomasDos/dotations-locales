@@ -1,5 +1,6 @@
 import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
+import Dots from "../Dots";
 
 interface Buttonprops {
     text: string;
@@ -7,6 +8,7 @@ interface Buttonprops {
     onClick?: () => void;
     backgroundColor?: string;
     backgroundColorHover?: string;
+    isLoading?: boolean;
 }
 
 const StyledButton = styled.button<{
@@ -34,23 +36,31 @@ const Button = ({
     onClick,
     backgroundColor,
     backgroundColorHover,
+    isLoading,
 }: Buttonprops) => {
     return (
         <StyledButton
             type="button"
+            disabled={isLoading}
             onClick={onClick}
             backgroundColor={backgroundColor}
             backgroundColorHover={backgroundColorHover}
         >
-            {icon && (
-                <ImageFixed
-                    src={`/icons/${icon}.svg`}
-                    width={24}
-                    height={24}
-                    alt={`icone ${text}`}
-                />
+            {isLoading ? (
+                <Dots />
+            ) : (
+                <>
+                    {icon && (
+                        <ImageFixed
+                            src={`/icons/${icon}.svg`}
+                            width={24}
+                            height={24}
+                            alt={`icone ${text}`}
+                        />
+                    )}
+                    <span className={icon ? "ml-2" : ""}>{text}</span>
+                </>
             )}
-            <span className={icon ? "ml-2" : ""}>{text}</span>
         </StyledButton>
     );
 };

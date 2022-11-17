@@ -31,3 +31,30 @@ export function toastError(toasterText: string) {
         },
     });
 }
+
+export function toastPromise(
+    funcPromise: Promise<unknown>,
+    {
+        loading,
+        success,
+        error,
+    }: { success: string; loading: string; error: string }
+) {
+    toast.promise(
+        funcPromise,
+        { loading, success, error },
+        {
+            duration: 3000,
+            iconTheme: {
+                primary: "#000091",
+                secondary: "#FFFAEE",
+            },
+            style: {
+                border: "1px solid #000091",
+                color: "#000091",
+                fontSize: "20px",
+                padding: "16px",
+            },
+        }
+    );
+}

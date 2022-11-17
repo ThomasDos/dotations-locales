@@ -5,6 +5,7 @@ import type {
     CommuneAnnee,
     Criteres,
 } from "models/commune/commune.interface";
+import { CommuneSimulation } from "models/simulation/simulation.interface";
 import {
     selectInitialAnnees,
     selectInitialCriteresGeneraux,
@@ -13,19 +14,22 @@ import {
 import type { RootState } from ".";
 import { selectIsSimulation } from "./appSettings.slice";
 
-const initialState: Commune = {
+const initialState: CommuneSimulation = {
     annees: [],
     codeInsee: "",
     criteresGeneraux: {},
     dotations: {},
+    avertissementPrecisionSimulation: false,
 };
 
 const simulationCommuneSlice = createSlice({
     initialState,
     name: "simulationCommune",
     reducers: {
-        hydrateSimulationCommune: (_, { payload }: PayloadAction<Commune>) =>
-            payload,
+        hydrateSimulationCommune: (
+            _,
+            { payload }: PayloadAction<Commune | CommuneSimulation>
+        ) => payload,
         resetSimulationCommune: () => initialState,
         updateSimulationCritereValeur: (
             state,
@@ -74,6 +78,11 @@ export const selectSimulationDotations = createSelector(
 export const selectSimulationAnnees = createSelector(
     selectSelf,
     state => state.annees
+);
+
+export const selectSimulationAvertissementPrecisionSimulation = createSelector(
+    selectSelf,
+    state => state.avertissementPrecisionSimulation
 );
 
 export const selectSimulationIsDifferentThanInitial = createSelector(
