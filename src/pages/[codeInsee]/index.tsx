@@ -3,10 +3,10 @@ import {
     EntityParameters,
     SubHeader,
 } from "components/dashboard";
-import DashboardFooter from "components/dashboard/DashboardFooter";
 import CriteresGenerauxSimulation from "components/simulation/CriteresGenerauxSimulation";
 import SimulationBanner from "components/simulation/SimulationBanner";
 import { Spinner } from "components/ui";
+import AlertDefaultModal from "components/ui/AlertModal";
 import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
 import { useRouter } from "next/router";
@@ -25,6 +25,8 @@ const Dashboard = () => {
         useState(true);
     const [displayMobileCriteresGeneraux, setDisplayMobileCriteresGeneraux] =
         useState(false);
+    const [showAlertModal, setShowAlertModal] = useState(false);
+    const [hasConfirmedAlert, setHasConfirmedAlert] = useState(false);
 
     const {
         data: fetchCommuneData,
@@ -88,33 +90,36 @@ const Dashboard = () => {
                     setDisplayMobileCriteresGeneraux={
                         setDisplayMobileCriteresGeneraux
                     }
+                    setShowAlertModal={setShowAlertModal}
                 />
             ) : (
-                <>
-                    <div className="flex pb-0.5">
-                        <DashboardBody
-                            setDisplayMobileCriteresGeneraux={
-                                setDisplayMobileCriteresGeneraux
-                            }
-                            displayMobileCriteresGeneraux={
-                                displayMobileCriteresGeneraux
-                            }
-                        />
-                        <EntityParameters
-                            setIsCriteresGenerauxSimulation={
-                                setIsCriteresGenerauxSimulation
-                            }
-                            setDisplayMobileCriteresGeneraux={
-                                setDisplayMobileCriteresGeneraux
-                            }
-                            displayMobileCriteresGeneraux={
-                                displayMobileCriteresGeneraux
-                            }
-                        />
-                    </div>
-                    <DashboardFooter />
-                </>
+                <div className="flex pb-0.5">
+                    <DashboardBody
+                        setDisplayMobileCriteresGeneraux={
+                            setDisplayMobileCriteresGeneraux
+                        }
+                        displayMobileCriteresGeneraux={
+                            displayMobileCriteresGeneraux
+                        }
+                    />
+                    <EntityParameters
+                        setIsCriteresGenerauxSimulation={
+                            setIsCriteresGenerauxSimulation
+                        }
+                        setDisplayMobileCriteresGeneraux={
+                            setDisplayMobileCriteresGeneraux
+                        }
+                        displayMobileCriteresGeneraux={
+                            displayMobileCriteresGeneraux
+                        }
+                    />
+                </div>
             )}
+            <AlertDefaultModal
+                setShowAlertModal={setShowAlertModal}
+                showAlertModal={!hasConfirmedAlert && showAlertModal}
+                setHasConfirmedAlert={setHasConfirmedAlert}
+            />
         </>
     );
 };

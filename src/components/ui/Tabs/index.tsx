@@ -34,7 +34,7 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
         })}
 
     @media (min-width: 640px) {
-        padding: 0 32px !important;
+        padding: 0 !important;
     }
 `;
 

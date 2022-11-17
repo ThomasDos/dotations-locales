@@ -13,6 +13,7 @@ import styled from "styled-components";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
 import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescending";
 
+import SimulationWarning from "components/simulation/SimulationWarning";
 import MainTab from "./MainTab";
 import SubTab from "./SubTab";
 
@@ -22,7 +23,7 @@ const StyledDashboardBody = styled.div<{
     display: ${({ displayMobileCriteresGeneraux }) =>
         displayMobileCriteresGeneraux ? "none" : "block"};
     width: 100%;
-    padding: 0 16px;
+    padding: 24px 16px 0;
     @media (min-width: 640px) {
         display: block;
         width: 70%;
@@ -64,7 +65,7 @@ const DashboardBody = ({
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
         >
             <>
-                <div className="w-full sm:px-8 sm:py-4 my-6 sm:mb-10 flex flex-col">
+                <div className="w-full mb-6 sm:mb-10 flex flex-col">
                     <div className="hidden sm:flex justify-between">
                         <span className="text-3xl font-bold">
                             Dotations pour {currentYear}
@@ -85,6 +86,8 @@ const DashboardBody = ({
                         />
                     </div>
                 </div>
+
+                {isSimulation && <SimulationWarning />}
 
                 <Tabs dotationsNonEligibles={tabIndexDotationsNonEligibles}>
                     {/*@ts-ignore*/}
