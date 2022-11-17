@@ -28,15 +28,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     );
 
     useEffect(() => {
-        const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? "";
-        const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
-
-        hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
-        matomoInit({
-            excludeUrlsPatterns: [/^localhost:.+/g],
-            siteId: matomoSiteId,
-            url: matomoUrl,
-        });
+        if (process.env.NODE_ENV !== "development") {
+            const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? "";
+            const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
+            hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
+            matomoInit({
+                excludeUrlsPatterns: [/^localhost:.+/g],
+                siteId: matomoSiteId,
+                url: matomoUrl,
+            });
+        }
     }, []);
 
     return (
