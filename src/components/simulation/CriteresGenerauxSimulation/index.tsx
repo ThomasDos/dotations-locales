@@ -39,6 +39,7 @@ interface CriteresGenerauxSimulationProps {
         isCriteresGenerauxSimulation: boolean
     ) => void;
     setDisplayMobileCriteresGeneraux: (display: boolean) => void;
+    setShowAlertModal(show: boolean): void;
 }
 
 export interface LawAvailable {
@@ -72,6 +73,7 @@ const radioButtonLawAvailable: LawAvailable[] = [
 export default function CriteresGenerauxSimulation({
     setIsCriteresGenerauxSimulation,
     setDisplayMobileCriteresGeneraux,
+    setShowAlertModal,
 }: CriteresGenerauxSimulationProps) {
     const dispatch = useDispatch();
     const { codeInsee } = useRouter().query;
@@ -103,6 +105,7 @@ export default function CriteresGenerauxSimulation({
             setIsCriteresGenerauxSimulation(false);
             toastSuccess("Votre simulation est prête !");
             window.scrollTo(0, 0);
+            setShowAlertModal(true);
         }
 
         if (fetchSimulation && !simulationIsDifferentThanInitial) {
