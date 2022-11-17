@@ -11,7 +11,7 @@ import {
     updateSimulationCriteresGeneraux,
 } from "store/simulationCommune.slice";
 import styled from "styled-components";
-import { toastError, toastSuccess } from "utils/customToasts";
+import { toastError, toastPromise } from "utils/customToasts";
 
 import CriteresGenerauxCard from "./CriteresGenerauxCard";
 import RadioGroupContainer from "./RadioGroupContainer";
@@ -77,7 +77,9 @@ export default function CriteresGenerauxSimulation({
 }: CriteresGenerauxSimulationProps) {
     const dispatch = useDispatch();
     const { codeInsee } = useRouter().query;
-    const { mutate } = usePostSimulation(`${codeInsee}`);
+    const { mutateAsync, isSuccess, isLoading } = usePostSimulation(
+        `${codeInsee}`
+    );
     const simulationCommune = useSelector(selectSimulationCommune);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
@@ -95,17 +97,21 @@ export default function CriteresGenerauxSimulation({
     useEffect(() => {
         if (fetchSimulation && simulationIsDifferentThanInitial) {
             setDisplayMobileCriteresGeneraux(false);
-            mutate({
-                ...simulationCommune,
-                criteresGeneraux: {
-                    ...criteresGenerauxSimulation,
-                    ...criteres,
-                },
-            });
-            setIsCriteresGenerauxSimulation(false);
-            toastSuccess("Votre simulation est prête !");
-            window.scrollTo(0, 0);
-            setShowAlertModal(true);
+
+            toastPromise(
+                mutateAsync({
+                    ...simulationCommune,
+                    criteresGeneraux: {
+                        ...criteresGenerauxSimulation,
+                        ...criteres,
+                    },
+                }),
+                {
+                    success: "Votre simulation est prête !",
+                    loading: "Votre simulation est en préparation...",
+                    error: "Votre simulation a rencontré une erreur...",
+                }
+            );
         }
 
         if (fetchSimulation && !simulationIsDifferentThanInitial) {
@@ -115,6 +121,14 @@ export default function CriteresGenerauxSimulation({
             setFetchsimulation(false);
         }
     }, [fetchSimulation, simulationIsDifferentThanInitial]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            setIsCriteresGenerauxSimulation(false);
+            window.scrollTo(0, 0);
+            setShowAlertModal(true);
+        }
+    }, [isSuccess]);
 
     const handleReset = () => {
         setCriteres(criteresGenerauxSimulation);
@@ -184,6 +198,7 @@ export default function CriteresGenerauxSimulation({
                         );
                         setFetchsimulation(true);
                     }}
+                    isLoading={isLoading}
                 />
             </div>
         </div>
