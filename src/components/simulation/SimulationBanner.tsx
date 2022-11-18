@@ -22,6 +22,7 @@ const style = {
     textAlign: "center",
     top: "50%",
     transform: "translate(-50%, -50%)",
+    maxWidth: "90vw",
 };
 
 const StyledSimulationBanner = styled.div`
@@ -44,18 +45,29 @@ const StyledSimulationBanner = styled.div`
 `;
 
 const StyledBannerTitle = styled.span`
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 20px;
+    line-height: 24px;
+
+    @media (min-width: 768px) {
+        font-size: 28px;
+        line-height: 36px;
+    }
 `;
 
-const StyledBannerButton = styled.div`
+const StyledBannerButton = styled.div<{ hideSmall?: boolean }>`
     border: 1px #fff solid;
-    display: flex;
+    display: ${({ hideSmall }) => (hideSmall ? "none" : "flex")};
     justify-content: center;
     align-items: center;
     cursor: pointer;
     padding: 8px;
     text-align: center;
+
+    @media (min-width: 640px) {
+        //TODO: réactiver les deux buttons quand feature exporter / enregistrer seront dispos
+        /* display: flex; */
+    }
+
     @media (min-width: 1024px) {
         padding: 8px 24px;
     }
@@ -90,7 +102,7 @@ const SimulationBanner = ({
                         height={48}
                         alt="image de la simulation"
                     />
-                    <div className="flex flex-col ml-3">
+                    <div className="flex flex-col justify-center sm:ml-3">
                         <StyledBannerTitle>
                             {commune} ({codeInsee})
                         </StyledBannerTitle>
@@ -112,17 +124,19 @@ const SimulationBanner = ({
                         Abandonner
                     </StyledBannerButton>
                     {simulationIsDifferentThanInitial && (
-                        <div className="hidden sm:flex">
+                        <>
                             <StyledBannerButton
                                 className="ml-4"
                                 onClick={() => {
                                     setResetModal(true);
                                 }}
                             >
-                                Réinitialiser ma simulation
+                                Réinitialiser
                             </StyledBannerButton>
+
                             <StyledBannerButton
                                 className="ml-4"
+                                hideSmall
                                 onClick={() => {
                                     matomoTrackEvent([
                                         "simulation",
@@ -135,6 +149,7 @@ const SimulationBanner = ({
                             </StyledBannerButton>
                             <StyledBannerButton
                                 className="ml-4"
+                                hideSmall
                                 onClick={() => {
                                     matomoTrackEvent([
                                         "simulation",
@@ -145,7 +160,7 @@ const SimulationBanner = ({
                             >
                                 Enregistrer
                             </StyledBannerButton>
-                        </div>
+                        </>
                     )}
                 </div>
             </StyledSimulationBanner>
@@ -163,14 +178,14 @@ const SimulationBanner = ({
                         ?
                     </span>
                     <div className="flex mt-4 justify-center">
-                        <div className="mr-6 flex-1">
+                        <div className="mr-3 sm:mr-6 flex-1">
                             <Button
                                 text="Oui"
                                 onClick={() => {
                                     dispatch(
                                         hydrateSimulationCommune(initialCommune)
                                     );
-                                    setIsCriteresGenerauxSimulation(true);
+                                    setIsCriteresGenerauxSimulation(false);
                                     setResetModal(false);
                                 }}
                             />

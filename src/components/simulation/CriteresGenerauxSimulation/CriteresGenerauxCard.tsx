@@ -5,7 +5,11 @@ import styled from "styled-components";
 
 const CriteresCardStyled = styled.div`
     border: solid 1px var(--blue-france-925);
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+        margin-bottom: 40px;
+    }
 `;
 
 const DescriptionStyled = styled.span`

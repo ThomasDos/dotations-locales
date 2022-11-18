@@ -24,7 +24,7 @@ const StyledDashboardBody = styled.div<{
         displayMobileCriteresGeneraux ? "none" : "block"};
     width: 100%;
     padding: 24px 16px 0;
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
         display: block;
         width: 70%;
     }
@@ -65,17 +65,19 @@ const DashboardBody = ({
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
         >
             <>
-                <div className="w-full mb-6 sm:mb-10 flex flex-col">
-                    <div className="hidden sm:flex justify-between">
+                <div className="w-full mb-6 md:mb-10 flex flex-col">
+                    <div className="hidden md:flex justify-between">
                         <span className="text-3xl font-bold">
-                            Dotations pour {currentYear}
+                            {isSimulation
+                                ? "Simulation des dotations"
+                                : `Dotations pour ${currentYear}`}
                         </span>
                         <DropdownMenuDownload />
                     </div>
                     <div className="flex w-full items-center justify-between">
                         <BaseCalculLoi />
                         <ImageFixed
-                            className="flex flex-1 sm:hidden justify-end"
+                            className="flex flex-1 md:hidden justify-end"
                             width={48}
                             height={48}
                             alt="Configuration des critères généraux"

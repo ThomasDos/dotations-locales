@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
+import LabelProchainement from "../LabelText/LabelProchainement";
 
 const StyledDivider = styled(Divider)`
     margin: 0 !important;
@@ -20,6 +21,9 @@ const StyledCustomSpan = styled.span`
 
 const StyledMenuItem = styled(MenuItem)`
     padding: 0 !important;
+    //TODO: supprimer quand feature export sera prête
+    opacity: 0.5;
+    cursor: not-allowed !important;
 `;
 
 const MenuItemCustom = ({
@@ -91,6 +95,9 @@ const DropdownMenuDownload = () => {
                 }}
             >
                 <div className="px-6 py-4">
+                    <div className="mb-2">
+                        <LabelProchainement />
+                    </div>
                     <MenuItemCustom
                         handleClose={handleClose}
                         text="Fichier csv"
