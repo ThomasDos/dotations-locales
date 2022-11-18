@@ -8,6 +8,7 @@ interface LabelTextProps {
     icon?: string;
     color?: string;
     fontWeight?: string;
+    fontSize?: string;
 }
 
 interface LabelTextContainerProps {
@@ -26,6 +27,10 @@ const StyledLabelText = styled.div<LabelTextContainerProps>`
     font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "normal")};
 `;
 
+const StyledSpanText = styled.span<{ fontSize?: string }>`
+    font-size: ${({ fontSize }) => fontSize};
+`;
+
 const LabelText = ({
     text,
     icon,
@@ -33,6 +38,7 @@ const LabelText = ({
     color = "#000000",
     borderColor,
     fontWeight,
+    fontSize,
 }: LabelTextProps) => {
     return (
         <StyledLabelText
@@ -50,7 +56,12 @@ const LabelText = ({
                     alt="icone croix"
                 />
             )}
-            <span className={`${icon ? "ml-2" : ""}`}>{text}</span>
+            <StyledSpanText
+                className={`${icon ? "ml-2" : ""}`}
+                fontSize={fontSize}
+            >
+                {text}
+            </StyledSpanText>
         </StyledLabelText>
     );
 };

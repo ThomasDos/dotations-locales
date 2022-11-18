@@ -4,6 +4,7 @@ import {
     Radio,
     RadioGroup,
 } from "@mui/material";
+import LabelProchainement from "components/ui/LabelText/LabelProchainement";
 import styled from "styled-components";
 
 import type { LawAvailable } from ".";
@@ -62,7 +63,7 @@ export default function RadioGroupContainer({
                     name="radio-buttons-group"
                     row
                     sx={{
-                        "@media (max-width: 640px)": {
+                        "@media (max-width: 768px)": {
                             flexDirection: "column !important",
                             gap: "16px",
                             width: "100%",
@@ -105,11 +106,7 @@ export default function RadioGroupContainer({
                                                     : "Loi en vigueur"}{" "}
                                                 {value}
                                             </StyledLoiSpan>
-                                            {disabled && (
-                                                <ProchainementStyled>
-                                                    Prochainement
-                                                </ProchainementStyled>
-                                            )}
+                                            {disabled && <LabelProchainement />}
                                         </div>
                                     </ContainerRadioStyled>
                                 }

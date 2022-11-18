@@ -10,9 +10,9 @@ import LinkArrow from "./LinkArrow";
 const StyledHeaderBody = styled.div`
     display: flex;
     align-items: center;
-    padding: 4px 12px;
+    padding: 4px 16px;
     @media (min-width: 768px) {
-        padding: 12px 120px;
+        padding: 16px;
     }
 `;
 
