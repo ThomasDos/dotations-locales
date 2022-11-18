@@ -40,7 +40,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
 
     return (
         <>
-            <StyledHeaderDashboard className="flex flex-col sm:flex-row justify-between">
+            <StyledHeaderDashboard className="flex flex-col md:flex-row justify-between">
                 <div className="flex flex-col">
                     <BreadCrumbsTwoLinks
                         firstLink="Accueil"
@@ -51,7 +51,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                         {communeWithCodeInsee}
                     </span>
                 </div>
-                <div className="hidden sm:flex mt-8">
+                <div className="hidden md:flex mt-8">
                     <LinkIcon
                         icon="euro"
                         text="Dotations"
@@ -93,7 +93,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     />
                     <LinkIcon icon="comparer" text="Comparer" disabled />
                 </div>
-                <div className="w-full sm:hidden">
+                <div className="w-full md:hidden">
                     <FormControl
                         variant="filled"
                         sx={{
@@ -173,7 +173,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     </FormControl>
                 </div>
             </StyledHeaderDashboard>
-            <hr className="hidden sm:flex" />
+            <hr className="hidden md:flex" />
         </>
     );
 };

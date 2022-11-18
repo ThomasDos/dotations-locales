@@ -37,7 +37,7 @@ const StyledEntityParameters = styled.div<{
     width: 100%;
     padding: 32px 16px;
 
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
         padding: 32px;
         width: 30%;
         display: flex;
@@ -106,7 +106,7 @@ const EntityParameters = ({
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
         >
             <div className="w-full sticky top-16">
-                <div className="mb-4 flex justify-between">
+                <div className="mb-4 flex justify-between items-center">
                     <span className="font-bold">
                         {isSimulation
                             ? "Données modifiables"
@@ -118,7 +118,7 @@ const EntityParameters = ({
                         height={48}
                         width={48}
                         alt="Icone de croix pour fermer les critères généraux"
-                        className="sm:hidden"
+                        className="md:hidden"
                         onClick={() => {
                             setDisplayMobileCriteresGeneraux(false);
                         }}
@@ -146,8 +146,8 @@ const EntityParameters = ({
                             text="Modifier les données"
                             onClick={() => {
                                 matomoTrackEvent(["simulation", "modifier"]);
-
                                 setIsCriteresGenerauxSimulation(true);
+                                window.scrollTo(0, 0);
                             }}
                         />
                     </div>

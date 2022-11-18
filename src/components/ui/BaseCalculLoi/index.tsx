@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledBaseCalculLoi = styled.div`
     display: flex;
     flex: 2;
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
         width: 100%;
         border-top: solid 1px var(--blue-france-925);
         padding-top: 16px;
@@ -29,7 +29,7 @@ const lois = ["Loi en vigueur 2022", "Critères de répartition 2022"];
 export default function BaseCalculLoi() {
     return (
         <StyledBaseCalculLoi>
-            <span className="text-sm mr-1 hidden sm:block">
+            <span className="text-sm mr-1 hidden md:block">
                 Base de calcul :{" "}
             </span>
             {lois.map((loi: string) => (
