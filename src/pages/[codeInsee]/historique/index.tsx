@@ -5,6 +5,7 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
@@ -74,6 +75,9 @@ const HistoriquePage = () => {
 
     return (
         <>
+            <Head>
+                <title>L&apos;historique de votre dotation</title>
+            </Head>
             <SubHeader commune={commune} codeInsee={codeInsee} />
             <span className="sm:hidden px-4 py-3 mb-6 flex items-center">
                 Historique sur {anneesLength} an

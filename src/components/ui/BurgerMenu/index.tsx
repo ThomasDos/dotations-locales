@@ -36,6 +36,7 @@ export default function BurgerMenu() {
                     toggle={() => {
                         setShowMenu(!showMenu);
                     }}
+                    label="Ouvrir le menu pour acceder aux liens mission et contact"
                     toggled={showMenu}
                     size={24}
                     color="var(--blue-france-113)"

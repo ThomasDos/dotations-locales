@@ -35,22 +35,18 @@ const HeaderContainer = () => {
                             >
                                 <ImageFixed
                                     className="hidden sm:block cursor-pointer"
-                                    src="/images/marianne-text-header-lg.svg"
+                                    src="/images/marianne-text-header-lg.png"
                                     height={90}
                                     width={88}
                                     alt="Logo de la marianne qui redirige vers l'accueil"
-                                    quality={100}
-                                    priority
                                 />
 
                                 <ImageFixed
                                     className="sm:hidden cursor-pointer"
-                                    src="/images/marianne-text-header-sm.svg"
+                                    src="/images/marianne-text-header-sm.png"
                                     height={78}
                                     width={174}
                                     alt="Logo de la marianne qui redirige vers l'accueil"
-                                    quality={100}
-                                    priority
                                 />
                             </div>
                         </Link>
