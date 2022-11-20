@@ -11,6 +11,7 @@ interface HomeRowImageTextProps {
     imageAlt: string;
     titleContent: string;
     children: ReactNode;
+    priority?: boolean;
 }
 
 const StyledImageContainer = styled.div<{ imageWidth: number }>`
@@ -30,6 +31,7 @@ const HomeRowImageText = ({
     imageAlt,
     titleContent,
     children,
+    priority,
 }: HomeRowImageTextProps) => {
     return (
         <div
@@ -51,6 +53,7 @@ const HomeRowImageText = ({
                     alt={imageAlt}
                     width={imageWidth}
                     height={imageHeight}
+                    priority={priority}
                 />
             </StyledImageContainer>
         </div>

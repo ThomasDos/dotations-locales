@@ -30,7 +30,7 @@ const FooterContainer = () => {
 
                     <ImageFixed
                         className="ml-5"
-                        src="/icons/incubateur-territoires.svg"
+                        src="/images/incubateur-territoires.png"
                         height={90}
                         width={160}
                         alt="logo incubateur territoires"
@@ -39,28 +39,28 @@ const FooterContainer = () => {
                 <FooterBodyItem>
                     <Link
                         href="https://legifrance.gouv.fr"
-                        className="mr-3"
+                        className="mr-4"
                         target="_"
                     >
                         legifrance.gouv.fr
                     </Link>
                     <Link
                         href="https://gouvernement.fr"
-                        className="mx-3"
+                        className="mx-4"
                         target="_"
                     >
                         gouvernement.fr
                     </Link>
                     <Link
                         href="https://service-public.fr"
-                        className="mx-3"
+                        className="mx-4"
                         target="_"
                     >
                         service-public.fr
                     </Link>
                     <Link
                         href="https://data.gouv.fr"
-                        className="ml-3"
+                        className="ml-4"
                         target="_"
                     >
                         data.gouv.fr
