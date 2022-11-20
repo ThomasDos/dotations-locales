@@ -39,28 +39,28 @@ const FooterContainer = () => {
                 <FooterBodyItem>
                     <Link
                         href="https://legifrance.gouv.fr"
-                        className="pr-4"
+                        className="mr-4"
                         target="_"
                     >
                         legifrance.gouv.fr
                     </Link>
                     <Link
                         href="https://gouvernement.fr"
-                        className="px-4"
+                        className="mx-4"
                         target="_"
                     >
                         gouvernement.fr
                     </Link>
                     <Link
                         href="https://service-public.fr"
-                        className="px-4"
+                        className="mx-4"
                         target="_"
                     >
                         service-public.fr
                     </Link>
                     <Link
                         href="https://data.gouv.fr"
-                        className="pl-4"
+                        className="ml-4"
                         target="_"
                     >
                         data.gouv.fr
