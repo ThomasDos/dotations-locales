@@ -9,6 +9,7 @@ import { Spinner } from "components/ui";
 import AlertDefaultModal from "components/ui/AlertModal";
 import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -63,6 +64,9 @@ const Dashboard = () => {
     ) {
         return (
             <>
+                <Head>
+                    <title>Le tableau de bord de votre dotation</title>
+                </Head>
                 <SubHeader commune={commune} codeInsee={codeInsee} />
                 <div className="w-auto my-40 flex justify-center">
                     <Spinner size="md" />
@@ -73,6 +77,9 @@ const Dashboard = () => {
 
     return (
         <>
+            <Head>
+                <title>Le tableau de bord de votre dotation</title>
+            </Head>
             {isSimulation ? (
                 <SimulationBanner
                     setIsCriteresGenerauxSimulation={

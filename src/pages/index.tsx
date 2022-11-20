@@ -51,7 +51,8 @@ const Home: NextPage = () => {
             <SearchInput />
             <div className="md:mx-60 mt-10 md:mt-20 text-center md:text-left">
                 <HomeRowImageText
-                    src="/images/landing-1.svg"
+                    priority
+                    src="/images/landing-1.png"
                     imageHeight={444}
                     imageWidth={444}
                     imageAlt="first row image"
@@ -65,7 +66,7 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
 
                 <HomeRowImageText
-                    src="/images/landing-2.svg"
+                    src="/images/landing-2.png"
                     reverse
                     imageHeight={444}
                     imageWidth={444}
@@ -81,7 +82,7 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
 
                 <HomeRowImageText
-                    src="/images/landing-3.svg"
+                    src="/images/landing-3.png"
                     imageHeight={320}
                     imageWidth={320}
                     imageAlt="third row image"
@@ -93,7 +94,7 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
 
                 <HomeRowImageText
-                    src="/images/landing-4.svg"
+                    src="/images/landing-4.png"
                     reverse
                     imageHeight={256}
                     imageWidth={256}
@@ -108,7 +109,7 @@ const Home: NextPage = () => {
                 </HomeRowImageText>
 
                 <HomeRowImageText
-                    src="/images/landing-5.svg"
+                    src="/images/landing-5.png"
                     imageHeight={256}
                     imageWidth={256}
                     imageAlt="fifth row image"
@@ -125,15 +126,15 @@ const Home: NextPage = () => {
                     <div className="md:mr-14 mb-14 md:mb-0 flex flex-col items-center">
                         <ImageFixed
                             className="mb-4"
-                            src="/icons/france-relance.svg"
+                            src="/images/france-relance.png"
                             height={116}
                             width={116}
                             alt="icone france relance"
                         />
                         <ImageFixed
-                            src="/images/financé-ue.svg"
+                            src="/images/financé-ue.png"
                             height={41.5}
-                            width={140}
+                            width={179}
                             alt="icone union européenne"
                         />
                     </div>
