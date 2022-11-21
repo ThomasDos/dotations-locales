@@ -10,11 +10,13 @@ import AlertDefaultModal from "components/ui/AlertModal";
 import communesList from "constants/communesList";
 import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
-import { GetStaticPaths } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { dehydrate, QueryClient } from "react-query";
 import { useSelector } from "react-redux";
+import fetchCommune from "services/fetchCommune";
 import { selectIsSimulation } from "store/appSettings.slice";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -23,6 +25,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }));
 
     return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const queryClient = new QueryClient();
+
+    const { codeInsee } = params as { codeInsee: string };
+
+    await queryClient.prefetchQuery(["fetchCommune", codeInsee], () =>
+        fetchCommune(codeInsee)
+    );
+
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient),
+        },
+    };
 };
 
 const Dashboard = () => {
