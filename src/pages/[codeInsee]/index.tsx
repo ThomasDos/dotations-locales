@@ -10,22 +10,20 @@ import AlertDefaultModal from "components/ui/AlertModal";
 import communesList from "constants/communesList";
 import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
+import { GetStaticPaths } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
 
-export async function getStaticPaths() {
-    // Get the paths we want to pre-render based on posts
-    const paths = communesList.map(({ libelle, codeInsee }) => ({
-        params: { commune: libelle, codeInsee },
+export const getStaticPaths: GetStaticPaths = async () => {
+    const paths = communesList.map(({ codeInsee }) => ({
+        params: { codeInsee },
     }));
 
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
     return { paths, fallback: false };
-}
+};
 
 const Dashboard = () => {
     const { commune, codeInsee } = useRouter().query as {
