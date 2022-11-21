@@ -49,9 +49,15 @@ const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
         };
     }, [percentage]);
 
-    const textLabel = valeur
-        ? valeur
-        : `${percentageLabelData.startUnit}${percentageFormatted}%`;
+    const textLabel = useMemo(() => {
+        if (valeur) {
+            return valeur;
+        }
+        if (!Number.isFinite(percentage)) {
+            return null;
+        }
+        return `${percentageLabelData.startUnit}${percentageFormatted}%`;
+    }, [valeur, percentage]);
 
     return (
         <StyledLabel

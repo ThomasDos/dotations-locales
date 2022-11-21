@@ -1,13 +1,13 @@
 import warningMessages from "constants/warningMessages.json";
 
-export default function PrecisionAlert() {
+export default function WarningPrecisionAlert() {
     return (
         <>
-            <div className="text-3xl font-bold my-6">
+            <div className="text-error-425 font-bold mb-1">
                 {warningMessages.precisionSimulation.alert.title}
             </div>
-            <div className="mb-6">
-                <p>
+            <div className="text-sm">
+                <div className="my-3">
                     {warningMessages.precisionSimulation.alert.firstText.normal}{" "}
                     <b>
                         {
@@ -15,8 +15,10 @@ export default function PrecisionAlert() {
                                 .bold
                         }
                     </b>
-                </p>
-                <p>{warningMessages.precisionSimulation.alert.secondText}</p>
+                </div>
+                <div>
+                    {warningMessages.precisionSimulation.alert.secondText}
+                </div>
             </div>
         </>
     );
