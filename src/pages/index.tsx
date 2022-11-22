@@ -24,12 +24,6 @@ const MainBottomBody = styled.div`
     }
 `;
 
-export async function getStaticProps() {
-    return {
-        props: {},
-    };
-}
-
 const Home: NextPage = () => {
     const dispatch = useDispatch();
 
