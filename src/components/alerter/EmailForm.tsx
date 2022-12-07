@@ -15,6 +15,7 @@ interface EmailFormProps {
     postEmailIsLoading: boolean;
     commune: string;
     codeInsee: string;
+    postEmailIsError: boolean;
 }
 
 export default function EmailForm({
@@ -24,6 +25,7 @@ export default function EmailForm({
     postEmailIsLoading,
     commune,
     codeInsee,
+    postEmailIsError,
 }: EmailFormProps) {
     return (
         <>
@@ -33,6 +35,7 @@ export default function EmailForm({
                 userEmail={userEmail}
                 setUserEmail={setUserEmail}
                 postEmailIsLoading={postEmailIsLoading}
+                postEmailIsError={postEmailIsError}
             />
             <div className="text-lg">
                 S’abonner aux alertes c’est recevoir des informations concernant

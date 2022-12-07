@@ -10,8 +10,11 @@ const StyledSearchButton = styled.div`
     gap: 8px;
 `;
 
-const StyledSearchInput = styled.div`
-    border-bottom: 2px solid var(--blue-france-sun-113-625);
+const StyledSearchInput = styled.div<{ isError?: boolean }>`
+    border-bottom: ${({ isError }) =>
+        `2px solid var(--${
+            isError ? "error-425" : "blue-france-sun-113-625"
+        })`};
 `;
 
 const StyledSpanButton = styled.span`
@@ -32,6 +35,7 @@ interface EmailInputProps {
     setUserEmail(email: string): void;
     postEmail(email: string): void;
     postEmailIsLoading: boolean;
+    postEmailIsError: boolean;
 }
 
 export default function EmailInput({
@@ -39,6 +43,7 @@ export default function EmailInput({
     setUserEmail,
     postEmail,
     postEmailIsLoading,
+    postEmailIsError,
 }: EmailInputProps) {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,8 +56,12 @@ export default function EmailInput({
     };
     return (
         <form onSubmit={handleSubmit}>
-            <StyledSearchInput className="flex md:w-5/6 my-8">
+            <StyledSearchInput
+                className="flex md:w-5/6 my-8"
+                isError={postEmailIsError}
+            >
                 <StyledInput
+                    autoFocus
                     type="text"
                     placeholder="Votre e-mail"
                     className="pl-4"
@@ -61,7 +70,11 @@ export default function EmailInput({
                         setUserEmail(e.target.value);
                     }}
                 />
-                <button type="submit" role="button">
+                <button
+                    type="submit"
+                    role="button"
+                    disabled={postEmailIsLoading}
+                >
                     <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
                         {postEmailIsLoading ? (
                             <Dots />

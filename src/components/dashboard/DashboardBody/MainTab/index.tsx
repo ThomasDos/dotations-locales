@@ -1,12 +1,15 @@
 import { Collapse } from "@mui/material";
+import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import type { Dotation, Dotations } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
+    selectAllYears,
     selectCurrentYear,
     selectLastYear,
 } from "store/simulationCommune.slice";
+import formatDotationsToExportCsv from "utils/formatDotationsToExportCsv";
 import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";
 
@@ -21,6 +24,8 @@ interface MainTabProps {
 const MainTab = ({ dotations }: MainTabProps) => {
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
+    const years = useSelector(selectAllYears);
+
     const [showNonEligible, setShowNonEligible] = useState(false);
 
     const currentYearTotal = getTotalDotations(dotations, currentYear);
@@ -46,8 +51,29 @@ const MainTab = ({ dotations }: MainTabProps) => {
         title: "Dotations Générales de Fonctionnement (DGF)",
     };
 
+    const headersYears = years.map((year: string) => ({
+        label: `Montant de l'année ${year}`,
+        key: year,
+    }));
+    const dotationsCurrentYearFormattedToExportCSV =
+        formatDotationsToExportCsv(dotations);
+
+    console.log(
+        "dotationsCurrentYearFormattedToExportCSV",
+        dotationsCurrentYearFormattedToExportCSV
+    );
+
     return (
         <div className="pt-10">
+            <div className="pb-4 flex justify-end">
+                <DropdownMenuDownload
+                    headers={[
+                        { label: "Dotations", key: "title" },
+                        ...headersYears,
+                    ]}
+                    dataCSV={dotationsCurrentYearFormattedToExportCSV}
+                />
+            </div>
             <DotationCard
                 hasInformation={false}
                 dotation={dotationDGF}

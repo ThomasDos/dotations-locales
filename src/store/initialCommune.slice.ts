@@ -65,7 +65,7 @@ export const selectLastYearTotal = createSelector(
     selectInitialDotations,
     selectInitialAnnees,
     (dotations: Dotations, annees: CommuneAnnee) => {
-        const lastYear = annees[0];
+        const lastYear = annees[1];
         return getTotalDotations(dotations, String(lastYear));
     }
 );
