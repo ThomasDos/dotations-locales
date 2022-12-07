@@ -128,4 +128,12 @@ export const selectLastYear = createSelector(
         isSimulation ? simulationAnnees[1] : initialAnnees[1]
 );
 
+export const selectAllYears = createSelector(
+    selectIsSimulation,
+    selectSimulationAnnees,
+    selectInitialAnnees,
+    (isSimulation, simulationAnnees, initialAnnees) =>
+        isSimulation ? simulationAnnees : initialAnnees
+);
+
 export default simulationCommuneSlice.reducer;

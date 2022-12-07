@@ -5,9 +5,10 @@ import MenuItem from "@mui/material/MenuItem";
 import ImageFixed from "components/ui/ImageFixed";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { CSVLink } from "react-csv";
+import { Headers } from "react-csv/components/CommonPropTypes";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
-import LabelProchainement from "../LabelText/LabelProchainement";
 
 const StyledDivider = styled(Divider)`
     margin: 0 !important;
@@ -21,9 +22,6 @@ const StyledCustomSpan = styled.span`
 
 const StyledMenuItem = styled(MenuItem)`
     padding: 0 !important;
-    //TODO: supprimer quand feature export sera prête
-    opacity: 0.5;
-    cursor: not-allowed !important;
 `;
 
 const MenuItemCustom = ({
@@ -54,10 +52,19 @@ const MenuItemCustom = ({
     );
 };
 
-const DropdownMenuDownload = () => {
+interface DropdownMenuDownloadProps {
+    dataCSV: {}[] | [][];
+    headers: Headers;
+}
+
+const DropdownMenuDownload = ({
+    dataCSV,
+    headers,
+}: DropdownMenuDownloadProps) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
     const { pathname } = useRouter();
+    const hasDataCSV = !!dataCSV?.length;
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         matomoTrackEvent(["fonction", "export", "clique", pathname]);
         setAnchorEl(event.currentTarget);
@@ -65,6 +72,7 @@ const DropdownMenuDownload = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    if (!dataCSV?.length) return null;
 
     return (
         <div className="flex text-sm items-center cursor-pointer">
@@ -95,29 +103,17 @@ const DropdownMenuDownload = () => {
                 }}
             >
                 <div className="px-6 py-4">
-                    <div className="mb-2">
-                        <LabelProchainement />
-                    </div>
-                    <MenuItemCustom
-                        handleClose={handleClose}
-                        text="Fichier csv"
-                    />
-                    <StyledDivider
-                        sx={{ borderBottomWidth: 0 }}
-                        variant="middle"
-                    />
-                    <MenuItemCustom
-                        handleClose={handleClose}
-                        text="Fichier xls"
-                    />
-                    <StyledDivider
-                        sx={{ borderBottomWidth: 0 }}
-                        variant="middle"
-                    />
-                    <MenuItemCustom
-                        handleClose={handleClose}
-                        text="Fichier pdf"
-                    />
+                    <CSVLink
+                        data={dataCSV}
+                        download={"Dotations_Locales"}
+                        hidden={!hasDataCSV}
+                        headers={headers}
+                    >
+                        <MenuItemCustom
+                            handleClose={handleClose}
+                            text="Fichier csv"
+                        />
+                    </CSVLink>
                 </div>
             </Menu>
         </div>

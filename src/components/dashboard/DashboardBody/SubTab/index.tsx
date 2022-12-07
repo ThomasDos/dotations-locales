@@ -1,4 +1,5 @@
 import { Collapse } from "@mui/material";
+import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import { useState } from "react";
@@ -6,6 +7,7 @@ import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { selectCurrentYear } from "store/simulationCommune.slice";
 import styled from "styled-components";
+import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
@@ -25,7 +27,19 @@ const SubTab = ({ dotation }: SubTabProps) => {
     const [showNonEligible, setShowNonEligible] = useState(false);
     const currentYear = useSelector(selectCurrentYear);
 
-    const { sousDotations, criteres } = dotation;
+    const { annees } = dotation;
+
+    const years = annees.map(annee => Object.keys(annee)[0]);
+    const headersYears = years.map((year: string) => ({
+        label: `Montant de l'année ${year}`,
+        key: year,
+    }));
+
+    const { sousDotations, criteres, title } = dotation;
+    const dotationFormattedToExportCsv = formatDotationWithCriteresToExportCsv(
+        dotation,
+        title
+    );
 
     const { criteresEligibles, criteresNonEligibles } =
         sortCriteresEligiblesOrNonEligibles(criteres, currentYear);
@@ -41,7 +55,16 @@ const SubTab = ({ dotation }: SubTabProps) => {
                     sousDotations={sousDotations}
                 />
             ) : (
-                <div className="pt-10">
+                <>
+                    <div className="pb-4 flex justify-end">
+                        <DropdownMenuDownload
+                            headers={[
+                                { label: title, key: "title" },
+                                ...headersYears,
+                            ]}
+                            dataCSV={dotationFormattedToExportCsv}
+                        />
+                    </div>
                     <>
                         <DotationCard
                             dotation={dotation}
@@ -98,7 +121,7 @@ const SubTab = ({ dotation }: SubTabProps) => {
                             </>
                         ) : null}
                     </>
-                </div>
+                </>
             )}
         </div>
     );
