@@ -1,10 +1,4 @@
 import apiDotations from "./apiDotations";
 
-export default async (email: string) =>
-    apiDotations.post(
-        `https://jsonplaceholder.typicode.com/posts`
-
-        // , {
-        // email,
-        // }
-    );
+export default (email: string, code_insee: string, commune: string) =>
+    apiDotations.post("/alerte/", { email, code_insee, commune });

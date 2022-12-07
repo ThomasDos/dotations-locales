@@ -1,7 +1,6 @@
 import { SubHeader } from "components/dashboard";
 import HistoriqueTab from "components/historique";
 import { BaseCalculLoi, Tab, Tabs } from "components/ui";
-import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
@@ -90,7 +89,6 @@ const HistoriquePage = () => {
                             <span className="text-3xl font-bold">
                                 Dotations pour {currentYear}
                             </span>
-                            <DropdownMenuDownload />
                         </div>
                         <BaseCalculLoi />
                     </div>

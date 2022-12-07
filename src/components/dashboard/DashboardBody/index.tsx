@@ -1,5 +1,4 @@
 import { BaseCalculLoi, Tab, Tabs } from "components/ui";
-import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
 import { useSelector } from "react-redux";
@@ -72,7 +71,6 @@ const DashboardBody = ({
                                 ? "Simulation des dotations"
                                 : `Dotations pour ${currentYear}`}
                         </span>
-                        <DropdownMenuDownload />
                     </div>
                     <div className="flex w-full items-center justify-between">
                         <BaseCalculLoi />

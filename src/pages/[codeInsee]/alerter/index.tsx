@@ -14,11 +14,12 @@ export default function Alerter() {
 
     const [userEmail, setUserEmail] = useState("");
     const {
-        mutateAsync: postEmail,
+        mutate: postEmail,
         isSuccess: postEmailSuccess,
         isLoading: postEmailIsLoading,
+        isError: postEmailIsError,
         reset: postEmailReset,
-    } = usePostEmail(userEmail);
+    } = usePostEmail(userEmail, codeInsee, commune);
 
     useEffect(() => {
         if (!commune || !codeInsee) {
@@ -44,6 +45,7 @@ export default function Alerter() {
                         userEmail={userEmail}
                         setUserEmail={setUserEmail}
                         postEmailIsLoading={postEmailIsLoading}
+                        postEmailIsError={postEmailIsError}
                         commune={commune}
                         codeInsee={codeInsee}
                     />

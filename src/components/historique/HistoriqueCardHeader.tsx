@@ -1,4 +1,3 @@
-import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import styled from "styled-components";
 
 const StyledCardTitle = styled.span`
@@ -27,9 +26,6 @@ export default function HistoriqueCardHeader({
         <div className="flex flex-col mb-2 sm:mb-10">
             <div className="flex items-center justify-center sm:justify-between">
                 <StyledCardTitle>{title}</StyledCardTitle>
-                <div className="hidden sm:block">
-                    <DropdownMenuDownload />
-                </div>
             </div>
             <span className="hidden sm:block">
                 {subtitle}, historique sur {anneesLength} an

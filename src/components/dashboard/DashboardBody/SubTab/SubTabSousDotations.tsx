@@ -1,15 +1,17 @@
 import { Collapse } from "@mui/material";
+import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type {
     Dotation,
     Dotations,
     SousDotations,
 } from "models/commune/commune.interface";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { selectCurrentYear } from "store/simulationCommune.slice";
 import styled from "styled-components";
+import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
@@ -35,8 +37,28 @@ const SubTabSousDotations = ({
         dsrFractionCible: false,
         dsrFractionPerequation: false,
     });
+    const dotationTotalExport = useRef<{}[]>([]);
+
+    const { annees } = dotation;
+
+    const years = annees.map(annee => Object.keys(annee)[0]);
+
+    const headersYears = years.map((year: string) => ({
+        label: `Montant de l'année ${year}`,
+        key: year,
+    }));
+
     return (
         <>
+            <div className="pb-4 flex justify-end">
+                <DropdownMenuDownload
+                    headers={[
+                        { label: "Dotations", key: "title" },
+                        ...headersYears,
+                    ]}
+                    dataCSV={dotationTotalExport.current}
+                />
+            </div>
             <DotationCard dotation={dotation} borderTop />
 
             {sousDotations.map((sousDotationRecord: Dotations) => {
@@ -46,6 +68,16 @@ const SubTabSousDotations = ({
                     | "dsrFractionPerequation";
                 const sousDotation: Dotation = sousDotationRecord[keyName];
 
+                const sousDotationFormattedToExportCsv =
+                    formatDotationWithCriteresToExportCsv(
+                        sousDotation,
+                        sousDotation.title
+                    );
+
+                dotationTotalExport.current = [
+                    ...dotationTotalExport.current,
+                    ...sousDotationFormattedToExportCsv,
+                ];
                 const { criteresEligibles, criteresNonEligibles } =
                     sortCriteresEligiblesOrNonEligibles(
                         sousDotation.criteres,
