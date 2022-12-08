@@ -51,6 +51,15 @@ const StyledCardTitle = styled.span`
     }
 `;
 
+const StyledSpanNonEligible = styled.span`
+    margin-right: 8px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--grey-625-425);
+    margin-bottom: 8px;
+`;
+
 interface DotationCardProps {
     hasInformation?: boolean;
     dotation: Dotation;
@@ -105,7 +114,7 @@ const DotationCard = ({
                             )}
                         </div>
                         <span>
-                            Évolution du montant {lastYear} / {currentYear}.
+                            Situation du montant {lastYear} / {currentYear}.
                         </span>
                     </div>
                     {currentYearDotation ? (
@@ -136,8 +145,16 @@ const DotationCard = ({
                             )}
                         </div>
                     ) : (
-                        <div>
-                            <LabelGreyCustomCrossIcon text="Non éligible" />
+                        <div className="flex flex-col items-center sm:items-end">
+                            <StyledSpanNonEligible>0€</StyledSpanNonEligible>
+                            <div className="flex">
+                                {totalEvolution !== 0 && (
+                                    <div className="flex items-center mr-2">
+                                        {formatNumberWithSpace(totalEvolution)}€
+                                    </div>
+                                )}
+                                <LabelGreyCustomCrossIcon text="Non éligible" />
+                            </div>
                         </div>
                     )}
                 </div>
