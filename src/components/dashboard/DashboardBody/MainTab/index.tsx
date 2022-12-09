@@ -58,11 +58,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
     const dotationsCurrentYearFormattedToExportCSV =
         formatDotationsToExportCsv(dotations);
 
-    console.log(
-        "dotationsCurrentYearFormattedToExportCSV",
-        dotationsCurrentYearFormattedToExportCSV
-    );
-
     return (
         <div className="pt-10">
             <div className="pb-4 flex justify-end">
