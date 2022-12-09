@@ -114,7 +114,7 @@ const DotationCard = ({
                             )}
                         </div>
                         <span>
-                            Situation du montant {lastYear} / {currentYear}.
+                            Évolution du montant {lastYear} / {currentYear}.
                         </span>
                     </div>
                     {currentYearDotation ? (
