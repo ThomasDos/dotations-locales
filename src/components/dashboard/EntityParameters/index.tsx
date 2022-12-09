@@ -174,7 +174,9 @@ const EntityParameters = ({
                     <div className="text-center">
                         <span className="flex font-bold mt-10">Synthèse</span>
                         <div className="bg-white rounded-lg py-4 px-16 my-6">
-                            <span className="text-sm">Dotation / habitant</span>
+                            <span className="text-sm">
+                                Dotation (DGF) / habitant
+                            </span>
                             <div className="flex justify-center mt-2 items-center">
                                 <span className="font-bold text-xl mr-2">
                                     {Math.round(currentYearDotationPerHabitant)}
