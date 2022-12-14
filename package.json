@@ -12,8 +12,12 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "test": "jest --watch",
+        "test": "yarn jest && yarn test:playwright",
         "test:ci": "jest --ci",
+        "test:playwright": "playwright test",
+        "test:playwright:headed": "playwright test --headed --project=chromium",
+        "test:playwright:recorded": "yarn playwright test --trace on && yarn playwright show-report",
+        "test:playwright:codegen": "yarn playwright codegen http://localhost:3000",
         "git": "git add . && git-cz && git push",
         "rebase": "git checkout main && git pull && git rebase origin/develop && git push -f && git checkout -"
     },
@@ -43,6 +47,7 @@
         "styled-components": "^5.3.6"
     },
     "devDependencies": {
+        "@playwright/test": "^1.28.1",
         "@socialgouv/eslint-config-typescript": "^1.117.0",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
