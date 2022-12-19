@@ -66,6 +66,7 @@ const SearchInput = () => {
         <StyledSearchInputContainer>
             <StyledSearchInput className="flex">
                 <StyledInput
+                    autoFocus
                     type="text"
                     placeholder={`${
                         window.innerWidth > 480 ? "Nom de la c" : "C"
