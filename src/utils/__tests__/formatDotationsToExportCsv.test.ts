@@ -1,7 +1,7 @@
 import formatDotationsToExportCsv from "utils/formatDotationsToExportCsv";
-import { dotationsMocked } from "__fixtures__/dotationsMocked";
+import dotationsMocked from "__fixtures__/dotationsMocked";
 
-describe("formatDotationsToExportCsv", () => {
+describe("formatDotationsToExportCsv(dotations: Dotations)", () => {
     it("should return an array formatted from dotations to export CSV", () => {
         expect(formatDotationsToExportCsv(dotationsMocked)).toEqual([
             {

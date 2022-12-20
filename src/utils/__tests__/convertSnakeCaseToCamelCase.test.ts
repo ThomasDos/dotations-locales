@@ -1,6 +1,6 @@
 import convertSnakeCaseToCamelCase from "../convertSnakeCaseToCamelCase";
 
-describe("convertSnakeCaseToCamelCase", () => {
+describe("convertSnakeCaseToCamelCase(str: string)", () => {
     it("should return a string formatted in camel case", () => {
         const stringToFormatOne = "TO_CAMEL";
         const stringToFormatTwo = "to_camel";

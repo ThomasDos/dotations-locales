@@ -1,5 +1,5 @@
 import useResize from "hooks/useResize";
-import type { HistoriqueDotations } from "models/historique/historique.serializer";
+import { HistoriqueDotations } from "models/historique/historique.interface";
 import { useRouter } from "next/router";
 import { Bar, BarChart, LabelList, ResponsiveContainer } from "recharts";
 import styled from "styled-components";

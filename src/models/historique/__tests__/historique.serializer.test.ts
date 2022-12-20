@@ -1,4 +1,4 @@
-import { dotationsMocked } from "__fixtures__/dotationsMocked";
+import dotationsMocked from "__fixtures__/dotationsMocked";
 
 import { historiqueSerializer } from "../historique.serializer";
 

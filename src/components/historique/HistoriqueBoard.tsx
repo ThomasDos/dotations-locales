@@ -1,9 +1,10 @@
 import { TagData } from "components/ui";
 import useResize from "hooks/useResize";
-import type {
+import {
     HistoriqueDotation,
     HistoriqueDotations,
-} from "models/historique/historique.serializer";
+} from "models/historique/historique.interface";
+
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
