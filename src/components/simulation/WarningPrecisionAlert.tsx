@@ -1,4 +1,4 @@
-import warningMessages from "constants/warningMessages.json";
+import warningMessages from "constants/warningMessages";
 
 export default function WarningPrecisionAlert() {
     return (

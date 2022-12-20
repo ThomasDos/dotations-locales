@@ -1,11 +1,13 @@
-import { BurgerMenu } from "components/ui";
-import ImageFixed from "components/ui/ImageFixed";
 import Link from "next/link";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
-import HorizontalSeparator from "./HorizontalSeparator";
-import LinkArrow from "./LinkArrow";
+import {
+    BurgerMenu,
+    HorizontalSeparator,
+    ImageFixed,
+    LinkArrow,
+} from "components/ui";
 
 const StyledHeaderBody = styled.div`
     display: flex;

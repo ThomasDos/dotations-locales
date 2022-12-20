@@ -1,3 +1,5 @@
-import { dotationsMocked } from "./dotationsMocked";
+import dotationsMocked from "./dotationsMocked";
 
-export const dotationMocked = dotationsMocked[Object.keys(dotationsMocked)[2]];
+const dotationMocked = dotationsMocked[Object.keys(dotationsMocked)[2]];
+
+export default dotationMocked;

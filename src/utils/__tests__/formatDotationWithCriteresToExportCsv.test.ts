@@ -1,7 +1,7 @@
 import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
-import { dotationMocked } from "__fixtures__/dotationMocked";
+import dotationMocked from "__fixtures__/dotationMocked";
 
-describe("formatDotationWithCriteresToExportCsv", () => {
+describe("formatDotationWithCriteresToExportCsv(dotation: Dotation, titleTotal: string)", () => {
     it("should return an array formatted from dotation with criteres to export CSV", () => {
         expect(
             formatDotationWithCriteresToExportCsv(
