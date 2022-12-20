@@ -1,13 +1,7 @@
 import _ from "lodash";
 import type { Dotation } from "models/commune/commune.interface";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
-
-export interface HistoriqueDotation {
-    year: string;
-    label: string;
-    value: number;
-}
-export type HistoriqueDotations = HistoriqueDotation[];
+import { HistoriqueDotations } from "./historique.interface";
 
 export const historiqueSerializer = (
     dotation: Dotation

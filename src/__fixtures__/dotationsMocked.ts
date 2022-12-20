@@ -1,6 +1,6 @@
 import type { Dotations } from "models/commune/commune.interface";
 
-export const dotationsMocked: Dotations = {
+const dotationsMocked: Dotations = {
     dotationForfaitaire: {
         annees: [
             {
@@ -109,3 +109,5 @@ export const dotationsMocked: Dotations = {
         title: "Dotation Solidarité Urbaine (DSU)",
     },
 };
+
+export default dotationsMocked;

@@ -1,8 +1,8 @@
-import { dotationsMocked } from "__fixtures__/dotationsMocked";
+import dotationsMocked from "__fixtures__/dotationsMocked";
 
 import sortDotationsEligiblesOrNonEligibles from "../sortDotationsEligiblesOrNonEligibles";
 
-describe("sortDotationsEligiblesOrNonEligibles", () => {
+describe("sortDotationsEligiblesOrNonEligibles(dotations: Dotations, currentYear: string)", () => {
     const expectedResult = {
         dotationsEligibles: {
             dotationForfaitaire: {

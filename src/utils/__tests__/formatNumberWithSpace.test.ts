@@ -1,6 +1,6 @@
 import formatNumberWithSpace from "../formatNumberWithSpace";
 
-describe("formatNumberWithSpace", () => {
+describe("formatNumberWithSpace(numberToFormat: number)", () => {
     it("should return a number formatted with space every three digits", () => {
         const numberToFormat = 123456789;
 

@@ -1,6 +1,6 @@
 import filterOutBooleanCriteres from "utils/filterOutBooleanCriteres";
 
-describe("filterOutBooleanCriteres", () => {
+describe("filterOutBooleanCriteres(criteres: Criteres)", () => {
     it("should return without the boolean value = oui / non", () => {
         const mockedCriteres = {
             longueurVoirie: {

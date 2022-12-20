@@ -1,7 +1,7 @@
-import { dotationsMocked } from "__fixtures__/dotationsMocked";
+import dotationsMocked from "__fixtures__/dotationsMocked";
 import sortDotationsByAmountDescending from "../sortDotationsByAmountDescending";
 
-describe("sortDotationsByAmountDescending", () => {
+describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: string)", () => {
     const expectedResult = {
         dotationForfaitaire: {
             annees: [{ "2022": 263676 }, { "2021": 264940 }],
