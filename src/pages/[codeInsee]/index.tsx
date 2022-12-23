@@ -14,9 +14,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
+import { toastError } from "utils/customToasts";
 
 const Dashboard = () => {
-    const { commune, codeInsee } = useRouter().query as {
+    const router = useRouter();
+    const { commune, codeInsee } = router.query as {
         commune: string;
         codeInsee: string;
     };
@@ -57,11 +59,12 @@ const Dashboard = () => {
         window.sessionStorage.setItem("tallyHasOpen", "true");
     }, []);
 
-    if (
-        !fetchCommuneData ||
-        (fetchCommuneIsLoading as boolean) ||
-        fetchCommuneError
-    ) {
+    if (fetchCommuneError) {
+        toastError("Une erreur est survenue avec cette commune");
+        router.push("/");
+    }
+
+    if (!fetchCommuneData || (fetchCommuneIsLoading as boolean)) {
         return (
             <>
                 <Head>
