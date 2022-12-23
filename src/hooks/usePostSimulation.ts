@@ -14,7 +14,6 @@ export default (codeInsee: string) => {
             onSuccess: data => {
                 dispatch(hydrateSimulationCommune(data));
             },
-            retry: 1,
         }
     );
 };

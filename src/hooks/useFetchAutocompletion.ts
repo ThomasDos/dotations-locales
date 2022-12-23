@@ -11,7 +11,5 @@ export default (search: string) =>
                 //TODO: manage error
                 return err;
             },
-
-            retry: 1,
         }
     );

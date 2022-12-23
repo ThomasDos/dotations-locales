@@ -12,7 +12,5 @@ export default (codeInsee: string, enabled: boolean) =>
                 //TODO: manage error
                 return err;
             },
-
-            retry: 1,
         }
     );
