@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import _ from "lodash";
 import type { Criteres } from "models/commune/commune.interface";
 
