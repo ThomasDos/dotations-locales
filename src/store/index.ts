@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import appSettingsReducer from "./appSettings.slice";
+import communesComparerReducer from "./communesComparer.slice";
 import initialCommuneReducer from "./initialCommune.slice";
 import simulationCommuneReducer from "./simulationCommune.slice";
 
@@ -10,6 +11,7 @@ const reducers = combineReducers({
     appSettings: appSettingsReducer,
     initialCommune: initialCommuneReducer,
     simulationCommune: simulationCommuneReducer,
+    communesComparer: communesComparerReducer,
 });
 
 const persistConfig = {
