@@ -1,4 +1,5 @@
-import useResize from "hooks/useResize";
+import { DotationsFormatedChartComparer } from "models/comparer/comparer.interface";
+import { Fragment } from "react";
 import {
     Bar,
     BarChart,
@@ -8,85 +9,45 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
-import styled from "styled-components";
-
-interface DotationCurrentFormatedChartComparer {
-    currentDotationTitle: string;
-    value: number;
-    label: string;
-}
-
-interface DotationFormatedChartComparer
-    extends Omit<DotationCurrentFormatedChartComparer, "currentDotationTitle"> {
-    barTitle: string;
-}
 
 interface BarChartComparerProps {
-    dotations: (
-        | DotationCurrentFormatedChartComparer
-        | DotationFormatedChartComparer
-    )[];
-    title: string;
-    subtitle: string;
+    dotations: DotationsFormatedChartComparer;
 }
 
-const StyledBarChartComparerContainer = styled.div`
-    @media (min-width: 640px) {
-        border: 1px solid var(--blue-france-850);
-        padding: 32px 48px 18px 32px;
-    }
-    margin-top: 40px;
-`;
-
-const BarChartComparer = ({
-    dotations,
-    title,
-    subtitle,
-}: BarChartComparerProps) => {
-    const { windowWidth } = useResize();
-    const screenIsSmall = windowWidth < 640;
-
+const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
     return (
-        <StyledBarChartComparerContainer>
-            <div>{title}</div>
-            <div>{subtitle}</div>
-            <ResponsiveContainer width={"100%"} height={50 * dotations.length}>
-                <BarChart
-                    layout="vertical"
-                    margin={{
-                        bottom: 0,
-                        left: 0,
-                        right: 50,
-                        top: 0,
-                    }}
-                    data={dotations}
+        <ResponsiveContainer width={"100%"} height={50 * dotations.length}>
+            <BarChart
+                layout="vertical"
+                margin={{
+                    bottom: 0,
+                    left: 0,
+                    right: 100,
+                    top: 0,
+                }}
+                data={dotations}
+            >
+                <XAxis hide type="number" />
+                <YAxis hide type="category" />
+                <defs>
+                    <linearGradient id="colorUv" x1="0" y1="1" x2="1" y2="1">
+                        <stop offset="10%" stopColor="#6A6AF4" />
+                        <stop offset="100%" stopColor="#3737EE" />
+                    </linearGradient>
+                </defs>
+                <Bar
+                    minPointSize={150}
+                    dataKey="value"
+                    fill="url(#colorUv)"
+                    radius={[6, 6, 6, 6]}
+                    height={50}
                 >
-                    <XAxis hide type="number" />
-                    <YAxis hide type="category" />
-                    <defs>
-                        <linearGradient
-                            id="colorUv"
-                            x1="0"
-                            y1="1"
-                            x2="1"
-                            y2="1"
-                        >
-                            <stop offset="10%" stopColor="#6A6AF4" />
-                            <stop offset="100%" stopColor="#3737EE" />
-                        </linearGradient>
-                    </defs>
-                    <Bar
-                        dataKey="value"
-                        fill="url(#colorUv)"
-                        radius={[6, 6, 6, 6]}
-                        height={50}
-                    >
-                        {dotations.map((_, index) => {
-                            if (!index) {
-                                return (
+                    {dotations.map(dotation => {
+                        return (
+                            <Fragment key={dotation?.label}>
+                                {!dotation?.barTitle ? (
                                     <>
-                                        <Cell key={index} />
-                                        ;
+                                        <Cell />
                                         <LabelList
                                             dataKey="currentDotationTitle"
                                             position="insideLeft"
@@ -94,30 +55,29 @@ const BarChartComparer = ({
                                             dx={10}
                                         />
                                     </>
-                                );
-                            }
-                            return (
-                                <>
-                                    <Cell key={index} fill="#E3E3FD" />
-                                    <LabelList
-                                        dataKey="barTitle"
-                                        position="insideLeft"
-                                        fill="#161616"
-                                        dx={10}
-                                    />
-                                </>
-                            );
-                        })}
-                        <LabelList
-                            dataKey="label"
-                            position="right"
-                            fill="#161616"
-                            dx={10}
-                        />
-                    </Bar>
-                </BarChart>
-            </ResponsiveContainer>
-        </StyledBarChartComparerContainer>
+                                ) : (
+                                    <>
+                                        <Cell fill="#E3E3FD" />
+                                        <LabelList
+                                            dataKey="barTitle"
+                                            position="insideLeft"
+                                            fill="#161616"
+                                            dx={10}
+                                        />
+                                    </>
+                                )}
+                            </Fragment>
+                        );
+                    })}
+                    <LabelList
+                        dataKey="label"
+                        position="right"
+                        fill="#161616"
+                        dx={20}
+                    />
+                </Bar>
+            </BarChart>
+        </ResponsiveContainer>
     );
 };
 

@@ -15,7 +15,11 @@ export default function DashboardFooter() {
     return (
         <StyledFooter>
             Les montants des dotations sont calculés sur la base de la{" "}
-            <Link href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044637640">
+            <Link
+                href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044637640"
+                rel="noopener noreferrer"
+                target="_"
+            >
                 loi de finances 2022{" "}
             </Link>
             avec les{" "}

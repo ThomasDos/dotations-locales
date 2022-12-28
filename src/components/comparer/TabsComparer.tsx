@@ -9,7 +9,7 @@ import { selectCurrentYear } from "store/simulationCommune.slice";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
 import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescending";
-import BarChartComparer from "./BarChartComparer";
+import TabComparer from "./TabComparer";
 
 const TabsContainerComparer = () => {
     const dotations = useSelector(selectInitialDotations);
@@ -39,34 +39,16 @@ const TabsContainerComparer = () => {
         title: "Dotations Générales de Fonctionnement (DGF)",
     };
 
-    const mockedDotations = [
-        {
-            currentDotationTitle: "Montreuil (80829)",
-            label: "10000000 €",
-            value: 10000000,
-        },
-        {
-            barTitle: "Second (12345)",
-            label: "500000 €",
-            value: 5000000,
-        },
-
-        {
-            barTitle: "Third (12213)",
-            label: "15 000 000 €",
-            value: 15000000,
-        },
-    ];
-
     return (
         <div className="mt-10">
             <Tabs dotationsNonEligibles={tabIndexDotationsNonEligibles}>
                 {/*@ts-ignore*/}
                 <Tab label="Résumé">
-                    <BarChartComparer
-                        dotations={mockedDotations}
+                    <TabComparer
+                        dotation={dotationDGF}
                         title="Dotations Générales de Fonctionnement (DGF)"
                         subtitle={`Comparaison ${currentYear}`}
+                        isDGF
                     />
                 </Tab>
 
@@ -80,8 +62,8 @@ const TabsContainerComparer = () => {
                                 label={dotation.label}
                                 key={dotation.title}
                             >
-                                <BarChartComparer
-                                    dotations={mockedDotations}
+                                <TabComparer
+                                    dotation={dotation}
                                     title={dotation.title}
                                     subtitle={`Comparaison ${currentYear}`}
                                 />

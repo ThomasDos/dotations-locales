@@ -85,20 +85,20 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                         }
                     />
                     <LinkIcon
-                        icon="alerter"
-                        text="M'alerter"
-                        handleClick={() =>
-                            router.push(
-                                `/${codeInsee}/alerter?commune=${commune}`
-                            )
-                        }
-                    />
-                    <LinkIcon
                         icon="comparer"
                         text="Comparer"
                         handleClick={() =>
                             router.push(
                                 `/${codeInsee}/comparer?commune=${commune}`
+                            )
+                        }
+                    />
+                    <LinkIcon
+                        icon="alerter"
+                        text="M'alerter"
+                        handleClick={() =>
+                            router.push(
+                                `/${codeInsee}/alerter?commune=${commune}`
                             )
                         }
                     />
@@ -162,16 +162,6 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             </MenuItem>
 
                             <MenuItem
-                                value="M'alerter"
-                                onClick={() =>
-                                    router.push(
-                                        `/${codeInsee}/alerter?commune=${commune}`
-                                    )
-                                }
-                            >
-                                <LinkIcon icon="alerter" text="M'alerter" />
-                            </MenuItem>
-                            <MenuItem
                                 value="Comparer"
                                 onClick={() =>
                                     router.push(
@@ -180,6 +170,17 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                                 }
                             >
                                 <LinkIcon icon="comparer" text="Comparer" />
+                            </MenuItem>
+
+                            <MenuItem
+                                value="M'alerter"
+                                onClick={() =>
+                                    router.push(
+                                        `/${codeInsee}/alerter?commune=${commune}`
+                                    )
+                                }
+                            >
+                                <LinkIcon icon="alerter" text="M'alerter" />
                             </MenuItem>
                         </Select>
                     </FormControl>

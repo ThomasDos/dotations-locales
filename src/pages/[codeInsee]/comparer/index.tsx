@@ -1,6 +1,6 @@
 import EmptySelectionComparer from "components/comparer/EmptySelectionComparer";
 import SearchInputComparer from "components/comparer/SearchInputComparer";
-import TabsContainerComparer from "components/comparer/TabsContainerComparer";
+import TabsContainerComparer from "components/comparer/TabsComparer";
 import { SubHeader } from "components/dashboard";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -33,7 +33,7 @@ const Comparer = () => {
         if (!communes.length) {
             dispatch(addCommune({ ...currentCommune, commune }));
         }
-    }, []);
+    }, [communes]);
 
     return (
         <>

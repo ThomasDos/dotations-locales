@@ -1,10 +1,14 @@
-import { SearchInput } from "components/ui";
-import { useSelector } from "react-redux";
-import { selectCommunes } from "store/communesComparer.slice";
+import { Button, SearchInput } from "components/ui";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    resetCommunesComparer,
+    selectCommunes,
+} from "store/communesComparer.slice";
 import LabelCommune from "./LabelCommune";
 
 const SearchInputComparer = () => {
     const communes = useSelector(selectCommunes);
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -21,19 +25,29 @@ const SearchInputComparer = () => {
                 />
             </div>
             {communes.length > 1 && (
-                <div className="flex flex-wrap">
-                    {communes.map((commune, index) => {
-                        if (!index) return null;
+                <>
+                    <div className="flex flex-wrap">
+                        {communes.map((commune, index) => {
+                            if (!index) return null;
 
-                        return (
-                            <LabelCommune
-                                key={commune.codeInsee}
-                                codeInsee={commune.codeInsee}
-                                commune={commune.commune}
-                            />
-                        );
-                    })}
-                </div>
+                            return (
+                                <LabelCommune
+                                    key={commune.codeInsee}
+                                    codeInsee={commune.codeInsee}
+                                    commune={commune.commune}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div className="w-3/12">
+                        <Button
+                            text="Réinitialiser"
+                            backgroundColor="var(--red-marianne-425)"
+                            backgroundColorHover="var(--red-marianne-main-472)"
+                            onClick={() => dispatch(resetCommunesComparer())}
+                        />
+                    </div>
+                </>
             )}
         </>
     );

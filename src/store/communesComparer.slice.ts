@@ -6,12 +6,13 @@ import type { RootState } from ".";
 export interface CommuneComparer extends Commune {
     commune: string;
 }
+export type CommunesComparer = CommuneComparer[];
 
-interface CommunesComparer {
-    communes: CommuneComparer[];
+interface CommunesComparerSlice {
+    communes: CommunesComparer;
 }
 
-const initialState: CommunesComparer = {
+const initialState: CommunesComparerSlice = {
     communes: [],
 };
 
@@ -36,9 +37,9 @@ const communesComparerSlice = createSlice({
                 commune => commune.codeInsee !== codeInsee
             );
         },
-        resetCommunesComparer: () => ({
-            communes: [],
-        }),
+        resetCommunesComparer: state => {
+            state.communes = [];
+        },
     },
 });
 
