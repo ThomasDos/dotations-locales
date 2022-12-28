@@ -1,5 +1,6 @@
 import EmptySelectionComparer from "components/comparer/EmptySelectionComparer";
 import SearchInputComparer from "components/comparer/SearchInputComparer";
+import TabsContainerComparer from "components/comparer/TabsContainerComparer";
 import { SubHeader } from "components/dashboard";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -43,7 +44,7 @@ const Comparer = () => {
             <StyledComparerBody>
                 <SearchInputComparer />
                 {communes.length > 1 ? (
-                    <div>more than one</div>
+                    <TabsContainerComparer />
                 ) : (
                     <EmptySelectionComparer />
                 )}
