@@ -1,4 +1,4 @@
-import { Button, SearchInput } from "components/ui";
+import { SearchInput } from "components/ui";
 import { useDispatch, useSelector } from "react-redux";
 import {
     resetCommunesComparer,
@@ -26,7 +26,7 @@ const SearchInputComparer = () => {
             </div>
             {communes.length > 1 && (
                 <>
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap items-center">
                         {communes.map((commune, index) => {
                             if (!index) return null;
 
@@ -38,14 +38,12 @@ const SearchInputComparer = () => {
                                 />
                             );
                         })}
-                    </div>
-                    <div className="w-3/12">
-                        <Button
-                            text="Réinitialiser"
-                            backgroundColor="var(--red-marianne-425)"
-                            backgroundColorHover="var(--red-marianne-main-472)"
+                        <div
+                            className="text-sm cursor-pointer hover:underline text-color-primary"
                             onClick={() => dispatch(resetCommunesComparer())}
-                        />
+                        >
+                            Tout effacer
+                        </div>
                     </div>
                 </>
             )}

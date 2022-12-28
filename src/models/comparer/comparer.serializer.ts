@@ -20,19 +20,21 @@ export const dotationsChartComparerSerializer = (
             const dotationSelected = dotations[dotationSelectedKey] as Dotation;
 
             const value = dotationSelected.annees[0][year];
-            const label = `${formatNumberWithSpace(value)} €`;
+            const label = value
+                ? `${formatNumberWithSpace(value)} €`
+                : "Non elligible : 0€";
 
             if (!index) {
                 return {
                     value,
                     label,
-                    currentDotationTitle: `${commune} (${codeInsee})`,
+                    communeTitleMain: `${commune} (${codeInsee})`,
                 };
             }
             return {
                 value,
                 label,
-                barTitle: `${commune} (${codeInsee})`,
+                communeTitle: `${commune} (${codeInsee})`,
             };
         })
         .filter(Boolean);

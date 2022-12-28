@@ -1,6 +1,6 @@
 export interface DotationFormatedChartComparer {
-    currentDotationTitle?: string;
-    barTitle?: string;
+    communeTitle?: string;
+    communeTitleMain?: string;
     value: number;
     label: string;
 }
