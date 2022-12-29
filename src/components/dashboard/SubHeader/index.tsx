@@ -33,6 +33,9 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
         if (router.pathname.includes("alerter")) {
             return "M'alerter";
         }
+        if (router.pathname.includes("comparer")) {
+            return "Comparer";
+        }
 
         return "Dotations";
     }, [router.pathname]);
@@ -82,6 +85,15 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                         }
                     />
                     <LinkIcon
+                        icon="comparer"
+                        text="Comparer"
+                        handleClick={() =>
+                            router.push(
+                                `/${codeInsee}/comparer?commune=${commune}`
+                            )
+                        }
+                    />
+                    <LinkIcon
                         icon="alerter"
                         text="M'alerter"
                         handleClick={() =>
@@ -90,7 +102,6 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             )
                         }
                     />
-                    <LinkIcon icon="comparer" text="Comparer" disabled />
                 </div>
                 <div className="w-full md:hidden">
                     <FormControl
@@ -151,6 +162,17 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                             </MenuItem>
 
                             <MenuItem
+                                value="Comparer"
+                                onClick={() =>
+                                    router.push(
+                                        `/${codeInsee}/comparer?commune=${commune}`
+                                    )
+                                }
+                            >
+                                <LinkIcon icon="comparer" text="Comparer" />
+                            </MenuItem>
+
+                            <MenuItem
                                 value="M'alerter"
                                 onClick={() =>
                                     router.push(
@@ -159,13 +181,6 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                                 }
                             >
                                 <LinkIcon icon="alerter" text="M'alerter" />
-                            </MenuItem>
-                            <MenuItem value="Comparer" disabled>
-                                <LinkIcon
-                                    icon="comparer"
-                                    text="Comparer"
-                                    disabled
-                                />
                             </MenuItem>
                         </Select>
                     </FormControl>

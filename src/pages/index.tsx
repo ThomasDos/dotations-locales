@@ -1,12 +1,9 @@
-import { HomeRowImageText, SearchInput } from "components/home";
+import { HomeRowImageText } from "components/home";
+import { SearchInput } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
+import useHomeInit from "hooks/useHomeInit";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { updateIsSimulationFalse } from "store/appSettings.slice";
-import { resetInitialCommune } from "store/initialCommune.slice";
-import { resetSimulationCommune } from "store/simulationCommune.slice";
 import styled from "styled-components";
 
 const MainBottom = styled.div`
@@ -25,13 +22,7 @@ const MainBottomBody = styled.div`
 `;
 
 const Home: NextPage = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(resetSimulationCommune());
-        dispatch(resetInitialCommune());
-        dispatch(updateIsSimulationFalse());
-    }, [dispatch]);
+    useHomeInit();
 
     return (
         <>
@@ -53,7 +44,12 @@ const Home: NextPage = () => {
                         collectivité.
                     </span>
                 </div>
-                <SearchInput />
+                <SearchInput
+                    placeholder={`${
+                        window.innerWidth > 480 ? "Nom de la c" : "C"
+                    }ollectivité ou code insee`}
+                    textIcon="Rechercher"
+                />
                 <div className="md:mx-60 mt-10 md:mt-20 text-center md:text-left">
                     <HomeRowImageText
                         priority
