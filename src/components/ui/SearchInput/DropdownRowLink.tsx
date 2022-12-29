@@ -13,12 +13,7 @@ const DropdownRowLink = ({
         <Link href={{ pathname: `/${codeInseeFormatted}`, query: { commune } }}>
             <div
                 onClick={() => {
-                    matomoTrackEvent([
-                        "autocompletion",
-                        "clique résultat",
-                        commune,
-                    ]);
-                    matomoTrackEvent(["autocompletion", "recherche", search]);
+                    matomoTrackEvent(["Recherche", commune]);
                 }}
             >
                 <StyledDropdownRow className="flex justify-between px-6 py-4">

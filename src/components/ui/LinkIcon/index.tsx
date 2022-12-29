@@ -49,7 +49,7 @@ const LinkIcon = ({ icon, text, handleClick, disabled }: LinkIconProps) => {
                 className="flex items-center"
                 onClick={() => {
                     if (disabled) return;
-                    matomoTrackEvent(["fonction", text]);
+                    matomoTrackEvent(["Navigation", text]);
                     handleClick?.();
                 }}
                 disabled={disabled}

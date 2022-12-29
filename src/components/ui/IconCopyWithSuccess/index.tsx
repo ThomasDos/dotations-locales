@@ -21,7 +21,7 @@ const IconCopyWithSuccess = ({ toCopy }: IconCopyProps) => {
     return (
         <div
             onClick={async () => {
-                matomoTrackEvent(["fonction", "copier"]);
+                matomoTrackEvent(["Fonction", "Copier"]);
                 onCopy();
                 return navigator.clipboard.writeText(String(toCopy));
             }}

@@ -145,7 +145,10 @@ const EntityParameters = ({
                         <Button
                             text="Modifier les données"
                             onClick={() => {
-                                matomoTrackEvent(["simulation", "modifier"]);
+                                matomoTrackEvent([
+                                    "Simulation",
+                                    "Modifier les données",
+                                ]);
                                 setIsCriteresGenerauxSimulation(true);
                                 window.scrollTo(0, 0);
                             }}
@@ -158,10 +161,8 @@ const EntityParameters = ({
                             text="Créer une simulation"
                             onClick={() => {
                                 matomoTrackEvent([
-                                    "dashboard",
-                                    "fonction",
-                                    "simulation",
-                                    "button",
+                                    "Simulation",
+                                    "Créer une simulation",
                                 ]);
 
                                 dispatch(updateIsSimulationTrue());

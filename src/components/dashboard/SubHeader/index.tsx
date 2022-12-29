@@ -87,6 +87,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                     <LinkIcon
                         icon="comparer"
                         text="Comparer"
+                        disabled
                         handleClick={() =>
                             router.push(
                                 `/${codeInsee}/comparer?commune=${commune}`
@@ -163,6 +164,7 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
 
                             <MenuItem
                                 value="Comparer"
+                                disabled
                                 onClick={() =>
                                     router.push(
                                         `/${codeInsee}/comparer?commune=${commune}`

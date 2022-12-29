@@ -87,9 +87,8 @@ const SubTab = ({ dotation }: SubTabProps) => {
                                     showNonEligible={showNonEligible}
                                     toggleShowNonEligible={() => {
                                         matomoTrackEvent([
-                                            "fonction",
-                                            "afficher non éligibles",
-                                            "criteres",
+                                            "Fonction",
+                                            "Afficher critères non éligibles",
                                         ]);
                                         setShowNonEligible(!showNonEligible);
                                     }}

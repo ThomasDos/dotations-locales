@@ -112,13 +112,8 @@ const SimulationBanner = ({
                 <div className="flex">
                     <StyledBannerButton
                         onClick={() => {
-                            matomoTrackEvent([
-                                "simulation",
-                                "clique",
-                                "Abandonner",
-                            ]);
+                            matomoTrackEvent(["Simulation", "Abandonner"]);
                             dispatch(updateIsSimulationFalse());
-                            setIsCriteresGenerauxSimulation(false);
                         }}
                     >
                         Abandonner
@@ -131,7 +126,7 @@ const SimulationBanner = ({
                                     setResetModal(true);
                                 }}
                             >
-                                Réinitialiser
+                                Tout réinitialiser
                             </StyledBannerButton>
 
                             <StyledBannerButton
@@ -139,8 +134,7 @@ const SimulationBanner = ({
                                 hideSmall
                                 onClick={() => {
                                     matomoTrackEvent([
-                                        "simulation",
-                                        "clique",
+                                        "Simulation",
                                         "Exporter",
                                     ]);
                                 }}
@@ -152,8 +146,7 @@ const SimulationBanner = ({
                                 hideSmall
                                 onClick={() => {
                                     matomoTrackEvent([
-                                        "simulation",
-                                        "clique",
+                                        "Simulation",
                                         "Enregistrer",
                                     ]);
                                 }}
@@ -182,10 +175,14 @@ const SimulationBanner = ({
                             <Button
                                 text="Oui"
                                 onClick={() => {
+                                    matomoTrackEvent([
+                                        "Simulation",
+                                        "Tout réinitialiser",
+                                    ]);
                                     dispatch(
                                         hydrateSimulationCommune(initialCommune)
                                     );
-                                    setIsCriteresGenerauxSimulation(false);
+                                    setIsCriteresGenerauxSimulation(true);
                                     setResetModal(false);
                                 }}
                             />
