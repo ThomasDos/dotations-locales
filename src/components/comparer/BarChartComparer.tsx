@@ -27,7 +27,7 @@ const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
                 margin={{
                     bottom: 0,
                     left: 0,
-                    right: 100,
+                    right: 120,
                     top: 20,
                 }}
                 data={dotations}

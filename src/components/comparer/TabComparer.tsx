@@ -1,22 +1,15 @@
 import { Dotation } from "models/commune/commune.interface";
 import { DotationsFormatedChartComparer } from "models/comparer/comparer.interface";
-import { dotationsChartComparerSerializer } from "models/comparer/comparer.serializer";
+import {
+    dotationDgfChartSerializer,
+    dotationDgfPerHabitantChartSerializer,
+    dotationsChartComparerSerializer,
+} from "models/comparer/comparer.serializer";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { selectCommunes } from "store/communesComparer.slice";
 import { selectInitialCurrentYear } from "store/initialCommune.slice";
-import styled from "styled-components";
-import sortDotationsChartDescending from "utils/sortDotationsChartDescending";
-import BarChartComparer from "./BarChartComparer";
-
-const StyledBarChartComparerContainer = styled.div`
-    @media (min-width: 640px) {
-        border: 1px solid var(--blue-france-850);
-        padding: 32px 48px 18px 32px;
-    }
-    margin-top: 40px;
-    margin-bottom: 120px;
-`;
+import DotationComparerCard from "./DotationComparerCard";
 
 interface BarChartComparerProps {
     title: string;
@@ -35,7 +28,10 @@ const TabComparer = ({
     const currentYear = useSelector(selectInitialCurrentYear);
     const dotationsChart: DotationsFormatedChartComparer = useMemo(() => {
         if (isDGF) {
-            return [];
+            return dotationDgfChartSerializer(
+                communes,
+                currentYear
+            ) as DotationsFormatedChartComparer;
         }
         return dotationsChartComparerSerializer(
             communes,
@@ -44,21 +40,32 @@ const TabComparer = ({
         ) as DotationsFormatedChartComparer;
     }, [communes]);
 
-    const dotationsChartSortedDescending =
-        sortDotationsChartDescending(dotationsChart);
+    const dotationsChartPerHabitant: DotationsFormatedChartComparer =
+        useMemo(() => {
+            if (isDGF) {
+                return dotationDgfPerHabitantChartSerializer(
+                    communes,
+                    currentYear
+                ) as DotationsFormatedChartComparer;
+            }
+            return [] as DotationsFormatedChartComparer;
+        }, [communes]);
 
     return (
-        <StyledBarChartComparerContainer>
-            <div className="text-xl md:text-2xl font-bold mb-1">{title}</div>
-            <div className="mb-5 md:mb-10">{subtitle}</div>
-            <div className="mb-5 md:mb-10">
-                {!!dotationsChart.length && (
-                    <BarChartComparer
-                        dotations={dotationsChartSortedDescending}
-                    />
-                )}
-            </div>
-        </StyledBarChartComparerContainer>
+        <>
+            <DotationComparerCard
+                title={title}
+                subtitle={subtitle}
+                dotationsChart={dotationsChart}
+            />
+            {isDGF && (
+                <DotationComparerCard
+                    title={dotation.description}
+                    subtitle={subtitle}
+                    dotationsChart={dotationsChartPerHabitant}
+                />
+            )}
+        </>
     );
 };
 

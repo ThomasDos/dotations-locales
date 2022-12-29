@@ -34,7 +34,7 @@ const TabsContainerComparer = () => {
     const dotationDGF: Dotation = {
         annees: anneesDotationsTotal,
         criteres: {},
-        description: "",
+        description: "Dotations (DGF) par habitants",
         label: "Résumé",
         title: "Dotations Générales de Fonctionnement (DGF)",
     };
