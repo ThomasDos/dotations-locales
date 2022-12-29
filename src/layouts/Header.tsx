@@ -28,11 +28,7 @@ const HeaderContainer = () => {
                         <Link href="/">
                             <div
                                 onClick={() => {
-                                    matomoTrackEvent([
-                                        "header",
-                                        "clique",
-                                        "logo home",
-                                    ]);
+                                    matomoTrackEvent(["Navigation", "Accueil"]);
                                 }}
                             >
                                 <ImageFixed

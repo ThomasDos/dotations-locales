@@ -19,8 +19,7 @@ const DropdownRowComparer = ({
     return (
         <div
             onClick={async () => {
-                matomoTrackEvent(["autocompletion", "comparer", commune]);
-                matomoTrackEvent(["autocompletion", "comparer", search]);
+                matomoTrackEvent(["Comparer", commune]);
                 try {
                     await fetchCommuneMutate({
                         codeInsee: codeInseeFormatted,

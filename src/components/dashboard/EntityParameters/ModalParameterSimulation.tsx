@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { matomoTrackEvent } from "services/matomo";
 import {
     selectSimulationCommune,
     updateSimulationCritereValeur,
@@ -103,7 +102,6 @@ function ModalParameterSimulation({
     };
 
     const handleSubmit = () => {
-        matomoTrackEvent(["simulation", "modifier data", description]);
         dispatch(
             updateSimulationCritereValeur({
                 critereGeneralKey,

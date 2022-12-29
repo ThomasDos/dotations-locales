@@ -27,9 +27,8 @@ const TitleDotationsNonEligibles = ({
                 className="flex items-center cursor-pointer "
                 onClick={() => {
                     matomoTrackEvent([
-                        "fonction",
-                        "afficher non éligibles",
-                        "dotations",
+                        "Fonction",
+                        "Afficher dotations non éligibles",
                     ]);
                     setShowNonEligible(!showNonEligible);
                 }}

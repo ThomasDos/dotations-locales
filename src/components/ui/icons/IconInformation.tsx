@@ -1,5 +1,4 @@
 import ImageFixed from "components/ui/ImageFixed";
-import { matomoTrackEvent } from "services/matomo";
 
 interface IconInformationProps {
     setShowInfoModal(show: boolean): void;
@@ -10,7 +9,6 @@ const IconInformation = ({ setShowInfoModal }: IconInformationProps) => {
         <ImageFixed
             className="cursor-help"
             onClick={() => {
-                matomoTrackEvent(["fonction", "info icone", "clique"]);
                 setShowInfoModal(true);
             }}
             src="/icons/information.svg"
