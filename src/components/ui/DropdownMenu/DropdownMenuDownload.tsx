@@ -1,18 +1,12 @@
-import { Divider } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ImageFixed from "components/ui/ImageFixed";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { CSVLink } from "react-csv";
 import { Headers } from "react-csv/components/CommonPropTypes";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
-
-const StyledDivider = styled(Divider)`
-    margin: 0 !important;
-`;
 
 const StyledCustomSpan = styled.span`
     color: var(--blue-france-sun-113-625);
@@ -34,7 +28,7 @@ const MenuItemCustom = ({
     return (
         <StyledMenuItem
             onClick={() => {
-                matomoTrackEvent(["fonction", "export", text]);
+                matomoTrackEvent(["Fonction", `Exporter ${text}`]);
                 handleClose();
             }}
         >
@@ -63,10 +57,9 @@ const DropdownMenuDownload = ({
 }: DropdownMenuDownloadProps) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
-    const { pathname } = useRouter();
     const hasDataCSV = !!dataCSV?.length;
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        matomoTrackEvent(["fonction", "export", "clique", pathname]);
+        matomoTrackEvent(["Fonction", "Exporter"]);
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {

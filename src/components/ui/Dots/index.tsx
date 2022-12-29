@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const StyledDots = styled.div`
+const StyledDots = styled.div<{ dotsColor: string }>`
     display: inline-block;
     position: relative;
     width: 68px;
@@ -13,7 +13,7 @@ const StyledDots = styled.div`
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: var(--grey-975);
+        background: ${({ dotsColor }) => `var(${dotsColor})`};
         animation-timing-function: cubic-bezier(0, 1, 1, 0);
 
         &:nth-child(1) {
@@ -59,9 +59,13 @@ const StyledDots = styled.div`
     }
 `;
 
-export default function Dots() {
+interface DotsProps {
+    dotsColor?: string;
+}
+
+export default function Dots({ dotsColor = "--grey-975" }: DotsProps) {
     return (
-        <StyledDots>
+        <StyledDots dotsColor={dotsColor}>
             <div />
             <div />
             <div />

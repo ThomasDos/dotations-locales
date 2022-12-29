@@ -20,7 +20,7 @@ const Spinner = ({ size }: SpinnerProps) => {
         <svg
             role="status"
             className={
-                "inline text-gray-200 animate-spin dark:text-gray-600 fill-white dark:fill-white " +
+                "inline text-grey-200 animate-spin dark:text-grey-600 fill-white dark:fill-white " +
                 spinnerSize
             }
             viewBox="0 0 100 101"

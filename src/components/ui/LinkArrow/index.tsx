@@ -9,7 +9,7 @@ const StyledSpan = styled.span`
 
 interface LinkArrowProps {
     textLink: string;
-    handleOnClick: () => void;
+    handleOnClick?: () => void;
 }
 
 const LinkArrow = ({ textLink, handleOnClick }: LinkArrowProps) => {

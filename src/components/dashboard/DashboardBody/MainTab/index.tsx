@@ -3,7 +3,6 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import type { Dotation, Dotations } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { matomoTrackEvent } from "services/matomo";
 import {
     selectAllYears,
     selectCurrentYear,
@@ -73,14 +72,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
                 hasInformation={false}
                 dotation={dotationDGF}
                 borderTop
-                handleClick={() => {
-                    matomoTrackEvent([
-                        "dashboard",
-                        "clique",
-                        "titre",
-                        dotationDGF.title,
-                    ]);
-                }}
             />
             {countDotationsEligiblesDotations ? (
                 <>
@@ -98,16 +89,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
                                         dotationsEligibles[dotationEligibleKey]
                                     }
                                     borderTop={index === 0}
-                                    handleClick={() => {
-                                        matomoTrackEvent([
-                                            "dashboard",
-                                            "clique",
-                                            "titre",
-                                            dotationsEligibles[
-                                                dotationEligibleKey
-                                            ].title,
-                                        ]);
-                                    }}
                                 />
                             );
                         }

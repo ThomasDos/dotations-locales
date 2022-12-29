@@ -28,11 +28,7 @@ const HeaderContainer = () => {
                         <Link href="/">
                             <div
                                 onClick={() => {
-                                    matomoTrackEvent([
-                                        "header",
-                                        "clique",
-                                        "logo home",
-                                    ]);
+                                    matomoTrackEvent(["Navigation", "Accueil"]);
                                 }}
                             >
                                 <ImageFixed
@@ -63,25 +59,21 @@ const HeaderContainer = () => {
                 </div>
                 <div>
                     <div className="hidden sm:flex items-center ml-8 py-5">
-                        <div>
-                            <LinkArrow
-                                textLink="Notre mission"
-                                handleOnClick={() => {
-                                    win.location =
-                                        "https://beta.gouv.fr/startups/dotations-locales.html";
-                                }}
-                            />
-                        </div>
+                        <Link
+                            href="https://beta.gouv.fr/startups/dotations-locales.html"
+                            rel="noopener noreferrer"
+                            target="_"
+                            style={{ all: "unset" }}
+                        >
+                            <LinkArrow textLink="Notre mission" />
+                        </Link>
                         <HorizontalSeparator />
-                        <div>
-                            <LinkArrow
-                                textLink="Contact"
-                                handleOnClick={() => {
-                                    win.location =
-                                        "mailto:contact-dotations-locales@anct.gouv.fr";
-                                }}
-                            />
-                        </div>
+                        <Link
+                            href="mailto:contact-dotations-locales@anct.gouv.fr"
+                            style={{ all: "unset" }}
+                        >
+                            <LinkArrow textLink="Contact" />
+                        </Link>
                     </div>
                     <div className="sm:hidden">
                         <BurgerMenu />
