@@ -1,37 +1,52 @@
-import { DotationsFormatedChartComparer } from "models/comparer/comparer.interface";
+import { DotationsFormattedChartComparer } from "models/comparer/comparer.interface";
 import styled from "styled-components";
 import sortDotationsChartDescending from "utils/sortDotationsChartDescending";
 import BarChartComparer from "./BarChartComparer";
+import ComparerDgfBoardContainer from "./ComparerDgfBoardContainer";
 
-const StyledBarChartComparerContainer = styled.div`
+const StyledBarChartComparerContainer = styled.div<{
+    isSousDotation?: boolean;
+}>`
     @media (min-width: 640px) {
         border: 1px solid var(--blue-france-850);
         padding: 32px 48px 18px 32px;
     }
-    margin-top: 40px;
-    margin-bottom: 120px;
+    margin-top: ${({ isSousDotation }) => (isSousDotation ? "10px" : "40px")};
+    margin-bottom: ${({ isSousDotation }) =>
+        isSousDotation ? "30px" : "120px"};
 `;
 
 interface DotationComparerCardProps {
-    dotationsChart: DotationsFormatedChartComparer;
+    dotationsChart: DotationsFormattedChartComparer;
     title: string;
     subtitle: string;
+    isSousDotation?: boolean;
+    isDGF?: boolean;
+    boardPerHabitant?: boolean;
 }
 
 const DotationComparerCard = ({
     dotationsChart,
     title,
     subtitle,
+    isSousDotation,
+    isDGF,
+    boardPerHabitant,
 }: DotationComparerCardProps) => {
     const dotationsChartSortedDescending =
         sortDotationsChartDescending(dotationsChart);
     return (
-        <StyledBarChartComparerContainer>
+        <StyledBarChartComparerContainer isSousDotation={isSousDotation}>
             <div className="text-xl md:text-2xl font-bold mb-1">{title}</div>
             <div className="mb-5 md:mb-10">{subtitle}</div>
             <div className="mb-5 md:mb-10">
                 <BarChartComparer dotations={dotationsChartSortedDescending} />
             </div>
+            {isDGF && (
+                <ComparerDgfBoardContainer
+                    boardPerHabitant={boardPerHabitant}
+                />
+            )}
         </StyledBarChartComparerContainer>
     );
 };

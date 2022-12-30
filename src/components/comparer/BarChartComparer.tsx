@@ -1,4 +1,4 @@
-import { DotationsFormatedChartComparer } from "models/comparer/comparer.interface";
+import { DotationsFormattedChartComparer } from "models/comparer/comparer.interface";
 import { Fragment } from "react";
 import {
     Bar,
@@ -12,7 +12,7 @@ import {
 import calculDyBarChart from "utils/calculDyBarChart";
 
 interface BarChartComparerProps {
-    dotations: DotationsFormatedChartComparer;
+    dotations: DotationsFormattedChartComparer;
 }
 
 const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
