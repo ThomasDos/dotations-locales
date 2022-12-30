@@ -6,6 +6,10 @@ const StyledSpanToggle = styled.span`
     color: var(--blue-france-sun-113-625);
 `;
 
+const StyledContainer = styled.div`
+    border-top: 1px solid var(--blue-france-925);
+`;
+
 interface TitleCollapseDetailsProps {
     setShowDetails: (showShowCollapse: boolean) => void;
     showDetails: boolean;
@@ -15,7 +19,7 @@ const TitleCollapseDetails = ({
     showDetails,
 }: TitleCollapseDetailsProps) => {
     return (
-        <div className="flex text-sm justify-between py-5 items-center">
+        <StyledContainer className="flex text-sm justify-between py-5 items-center">
             <span>Données par communes</span>
             <div
                 className="flex items-center cursor-pointer "
@@ -36,7 +40,7 @@ const TitleCollapseDetails = ({
                     src="/icons/arrow-up.svg"
                 />
             </div>
-        </div>
+        </StyledContainer>
     );
 };
 
