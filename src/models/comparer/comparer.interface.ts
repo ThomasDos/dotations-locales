@@ -3,6 +3,7 @@ export interface DotationFormattedChartComparer {
     communeTitleMain?: string;
     value: number;
     label: string;
+    link?: string;
 }
 
 export interface DotationFormattedBoardDgfComparer {

@@ -12,8 +12,7 @@ const StyledBarChartComparerContainer = styled.div<{
         padding: 32px 48px 18px 32px;
     }
     margin-top: ${({ isSousDotation }) => (isSousDotation ? "10px" : "40px")};
-    margin-bottom: ${({ isSousDotation }) =>
-        isSousDotation ? "30px" : "120px"};
+    margin-bottom: 40px;
 `;
 
 interface DotationComparerCardProps {

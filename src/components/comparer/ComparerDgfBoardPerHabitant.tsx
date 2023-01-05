@@ -7,9 +7,9 @@ import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
 const StyledContainer = styled.div`
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     @media (min-width: 640px) {
-        margin-bottom: 120px;
+        margin-bottom: 40px;
     }
 `;
 
@@ -95,7 +95,11 @@ export default function ComparerDgfBoardPerHabitant() {
         year
     );
     const dotationsDgfBoardPopulationsDescending =
-        dotationsDgfBoardPopulations.sort((a, b) => b.values[0] - a.values[0]);
+        dotationsDgfBoardPopulations.sort(
+            (a, b) =>
+                +(b.values[2] as string).split("K")[0].replace(" ", "") -
+                +(a.values[2] as string).split("K")[0].replace(" ", "")
+        );
 
     const { labels } = dotationsDgfBoardPopulationsDescending[0];
 
@@ -134,7 +138,9 @@ export default function ComparerDgfBoardPerHabitant() {
                                             key={value}
                                             hasValue={!!value}
                                         >
-                                            {formatNumberWithSpace(value)}
+                                            {isNaN(+value)
+                                                ? value
+                                                : formatNumberWithSpace(+value)}
                                         </StyledBodyBoardRowValue>
                                     ))}
                                 </StyledBodyBoardRowValues>

@@ -8,9 +8,9 @@ import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
 const StyledContainer = styled.div`
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     @media (min-width: 640px) {
-        margin-bottom: 120px;
+        margin-bottom: 40px;
     }
 `;
 

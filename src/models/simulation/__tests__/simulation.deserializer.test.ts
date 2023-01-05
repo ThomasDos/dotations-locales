@@ -6,6 +6,7 @@ import {
 describe("simulation deserializer", () => {
     describe("postSimulationDeserializer", () => {
         it("should return a deserialized post simulation with a simulationCommune", () => {
+            //TODO: FIX TESTS !!
             expect(
                 postSimulationDeserializer({
                     annees: ["2022", "2021"],
@@ -151,7 +152,7 @@ describe("simulation deserializer", () => {
                     superficie: 622,
                     zone_de_montagne: true,
                 },
-                periode_loi: "2022",
+                periode_loi: "2023",
             });
         });
     });

@@ -138,14 +138,18 @@ export const dotationsDgfBoardPopulationsSerializer = (
     communes: CommunesComparer,
     year: string
 ) =>
-    communes.map(({ commune, codeInsee, criteresGeneraux }) => {
+    communes.map(({ commune, codeInsee, criteresGeneraux, dotations }) => {
         const populationInsee = +getPopulationInsee(criteresGeneraux, year);
-        const populationDgf = +getPopulationDgf(criteresGeneraux, year);
+        const dotationsDf = dotations.dotationForfaitaire;
+        const populationDgf = +getPopulationDgf(dotationsDf.criteres, year);
+        const totalDotations = getTotalDotations(dotations, year);
+        const totalDotationsFomatted = `${formatNumberWithSpace(
+            totalDotations / 1000
+        )}K€`;
 
-        //TODO: récuperer la population DGF grace au back
         return {
-            values: [populationInsee],
-            labels: ["Population INSEE"],
+            values: [populationInsee, populationDgf, totalDotationsFomatted],
+            labels: ["Population INSEE", "Population DGF", "Montant DGF"],
             titleRow: `${commune} (${codeInsee})`,
         };
     });
@@ -177,6 +181,7 @@ export const dotationDgfPerHabitantChartSerializer = (
                 value,
                 label,
                 communeTitle: `${commune} (${codeInsee})`,
+                link: `/${codeInsee}?commune=${commune}`,
             };
         })
         .filter(Boolean);
