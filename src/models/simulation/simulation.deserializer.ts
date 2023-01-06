@@ -6,15 +6,15 @@ import type {
 import convertCamelCaseToSnakeCase from "utils/convertCamelCaseToSnakeCase";
 
 export const postSimulationDeserializer = (
-    simulationCommune: Commune
+    simulationCommune: Commune,
+    selectLoiSimulation: string
 ): PostSimulation => {
     return {
         code_insee: simulationCommune.codeInsee,
         data: postSimulationDataDeserializer(
             simulationCommune.criteresGeneraux
         ),
-        //TODO : dynamique quand tableau annees loi dispo
-        periode_loi: String(new Date().getFullYear()),
+        periode_loi: selectLoiSimulation,
     };
 };
 

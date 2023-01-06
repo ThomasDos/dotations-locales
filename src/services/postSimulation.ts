@@ -9,10 +9,13 @@ import type { Commune } from "src/models/commune/commune.interface";
 import apiDotations from "./apiDotations";
 
 export default async (
-    simulationCommune: Commune
+    simulationCommune: Commune,
+    selectLoiSimulation: string
 ): Promise<CommuneSimulation> => {
-    const simulationDeserialized =
-        postSimulationDeserializer(simulationCommune);
+    const simulationDeserialized = postSimulationDeserializer(
+        simulationCommune,
+        selectLoiSimulation
+    );
 
     return apiDotations
         .post("/simulation/", simulationDeserialized)
