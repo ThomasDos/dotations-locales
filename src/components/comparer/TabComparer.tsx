@@ -1,9 +1,10 @@
 import { Dotation } from "models/commune/commune.interface";
-import { DotationsFormatedChartComparer } from "models/comparer/comparer.interface";
+import { DotationsFormattedChartComparer } from "models/comparer/comparer.interface";
 import {
     dotationDgfChartSerializer,
     dotationDgfPerHabitantChartSerializer,
     dotationsChartComparerSerializer,
+    sousDotationsChartComparerSerializer,
 } from "models/comparer/comparer.serializer";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
@@ -16,6 +17,8 @@ interface BarChartComparerProps {
     subtitle: string;
     dotation: Dotation;
     isDGF?: boolean;
+    isSousDotation?: boolean;
+    sousDotationKey?: string;
 }
 
 const TabComparer = ({
@@ -23,32 +26,39 @@ const TabComparer = ({
     subtitle,
     dotation,
     isDGF,
+    isSousDotation,
+    sousDotationKey,
 }: BarChartComparerProps) => {
     const communes = useSelector(selectCommunes);
     const currentYear = useSelector(selectInitialCurrentYear);
-    const dotationsChart: DotationsFormatedChartComparer = useMemo(() => {
+    const dotationsChart: DotationsFormattedChartComparer = useMemo(() => {
         if (isDGF) {
-            return dotationDgfChartSerializer(
+            return dotationDgfChartSerializer(communes, currentYear);
+        }
+
+        if (isSousDotation) {
+            return sousDotationsChartComparerSerializer(
                 communes,
-                currentYear
-            ) as DotationsFormatedChartComparer;
+                currentYear,
+                sousDotationKey as string
+            ) as DotationsFormattedChartComparer;
         }
         return dotationsChartComparerSerializer(
             communes,
             currentYear,
             dotation
-        ) as DotationsFormatedChartComparer;
+        ) as DotationsFormattedChartComparer;
     }, [communes]);
 
-    const dotationsChartPerHabitant: DotationsFormatedChartComparer =
+    const dotationsChartPerHabitant: DotationsFormattedChartComparer =
         useMemo(() => {
             if (isDGF) {
                 return dotationDgfPerHabitantChartSerializer(
                     communes,
                     currentYear
-                ) as DotationsFormatedChartComparer;
+                ) as DotationsFormattedChartComparer;
             }
-            return [] as DotationsFormatedChartComparer;
+            return [] as DotationsFormattedChartComparer;
         }, [communes]);
 
     return (
@@ -57,12 +67,16 @@ const TabComparer = ({
                 title={title}
                 subtitle={subtitle}
                 dotationsChart={dotationsChart}
+                isSousDotation={isSousDotation}
+                isDGF={isDGF}
             />
             {isDGF && (
                 <DotationComparerCard
                     title={dotation.description}
                     subtitle={subtitle}
                     dotationsChart={dotationsChartPerHabitant}
+                    isDGF={isDGF}
+                    boardPerHabitant
                 />
             )}
         </>

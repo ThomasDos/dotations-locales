@@ -79,7 +79,7 @@ function ModalParameterSimulation({
 }: ModalParameterSimulationProps) {
     const dispatch = useDispatch();
     const { codeInsee } = useRouter().query;
-    const { mutate, isLoading } = usePostSimulation(`${codeInsee}`);
+    const { isLoading } = usePostSimulation(`${codeInsee}`);
     const simulationCommune = useSelector(selectSimulationCommune);
     const [fetchSimulation, setFetchsimulation] = useState(false);
 
@@ -93,7 +93,7 @@ function ModalParameterSimulation({
 
     useEffect(() => {
         if (fetchSimulation) {
-            mutate(simulationCommune);
+            //UPDATE postSimulationMutate si besoin
             setFetchsimulation(false);
         }
     }, [simulationCommune]);

@@ -1,4 +1,4 @@
-import { DotationsFormatedChartComparer } from "models/comparer/comparer.interface";
+import { DotationsFormattedChartComparer } from "models/comparer/comparer.interface";
 import { Fragment } from "react";
 import {
     Bar,
@@ -10,14 +10,20 @@ import {
     YAxis,
 } from "recharts";
 import calculDyBarChart from "utils/calculDyBarChart";
+import formatLinkForLabelBarChart from "utils/formatLinkForLabelBarChart";
 
 interface BarChartComparerProps {
-    dotations: DotationsFormatedChartComparer;
+    dotations: DotationsFormattedChartComparer;
 }
 
 const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
     const dotationsLength = dotations.length;
     const dy = calculDyBarChart(dotationsLength);
+
+    const handleLabelClick = (e: any) => {
+        const link = formatLinkForLabelBarChart(e.target.textContent);
+        window.open(link, "_blank");
+    };
 
     return (
         <ResponsiveContainer width={"100%"} height={100 * dotations.length}>
@@ -71,6 +77,8 @@ const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
                         dy={dy}
                         width={350}
                         fontWeight={400}
+                        onClick={handleLabelClick}
+                        cursor="pointer"
                     />
                     <LabelList
                         dataKey="label"

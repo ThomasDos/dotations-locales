@@ -9,7 +9,13 @@ export default (codeInsee: string) => {
 
     return useMutation(
         ["postSimulation", codeInsee],
-        async (simulationCommune: Commune) => postSimulation(simulationCommune),
+        async ({
+            simulationCommune,
+            selectLoiSimulation,
+        }: {
+            simulationCommune: Commune;
+            selectLoiSimulation: string;
+        }) => postSimulation(simulationCommune, selectLoiSimulation),
         {
             onSuccess: data => {
                 dispatch(hydrateSimulationCommune(data));

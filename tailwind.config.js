@@ -8,6 +8,7 @@ module.exports = {
             "color-primary": "#000091",
             white: "#ffffff",
             "grey-200": "rgb(229 231 235)",
+            "grey-625-425": "#929292",
             dark: {
                 "grey-600": "rgb(75 85 99)",
                 white: "#ffffff",
