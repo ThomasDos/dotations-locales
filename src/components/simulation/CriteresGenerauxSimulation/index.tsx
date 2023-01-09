@@ -100,11 +100,14 @@ export default function CriteresGenerauxSimulation({
 
             toastPromise(
                 mutateAsync({
-                    ...simulationCommune,
-                    criteresGeneraux: {
-                        ...criteresGenerauxSimulation,
-                        ...criteres,
+                    simulationCommune: {
+                        ...simulationCommune,
+                        criteresGeneraux: {
+                            ...criteresGenerauxSimulation,
+                            ...criteres,
+                        },
                     },
+                    selectLoiSimulation: selectLoiSimulation.value,
                 }),
                 {
                     success: "Votre simulation est prête !",

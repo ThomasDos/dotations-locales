@@ -67,6 +67,24 @@ const TabsContainerComparer = () => {
                                     title={dotation.title}
                                     subtitle={`Comparaison ${currentYear}`}
                                 />
+
+                                {dotation.sousDotations?.map(sousDotation => {
+                                    const [sousDotationKey] =
+                                        Object.keys(sousDotation);
+
+                                    const currentSousDotation =
+                                        sousDotation[sousDotationKey];
+                                    return (
+                                        <TabComparer
+                                            key={currentSousDotation.title}
+                                            dotation={currentSousDotation}
+                                            title={currentSousDotation.title}
+                                            subtitle={`Comparaison ${currentYear}`}
+                                            isSousDotation
+                                            sousDotationKey={sousDotationKey}
+                                        />
+                                    );
+                                })}
                             </Tab>
                         );
                     }

@@ -20,7 +20,7 @@ import {
     selectSimulationIsDifferentThanInitial,
 } from "store/simulationCommune.slice";
 import styled from "styled-components";
-import getDotationPerHabitant from "utils/getDotationPerHabitant";
+import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantPopulationInsee";
 import getPercentageEvolution from "utils/getPercentageEvolution";
 
 import ParameterRow from "./ParameterRow";
@@ -84,13 +84,14 @@ const EntityParameters = ({
 
     const criteresGenerauxKeys = Object.keys(criteresGeneraux);
 
-    const currentYearDotationPerHabitant = getDotationPerHabitant(
-        criteresGeneraux,
-        currentYear,
-        currentYearTotal
-    );
+    const currentYearDotationPerHabitant =
+        getDotationPerHabitantPopulationInsee(
+            criteresGeneraux,
+            currentYear,
+            currentYearTotal
+        );
 
-    const lastYearDotationPerHabitant = getDotationPerHabitant(
+    const lastYearDotationPerHabitant = getDotationPerHabitantPopulationInsee(
         criteresGeneraux,
         lastYear,
         lastYearTotal
