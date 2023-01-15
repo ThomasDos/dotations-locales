@@ -36,6 +36,7 @@ interface EmailInputProps {
     postEmail(email: string): void;
     postEmailIsLoading: boolean;
     postEmailIsError: boolean;
+    isChecked: boolean;
 }
 
 export default function EmailInput({
@@ -44,16 +45,22 @@ export default function EmailInput({
     postEmail,
     postEmailIsLoading,
     postEmailIsError,
+    isChecked,
 }: EmailInputProps) {
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!isChecked) {
+            return toast.error("Merci de d'accepter les conditions");
+        }
         const emailIsValid = isValidEmail(userEmail);
         if (!emailIsValid) {
             return toast.error("Votre email est invalide");
         }
 
-        await postEmail(userEmail);
+        postEmail(userEmail);
     };
+    const canSubmit = isChecked && !postEmailIsLoading;
+
     return (
         <form onSubmit={handleSubmit}>
             <StyledSearchInput

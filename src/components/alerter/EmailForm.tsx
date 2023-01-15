@@ -1,3 +1,5 @@
+import { Checkbox, FormControlLabel } from "@mui/material";
+import { useState } from "react";
 import styled from "styled-components";
 import AlertRowIcon from "./AlertRowIcon";
 import EmailInput from "./EmailInput";
@@ -27,6 +29,7 @@ export default function EmailForm({
     codeInsee,
     postEmailIsError,
 }: EmailFormProps) {
+    const [isChecked, setIsChecked] = useState(false);
     return (
         <>
             <StyledTitle>S’abonner aux alertes</StyledTitle>
@@ -36,6 +39,16 @@ export default function EmailForm({
                 setUserEmail={setUserEmail}
                 postEmailIsLoading={postEmailIsLoading}
                 postEmailIsError={postEmailIsError}
+                isChecked={isChecked}
+            />
+            <FormControlLabel
+                label="En cochant cette case, vous acceptez les conditions générales"
+                control={
+                    <Checkbox
+                        checked={isChecked}
+                        onChange={e => setIsChecked(e.target.checked)}
+                    />
+                }
             />
             <div className="text-lg">
                 S’abonner aux alertes c’est recevoir des informations concernant
