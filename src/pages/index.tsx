@@ -9,11 +9,33 @@ import styled from "styled-components";
 const MainBottom = styled.div`
     background-color: var(--green-emeraude-975);
     margin-bottom: 0.2rem;
+    width: 100%;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 768px) {
+        padding: 5rem 10rem;
+    }
+    @media (min-width: 1024px) {
+        padding: 5rem 15rem;
+    }
 `;
 const MainBottomBody = styled.div`
     background-color: var(--grey-1000);
     padding: 32px;
     text-align: center;
+    width: 100vw;
+    max-width: 56rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
 
     @media (min-width: 940px) {
         padding: 50px 40px;
@@ -125,8 +147,8 @@ const Home: NextPage = () => {
                     </HomeRowImageText>
                 </div>
 
-                <MainBottom className="w-full p-5 md:py-20 md:px-40 lg:px-60 flex justify-center items-center">
-                    <MainBottomBody className="w-screen max-w-4xl flex flex-col md:flex-row justify-center items-center">
+                <MainBottom>
+                    <MainBottomBody>
                         <div className="md:mr-14 mb-14 md:mb-0 flex flex-col items-center">
                             <ImageFixed
                                 className="mb-4"

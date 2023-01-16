@@ -1,5 +1,5 @@
 import Dots from "components/ui/Dots";
-import { FormEvent } from "react";
+import { FormEvent, useMemo } from "react";
 import toast from "react-hot-toast";
 import styled from "styled-components";
 import isValidEmail from "utils/isValidEmail";
@@ -59,13 +59,18 @@ export default function EmailInput({
 
         postEmail(userEmail);
     };
-    const canSubmit = isChecked && !postEmailIsLoading;
+    const valideUserEmail = useMemo(
+        () => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail),
+        [userEmail]
+    );
+
+    const canSubmit = isChecked && !postEmailIsLoading && valideUserEmail;
 
     return (
         <form onSubmit={handleSubmit}>
             <StyledSearchInput
                 className="flex md:w-5/6 my-8"
-                isError={postEmailIsError}
+                isError={postEmailIsError || !valideUserEmail}
             >
                 <StyledInput
                     autoFocus
@@ -77,11 +82,7 @@ export default function EmailInput({
                         setUserEmail(e.target.value);
                     }}
                 />
-                <button
-                    type="submit"
-                    role="button"
-                    disabled={postEmailIsLoading}
-                >
+                <button type="submit" role="button" disabled={!canSubmit}>
                     <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
                         {postEmailIsLoading ? (
                             <Dots />

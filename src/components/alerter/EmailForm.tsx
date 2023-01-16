@@ -1,4 +1,5 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox } from "@mui/material";
+import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import AlertRowIcon from "./AlertRowIcon";
@@ -41,15 +42,26 @@ export default function EmailForm({
                 postEmailIsError={postEmailIsError}
                 isChecked={isChecked}
             />
-            <FormControlLabel
-                label="En cochant cette case, vous acceptez les conditions générales"
-                control={
+            <div className="flex my-6">
+                <div>
                     <Checkbox
                         checked={isChecked}
                         onChange={e => setIsChecked(e.target.checked)}
                     />
-                }
-            />
+                </div>
+                <span>
+                    Je consens à ce que mon adresse email soit utilisée afin de
+                    recevoir les alertes et informations du service Dotations
+                    Locales.{" "}
+                    <Link
+                        href="https://www.economie.gouv.fr/politique-confidentialite"
+                        target="_"
+                    >
+                        Consulter notre politique de confidentialité
+                    </Link>
+                </span>
+            </div>
+
             <div className="text-lg">
                 S’abonner aux alertes c’est recevoir des informations concernant
                 :
