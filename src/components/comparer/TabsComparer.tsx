@@ -57,11 +57,8 @@ const TabsContainerComparer = () => {
                         const dotation =
                             dotationsByAmountDescending[dotationKey];
                         return (
-                            <Tab
-                                //@ts-ignore
-                                label={dotation.label}
-                                key={dotation.title}
-                            >
+                            //@ts-ignore
+                            <Tab label={dotation.label} key={dotation.title}>
                                 <TabComparer
                                     dotation={dotation}
                                     title={dotation.title}

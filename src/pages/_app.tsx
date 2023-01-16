@@ -32,7 +32,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         if (process.env.NODE_ENV !== "development") {
             const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? "";
             const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
-            hotjar.initialize(Number(process.env.NEXT_PUBLIC_APP_HOTJAR), 6);
+            hotjar.initialize(
+                Number(process.env.NEXT_PUBLIC_APP_HOTJAR),
+                6,
+                false
+            );
             matomoInit({
                 excludeUrlsPatterns: [/^localhost:.+/g],
                 siteId: matomoSiteId,

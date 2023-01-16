@@ -22,7 +22,7 @@ const StyledDashboardBody = styled.div`
     width: 100%;
     padding: 0 16px;
     @media (min-width: 940px) {
-        padding: 56px 80px 120px 120px;
+        padding: 56px 80px 60px 120px;
     }
 `;
 
@@ -104,10 +104,10 @@ const HistoriquePage = () => {
                                 const dotation =
                                     dotationsByAmountDescending[dotationKey];
                                 return (
+                                    //@ts-ignore
                                     <Tab
-                                        //@ts-ignore
-                                        label={dotation.label}
                                         key={dotation.title}
+                                        label={dotation.label}
                                     >
                                         <HistoriqueTab dotation={dotation} />
                                     </Tab>
