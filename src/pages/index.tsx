@@ -43,6 +43,18 @@ const MainBottomBody = styled.div`
     }
 `;
 
+const StyledBottomLogoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3.5rem;
+
+    @media (min-width: 768px) {
+        margin-right: 3.5rem;
+        margin-bottom: 0;
+    }
+`;
+
 const Home: NextPage = () => {
     useHomeInit();
 
@@ -149,7 +161,7 @@ const Home: NextPage = () => {
 
                 <MainBottom>
                     <MainBottomBody>
-                        <div className="md:mr-14 mb-14 md:mb-0 flex flex-col items-center">
+                        <StyledBottomLogoContainer>
                             <ImageFixed
                                 className="mb-4"
                                 src="/images/france-relance.png"
@@ -163,7 +175,7 @@ const Home: NextPage = () => {
                                 width={179}
                                 alt="icone union européenne"
                             />
-                        </div>
+                        </StyledBottomLogoContainer>
 
                         <div>
                             <div className="text-2xl font-bold mb-4">
