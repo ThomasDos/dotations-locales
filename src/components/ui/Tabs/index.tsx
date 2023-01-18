@@ -2,6 +2,8 @@ import { Tabs } from "@dataesr/react-dsfr";
 import styled from "styled-components";
 
 const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
+    height: auto;
+    box-shadow: none;
     ul {
         align-items: center !important;
     }

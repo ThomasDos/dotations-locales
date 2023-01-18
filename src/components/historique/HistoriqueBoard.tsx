@@ -15,7 +15,6 @@ const StyledHistoriqueBoard = styled.div`
     border: 1px solid var(--blue-france-850);
     padding: 4px;
     @media (min-width: 640px) {
-        margin-bottom: 120px;
         padding: 32px 48px 56px 32px;
     }
 `;

@@ -13,7 +13,7 @@ import styled from "styled-components";
 const StyledComparerBody = styled.div`
     padding: 24px 16px 0;
     @media (min-width: 940px) {
-        padding: 56px 80px 120px 120px;
+        padding: 56px 80px 60px 120px;
     }
 `;
 
