@@ -1,3 +1,6 @@
+import { Checkbox } from "@mui/material";
+import Link from "next/link";
+import { useState } from "react";
 import styled from "styled-components";
 import AlertRowIcon from "./AlertRowIcon";
 import EmailInput from "./EmailInput";
@@ -27,6 +30,7 @@ export default function EmailForm({
     codeInsee,
     postEmailIsError,
 }: EmailFormProps) {
+    const [isChecked, setIsChecked] = useState(false);
     return (
         <>
             <StyledTitle>S’abonner aux alertes</StyledTitle>
@@ -36,7 +40,28 @@ export default function EmailForm({
                 setUserEmail={setUserEmail}
                 postEmailIsLoading={postEmailIsLoading}
                 postEmailIsError={postEmailIsError}
+                isChecked={isChecked}
             />
+            <div className="flex my-6">
+                <div>
+                    <Checkbox
+                        checked={isChecked}
+                        onChange={e => setIsChecked(e.target.checked)}
+                    />
+                </div>
+                <span>
+                    Je consens à ce que mon adresse email soit utilisée afin de
+                    recevoir les alertes et informations du service Dotations
+                    Locales.{" "}
+                    <Link
+                        href="https://www.economie.gouv.fr/politique-confidentialite"
+                        target="_"
+                    >
+                        Consulter notre politique de confidentialité
+                    </Link>
+                </span>
+            </div>
+
             <div className="text-lg">
                 S’abonner aux alertes c’est recevoir des informations concernant
                 :

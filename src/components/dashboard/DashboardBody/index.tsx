@@ -28,7 +28,7 @@ const StyledDashboardBody = styled.div<{
         width: 70%;
     }
     @media (min-width: 940px) {
-        padding: 56px 80px 120px 120px;
+        padding: 56px 80px 60px 120px;
         width: 75%;
     }
 `;
@@ -100,8 +100,8 @@ const DashboardBody = ({
                             const dotation =
                                 dotationsByAmountDescending[dotationKey];
                             return (
+                                //@ts-ignore
                                 <Tab
-                                    //@ts-ignore
                                     label={dotation.label}
                                     key={dotation.title}
                                 >
