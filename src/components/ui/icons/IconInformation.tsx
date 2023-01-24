@@ -1,15 +1,15 @@
 import ImageFixed from "components/ui/ImageFixed";
 
 interface IconInformationProps {
-    setShowInfoModal(show: boolean): void;
+    setShowDrawer(show: boolean): void;
 }
 
-const IconInformation = ({ setShowInfoModal }: IconInformationProps) => {
+const IconInformation = ({ setShowDrawer }: IconInformationProps) => {
     return (
         <ImageFixed
-            className="cursor-help"
+            className="cursor-help items-start"
             onClick={() => {
-                setShowInfoModal(true);
+                setShowDrawer(true);
             }}
             src="/icons/information.svg"
             height={16}

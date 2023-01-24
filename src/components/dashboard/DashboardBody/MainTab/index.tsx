@@ -1,5 +1,6 @@
 import { Collapse } from "@mui/material";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
+import { dotationsMap } from "constants/communeMap";
 import type { Dotation, Dotations } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -45,9 +46,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
             { [lastYear]: lastYearTotal },
         ],
         criteres: {},
-        description: "Evolution de votre montant total de dotations",
-        label: "Résumé",
-        title: "Dotations Générales de Fonctionnement (DGF)",
+        ...dotationsMap.dotationsGeneralesFonctionnement,
     };
 
     const headersYears = years.map((year: string) => ({
@@ -68,11 +67,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
                     dataCSV={dotationsCurrentYearFormattedToExportCSV}
                 />
             </div>
-            <DotationCard
-                hasInformation={false}
-                dotation={dotationDGF}
-                borderTop
-            />
+            <DotationCard dotation={dotationDGF} borderTop />
             {countDotationsEligiblesDotations ? (
                 <>
                     <TitleDotationsEligibles

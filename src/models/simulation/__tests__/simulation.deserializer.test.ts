@@ -88,6 +88,7 @@ describe("simulation deserializer", () => {
                                     "Votre dotation forfaitaire est stable par rapport à l’année 2021",
                                 label: "DF",
                                 title: "Dotation Forfaitaire (DF)",
+                                key: "dotationForfaitaire",
                             },
                             dotationSolidariteRurale: {
                                 annees: [{ "2022": 8765 }, { "2021": 8795 }],
@@ -95,6 +96,8 @@ describe("simulation deserializer", () => {
                                 description:
                                     "Légère augmentation en 2022 dû à la part Bourg Centre",
                                 label: "DSR",
+                                key: "dotationSolidariteRurale",
+
                                 sousDotations: [
                                     {
                                         dsrFractionCible: {
@@ -107,6 +110,7 @@ describe("simulation deserializer", () => {
                                                 "Non éligible à la Part Cible",
                                             label: "",
                                             title: "Part Cible",
+                                            key: "dsrFractionCible",
                                         },
                                     },
                                     {
@@ -120,6 +124,7 @@ describe("simulation deserializer", () => {
                                                 "Montant de la commune éligible à la Péréquation",
                                             label: "",
                                             title: "Part Péréquation",
+                                            key: "dsrFractionPerequation",
                                         },
                                     },
                                     {
@@ -133,6 +138,7 @@ describe("simulation deserializer", () => {
                                                 "Montant de la commune éligible",
                                             label: "",
                                             title: "Part Bourg Centre",
+                                            key: "dsrFractionBourgCentre",
                                         },
                                     },
                                 ],
@@ -145,6 +151,7 @@ describe("simulation deserializer", () => {
                                     "Dotation pour les communes urbaines",
                                 label: "DSU",
                                 title: "Dotation Solidarité Urbaine (DSU)",
+                                key: "dsuMontant",
                             },
                         },
                     },

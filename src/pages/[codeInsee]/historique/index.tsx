@@ -63,6 +63,7 @@ const HistoriquePage = () => {
         description: "",
         label: "Résumé",
         title: "Dotations Générales de Fonctionnement (DGF)",
+        key: "",
     };
 
     const historiqueData = useMemo(

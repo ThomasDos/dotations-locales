@@ -37,14 +37,13 @@ const StyledCardTitle = styled.span`
 `;
 
 interface ParameterCardProps {
-    hasInformation?: boolean;
     critere: Critere;
     backgroundColor?: boolean;
 }
 
 const ParameterCard = ({
     critere,
-    // hasInformation = true,
+
     backgroundColor = false,
 }: ParameterCardProps) => {
     const { description } = critere;
@@ -81,7 +80,7 @@ const ParameterCard = ({
                     </StyledCardTitle>
                     {/* 
                         //TODO: réactiver quand feature info prête
-                        {hasInformation && (
+                        { && (
                             <div className="cursor-help">
                                 <IconInformation />
                             </div>

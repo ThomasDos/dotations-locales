@@ -26,12 +26,15 @@ export type DotationsDto = Record<
 export type Dotations = Record<string, Dotation>;
 
 export interface Dotation {
+    key: string;
     annees: DotationAnnee[];
     criteres: Criteres;
     sousDotations?: SousDotations;
     description: string;
     title: string;
     label: string;
+    info?: string;
+    links?: { linkText: string; dotationKey: string }[];
 }
 
 export type SousDotationsDto = DotationsDto[];
