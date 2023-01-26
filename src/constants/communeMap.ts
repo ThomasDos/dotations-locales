@@ -109,7 +109,23 @@ export const dotationsMap: Record<string, DotationMap> = {
             },
         ],
         info: `La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.
-Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
+        <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
+    },
+    dotationAmenagementCommunesOutreMer: {
+        key: "dotation_amenagement_communes_outre_mer",
+        description: "Lorem Ipsum DNP",
+        label: "DACOM",
+        title: "Dotation aménagement communes outre mer (DACOM)",
+        info: "",
+        links: [],
+    },
+    dotationEluLocal: {
+        key: "dotation_elu_local",
+        description: "Lorem Ipsum DNP",
+        label: "DEL",
+        title: "Dotation élu local (DEL)",
+        info: "",
+        links: [],
     },
 };
 

@@ -1,6 +1,5 @@
 import { SwipeableDrawer } from "@mui/material";
 import ImageFixed from "components/ui/ImageFixed";
-import LabelText from "components/ui/LabelText";
 import useResize from "hooks/useResize";
 import { Dotation, Dotations } from "models/commune/commune.interface";
 import { useState } from "react";
@@ -74,6 +73,8 @@ export default function InfoDrawer({
     const { title, info, links } = currentDotation;
     const { windowWidth } = useResize();
 
+    const textFormatted = info?.split("<br>");
+
     return (
         <SwipeableDrawer
             PaperProps={{
@@ -98,6 +99,8 @@ export default function InfoDrawer({
             <StyledDrawerBody>
                 <div className="mb-10">
                     <StyledDotationTitle>{title}</StyledDotationTitle>
+                    {/* 
+                    TODO: décommenter quand on aura la date dernier MAJ
                     <div className="text-sm flex items-center">
                         <div className="mr-2">
                             Dernière mise à jour : 29 juillet 2022
@@ -107,11 +110,13 @@ export default function InfoDrawer({
                             backgroundColor="var(--blue-france-925)"
                             color="var(--blue-france-113)"
                         />
-                    </div>
+                    </div> */}
                 </div>
 
-                <div className="mb-10">{info}</div>
-
+                <div className="mb-10">{textFormatted?.[0]}</div>
+                {textFormatted?.[1] && (
+                    <div className="mb-10">{textFormatted[1]}</div>
+                )}
                 {/*
                 TODO: Faire les collapse quand feature prête 
                 */}
@@ -129,9 +134,9 @@ export default function InfoDrawer({
                     />
                 )}
 
-                <div className="text-sm text-grey-mayback">
+                {/* <div className="text-sm text-grey-mayback">
                     Pour aller plus loin
-                </div>
+                </div> */}
             </StyledDrawerBody>
         </SwipeableDrawer>
     );
