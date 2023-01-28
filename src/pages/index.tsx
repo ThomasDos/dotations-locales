@@ -1,4 +1,5 @@
-import { HomeRowImageText } from "components/home";
+import HomeRowImageText from "components/home/HomeRowImageText";
+import LandingNewBloc from "components/home/LandingNewBloc";
 import { SearchInput } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import useHomeInit from "hooks/useHomeInit";
@@ -84,10 +85,12 @@ const Home: NextPage = () => {
                     }ollectivité ou code insee`}
                     textIcon="Rechercher"
                 />
-                <div className="md:mx-60 mt-10 md:mt-20 text-center md:text-left">
+
+                <LandingNewBloc />
+                <div className="md:mx-60 text-center md:text-left">
                     <HomeRowImageText
                         priority
-                        src="/images/landing-1.png"
+                        src="/images/landing-euro.png"
                         imageHeight={444}
                         imageWidth={444}
                         imageAlt="first row image"
@@ -102,7 +105,7 @@ const Home: NextPage = () => {
                     </HomeRowImageText>
 
                     <HomeRowImageText
-                        src="/images/landing-2.png"
+                        src="/images/landing-dotations.png"
                         reverse
                         imageHeight={444}
                         imageWidth={444}
@@ -118,8 +121,8 @@ const Home: NextPage = () => {
                         </strong>
                     </HomeRowImageText>
 
-                    <HomeRowImageText
-                        src="/images/landing-3.png"
+                    {/* <HomeRowImageText
+                        src="/images/landing-chart.png"
                         imageHeight={320}
                         imageWidth={320}
                         imageAlt="third row image"
@@ -128,11 +131,10 @@ const Home: NextPage = () => {
                         Un outil pratique pour suivre l’évolution des montants,
                         comparer et analyser les critères et les données qui ont
                         un impact fort sur les fonds qui vous sont attribués.
-                    </HomeRowImageText>
+                    </HomeRowImageText> */}
 
                     <HomeRowImageText
-                        src="/images/landing-4.png"
-                        reverse
+                        src="/images/landing-open-fisca.png"
                         imageHeight={256}
                         imageWidth={256}
                         imageAlt="fourth row image"
@@ -146,7 +148,8 @@ const Home: NextPage = () => {
                     </HomeRowImageText>
 
                     <HomeRowImageText
-                        src="/images/landing-5.png"
+                        src="/images/landing-data-gouv.png"
+                        reverse
                         imageHeight={256}
                         imageWidth={256}
                         imageAlt="fifth row image"
