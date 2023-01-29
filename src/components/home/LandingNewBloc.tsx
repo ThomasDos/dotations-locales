@@ -11,7 +11,7 @@ const LandingNewBloc = () => {
                 alt="Rouleau de papier représentant le budget des dotations"
             />
             <div className="py-5 md:ml-14 flex flex-col items-center md:items-start text-center md:text-left">
-                <Badge text="NOUVEAUTÉ 2023" />
+                <Badge text="NOUVEAUTÉ 2023" hasIcon />
                 <div className="my-4 text-2xl font-bold">
                     La nouvelle plateforme dédiée à vos dotations locales
                 </div>
