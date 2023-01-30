@@ -122,8 +122,8 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationEluLocal: {
         key: "dotation_elu_local",
         description: "Lorem Ipsum DNP",
-        label: "DEL",
-        title: "Dotation élu local (DEL)",
+        label: "DPEL",
+        title: "Dotation élu local (DPEL)",
         info: "",
         links: [],
     },

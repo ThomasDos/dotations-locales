@@ -1,8 +1,5 @@
-import {
-    LabelGreenCustomCrossIcon,
-    LabelGreyCustomCrossIcon,
-    TagData,
-} from "components/ui";
+import { Badge } from "@dataesr/react-dsfr";
+import { LabelGreyCustomCrossIcon, TagData } from "components/ui";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
 
@@ -33,7 +30,7 @@ const Value = ({
 
     return valeurIsLabel ? (
         valeur === "Oui" ? (
-            <LabelGreenCustomCrossIcon text="Oui" />
+            <Badge text="Oui" type="success" hasIcon />
         ) : (
             <LabelGreyCustomCrossIcon text="Non" />
         )
