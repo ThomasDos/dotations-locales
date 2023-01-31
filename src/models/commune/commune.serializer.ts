@@ -56,11 +56,14 @@ export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
         const keyCamelCase = convertSnakeCaseToCamelCase(key);
 
         newObjectDotations[keyCamelCase] = {
+            key: dotationsMap[keyCamelCase].key,
             annees: rawDotations[key].annees,
             criteres: criteresSerializer(rawDotations[key].criteres),
             description: dotationsMap[keyCamelCase].description,
             label: dotationsMap[keyCamelCase].label,
             title: dotationsMap[keyCamelCase].title,
+            info: dotationsMap[keyCamelCase].info,
+            links: dotationsMap[keyCamelCase].links,
 
             ...(rawDotations[key].sous_dotations && {
                 sousDotations: sousDotationsSerializer(
@@ -86,10 +89,12 @@ export const sousDotationsSerializer = (
 
             newObjectSousDotations[keyCamelCase] = {
                 ...sousDotation[key],
+                key: sousDotationsMap[keyCamelCase].key,
                 criteres: criteresSerializer(sousDotation[key].criteres),
                 description: sousDotationsMap[keyCamelCase].description,
                 label: sousDotationsMap[keyCamelCase].label,
                 title: sousDotationsMap[keyCamelCase].title,
+                info: sousDotationsMap[keyCamelCase].info,
             };
         });
         return newObjectSousDotations;

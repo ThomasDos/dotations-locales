@@ -7,6 +7,7 @@ module.exports = {
             "error-425": "#ce0500",
             "color-primary": "#000091",
             white: "#ffffff",
+            "grey-mayback": "#666666",
             "grey-200": "rgb(229 231 235)",
             "grey-625-425": "#929292",
             dark: {

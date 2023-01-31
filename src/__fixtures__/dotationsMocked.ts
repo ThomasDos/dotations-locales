@@ -15,6 +15,8 @@ const dotationsMocked: Dotations = {
             "Votre dotation forfaitaire est stable par rapport à l’année 2021",
         label: "DF",
         title: "Dotation Forfaitaire (DF)",
+        key: "dotationForfaitaire",
+        info: "mockedInfo",
     },
     dotationNationalePerequation: {
         annees: [
@@ -29,6 +31,8 @@ const dotationsMocked: Dotations = {
         description: "Lorem Ipsum DNP",
         label: "DNP",
         title: "Dotations Nationale de Péréquation (DNP)",
+        key: "dotationNationalePerequation",
+        info: "mockedInfo",
     },
     dotationSolidariteRurale: {
         annees: [
@@ -42,6 +46,9 @@ const dotationsMocked: Dotations = {
         criteres: {},
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
         label: "DSR",
+        key: "dotationSolidariteRurale",
+        info: "mockedInfo",
+
         sousDotations: [
             {
                 dsrFractionCible: {
@@ -57,6 +64,8 @@ const dotationsMocked: Dotations = {
                     description: "",
                     label: "",
                     title: "Part Cible",
+                    info: "mockedInfo",
+                    key: "dsrFractionCible",
                 },
             },
             {
@@ -73,6 +82,8 @@ const dotationsMocked: Dotations = {
                     description: "",
                     label: "",
                     title: "Part Péréquation",
+                    info: "mockedInfo",
+                    key: "dsrFractionPerequation",
                 },
             },
             {
@@ -89,6 +100,8 @@ const dotationsMocked: Dotations = {
                     description: "",
                     label: "",
                     title: "Part Bourg Centre",
+                    info: "mockedInfo",
+                    key: "dsrFractionBourgCentre",
                 },
             },
         ],
@@ -107,6 +120,8 @@ const dotationsMocked: Dotations = {
         description: "Dotation pour les communes urbaines",
         label: "DSU",
         title: "Dotation Solidarité Urbaine (DSU)",
+        key: "dsuMontant",
+        info: "mockedInfo",
     },
 };
 

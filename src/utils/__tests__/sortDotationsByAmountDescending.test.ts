@@ -8,6 +8,8 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
             criteres: {},
             description:
                 "Votre dotation forfaitaire est stable par rapport à l’année 2021",
+            info: "mockedInfo",
+            key: "dotationForfaitaire",
             label: "DF",
             title: "Dotation Forfaitaire (DF)",
         },
@@ -15,6 +17,8 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
             annees: [{ "2022": 0 }, { "2021": 0 }],
             criteres: {},
             description: "Lorem Ipsum DNP",
+            info: "mockedInfo",
+            key: "dotationNationalePerequation",
             label: "DNP",
             title: "Dotations Nationale de Péréquation (DNP)",
         },
@@ -23,6 +27,8 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
             criteres: {},
             description:
                 "Légère augmentation en 2022 dû à la part Bourg Centre",
+            info: "mockedInfo",
+            key: "dotationSolidariteRurale",
             label: "DSR",
             sousDotations: [
                 {
@@ -30,6 +36,8 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
                         annees: [{ "2022": 0 }, { "2021": 0 }],
                         criteres: {},
                         description: "",
+                        info: "mockedInfo",
+                        key: "dsrFractionCible",
                         label: "",
                         title: "Part Cible",
                     },
@@ -39,6 +47,8 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
                         annees: [{ "2022": 90671 }, { "2021": 86048 }],
                         criteres: {},
                         description: "",
+                        info: "mockedInfo",
+                        key: "dsrFractionPerequation",
                         label: "",
                         title: "Part Péréquation",
                     },
@@ -48,6 +58,8 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
                         annees: [{ "2022": 0 }, { "2021": 0 }],
                         criteres: {},
                         description: "",
+                        info: "mockedInfo",
+                        key: "dsrFractionBourgCentre",
                         label: "",
                         title: "Part Bourg Centre",
                     },
@@ -59,11 +71,12 @@ describe("sortDotationsByAmountDescending(dotations: Dotations, currentYear: str
             annees: [{ "2022": 0 }, { "2021": 0 }],
             criteres: {},
             description: "Dotation pour les communes urbaines",
+            info: "mockedInfo",
+            key: "dsuMontant",
             label: "DSU",
             title: "Dotation Solidarité Urbaine (DSU)",
         },
     };
-
     it("should return two objects of dotations sorted, eligibles and nonEligibles", () => {
         expect(
             sortDotationsByAmountDescending(dotationsMocked, "2022")

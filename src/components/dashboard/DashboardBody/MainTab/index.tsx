@@ -1,7 +1,7 @@
-import { Collapse } from "@mui/material";
+import { Accordion, AccordionItem } from "@dataesr/react-dsfr";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
+import { dotationsMap } from "constants/communeMap";
 import type { Dotation, Dotations } from "models/commune/commune.interface";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
     selectAllYears,
@@ -14,7 +14,6 @@ import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOr
 
 import DotationCard from "../DotationCard";
 import TitleDotationsEligibles from "../TitleDotationsEligibles";
-import TitleDotationsNonEligibles from "../TitleDotationsNonEligibles";
 
 interface MainTabProps {
     dotations: Dotations;
@@ -24,8 +23,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
     const years = useSelector(selectAllYears);
-
-    const [showNonEligible, setShowNonEligible] = useState(false);
 
     const currentYearTotal = getTotalDotations(dotations, currentYear);
     const lastYearTotal = getTotalDotations(dotations, lastYear);
@@ -45,9 +42,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
             { [lastYear]: lastYearTotal },
         ],
         criteres: {},
-        description: "Evolution de votre montant total de dotations",
-        label: "Résumé",
-        title: "Dotations Générales de Fonctionnement (DGF)",
+        ...dotationsMap.dotationsGeneralesFonctionnement,
     };
 
     const headersYears = years.map((year: string) => ({
@@ -56,6 +51,9 @@ const MainTab = ({ dotations }: MainTabProps) => {
     }));
     const dotationsCurrentYearFormattedToExportCSV =
         formatDotationsToExportCsv(dotations);
+
+    const ifPluralS = countDotationsNonEligiblesDotations > 1 ? "s" : "";
+    const titleAccordion = `${countDotationsNonEligiblesDotations} autre${ifPluralS} dotation${ifPluralS} non éligible${ifPluralS}`;
 
     return (
         <div className="pt-10">
@@ -68,11 +66,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
                     dataCSV={dotationsCurrentYearFormattedToExportCSV}
                 />
             </div>
-            <DotationCard
-                hasInformation={false}
-                dotation={dotationDGF}
-                borderTop
-            />
+            <DotationCard dotation={dotationDGF} borderTop />
             {countDotationsEligiblesDotations ? (
                 <>
                     <TitleDotationsEligibles
@@ -96,16 +90,12 @@ const MainTab = ({ dotations }: MainTabProps) => {
                 </>
             ) : null}
 
-            {countDotationsNonEligiblesDotations ? (
-                <>
-                    <TitleDotationsNonEligibles
-                        countNonEligibleDotations={
-                            countDotationsNonEligiblesDotations
-                        }
-                        setShowNonEligible={setShowNonEligible}
-                        showNonEligible={showNonEligible}
-                    />
-                    <Collapse in={showNonEligible}>
+            {!!countDotationsNonEligiblesDotations && (
+                <Accordion size="sm" className="my-10">
+                    <AccordionItem
+                        title={titleAccordion}
+                        className="box-border"
+                    >
                         {dotationsNonEligiblesKeys.map(
                             (dotationNonEligibleKey, index) => {
                                 return (
@@ -121,9 +111,9 @@ const MainTab = ({ dotations }: MainTabProps) => {
                                 );
                             }
                         )}
-                    </Collapse>
-                </>
-            ) : null}
+                    </AccordionItem>
+                </Accordion>
+            )}
         </div>
     );
 };

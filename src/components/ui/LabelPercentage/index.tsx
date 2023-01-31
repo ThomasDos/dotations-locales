@@ -2,7 +2,11 @@ import { IconVectorDown, IconVectorUp } from "components/ui";
 import { useMemo } from "react";
 import styled from "styled-components";
 
-type BackgroundColorLabel = "blue-france-950" | "error-950" | "success-975";
+type BackgroundColorLabel =
+    | "blue-france-950"
+    | "error-950"
+    | "success-975"
+    | "";
 
 interface LabelContainerProps {
     backgroundColor: BackgroundColorLabel;
@@ -17,9 +21,14 @@ const StyledLabel = styled.div<LabelContainerProps>`
 interface LabelProps {
     percentage: number;
     valeur?: string;
+    hasBackgroundColor?: boolean;
 }
 
-const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
+const LabelPercentage = ({
+    percentage,
+    valeur,
+    hasBackgroundColor = true,
+}: LabelProps) => {
     const percentageFormatted = String(percentage).replace(".", ",");
     const percentageLabelData: {
         backgroundColor: BackgroundColorLabel;
@@ -61,7 +70,9 @@ const LabelPercentage = ({ percentage, valeur }: LabelProps) => {
 
     return (
         <StyledLabel
-            backgroundColor={percentageLabelData.backgroundColor}
+            backgroundColor={
+                hasBackgroundColor ? percentageLabelData.backgroundColor : ""
+            }
             className="text-sm flex items-center"
         >
             <div>{percentageLabelData.icon}</div>

@@ -1,7 +1,5 @@
-import {
-    LabelGreenCustomCrossIcon,
-    LabelGreyCustomCrossIcon,
-} from "components/ui";
+import { Badge } from "@dataesr/react-dsfr";
+import { LabelGreyCustomCrossIcon } from "components/ui";
 import type { SousDotations } from "models/commune/commune.interface";
 import { useSelector } from "react-redux";
 import { selectCurrentYear } from "store/simulationCommune.slice";
@@ -25,7 +23,7 @@ const SousDotationsContainer = ({ sousDotations }: SousDotationsProps) => {
                 return (
                     <div key={title} className="mx-1">
                         {currentYearTotal ? (
-                            <LabelGreenCustomCrossIcon text={title} />
+                            <Badge hasIcon type="success" text={title} />
                         ) : (
                             <LabelGreyCustomCrossIcon text={title} />
                         )}

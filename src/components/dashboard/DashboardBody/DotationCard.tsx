@@ -4,7 +4,7 @@ import {
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
-import InfoModal from "components/ui/InfoModal";
+import InfoDrawer from "components/ui/InfoDrawer";
 import type { Dotation } from "models/commune/commune.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -61,7 +61,6 @@ const StyledSpanNonEligible = styled.span`
 `;
 
 interface DotationCardProps {
-    hasInformation?: boolean;
     dotation: Dotation;
     borderTop: boolean;
     hasBackgroundColor?: boolean;
@@ -70,13 +69,11 @@ interface DotationCardProps {
 
 const DotationCard = ({
     dotation,
-    //TODO: passer en true quand feature info est prête
-    hasInformation = false,
     borderTop,
     handleClick,
     hasBackgroundColor = false,
 }: DotationCardProps) => {
-    const [showInfoModal, setShowInfoModal] = useState(false);
+    const [showInfoDrawer, setShowInfoDrawer] = useState(false);
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
 
@@ -107,11 +104,10 @@ const DotationCard = ({
                                 {title}
                             </StyledCardTitle>
 
-                            {hasInformation && (
-                                <IconInformation
-                                    setShowInfoModal={setShowInfoModal}
-                                />
-                            )}
+                            <IconInformation
+                                //TODO: réactiver drawer quand texte présent
+                                setShowDrawer={() => setShowInfoDrawer}
+                            />
                         </div>
                         <span>
                             Évolution du montant {lastYear} / {currentYear}.
@@ -163,9 +159,9 @@ const DotationCard = ({
                     <SousDotationsContainer sousDotations={sousDotations} />
                 )}
             </StyledDotationCard>
-            <InfoModal
-                showInfoModal={showInfoModal}
-                setShowInfoModal={setShowInfoModal}
+            <InfoDrawer
+                showInfoDrawer={showInfoDrawer}
+                setShowInfoDrawer={setShowInfoDrawer}
                 dotation={dotation}
             />
         </>

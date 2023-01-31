@@ -1,4 +1,5 @@
-import { Collapse } from "@mui/material";
+import { Accordion } from "@dataesr/react-dsfr";
+import AccordionItemStyled from "components/ui/Accordion/AccordionItemStyled";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type {
@@ -6,7 +7,7 @@ import type {
     Dotations,
     SousDotations,
 } from "models/commune/commune.interface";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { selectCurrentYear } from "store/simulationCommune.slice";
@@ -15,10 +16,10 @@ import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCrite
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
-import TitleCriteresNonEligibles from "../TitleCriteresNonEligibles";
 import ParameterCard from "./ParameterCard";
 
 const StyledContainerNonEligible = styled.div`
+    border-top: 1px solid var(--blue-france-850);
     border-bottom: 1px solid var(--blue-france-850);
 `;
 
@@ -32,11 +33,7 @@ const SubTabSousDotations = ({
     sousDotations,
 }: SubTabSousDotationsProps) => {
     const currentYear = useSelector(selectCurrentYear);
-    const [showNonEligible, setShowNonEligible] = useState({
-        dsrFractionBourgCentre: false,
-        dsrFractionCible: false,
-        dsrFractionPerequation: false,
-    });
+
     const dotationTotalExport = useRef<{}[]>([]);
 
     const { annees } = dotation;
@@ -86,6 +83,9 @@ const SubTabSousDotations = ({
                 const countNonEligiblesCriteres =
                     !_.isEmpty(criteresNonEligibles) &&
                     Object.keys(criteresNonEligibles).length;
+
+                const ifPluralS = countNonEligiblesCriteres > 1 ? "s" : "";
+                const titleAccordion = `${countNonEligiblesCriteres} autre${ifPluralS} critere${ifPluralS} non éligible${ifPluralS}`;
                 return (
                     <div className="pt-10" key={sousDotation.title}>
                         <>
@@ -97,7 +97,10 @@ const SubTabSousDotations = ({
 
                             {!_.isEmpty(criteresEligibles) &&
                                 Object.keys(criteresEligibles).map(
-                                    (criteresKey: string) => (
+                                    (
+                                        criteresKey: string,
+                                        indexEligible: number
+                                    ) => (
                                         <ParameterCard
                                             key={criteresKey}
                                             critere={
@@ -105,33 +108,28 @@ const SubTabSousDotations = ({
                                                     criteresKey
                                                 ]
                                             }
+                                            isLast={
+                                                Object.keys(criteresEligibles)
+                                                    .length -
+                                                    1 ===
+                                                indexEligible
+                                            }
                                         />
                                     )
                                 )}
 
-                            {countNonEligiblesCriteres ? (
-                                <>
-                                    <TitleCriteresNonEligibles
-                                        showNonEligible={
-                                            showNonEligible[keyName]
-                                        }
-                                        toggleShowNonEligible={() => {
+                            {!!countNonEligiblesCriteres && (
+                                <Accordion className="my-10">
+                                    <AccordionItemStyled
+                                        title={titleAccordion}
+                                        className="box-border"
+                                        onClick={() => {
                                             matomoTrackEvent([
                                                 "Fonction",
                                                 "Afficher critères non éligibles",
                                             ]);
-                                            setShowNonEligible({
-                                                ...showNonEligible,
-                                                [keyName]:
-                                                    !showNonEligible[keyName],
-                                            });
                                         }}
-                                        countNonEligiblesCriteres={
-                                            countNonEligiblesCriteres
-                                        }
-                                    />
-
-                                    <Collapse in={showNonEligible[keyName]}>
+                                    >
                                         <StyledContainerNonEligible>
                                             {Object.keys(
                                                 criteresNonEligibles
@@ -155,9 +153,9 @@ const SubTabSousDotations = ({
                                                 }
                                             )}
                                         </StyledContainerNonEligible>
-                                    </Collapse>
-                                </>
-                            ) : null}
+                                    </AccordionItemStyled>
+                                </Accordion>
+                            )}
                         </>
                     </div>
                 );

@@ -22,7 +22,7 @@ const StyledDashboardBody = styled.div<{
     display: ${({ displayMobileCriteresGeneraux }) =>
         displayMobileCriteresGeneraux ? "none" : "block"};
     width: 100%;
-    padding: 24px 16px 0;
+    padding: 24px 16px 16px;
     @media (min-width: 768px) {
         display: block;
         width: 70%;

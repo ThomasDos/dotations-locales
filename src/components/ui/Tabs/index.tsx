@@ -10,14 +10,27 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
     &::before {
         height: 1px;
     }
+
+    button {
+        padding: 12px !important;
+        font-size: 16px !important;
+    }
+
+    @media (max-width: 640px) {
+        button {
+            padding: 10px !important;
+            font-size: 14px !important;
+        }
+    }
+
     @media (max-width: 480px) {
         button {
-            padding: 12px !important;
+            font-size: 12px !important;
         }
     }
     @media (max-width: 420px) {
         button {
-            padding: 10px !important;
+            padding: 6px !important;
             padding-bottom: 12px !important;
         }
     }

@@ -1,8 +1,5 @@
-import {
-    LabelGreenCustomCrossIcon,
-    LabelGreyCustomCrossIcon,
-    LabelPercentage,
-} from "components/ui";
+import { Badge } from "@dataesr/react-dsfr";
+import { LabelGreyCustomCrossIcon, LabelPercentage } from "components/ui";
 import type { Critere } from "models/commune/commune.interface";
 import { useSelector } from "react-redux";
 import {
@@ -15,13 +12,15 @@ import getPercentageEvolution from "utils/getPercentageEvolution";
 
 const StyledParameterCard = styled.div<{
     backgroundColor: boolean;
+    isLast: boolean;
 }>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--blue-france-850);
-    border-bottom: 1px solid var(--grey-950);
-    border-top: none;
+    border-left: 1px solid var(--blue-france-850);
+    border-right: 1px solid var(--blue-france-850);
+    border-bottom: 1px solid
+        var(--${props => (props.isLast ? "blue-france-850" : "grey-950")});
     background-color: ${({ backgroundColor }) =>
         backgroundColor ? "var(--blue-france-975)" : "none"};
     padding: 16px;
@@ -37,15 +36,15 @@ const StyledCardTitle = styled.span`
 `;
 
 interface ParameterCardProps {
-    hasInformation?: boolean;
     critere: Critere;
     backgroundColor?: boolean;
+    isLast?: boolean;
 }
 
 const ParameterCard = ({
     critere,
-    // hasInformation = true,
     backgroundColor = false,
+    isLast,
 }: ParameterCardProps) => {
     const { description } = critere;
 
@@ -73,27 +72,26 @@ const ParameterCard = ({
     }
 
     return (
-        <StyledParameterCard backgroundColor={backgroundColor}>
-            <div className="flex flex-col">
-                <div className="flex">
-                    <StyledCardTitle className="mb-2 mr-1">
-                        {description}
-                    </StyledCardTitle>
-                    {/* 
-                        //TODO: réactiver quand feature info prête
-                        {hasInformation && (
-                            <div className="cursor-help">
-                                <IconInformation />
-                            </div>
-                        )} */}
-                </div>
+        <StyledParameterCard
+            backgroundColor={backgroundColor}
+            isLast={!!isLast}
+        >
+            <div className="flex flex-col justify-center items-center">
+                <StyledCardTitle>{description}</StyledCardTitle>
+                {/* 
+                    //TODO: réactiver quand feature info prête
+                    { && (
+                        <div className="cursor-help">
+                            <IconInformation />
+                        </div>
+                    )} */}
             </div>
             {currentYearValeur ? (
                 <div className="flex flex-col items-end">
-                    <div className="flex mb-2 items-center">
+                    <div className="flex items-center">
                         {valeurIsLabel ? (
                             currentYearValeur === "Oui" ? (
-                                <LabelGreenCustomCrossIcon text="Oui" />
+                                <Badge text="Oui" type="success" hasIcon />
                             ) : (
                                 <LabelGreyCustomCrossIcon text="Non" />
                             )
@@ -105,6 +103,7 @@ const ParameterCard = ({
                                     Number(currentYearValeur)
                                 )} ${unite ? " " + unite : ""}`}
                                 percentage={percentageEvolution}
+                                hasBackgroundColor={false}
                             />
                         )}
                     </div>

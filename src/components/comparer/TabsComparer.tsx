@@ -37,6 +37,7 @@ const TabsContainerComparer = () => {
         description: "Dotations (DGF) par habitants",
         label: "Résumé",
         title: "Dotations Générales de Fonctionnement (DGF)",
+        key: "",
     };
 
     return (

@@ -19,7 +19,7 @@ interface LabelTextContainerProps {
 }
 
 const StyledLabelText = styled.div<LabelTextContainerProps>`
-    border-radius: 40px;
+    border-radius: 0.25rem;
     background: ${props => props.backgroundColor};
     color: ${props => props.color};
     border: ${({ borderColor }) =>
@@ -29,6 +29,7 @@ const StyledLabelText = styled.div<LabelTextContainerProps>`
 
 const StyledSpanText = styled.span<{ fontSize?: string }>`
     font-size: ${({ fontSize }) => fontSize};
+    font-weight: bold;
 `;
 
 const LabelText = ({
@@ -42,7 +43,7 @@ const LabelText = ({
 }: LabelTextProps) => {
     return (
         <StyledLabelText
-            className="py-1 px-2 sm:px-4 flex justify-center items-center text-xs sm:text-sm"
+            className="py-0.5 px-2 flex justify-center items-center text-xs sm:text-sm"
             backgroundColor={backgroundColor}
             color={color}
             borderColor={borderColor}
@@ -60,7 +61,7 @@ const LabelText = ({
                 className={`${icon ? "ml-2" : ""}`}
                 fontSize={fontSize}
             >
-                {text}
+                {text.toUpperCase()}
             </StyledSpanText>
         </StyledLabelText>
     );
