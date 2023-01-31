@@ -20,6 +20,7 @@ module.exports = {
             "grey-975": "#f6f6f6",
             white: "#ffffff",
             "blue-france-113": "#000091",
+            "green-tilleul-verveine-975": "#FEF7DA",
         },
     },
     plugins: [],

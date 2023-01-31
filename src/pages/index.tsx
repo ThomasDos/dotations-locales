@@ -1,5 +1,5 @@
 import HomeRowImageText from "components/home/HomeRowImageText";
-import LandingNewBloc from "components/home/LandingNewBloc";
+import LandingIntroduction from "components/home/LandingIntroduction";
 import { SearchInput } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import useHomeInit from "hooks/useHomeInit";
@@ -86,8 +86,9 @@ const Home: NextPage = () => {
                     textIcon="Rechercher"
                 />
 
-                <LandingNewBloc />
                 <div className="md:mx-60 text-center md:text-left">
+                    <LandingIntroduction />
+
                     <HomeRowImageText
                         priority
                         src="/images/landing-euro.png"
@@ -121,7 +122,7 @@ const Home: NextPage = () => {
                         </strong>
                     </HomeRowImageText>
 
-                    {/* <HomeRowImageText
+                    <HomeRowImageText
                         src="/images/landing-chart.png"
                         imageHeight={320}
                         imageWidth={320}
@@ -131,9 +132,10 @@ const Home: NextPage = () => {
                         Un outil pratique pour suivre l’évolution des montants,
                         comparer et analyser les critères et les données qui ont
                         un impact fort sur les fonds qui vous sont attribués.
-                    </HomeRowImageText> */}
+                    </HomeRowImageText>
 
                     <HomeRowImageText
+                        reverse
                         src="/images/landing-open-fisca.png"
                         imageHeight={256}
                         imageWidth={256}
@@ -149,7 +151,6 @@ const Home: NextPage = () => {
 
                     <HomeRowImageText
                         src="/images/landing-data-gouv.png"
-                        reverse
                         imageHeight={256}
                         imageWidth={256}
                         imageAlt="fifth row image"
