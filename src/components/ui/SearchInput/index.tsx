@@ -89,6 +89,9 @@ const SearchInput = ({
     const { data: autocompletion, isLoading: searchResultIsLoading } =
         useFetchAutocompletion(search);
 
+    // const { data: autocompletionEPCI, isLoading: searchResultEPCIIsLoading } =
+    //     useFetchAutocompletionEPCI(search);
+
     const {
         isLoading: fetchCommuneIsLoading,
         mutateAsync: fetchCommuneMutate,
