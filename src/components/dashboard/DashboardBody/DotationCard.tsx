@@ -105,7 +105,8 @@ const DotationCard = ({
                             </StyledCardTitle>
 
                             <IconInformation
-                                setShowDrawer={setShowInfoDrawer}
+                                //TODO: réactiver drawer quand texte présent
+                                setShowDrawer={() => setShowInfoDrawer}
                             />
                         </div>
                         <span>
