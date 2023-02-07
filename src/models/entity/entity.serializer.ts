@@ -26,12 +26,7 @@ export const fetchEntitySerializer = (rawResult: EntityDto): Entity => ({
 });
 
 export const anneesSerializer = (dotations: DotationsDto): EntityAnnee => {
-    console.log(
-        "🚀 ~ file: commune.serializer.ts:29 ~ anneesSerializer ~ dotations",
-        dotations
-    );
     const [firstDotation] = Object.keys(dotations);
-
     return dotations[firstDotation].annees.map(annee => Object.keys(annee)[0]);
 };
 
@@ -53,10 +48,6 @@ export const criteresSerializer = (rawCriteres: CriteresDto): Criteres => {
 };
 
 export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
-    console.log(
-        "🚀 ~ file: commune.serializer.ts:56 ~ dotationSerializer ~ rawDotations",
-        rawDotations
-    );
     const rawDotationsKeys = Object.keys(rawDotations);
 
     const newObjectDotations: Dotations = {};

@@ -50,10 +50,6 @@ const Dashboard = () => {
         isLoading: fetchEPCIIsLoading,
     } = useFetchEPCI(code, !!code && isEPCI);
 
-    console.log(
-        "🚀 ~ file: index.tsx:43 ~ Dashboard ~ fetchEPCIData",
-        fetchEPCIData
-    );
     useDashboardInit(fetchCommuneData || fetchEPCIData);
 
     useEffect(() => {
