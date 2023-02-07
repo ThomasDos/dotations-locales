@@ -1,13 +1,13 @@
 import type {
-    Autocompletion,
-    AutocompletionDto,
-    DistributionPostale,
-    DistributionPostaleDto,
-} from "./autocompletion.interface";
+    AutocompletionCommune,
+    AutocompletionCommuneDistributionPostale,
+    AutocompletionCommuneDistributionPostaleDto,
+    AutocompletionCommuneDto,
+} from "./autocompletion.commune.interface";
 
 const distributionPostalesSerializer = (
-    raw: DistributionPostaleDto
-): DistributionPostale => {
+    raw: AutocompletionCommuneDistributionPostaleDto
+): AutocompletionCommuneDistributionPostale => {
     return {
         codeCommuneInsee: raw.code_commune_insee,
         codePostal: raw.code_postal,
@@ -18,8 +18,8 @@ const distributionPostalesSerializer = (
 };
 
 const autocompletionSerializer = (
-    rawAutocompletion: AutocompletionDto
-): Autocompletion => ({
+    rawAutocompletion: AutocompletionCommuneDto
+): AutocompletionCommune => ({
     autocompletion: rawAutocompletion.autocompletion,
     code: rawAutocompletion.code,
     commune: rawAutocompletion.commune,
@@ -31,8 +31,8 @@ const autocompletionSerializer = (
 });
 
 export const fetchAutocompletionSerializer = (
-    rawResult: AutocompletionDto[]
-): Autocompletion[] =>
+    rawResult: AutocompletionCommuneDto[]
+): AutocompletionCommune[] =>
     rawResult.map(rawAutocompletion =>
         autocompletionSerializer(rawAutocompletion)
     );

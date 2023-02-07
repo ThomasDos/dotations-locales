@@ -1,5 +1,5 @@
 import _ from "lodash";
-import type { Dotation } from "models/commune/commune.interface";
+import { Dotation } from "models/entity/entity.interface";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import { HistoriqueDotations } from "./historique.interface";
 

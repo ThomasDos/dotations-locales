@@ -1,13 +1,15 @@
 import { Collapse } from "@mui/material";
 import { LabelText, Spinner } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
-import useFetchAutocompletion from "hooks/useFetchAutocompletion";
+import useFetchAutocompletionCommune from "hooks/useFetchAutocompletionCommune";
+import useFetchAutocompletionEPCI from "hooks/useFetchAutocompletionEPCI";
 import usePostCommuneComparer from "hooks/usePostCommuneComparer";
 import { useState } from "react";
 import styled from "styled-components";
 import Dots from "../Dots";
+import DropdownEPCISearch from "./DropdownEPCISearch";
 
-import DropdownSearch from "./DropdownSearch";
+import DropdownCommuneSearch from "./DropdownCommuneSearch";
 
 const StyledSearchButton = styled.div`
     background-color: var(--blue-france-sun-113-625);
@@ -86,11 +88,13 @@ const SearchInput = ({
 }: SearchInputProps) => {
     const [search, setSearch] = useState<string>("");
 
-    const { data: autocompletion, isLoading: searchResultIsLoading } =
-        useFetchAutocompletion(search);
+    const {
+        data: autocompletionCommune,
+        isLoading: searchResultCommuneIsLoading,
+    } = useFetchAutocompletionCommune(search);
 
-    // const { data: autocompletionEPCI, isLoading: searchResultEPCIIsLoading } =
-    //     useFetchAutocompletionEPCI(search);
+    const { data: autocompletionEPCI, isLoading: searchResultEPCIIsLoading } =
+        useFetchAutocompletionEPCI(search);
 
     const {
         isLoading: fetchCommuneIsLoading,
@@ -119,7 +123,8 @@ const SearchInput = ({
                 <button type="button" role="button">
                     <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
                         <div className="flex items-center space-x-2">
-                            {searchResultIsLoading ? (
+                            {searchResultCommuneIsLoading ||
+                            searchResultEPCIIsLoading ? (
                                 <Spinner />
                             ) : (
                                 <ImageFixed
@@ -137,7 +142,13 @@ const SearchInput = ({
                 </button>
             </StyledSearchInput>
             {!fetchCommuneIsLoading && (
-                <Collapse in={!!autocompletion?.length && !!search}>
+                <Collapse
+                    in={
+                        (!!autocompletionCommune?.length ||
+                            !!autocompletionEPCI?.length) &&
+                        !!search
+                    }
+                >
                     <StyledCollapseContent
                         className="absolute z-10"
                         fullWidth={fullWidth}
@@ -146,7 +157,7 @@ const SearchInput = ({
                             <div>
                                 <LabelText
                                     text={`Communes (${
-                                        autocompletion?.length ?? "0"
+                                        autocompletionCommune?.length ?? "0"
                                     })`}
                                     backgroundColor="var(--blue-france-925)"
                                     color="var(--blue-france-113)"
@@ -156,11 +167,24 @@ const SearchInput = ({
                                 Code postal
                             </StyledSpanCodePostal>
                         </div>
-                        <DropdownSearch
+                        <DropdownCommuneSearch
                             fetchCommuneMutate={fetchCommuneMutate}
-                            autocompletion={autocompletion}
-                            search={search}
+                            autocompletionCommune={autocompletionCommune}
                             resetSearch={() => setSearch("")}
+                        />
+                        <div className="flex justify-between px-6 py-4">
+                            <div>
+                                <LabelText
+                                    text={`Intercommunalités (${
+                                        autocompletionEPCI?.length ?? "0"
+                                    })`}
+                                    backgroundColor="var(--blue-france-925)"
+                                    color="var(--blue-france-113)"
+                                />
+                            </div>
+                        </div>
+                        <DropdownEPCISearch
+                            autocompletionEPCI={autocompletionEPCI}
                         />
                     </StyledCollapseContent>
                 </Collapse>

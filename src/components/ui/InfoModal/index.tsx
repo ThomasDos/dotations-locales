@@ -1,7 +1,7 @@
 import { Fade, Modal } from "@mui/material";
 import ImageFixed from "components/ui/ImageFixed";
 import LabelText from "components/ui/LabelText";
-import { Dotation } from "models/commune/commune.interface";
+import { Dotation } from "models/entity/entity.interface";
 import styled from "styled-components";
 import InfoModalDropdown from "./InfoModalDropdown";
 

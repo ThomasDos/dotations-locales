@@ -7,9 +7,9 @@ import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    selectSimulationCommune,
+    selectSimulationEntity,
     updateSimulationCritereValeur,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 
 const StyledModalHeader = styled.div`
@@ -78,9 +78,9 @@ function ModalParameterSimulation({
     description,
 }: ModalParameterSimulationProps) {
     const dispatch = useDispatch();
-    const { codeInsee } = useRouter().query;
-    const { isLoading } = usePostSimulation(`${codeInsee}`);
-    const simulationCommune = useSelector(selectSimulationCommune);
+    const { code } = useRouter().query;
+    const { isLoading } = usePostSimulation(`${code}`);
+    const simulationEntity = useSelector(selectSimulationEntity);
     const [fetchSimulation, setFetchsimulation] = useState(false);
 
     const { valeur } = currentYearCritereGeneralSimulation;
@@ -96,7 +96,7 @@ function ModalParameterSimulation({
             //UPDATE postSimulationMutate si besoin
             setFetchsimulation(false);
         }
-    }, [simulationCommune]);
+    }, [simulationEntity]);
     const handleModalClose = () => {
         setShowModal(false);
     };

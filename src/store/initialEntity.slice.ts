@@ -1,37 +1,34 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import type {
-    Commune,
-    CommuneAnnee,
-    Dotations,
-} from "models/commune/commune.interface";
+import { Dotations, Entity, EntityAnnee } from "models/entity/entity.interface";
+
 import getTotalDotations from "utils/getTotalDotations";
 
 import type { RootState } from ".";
 
-const initialState: Commune = {
+const initialState: Entity = {
     annees: [],
-    codeInsee: "",
+    code: "",
     criteresGeneraux: {},
     dotations: {},
 };
 
-const initialCommuneSlice = createSlice({
+const initialEntitySlice = createSlice({
     initialState,
-    name: "initialCommune",
+    name: "initialEntity",
     reducers: {
-        hydrateInitialCommune: (_, { payload }: PayloadAction<Commune>) =>
+        hydrateInitialEntity: (_, { payload }: PayloadAction<Entity>) =>
             payload,
-        resetInitialCommune: () => initialState,
+        resetInitialEntity: () => initialState,
     },
 });
 
-export const { hydrateInitialCommune, resetInitialCommune } =
-    initialCommuneSlice.actions;
+export const { hydrateInitialEntity, resetInitialEntity } =
+    initialEntitySlice.actions;
 
-const selectSelf = (state: RootState) => state[initialCommuneSlice.name];
+const selectSelf = (state: RootState) => state[initialEntitySlice.name];
 
-export const selectInitialCommune = createSelector(selectSelf, state => state);
+export const selectInitialEntity = createSelector(selectSelf, state => state);
 
 export const selectInitialCriteresGeneraux = createSelector(
     selectSelf,
@@ -48,15 +45,15 @@ export const selectInitialAnnees = createSelector(
     state => state.annees
 );
 
-export const selectInitialCodeInsee = createSelector(
+export const selectInitialCode = createSelector(
     selectSelf,
-    state => state.codeInsee
+    state => state.code
 );
 
 export const selectCurrentYearTotal = createSelector(
     selectInitialDotations,
     selectInitialAnnees,
-    (dotations: Dotations, annees: CommuneAnnee) => {
+    (dotations: Dotations, annees: EntityAnnee) => {
         const currentYear = annees[0];
         return getTotalDotations(dotations, String(currentYear));
     }
@@ -64,7 +61,7 @@ export const selectCurrentYearTotal = createSelector(
 export const selectLastYearTotal = createSelector(
     selectInitialDotations,
     selectInitialAnnees,
-    (dotations: Dotations, annees: CommuneAnnee) => {
+    (dotations: Dotations, annees: EntityAnnee) => {
         const lastYear = annees[1];
         return getTotalDotations(dotations, String(lastYear));
     }
@@ -80,4 +77,4 @@ export const selectInitialLastYear = createSelector(
     initialAnnees => initialAnnees[1]
 );
 
-export default initialCommuneSlice.reducer;
+export default initialEntitySlice.reducer;

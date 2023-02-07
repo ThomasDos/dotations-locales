@@ -6,8 +6,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommune, selectCommunes } from "store/communesComparer.slice";
-import { selectInitialCommune } from "store/initialCommune.slice";
+import { addEntity, selectEntities } from "store/entitiesComparer.slice";
+import { selectInitialEntity } from "store/initialEntity.slice";
 import styled from "styled-components";
 
 const StyledComparerBody = styled.div`
@@ -19,31 +19,31 @@ const StyledComparerBody = styled.div`
 
 const Comparer = () => {
     const router = useRouter();
-    const { commune, codeInsee } = router.query as {
-        commune: string;
-        codeInsee: string;
+    const { libelle, code } = router.query as {
+        libelle: string;
+        code: string;
     };
 
     const dispatch = useDispatch();
 
-    const currentCommune = useSelector(selectInitialCommune);
-    const communes = useSelector(selectCommunes);
+    const currentEntity = useSelector(selectInitialEntity);
+    const entities = useSelector(selectEntities);
 
     useEffect(() => {
-        if (!communes.length) {
-            dispatch(addCommune({ ...currentCommune, commune }));
+        if (!entities.length) {
+            dispatch(addEntity({ ...currentEntity, libelle }));
         }
-    }, [communes]);
+    }, [entities]);
 
     return (
         <>
             <Head>
                 <title>Comparer votre dotation</title>
             </Head>
-            <SubHeader commune={commune} codeInsee={codeInsee} />
+            <SubHeader libelle={libelle} code={code} />
             <StyledComparerBody>
                 <SearchInputComparer />
-                {communes.length > 1 ? (
+                {entities.length > 1 ? (
                     <TabsContainerComparer />
                 ) : (
                     <EmptySelectionComparer />

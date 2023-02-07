@@ -1,8 +1,8 @@
 import { Badge } from "@dataesr/react-dsfr";
 import { LabelGreyCustomCrossIcon } from "components/ui";
-import type { SousDotations } from "models/commune/commune.interface";
+import type { SousDotations } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
-import { selectCurrentYear } from "store/simulationCommune.slice";
+import { selectCurrentYear } from "store/simulationEntity.slice";
 
 interface SousDotationsProps {
     sousDotations: SousDotations;

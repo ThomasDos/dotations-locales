@@ -1,4 +1,4 @@
-import type { Dotations } from "models/commune/commune.interface";
+import type { Dotations } from "models/entity/entity.interface";
 
 export default (dotations: Dotations, year: string): number => {
     const dotationsKeys = Object.keys(dotations);

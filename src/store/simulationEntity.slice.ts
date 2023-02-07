@@ -1,36 +1,33 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import type {
-    Commune,
-    CommuneAnnee,
-    Criteres,
-} from "models/commune/commune.interface";
-import { CommuneSimulation } from "models/simulation/simulation.interface";
+import { Criteres, Entity, EntityAnnee } from "models/entity/entity.interface";
+
+import { EntitySimulation } from "models/simulation/simulation.interface";
 import {
     selectInitialAnnees,
     selectInitialCriteresGeneraux,
-} from "store/initialCommune.slice";
+} from "store/initialEntity.slice";
 
 import type { RootState } from ".";
 import { selectIsSimulation } from "./appSettings.slice";
 
-const initialState: CommuneSimulation = {
+const initialState: EntitySimulation = {
     annees: [],
-    codeInsee: "",
+    code: "",
     criteresGeneraux: {},
     dotations: {},
     avertissementPrecisionSimulation: false,
 };
 
-const simulationCommuneSlice = createSlice({
+const simulationEntitySlice = createSlice({
     initialState,
-    name: "simulationCommune",
+    name: "simulationEntity",
     reducers: {
-        hydrateSimulationCommune: (
+        hydrateSimulationEntity: (
             _,
-            { payload }: PayloadAction<Commune | CommuneSimulation>
+            { payload }: PayloadAction<Entity | EntitySimulation>
         ) => payload,
-        resetSimulationCommune: () => initialState,
+        resetSimulationEntity: () => initialState,
         updateSimulationCritereValeur: (
             state,
             {
@@ -54,15 +51,15 @@ const simulationCommuneSlice = createSlice({
 });
 
 export const {
-    hydrateSimulationCommune,
+    hydrateSimulationEntity,
     updateSimulationCritereValeur,
-    resetSimulationCommune,
+    resetSimulationEntity,
     updateSimulationCriteresGeneraux,
-} = simulationCommuneSlice.actions;
+} = simulationEntitySlice.actions;
 
-const selectSelf = (state: RootState) => state[simulationCommuneSlice.name];
+const selectSelf = (state: RootState) => state[simulationEntitySlice.name];
 
-export const selectSimulationCommune = createSelector(
+export const selectSimulationEntity = createSelector(
     selectSelf,
     state => state
 );
@@ -93,8 +90,8 @@ export const selectSimulationIsDifferentThanInitial = createSelector(
     (
         simulationCriteresGeneraux: Criteres,
         initialCriteresGeneraux: Criteres,
-        simulationAnnees: CommuneAnnee,
-        initialAnnees: CommuneAnnee
+        simulationAnnees: EntityAnnee,
+        initialAnnees: EntityAnnee
     ): boolean => {
         const criteresGenerauxKeys = Object.keys(simulationCriteresGeneraux);
 
@@ -136,4 +133,4 @@ export const selectAllYears = createSelector(
         isSimulation ? simulationAnnees : initialAnnees
 );
 
-export default simulationCommuneSlice.reducer;
+export default simulationEntitySlice.reducer;

@@ -1,16 +1,16 @@
-import { Commune, CommuneDto } from "models/commune/commune.interface";
+import { Entity, EntityDto } from "models/entity/entity.interface";
 
 export interface PostSimulation {
-    code_insee: string;
+    code: string;
     periode_loi: string;
     data: PostSimulationData;
 }
 
-export interface CommuneSimulationDto extends CommuneDto {
+export interface EntitySimulationDto extends EntityDto {
     avertissement_precision_simulation: boolean;
 }
 
-export interface CommuneSimulation extends Commune {
+export interface EntitySimulation extends Entity {
     avertissementPrecisionSimulation?: boolean;
 }
 

@@ -1,7 +1,7 @@
 import { Fade, Modal } from "@mui/material";
 import { Button, LabelText } from "components/ui";
 import { useSelector } from "react-redux";
-import { selectSimulationAvertissementPrecisionSimulation } from "store/simulationCommune.slice";
+import { selectSimulationAvertissementPrecisionSimulation } from "store/simulationEntity.slice";
 import DefaultAlert from "./DefaultAlert";
 import PrecisionAlert from "./PrecisionAlert";
 

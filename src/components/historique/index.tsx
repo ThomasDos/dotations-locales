@@ -1,5 +1,5 @@
 import ImageFixed from "components/ui/ImageFixed";
-import type { Dotation } from "models/commune/commune.interface";
+import type { Dotation } from "models/entity/entity.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
 import { useMemo } from "react";
 

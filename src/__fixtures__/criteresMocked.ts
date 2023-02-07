@@ -1,4 +1,4 @@
-import { Criteres } from "models/commune/commune.interface";
+import { Criteres } from "models/entity/entity.interface";
 
 const criteresMocked: Criteres = {
     populationDgf: {

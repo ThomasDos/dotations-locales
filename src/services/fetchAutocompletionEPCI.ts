@@ -1,14 +1,10 @@
 import axios from "axios";
-import type {
-    Autocompletion,
-    AutocompletionDto,
-} from "src/models/autocompletion/autocompletion.interface";
-import { fetchAutocompletionSerializer } from "src/models/autocompletion/autocompletion.serializer";
+import { AutocompletionEPCI } from "models/autocompletion/epci/autocompletion.epci.interface";
 
 export default async (
     search: string,
     signal: AbortSignal | undefined
-): Promise<Autocompletion[]> =>
+): Promise<AutocompletionEPCI[]> =>
     axios
         .get(
             `${process.env.NEXT_PUBLIC_TERRITOIRES_API_URL}/epci/autocomplete?q=${search}`,
@@ -18,8 +14,6 @@ export default async (
             ({
                 data: { suggestions },
             }: {
-                data: { suggestions: AutocompletionDto[] };
-            }) => {
-                return fetchAutocompletionSerializer(suggestions);
-            }
+                data: { suggestions: AutocompletionEPCI[] };
+            }) => suggestions.slice(0, 5)
         );

@@ -1,5 +1,4 @@
-import type { Criteres } from "models/commune/commune.interface";
-
+import type { Criteres } from "models/entity/entity.interface";
 import sortCriteresByAmountDescending from "./sortCriteresByAmountDescending";
 
 export default (

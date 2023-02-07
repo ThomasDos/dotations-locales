@@ -5,12 +5,12 @@ import {
 
 describe("simulation deserializer", () => {
     describe("postSimulationDeserializer", () => {
-        it("should return a deserialized post simulation with a simulationCommune", () => {
+        it("should return a deserialized post simulation with a simulationEntity", () => {
             expect(
                 postSimulationDeserializer(
                     {
                         annees: ["2022", "2021"],
-                        codeInsee: "42113",
+                        code: "42113",
                         criteresGeneraux: {
                             longueurVoirie: {
                                 annees: [
@@ -158,7 +158,7 @@ describe("simulation deserializer", () => {
                     "2022"
                 )
             ).toEqual({
-                code_insee: "42113",
+                code: "42113",
                 data: {
                     longueur_voirie: 9290,
                     places_caravanes_avant_majoration: 0,

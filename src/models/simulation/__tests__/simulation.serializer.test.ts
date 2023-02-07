@@ -1,12 +1,12 @@
 import { postSimulationMocked } from "__fixtures__/postSimulationMocked";
-import { fetchCommuneSerializerSimulation } from "../simulation.serializer";
+import { fetchEntitySerializerSimulation } from "../simulation.serializer";
 
-describe("fetchCommuneSerializer", () => {
+describe("fetchEntitySerializer", () => {
     it("should return serialized commune", () => {
-        expect(fetchCommuneSerializerSimulation(postSimulationMocked)).toEqual({
+        expect(fetchEntitySerializerSimulation(postSimulationMocked)).toEqual({
             annees: ["2022", "2021"],
             avertissementPrecisionSimulation: true,
-            codeInsee: "42113",
+            code: "42113",
             criteresGeneraux: {
                 longueurVoirie: {
                     annees: [

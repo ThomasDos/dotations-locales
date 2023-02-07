@@ -1,13 +1,14 @@
 import { SearchInput } from "components/ui";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    resetCommunesComparer,
-    selectCommunes,
-} from "store/communesComparer.slice";
-import LabelCommune from "./LabelCommune";
+    resetEntitiesComparer,
+    selectEntities,
+} from "store/entitiesComparer.slice";
+import LabelEntity from "./LabelEntity";
 
 const SearchInputComparer = () => {
-    const communes = useSelector(selectCommunes);
+    const entities = useSelector(selectEntities);
+    console.log("entities", entities);
     const dispatch = useDispatch();
 
     return (
@@ -24,23 +25,23 @@ const SearchInputComparer = () => {
                     textIcon="Ajouter"
                 />
             </div>
-            {communes.length > 1 && (
+            {entities.length > 1 && (
                 <>
                     <div className="flex flex-wrap items-center">
-                        {communes.map((commune, index) => {
+                        {entities.map(({ libelle, code }, index) => {
                             if (!index) return null;
 
                             return (
-                                <LabelCommune
-                                    key={commune.codeInsee}
-                                    codeInsee={commune.codeInsee}
-                                    commune={commune.commune}
+                                <LabelEntity
+                                    key={code}
+                                    code={code}
+                                    libelle={libelle}
                                 />
                             );
                         })}
                         <div
                             className="text-sm cursor-pointer hover:underline text-color-primary"
-                            onClick={() => dispatch(resetCommunesComparer())}
+                            onClick={() => dispatch(resetEntitiesComparer())}
                         >
                             Tout effacer
                         </div>

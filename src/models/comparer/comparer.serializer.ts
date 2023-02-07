@@ -1,5 +1,5 @@
-import type { Dotation, Dotations } from "models/commune/commune.interface";
-import { CommunesComparer } from "store/communesComparer.slice";
+import { Dotation, Dotations } from "models/entity/entity.interface";
+import { EntitiesComparer } from "store/entitiesComparer.slice";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantPopulationInsee";
 import getPopulationDgf from "utils/getPopulationDgf";
@@ -8,12 +8,12 @@ import getTotalDotations from "utils/getTotalDotations";
 import { DotationsFormattedBoardDgfComparer } from "./comparer.interface";
 
 export const dotationsChartComparerSerializer = (
-    communes: CommunesComparer,
+    entities: EntitiesComparer,
     year: string,
     dotation: Dotation
 ) =>
-    communes
-        .map(({ commune, codeInsee, dotations }, index) => {
+    entities
+        .map(({ libelle, code, dotations }, index) => {
             const dotationsKeys = Object.keys(dotations);
             const dotationSelectedKey = dotationsKeys.find(
                 key => dotations[key].label === dotation.label
@@ -34,24 +34,24 @@ export const dotationsChartComparerSerializer = (
                 return {
                     value,
                     label,
-                    communeTitleMain: `${commune} (${codeInsee})`,
+                    entityTitleMain: `${libelle} (${code})`,
                 };
             }
             return {
                 value,
                 label,
-                communeTitle: `${commune} (${codeInsee})`,
+                entityTitle: `${libelle} (${code})`,
             };
         })
         .filter(Boolean);
 
 export const sousDotationsChartComparerSerializer = (
-    communes: CommunesComparer,
+    entities: EntitiesComparer,
     year: string,
     sousDotationKey: string
 ) =>
-    communes
-        .map(({ commune, codeInsee, dotations }, index) => {
+    entities
+        .map(({ libelle, code, dotations }, index) => {
             const dotationSelected: Dotations | undefined = dotations[
                 "dotationSolidariteRurale"
             ].sousDotations?.find(
@@ -68,23 +68,23 @@ export const sousDotationsChartComparerSerializer = (
                 return {
                     value,
                     label,
-                    communeTitleMain: `${commune} (${codeInsee})`,
+                    entityTitleMain: `${libelle} (${code})`,
                 };
             }
             return {
                 value,
                 label,
-                communeTitle: `${commune} (${codeInsee})`,
+                entityTitle: `${libelle} (${code})`,
             };
         })
         .filter(Boolean);
 
 export const dotationDgfChartSerializer = (
-    communes: CommunesComparer,
+    entities: EntitiesComparer,
     year: string
 ) =>
-    communes
-        .map(({ commune, codeInsee, dotations }, index) => {
+    entities
+        .map(({ libelle, code, dotations }, index) => {
             const value = getTotalDotations(dotations, year);
             const label = value
                 ? `${formatNumberWithSpace(value)} €`
@@ -94,23 +94,23 @@ export const dotationDgfChartSerializer = (
                 return {
                     value,
                     label,
-                    communeTitleMain: `${commune} (${codeInsee})`,
+                    entityTitleMain: `${libelle} (${code})`,
                 };
             }
             return {
                 value,
                 label,
-                communeTitle: `${commune} (${codeInsee})`,
+                entityTitle: `${libelle} (${code})`,
             };
         })
         .filter(Boolean);
 
 export const dotationsDgfBoardSerializer = (
-    communes: CommunesComparer,
+    entities: EntitiesComparer,
     year: string
 ): DotationsFormattedBoardDgfComparer =>
-    communes
-        .map(({ commune, codeInsee, dotations }) => {
+    entities
+        .map(({ libelle, code, dotations }) => {
             const totalDotations = getTotalDotations(dotations, year);
 
             const dotationsKeys = Object.keys(dotations);
@@ -130,15 +130,15 @@ export const dotationsDgfBoardSerializer = (
             return {
                 totalDotations,
                 dotations: dotationsFormatted,
-                titleRow: `${commune} (${codeInsee})`,
+                titleRow: `${libelle} (${code})`,
             };
         })
         .filter(Boolean);
 export const dotationsDgfBoardPopulationsSerializer = (
-    communes: CommunesComparer,
+    entities: EntitiesComparer,
     year: string
 ) =>
-    communes.map(({ commune, codeInsee, criteresGeneraux, dotations }) => {
+    entities.map(({ libelle, code, criteresGeneraux, dotations }) => {
         const populationInsee = +getPopulationInsee(criteresGeneraux, year);
         const dotationsDf = dotations.dotationForfaitaire;
         const populationDgf = +getPopulationDgf(dotationsDf.criteres, year);
@@ -150,16 +150,16 @@ export const dotationsDgfBoardPopulationsSerializer = (
         return {
             values: [populationInsee, populationDgf, totalDotationsFomatted],
             labels: ["Population INSEE", "Population DGF", "Montant DGF"],
-            titleRow: `${commune} (${codeInsee})`,
+            titleRow: `${libelle} (${code})`,
         };
     });
 
 export const dotationDgfPerHabitantChartSerializer = (
-    communes: CommunesComparer,
+    entities: EntitiesComparer,
     year: string
 ) =>
-    communes
-        .map(({ commune, codeInsee, dotations, criteresGeneraux }, index) => {
+    entities
+        .map(({ libelle, code, dotations, criteresGeneraux }, index) => {
             const totalDotations = getTotalDotations(dotations, year);
             const value = getDotationPerHabitantPopulationInsee(
                 criteresGeneraux,
@@ -174,14 +174,14 @@ export const dotationDgfPerHabitantChartSerializer = (
                 return {
                     value,
                     label,
-                    communeTitleMain: `${commune} (${codeInsee})`,
+                    entityTitleMain: `${libelle} (${code})`,
                 };
             }
             return {
                 value,
                 label,
-                communeTitle: `${commune} (${codeInsee})`,
-                link: `/${codeInsee}?commune=${commune}`,
+                entityTitle: `${libelle} (${code})`,
+                link: `/${code}?libelle=${libelle}`,
             };
         })
         .filter(Boolean);

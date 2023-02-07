@@ -50,7 +50,7 @@ const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
                     {dotations.map(dotation => {
                         return (
                             <Fragment key={dotation?.label}>
-                                {dotation?.communeTitleMain ? (
+                                {dotation?.entityTitleMain ? (
                                     <>
                                         <Cell />
                                     </>
@@ -63,7 +63,7 @@ const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
                         );
                     })}
                     <LabelList
-                        dataKey="communeTitleMain"
+                        dataKey="entityTitleMain"
                         position="insideLeft"
                         fill="#161616"
                         dy={dy}
@@ -71,7 +71,7 @@ const BarChartComparer = ({ dotations }: BarChartComparerProps) => {
                         fontWeight={700}
                     />
                     <LabelList
-                        dataKey="communeTitle"
+                        dataKey="entityTitle"
                         position="insideLeft"
                         fill="#161616"
                         dy={dy}

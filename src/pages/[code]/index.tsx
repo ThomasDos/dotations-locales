@@ -9,20 +9,27 @@ import { Spinner } from "components/ui";
 import AlertDefaultModal from "components/ui/AlertModal";
 import useDashboardInit from "hooks/useDashboardInit";
 import useFetchCommune from "hooks/useFetchCommune";
+import useFetchEPCI from "hooks/useFetchEPCI";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectIsSimulation } from "store/appSettings.slice";
+import {
+    selectIsCommune,
+    selectIsEPCI,
+    selectIsSimulation,
+} from "store/appSettings.slice";
 import { toastError } from "utils/customToasts";
 
 const Dashboard = () => {
     const router = useRouter();
-    const { commune, codeInsee } = router.query as {
-        commune: string;
-        codeInsee: string;
+    const { libelle, code } = router.query as {
+        libelle: string;
+        code: string;
     };
 
+    const isEPCI = useSelector(selectIsEPCI);
+    const isCommune = useSelector(selectIsCommune);
     const isSimulation = useSelector(selectIsSimulation);
     const [isCriteresGenerauxSimulation, setIsCriteresGenerauxSimulation] =
         useState(true);
@@ -35,9 +42,19 @@ const Dashboard = () => {
         data: fetchCommuneData,
         error: fetchCommuneError,
         isLoading: fetchCommuneIsLoading,
-    } = useFetchCommune(codeInsee, !!codeInsee);
+    } = useFetchCommune(code, !!code && isCommune);
 
-    useDashboardInit(fetchCommuneData);
+    const {
+        data: fetchEPCIData,
+        error: fetchEPCIError,
+        isLoading: fetchEPCIIsLoading,
+    } = useFetchEPCI(code, !!code && isEPCI);
+
+    console.log(
+        "🚀 ~ file: index.tsx:43 ~ Dashboard ~ fetchEPCIData",
+        fetchEPCIData
+    );
+    useDashboardInit(fetchCommuneData || fetchEPCIData);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -59,18 +76,22 @@ const Dashboard = () => {
         window.sessionStorage.setItem("tallyHasOpen", "true");
     }, []);
 
-    if (fetchCommuneError) {
+    if (fetchCommuneError && fetchEPCIError) {
         toastError("Une erreur est survenue avec cette commune");
         router.push("/");
     }
 
-    if (!fetchCommuneData || (fetchCommuneIsLoading as boolean)) {
+    if (
+        (!fetchCommuneData && !fetchEPCIData) ||
+        fetchCommuneIsLoading ||
+        fetchEPCIIsLoading
+    ) {
         return (
             <>
                 <Head>
                     <title>Le tableau de bord de votre dotation</title>
                 </Head>
-                <SubHeader commune={commune} codeInsee={codeInsee} />
+                <SubHeader libelle={libelle} code={code} />
                 <div className="w-auto my-40 flex justify-center">
                     <Spinner size="md" />
                 </div>
@@ -90,9 +111,9 @@ const Dashboard = () => {
                     }
                 />
             ) : (
-                <SubHeader commune={commune} codeInsee={codeInsee} />
+                <SubHeader libelle={libelle} code={code} />
             )}
-            {isCriteresGenerauxSimulation && isSimulation ? (
+            {isCriteresGenerauxSimulation && isSimulation && isCommune ? (
                 <CriteresGenerauxSimulation
                     setIsCriteresGenerauxSimulation={
                         setIsCriteresGenerauxSimulation

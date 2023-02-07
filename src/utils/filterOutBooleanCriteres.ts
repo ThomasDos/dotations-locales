@@ -1,4 +1,4 @@
-import type { Criteres } from "models/commune/commune.interface";
+import type { Criteres } from "models/entity/entity.interface";
 
 export default function filterOutBooleanCriteres(criteres: Criteres): Criteres {
     const currentCriteres = { ...criteres };

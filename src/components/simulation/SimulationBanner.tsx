@@ -6,11 +6,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { updateIsSimulationFalse } from "store/appSettings.slice";
-import { selectInitialCommune } from "store/initialCommune.slice";
+import { selectInitialEntity } from "store/initialEntity.slice";
 import {
-    hydrateSimulationCommune,
+    hydrateSimulationEntity,
     selectSimulationIsDifferentThanInitial,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 
 const style = {
@@ -83,12 +83,12 @@ const SimulationBanner = ({
     setIsCriteresGenerauxSimulation,
 }: SimulationBannerProps) => {
     const dispatch = useDispatch();
-    const { codeInsee, commune } = useRouter().query;
+    const { code, libelle } = useRouter().query;
 
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
-    const initialCommune = useSelector(selectInitialCommune);
+    const initialEntity = useSelector(selectInitialEntity);
     const [resetModal, setResetModal] = useState(false);
 
     return (
@@ -104,7 +104,7 @@ const SimulationBanner = ({
                     />
                     <div className="flex flex-col justify-center sm:ml-3">
                         <StyledBannerTitle>
-                            {commune} ({codeInsee})
+                            {libelle} ({code})
                         </StyledBannerTitle>
                         <span className="text-sm">Simulation de dotations</span>
                     </div>
@@ -180,7 +180,7 @@ const SimulationBanner = ({
                                         "Tout réinitialiser",
                                     ]);
                                     dispatch(
-                                        hydrateSimulationCommune(initialCommune)
+                                        hydrateSimulationEntity(initialEntity)
                                     );
                                     setIsCriteresGenerauxSimulation(true);
                                     setResetModal(false);

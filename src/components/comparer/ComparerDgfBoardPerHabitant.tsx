@@ -1,7 +1,7 @@
 import { dotationsDgfBoardPopulationsSerializer } from "models/comparer/comparer.serializer";
 import { useSelector } from "react-redux";
-import { selectCommunes } from "store/communesComparer.slice";
-import { selectInitialCurrentYear } from "store/initialCommune.slice";
+import { selectEntities } from "store/entitiesComparer.slice";
+import { selectInitialCurrentYear } from "store/initialEntity.slice";
 
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
@@ -87,11 +87,11 @@ const StyledBodyBoardRowValue = styled.div<{ hasValue: boolean }>`
 `;
 
 export default function ComparerDgfBoardPerHabitant() {
-    const communes = useSelector(selectCommunes);
+    const entities = useSelector(selectEntities);
     const year = useSelector(selectInitialCurrentYear);
 
     const dotationsDgfBoardPopulations = dotationsDgfBoardPopulationsSerializer(
-        communes,
+        entities,
         year
     );
     const dotationsDgfBoardPopulationsDescending =

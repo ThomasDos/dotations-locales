@@ -1,13 +1,10 @@
-import type { Commune, CommuneDto } from "src/models/commune/commune.interface";
-import { fetchCommuneSerializer } from "src/models/commune/commune.serializer";
-
+import { Entity, EntityDto } from "models/entity/entity.interface";
+import { fetchEntitySerializer } from "models/entity/entity.serializer";
 import apiDotations from "./apiDotations";
 
-export default async (codeInsee: string): Promise<Commune> =>
+export default async (code: string): Promise<Entity> =>
     apiDotations
         .post(`/commune/`, {
-            code_insee: codeInsee,
+            code,
         })
-        .then(({ data }: { data: CommuneDto }) => {
-            return fetchCommuneSerializer(data);
-        });
+        .then(({ data }: { data: EntityDto }) => fetchEntitySerializer(data));

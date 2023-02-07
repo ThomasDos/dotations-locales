@@ -1,5 +1,5 @@
 import _ from "lodash";
-import type { Criteres } from "models/commune/commune.interface";
+import type { Criteres } from "models/entity/entity.interface";
 
 export default (criteres: Criteres, year: string) => {
     if (_.isEmpty(criteres)) return "";

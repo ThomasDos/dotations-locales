@@ -1,4 +1,3 @@
-import { Dotation } from "models/commune/commune.interface";
 import { DotationsFormattedChartComparer } from "models/comparer/comparer.interface";
 import {
     dotationDgfChartSerializer,
@@ -6,10 +5,11 @@ import {
     dotationsChartComparerSerializer,
     sousDotationsChartComparerSerializer,
 } from "models/comparer/comparer.serializer";
+import { Dotation } from "models/entity/entity.interface";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { selectCommunes } from "store/communesComparer.slice";
-import { selectInitialCurrentYear } from "store/initialCommune.slice";
+import { selectEntities } from "store/entitiesComparer.slice";
+import { selectInitialCurrentYear } from "store/initialEntity.slice";
 import DotationComparerCard from "./DotationComparerCard";
 
 interface BarChartComparerProps {
@@ -29,37 +29,37 @@ const TabComparer = ({
     isSousDotation,
     sousDotationKey,
 }: BarChartComparerProps) => {
-    const communes = useSelector(selectCommunes);
+    const entities = useSelector(selectEntities);
     const currentYear = useSelector(selectInitialCurrentYear);
     const dotationsChart: DotationsFormattedChartComparer = useMemo(() => {
         if (isDGF) {
-            return dotationDgfChartSerializer(communes, currentYear);
+            return dotationDgfChartSerializer(entities, currentYear);
         }
 
         if (isSousDotation) {
             return sousDotationsChartComparerSerializer(
-                communes,
+                entities,
                 currentYear,
                 sousDotationKey as string
             ) as DotationsFormattedChartComparer;
         }
         return dotationsChartComparerSerializer(
-            communes,
+            entities,
             currentYear,
             dotation
         ) as DotationsFormattedChartComparer;
-    }, [communes]);
+    }, [entities]);
 
     const dotationsChartPerHabitant: DotationsFormattedChartComparer =
         useMemo(() => {
             if (isDGF) {
                 return dotationDgfPerHabitantChartSerializer(
-                    communes,
+                    entities,
                     currentYear
                 ) as DotationsFormattedChartComparer;
             }
             return [] as DotationsFormattedChartComparer;
-        }, [communes]);
+        }, [entities]);
 
     return (
         <>

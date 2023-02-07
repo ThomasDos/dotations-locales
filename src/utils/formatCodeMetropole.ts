@@ -1,5 +1,5 @@
-export default (codeInsee: string): string => {
-    const isMetropole = codeInsee.match(/^(751|132|6938)/gm);
+export default (code: string): string => {
+    const isMetropole = code.match(/^(751|132|6938)/gm);
 
     if (isMetropole) {
         switch (isMetropole[0]) {
@@ -10,9 +10,9 @@ export default (codeInsee: string): string => {
             case "6938":
                 return "69123";
             default:
-                return codeInsee;
+                return code;
         }
     } else {
-        return codeInsee;
+        return code;
     }
 };

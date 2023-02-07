@@ -1,6 +1,6 @@
-import type { Criteres } from "models/commune/commune.interface";
+import type { Criteres } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
-import { selectInitialCriteresGeneraux } from "store/initialCommune.slice";
+import { selectInitialCriteresGeneraux } from "store/initialEntity.slice";
 import styled from "styled-components";
 
 const CriteresCardStyled = styled.div`

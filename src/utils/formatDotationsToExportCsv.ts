@@ -1,4 +1,4 @@
-import { Dotations } from "models/commune/commune.interface";
+import { Dotations } from "models/entity/entity.interface";
 
 const formatDotationsToExportCsv = (dotations: Dotations) =>
     Object.keys(dotations).map(key => {

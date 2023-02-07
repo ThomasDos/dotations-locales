@@ -1,24 +1,25 @@
 import { Button, LabelPercentage } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
-import type { Criteres } from "models/commune/commune.interface";
+import type { Criteres } from "models/entity/entity.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
+    selectIsCommune,
     selectIsSimulation,
     updateIsSimulationTrue,
 } from "store/appSettings.slice";
 import {
     selectCurrentYearTotal,
-    selectInitialCommune,
+    selectInitialEntity,
     selectLastYearTotal,
-} from "store/initialCommune.slice";
+} from "store/initialEntity.slice";
 import {
     selectCurrentYear,
     selectLastYear,
-    selectSimulationCommune,
+    selectSimulationEntity,
     selectSimulationIsDifferentThanInitial,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantPopulationInsee";
 import getPercentageEvolution from "utils/getPercentageEvolution";
@@ -62,25 +63,26 @@ const EntityParameters = ({
     setDisplayMobileCriteresGeneraux,
 }: EntityParametersProps) => {
     const dispatch = useDispatch();
-    const simulationCommune = useSelector(selectSimulationCommune);
+    const simulationEntity = useSelector(selectSimulationEntity);
     const currentYearTotal = useSelector(selectCurrentYearTotal);
     const lastYearTotal = useSelector(selectLastYearTotal);
-    const initialCommune = useSelector(selectInitialCommune);
+    const initialEntity = useSelector(selectInitialEntity);
     const isSimulation = useSelector(selectIsSimulation);
+    const isCommune = useSelector(selectIsCommune);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
 
-    if (_.isEmpty(initialCommune.criteresGeneraux)) return null;
+    if (_.isEmpty(initialEntity.criteresGeneraux)) return null;
 
-    const { criteresGeneraux: initialCriteresGeneraux } = initialCommune as {
+    const { criteresGeneraux: initialCriteresGeneraux } = initialEntity as {
         criteresGeneraux: Criteres;
     };
     const { criteresGeneraux } = isSimulation
-        ? (simulationCommune as { criteresGeneraux: Criteres })
-        : (initialCommune as { criteresGeneraux: Criteres });
+        ? (simulationEntity as { criteresGeneraux: Criteres })
+        : (initialEntity as { criteresGeneraux: Criteres });
 
     const criteresGenerauxKeys = Object.keys(criteresGeneraux);
 
@@ -156,20 +158,22 @@ const EntityParameters = ({
                         />
                     </div>
                 ) : (
-                    <div>
-                        <Button
-                            icon="calculator"
-                            text="Créer une simulation"
-                            onClick={() => {
-                                matomoTrackEvent([
-                                    "Simulation",
-                                    "Créer une simulation",
-                                ]);
+                    isCommune && (
+                        <div>
+                            <Button
+                                icon="calculator"
+                                text="Créer une simulation"
+                                onClick={() => {
+                                    matomoTrackEvent([
+                                        "Simulation",
+                                        "Créer une simulation",
+                                    ]);
 
-                                dispatch(updateIsSimulationTrue());
-                            }}
-                        />
-                    </div>
+                                    dispatch(updateIsSimulationTrue());
+                                }}
+                            />
+                        </div>
+                    )
                 )}
 
                 {(!isSimulation || simulationIsDifferentThanInitial) && (

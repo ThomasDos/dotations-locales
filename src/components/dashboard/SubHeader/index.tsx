@@ -2,8 +2,9 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import { BreadCrumbsTwoLinks, LinkIcon } from "components/ui";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+    selectIsCommune,
     updateIsSimulationFalse,
     updateIsSimulationTrue,
 } from "store/appSettings.slice";
@@ -17,14 +18,15 @@ const StyledHeaderDashboard = styled.div`
 `;
 
 interface SubHeaderProps {
-    commune: string;
-    codeInsee: string;
+    libelle: string;
+    code: string;
 }
 
-const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
-    const communeWithCodeInsee = `${commune} (${codeInsee})`;
+const SubHeader = ({ libelle, code }: SubHeaderProps) => {
+    const entityWithCode = `${libelle} (${code})`;
     const dispatch = useDispatch();
     const router = useRouter();
+    const isCommune = useSelector(selectIsCommune);
 
     const pathnameFiltered = useMemo(() => {
         if (router.pathname.includes("historique")) {
@@ -47,11 +49,11 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                 <div className="flex flex-col">
                     <BreadCrumbsTwoLinks
                         firstLink="Accueil"
-                        secondLink={communeWithCodeInsee}
+                        secondLink={entityWithCode}
                     />
 
                     <span className="font-bold lg:text-2xl text-xl">
-                        {communeWithCodeInsee}
+                        {entityWithCode}
                     </span>
                 </div>
                 <div className="hidden md:flex mt-8">
@@ -60,46 +62,46 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                         text="Dotations"
                         handleClick={() => {
                             dispatch(updateIsSimulationFalse());
-                            return router.push(
-                                `/${codeInsee}?commune=${commune}`
-                            );
+                            return router.push(`/${code}?libelle=${libelle}`);
                         }}
                     />
-                    <LinkIcon
-                        icon="simulation"
-                        text="Simulation"
-                        handleClick={() => {
-                            dispatch(updateIsSimulationTrue());
-                            return router.push(
-                                `/${codeInsee}?commune=${commune}`
-                            );
-                        }}
-                    />
+                    {isCommune && (
+                        <LinkIcon
+                            icon="simulation"
+                            text="Simulation"
+                            handleClick={() => {
+                                dispatch(updateIsSimulationTrue());
+                                return router.push(
+                                    `/${code}?libelle=${libelle}`
+                                );
+                            }}
+                        />
+                    )}
                     <LinkIcon
                         icon="historique"
                         text="Historique"
                         handleClick={() =>
                             router.push(
-                                `/${codeInsee}/historique?commune=${commune}`
+                                `/${code}/historique?libelle=${libelle}`
                             )
                         }
                     />
-                    <LinkIcon
-                        icon="comparer"
-                        text="Comparer"
-                        handleClick={() =>
-                            router.push(
-                                `/${codeInsee}/comparer?commune=${commune}`
-                            )
-                        }
-                    />
+                    {isCommune && (
+                        <LinkIcon
+                            icon="comparer"
+                            text="Comparer"
+                            handleClick={() =>
+                                router.push(
+                                    `/${code}/comparer?libelle=${libelle}`
+                                )
+                            }
+                        />
+                    )}
                     <LinkIcon
                         icon="alerter"
                         text="M'alerter"
                         handleClick={() =>
-                            router.push(
-                                `/${codeInsee}/alerter?commune=${commune}`
-                            )
+                            router.push(`/${code}/alerter?libelle=${libelle}`)
                         }
                     />
                 </div>
@@ -133,50 +135,57 @@ const SubHeader = ({ commune, codeInsee }: SubHeaderProps) => {
                                 onClick={() => {
                                     dispatch(updateIsSimulationFalse());
                                     return router.push(
-                                        `/${codeInsee}?commune=${commune}`
+                                        `/${code}?libelle=${libelle}`
                                     );
                                 }}
                             >
                                 <LinkIcon icon="euro" text="Dotations" />
                             </MenuItem>
-                            <MenuItem
-                                value="Simulation"
-                                onClick={() => {
-                                    dispatch(updateIsSimulationTrue());
-                                    return router.push(
-                                        `/${codeInsee}?commune=${commune}`
-                                    );
-                                }}
-                            >
-                                <LinkIcon icon="simulation" text="Simulation" />
-                            </MenuItem>
+                            {isCommune && (
+                                <MenuItem
+                                    value="Simulation"
+                                    onClick={() => {
+                                        dispatch(updateIsSimulationTrue());
+                                        return router.push(
+                                            `/${code}?libelle=${libelle}`
+                                        );
+                                    }}
+                                >
+                                    <LinkIcon
+                                        icon="simulation"
+                                        text="Simulation"
+                                    />
+                                </MenuItem>
+                            )}
                             <MenuItem
                                 value="Historique"
                                 onClick={() =>
                                     router.push(
-                                        `/${codeInsee}/historique?commune=${commune}`
+                                        `/${code}/historique?libelle=${libelle}`
                                     )
                                 }
                             >
                                 <LinkIcon icon="historique" text="Historique" />
                             </MenuItem>
 
-                            <MenuItem
-                                value="Comparer"
-                                onClick={() =>
-                                    router.push(
-                                        `/${codeInsee}/comparer?commune=${commune}`
-                                    )
-                                }
-                            >
-                                <LinkIcon icon="comparer" text="Comparer" />
-                            </MenuItem>
+                            {isCommune && (
+                                <MenuItem
+                                    value="Comparer"
+                                    onClick={() =>
+                                        router.push(
+                                            `/${code}/comparer?libelle=${libelle}`
+                                        )
+                                    }
+                                >
+                                    <LinkIcon icon="comparer" text="Comparer" />
+                                </MenuItem>
+                            )}
 
                             <MenuItem
                                 value="M'alerter"
                                 onClick={() =>
                                     router.push(
-                                        `/${codeInsee}/alerter?commune=${commune}`
+                                        `/${code}/alerter?libelle=${libelle}`
                                     )
                                 }
                             >

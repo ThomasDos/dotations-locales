@@ -1,4 +1,4 @@
-import type { Commune, Criteres } from "models/commune/commune.interface";
+import { Criteres, Entity } from "models/entity/entity.interface";
 import type {
     PostSimulation,
     PostSimulationData,
@@ -6,14 +6,12 @@ import type {
 import convertCamelCaseToSnakeCase from "utils/convertCamelCaseToSnakeCase";
 
 export const postSimulationDeserializer = (
-    simulationCommune: Commune,
+    simulationEntity: Entity,
     selectLoiSimulation: string
 ): PostSimulation => {
     return {
-        code_insee: simulationCommune.codeInsee,
-        data: postSimulationDataDeserializer(
-            simulationCommune.criteresGeneraux
-        ),
+        code: simulationEntity.code,
+        data: postSimulationDataDeserializer(simulationEntity.criteresGeneraux),
         periode_loi: selectLoiSimulation,
     };
 };
