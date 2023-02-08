@@ -8,7 +8,6 @@ import LabelEntity from "./LabelEntity";
 
 const SearchInputComparer = () => {
     const entities = useSelector(selectEntities);
-    console.log("entities", entities);
     const dispatch = useDispatch();
 
     return (

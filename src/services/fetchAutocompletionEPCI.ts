@@ -15,5 +15,5 @@ export default async (
                 data: { suggestions },
             }: {
                 data: { suggestions: AutocompletionEPCI[] };
-            }) => suggestions.slice(0, 5)
+            }) => suggestions
         );

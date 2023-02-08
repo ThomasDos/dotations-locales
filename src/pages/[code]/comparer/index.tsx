@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectIsCommune } from "store/appSettings.slice";
 import { addEntity, selectEntities } from "store/entitiesComparer.slice";
 import { selectInitialEntity } from "store/initialEntity.slice";
 import styled from "styled-components";
@@ -29,7 +30,13 @@ const Comparer = () => {
     const currentEntity = useSelector(selectInitialEntity);
     const entities = useSelector(selectEntities);
 
+    //TODO: rétablir quand comparer EPCI prêt
+    const isCommune = useSelector(selectIsCommune);
+
     useEffect(() => {
+        if (!isCommune) {
+            router.push(`/${code}?libelle=${libelle}`);
+        }
         if (!entities.length) {
             dispatch(addEntity({ ...currentEntity, libelle }));
         }

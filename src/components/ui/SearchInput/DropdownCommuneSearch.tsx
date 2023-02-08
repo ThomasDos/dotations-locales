@@ -1,6 +1,5 @@
 import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { AutocompletionCommune } from "models/autocompletion/commune/autocompletion.commune.interface";
-import { useRouter } from "next/router";
 import formatCodeMetropole from "utils/formatCodeMetropole";
 import DropdownCommuneRowComparer from "./DropdownCommuneRowComparer";
 import DropdownCommuneRowLink from "./DropdownCommuneRowLink";
@@ -9,6 +8,7 @@ interface DropdownCommuneSearchProps {
     autocompletionCommune: AutocompletionCommune[] | undefined;
     resetSearch(): void;
     fetchCommuneMutate(props: UsePostEntityComparerProps): void;
+    isFeatureComparer: boolean;
 }
 
 export interface DropdownCommuneRowProps {
@@ -21,10 +21,8 @@ const DropdownCommuneSearch = ({
     autocompletionCommune,
     resetSearch,
     fetchCommuneMutate,
+    isFeatureComparer,
 }: DropdownCommuneSearchProps) => {
-    const router = useRouter();
-    const isFeatureComparer = router.pathname.includes("comparer");
-
     return (
         <>
             {!!autocompletionCommune &&

@@ -57,6 +57,9 @@ const Dashboard = () => {
     }, [isSimulation]);
 
     useEffect(() => {
+        if (!isEPCI && !isCommune) {
+            router.push("/");
+        }
         const tallyHasOpen = window.sessionStorage.getItem("tallyHasOpen");
         if (tallyHasOpen) return;
         //@ts-ignore

@@ -19,5 +19,5 @@ export default async (
                 data: { suggestions },
             }: {
                 data: { suggestions: AutocompletionCommuneDto[] };
-            }) => fetchAutocompletionSerializer(suggestions).slice(0, 5)
+            }) => fetchAutocompletionSerializer(suggestions)
         );

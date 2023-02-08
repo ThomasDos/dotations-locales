@@ -86,6 +86,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                             )
                         }
                     />
+
                     {isCommune && (
                         <LinkIcon
                             icon="comparer"
@@ -97,6 +98,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                             }
                         />
                     )}
+
                     <LinkIcon
                         icon="alerter"
                         text="M'alerter"

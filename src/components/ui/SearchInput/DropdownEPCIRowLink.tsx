@@ -2,20 +2,13 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { updateIsEPCITrue } from "store/appSettings.slice";
+import { DropdownEPCIRowProps } from "./DropdownEPCISearch";
 import StyledDropdownRow from "./StyledDropdownRow";
 
-interface DropdownEPCIRowLinkProps {
-    codeSiren: string;
-    libelle: string;
-}
-
-const DropdownEPCIRowLink = ({
-    codeSiren,
-    libelle,
-}: DropdownEPCIRowLinkProps) => {
+const DropdownEPCIRowLink = ({ code, libelle }: DropdownEPCIRowProps) => {
     const dispatch = useDispatch();
     return (
-        <Link href={{ pathname: `/${codeSiren}`, query: { libelle } }}>
+        <Link href={{ pathname: `/${code}`, query: { libelle } }}>
             <div
                 onClick={() => {
                     matomoTrackEvent(["Recherche EPCI", libelle]);
@@ -24,7 +17,7 @@ const DropdownEPCIRowLink = ({
             >
                 <StyledDropdownRow className="flex justify-between px-6 py-4">
                     <span>
-                        {libelle} ({codeSiren})
+                        {libelle} ({code})
                     </span>
                 </StyledDropdownRow>
             </div>
