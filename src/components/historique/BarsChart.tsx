@@ -22,9 +22,9 @@ export default function BarsChart({
     dotationTitle,
     historiqueData,
 }: BarsChartProps) {
-    const { commune, codeInsee } = useRouter().query as {
-        commune: string;
-        codeInsee: string;
+    const { libelle, code } = useRouter().query as {
+        libelle: string;
+        code: string;
     };
     const { windowWidth } = useResize();
     const screenIsSmall = windowWidth < 640;
@@ -34,7 +34,7 @@ export default function BarsChart({
             <HistoriqueCardHeader
                 anneesLength={historiqueData.length}
                 title={dotationTitle}
-                subtitle={`${commune} (${codeInsee})`}
+                subtitle={`${libelle} (${code})`}
             />
             <ResponsiveContainer width={"100%"} height={320}>
                 <BarChart

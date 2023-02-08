@@ -5,11 +5,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    selectSimulationCommune,
     selectSimulationCriteresGeneraux,
+    selectSimulationEntity,
     selectSimulationIsDifferentThanInitial,
     updateSimulationCriteresGeneraux,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 import { toastError, toastPromise } from "utils/customToasts";
 
@@ -76,11 +76,9 @@ export default function CriteresGenerauxSimulation({
     setShowAlertModal,
 }: CriteresGenerauxSimulationProps) {
     const dispatch = useDispatch();
-    const { codeInsee } = useRouter().query;
-    const { mutateAsync, isSuccess, isLoading } = usePostSimulation(
-        `${codeInsee}`
-    );
-    const simulationCommune = useSelector(selectSimulationCommune);
+    const { code } = useRouter().query;
+    const { mutateAsync, isSuccess, isLoading } = usePostSimulation(`${code}`);
+    const simulationEntity = useSelector(selectSimulationEntity);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
@@ -100,8 +98,8 @@ export default function CriteresGenerauxSimulation({
 
             toastPromise(
                 mutateAsync({
-                    simulationCommune: {
-                        ...simulationCommune,
+                    simulationEntity: {
+                        ...simulationEntity,
                         criteresGeneraux: {
                             ...criteresGenerauxSimulation,
                             ...criteres,

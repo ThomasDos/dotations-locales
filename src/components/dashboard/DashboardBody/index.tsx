@@ -3,11 +3,11 @@ import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
-import { selectInitialDotations } from "store/initialCommune.slice";
+import { selectInitialDotations } from "store/initialEntity.slice";
 import {
     selectCurrentYear,
     selectSimulationDotations,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
 import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescending";

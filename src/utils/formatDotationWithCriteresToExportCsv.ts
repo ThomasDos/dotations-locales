@@ -1,4 +1,4 @@
-import { Dotation } from "models/commune/commune.interface";
+import { Dotation } from "models/entity/entity.interface";
 
 const formatDotationWithCriteresToExportCsv = (
     dotation: Dotation,

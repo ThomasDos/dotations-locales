@@ -5,13 +5,13 @@ import {
     LabelPercentage,
 } from "components/ui";
 import InfoDrawer from "components/ui/InfoDrawer";
-import type { Dotation } from "models/commune/commune.interface";
+import type { Dotation } from "models/entity/entity.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
     selectCurrentYear,
     selectLastYear,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";

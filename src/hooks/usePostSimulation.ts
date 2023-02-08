@@ -1,24 +1,24 @@
+import { Entity } from "models/entity/entity.interface";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import postSimulation from "services/postSimulation";
-import type { Commune } from "src/models/commune/commune.interface";
-import { hydrateSimulationCommune } from "store/simulationCommune.slice";
+import { hydrateSimulationEntity } from "store/simulationEntity.slice";
 
-export default (codeInsee: string) => {
+export default (code: string) => {
     const dispatch = useDispatch();
 
     return useMutation(
-        ["postSimulation", codeInsee],
+        ["postSimulation", code],
         async ({
-            simulationCommune,
+            simulationEntity,
             selectLoiSimulation,
         }: {
-            simulationCommune: Commune;
+            simulationEntity: Entity;
             selectLoiSimulation: string;
-        }) => postSimulation(simulationCommune, selectLoiSimulation),
+        }) => postSimulation(simulationEntity, selectLoiSimulation),
         {
             onSuccess: data => {
-                dispatch(hydrateSimulationCommune(data));
+                dispatch(hydrateSimulationEntity(data));
             },
         }
     );

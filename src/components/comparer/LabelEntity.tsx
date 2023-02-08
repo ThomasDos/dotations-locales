@@ -1,22 +1,22 @@
 import { ImageFixed } from "components/ui";
 import { useDispatch } from "react-redux";
-import { removeCommune } from "store/communesComparer.slice";
+import { removeEntity } from "store/entitiesComparer.slice";
 
-interface LabelCommuneProps {
-    codeInsee: string;
-    commune: string;
+interface LabelEntityProps {
+    code: string;
+    libelle: string;
 }
 
-const LabelCommune = ({ commune, codeInsee }: LabelCommuneProps) => {
+const LabelEntity = ({ libelle, code }: LabelEntityProps) => {
     const dispatch = useDispatch();
     return (
         <div className="flex items-center rounded bg-blue-france-113 text-white w-fit py-1 pl-4 pr-3 mr-2 mb-2">
             <span>
-                {commune} ({codeInsee})
+                {libelle} ({code})
             </span>
             <ImageFixed
                 className="ml-1 cursor-pointer"
-                onClick={() => dispatch(removeCommune(codeInsee))}
+                onClick={() => dispatch(removeEntity(code))}
                 src="/icons/cross-white.svg"
                 width={24}
                 height={24}
@@ -26,4 +26,4 @@ const LabelCommune = ({ commune, codeInsee }: LabelCommuneProps) => {
     );
 };
 
-export default LabelCommune;
+export default LabelEntity;

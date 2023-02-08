@@ -1,4 +1,4 @@
-import { Dotation } from "models/commune/commune.interface";
+import { Dotation } from "models/entity/entity.interface";
 
 type DotationMap = Omit<Dotation, "annees" | "criteres" | "sousDotations">;
 
@@ -8,7 +8,7 @@ export const criteresMap: Record<string, string> = {
     chefLieuDepartementDansAgglomeration:
         "Appartenance à une agglomération avec le chef-lieu de département",
     effortFiscal: "Effort fiscal",
-    insulaire: "Commune insulaire",
+    insulaire: "Entity insulaire",
     longueurVoirie: "Longueur de voirie",
     nombreBeneficiairesAidesAuLogement:
         "Nombre de bénéficiaires des aides au logement",
@@ -35,7 +35,7 @@ export const criteresMap: Record<string, string> = {
     revenuTotal: "Revenu total",
     superficie: "Superficie",
     zoneDeMontagne: "Zone de montagne",
-    zrr: "Commune située en ZRR",
+    zrr: "Entity située en ZRR",
 };
 
 export const dotationsMap: Record<string, DotationMap> = {
@@ -124,6 +124,30 @@ export const dotationsMap: Record<string, DotationMap> = {
         description: "Lorem Ipsum DNP",
         label: "DPEL",
         title: "Dotation élu local (DPEL)",
+        info: "",
+        links: [],
+    },
+    dotationCompensation: {
+        key: "dotation_compensation",
+        description: "Lorem Ipsum DNP",
+        label: "DC",
+        title: "Dotation compensation (DC)",
+        info: "",
+        links: [],
+    },
+    dotationGroupementsTouristiques: {
+        key: "dotation_groupements_touristiques",
+        description: "Lorem Ipsum DNP",
+        label: "DGT",
+        title: "Dotation groupements touristiques (DGT)",
+        info: "",
+        links: [],
+    },
+    dotationIntercommunalite: {
+        key: "dotation_intercommunalite",
+        description: "Lorem Ipsum DNP",
+        label: "DI",
+        title: "Dotation intercommunalité (DI)",
         info: "",
         links: [],
     },

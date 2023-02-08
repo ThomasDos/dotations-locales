@@ -1,13 +1,19 @@
 import { Collapse } from "@mui/material";
 import { LabelText, Spinner } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
-import useFetchAutocompletion from "hooks/useFetchAutocompletion";
+import useFetchAutocompletionCommune from "hooks/useFetchAutocompletionCommune";
+import useFetchAutocompletionEPCI from "hooks/useFetchAutocompletionEPCI";
 import usePostCommuneComparer from "hooks/usePostCommuneComparer";
 import { useState } from "react";
 import styled from "styled-components";
 import Dots from "../Dots";
+import DropdownEPCISearch from "./DropdownEPCISearch";
 
-import DropdownSearch from "./DropdownSearch";
+import usePostEPCIComparer from "hooks/usePostEPCIComparer";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectIsCommune, selectIsEPCI } from "store/appSettings.slice";
+import DropdownCommuneSearch from "./DropdownCommuneSearch";
 
 const StyledSearchButton = styled.div`
     background-color: var(--blue-france-sun-113-625);
@@ -84,23 +90,41 @@ const SearchInput = ({
     placeholder,
     textIcon,
 }: SearchInputProps) => {
+    const router = useRouter();
+    const isFeatureComparer = router.pathname.includes("comparer");
+    const isCommune = useSelector(selectIsCommune);
+    const isEPCI = useSelector(selectIsEPCI);
+
     const [search, setSearch] = useState<string>("");
 
-    const { data: autocompletion, isLoading: searchResultIsLoading } =
-        useFetchAutocompletion(search);
+    const {
+        data: autocompletionCommune,
+        isLoading: searchResultCommuneIsLoading,
+    } = useFetchAutocompletionCommune(search);
 
-    // const { data: autocompletionEPCI, isLoading: searchResultEPCIIsLoading } =
-    //     useFetchAutocompletionEPCI(search);
+    const { data: autocompletionEPCI, isLoading: searchResultEPCIIsLoading } =
+        useFetchAutocompletionEPCI(search);
 
     const {
         isLoading: fetchCommuneIsLoading,
         mutateAsync: fetchCommuneMutate,
     } = usePostCommuneComparer();
 
+    const { isLoading: fetchEPCIIsLoading, mutateAsync: fetchEPCIMutate } =
+        usePostEPCIComparer();
+
+    const autocompletionEPCIFormatted = isFeatureComparer
+        ? autocompletionEPCI
+        : autocompletionEPCI?.slice(0, 5);
+
+    const autocompletionCommuneFormatted = isFeatureComparer
+        ? autocompletionCommune
+        : autocompletionCommune?.slice(0, 5);
+
     return (
         <StyledSearchInputContainer fullWidth={fullWidth}>
             <StyledSearchInput className="flex">
-                {fetchCommuneIsLoading ? (
+                {fetchCommuneIsLoading || fetchEPCIIsLoading ? (
                     <StyledDotsContainer>
                         <Dots dotsColor="--blue-france-113" />
                     </StyledDotsContainer>
@@ -119,7 +143,8 @@ const SearchInput = ({
                 <button type="button" role="button">
                     <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
                         <div className="flex items-center space-x-2">
-                            {searchResultIsLoading ? (
+                            {searchResultCommuneIsLoading ||
+                            searchResultEPCIIsLoading ? (
                                 <Spinner />
                             ) : (
                                 <ImageFixed
@@ -136,32 +161,65 @@ const SearchInput = ({
                     </StyledSearchButton>
                 </button>
             </StyledSearchInput>
-            {!fetchCommuneIsLoading && (
-                <Collapse in={!!autocompletion?.length && !!search}>
+            {!fetchCommuneIsLoading && !fetchEPCIIsLoading && (
+                <Collapse
+                    in={
+                        (!!autocompletionCommuneFormatted?.length ||
+                            !!autocompletionEPCIFormatted?.length) &&
+                        !!search
+                    }
+                >
                     <StyledCollapseContent
                         className="absolute z-10"
                         fullWidth={fullWidth}
                     >
-                        <div className="flex justify-between px-6 py-4">
-                            <div>
-                                <LabelText
-                                    text={`Communes (${
-                                        autocompletion?.length ?? "0"
-                                    })`}
-                                    backgroundColor="var(--blue-france-925)"
-                                    color="var(--blue-france-113)"
+                        {!isEPCI && (
+                            <>
+                                <div className="flex justify-between px-6 py-4">
+                                    <LabelText
+                                        text={`Communes (${
+                                            autocompletionCommuneFormatted?.length ??
+                                            "0"
+                                        })`}
+                                        backgroundColor="var(--blue-france-925)"
+                                        color="var(--blue-france-113)"
+                                    />
+                                    <StyledSpanCodePostal className="text-xs">
+                                        Code postal
+                                    </StyledSpanCodePostal>
+                                </div>
+                                <DropdownCommuneSearch
+                                    fetchCommuneMutate={fetchCommuneMutate}
+                                    autocompletionCommune={
+                                        autocompletionCommuneFormatted
+                                    }
+                                    resetSearch={() => setSearch("")}
+                                    isFeatureComparer={isFeatureComparer}
                                 />
-                            </div>
-                            <StyledSpanCodePostal className="text-xs">
-                                Code postal
-                            </StyledSpanCodePostal>
-                        </div>
-                        <DropdownSearch
-                            fetchCommuneMutate={fetchCommuneMutate}
-                            autocompletion={autocompletion}
-                            search={search}
-                            resetSearch={() => setSearch("")}
-                        />
+                            </>
+                        )}
+                        {!isCommune && (
+                            <>
+                                <div className="flex justify-between px-6 py-4">
+                                    <LabelText
+                                        text={`Intercommunalités (${
+                                            autocompletionEPCIFormatted?.length ??
+                                            "0"
+                                        })`}
+                                        backgroundColor="var(--blue-france-925)"
+                                        color="var(--blue-france-113)"
+                                    />
+                                </div>
+                                <DropdownEPCISearch
+                                    autocompletionEPCI={
+                                        autocompletionEPCIFormatted
+                                    }
+                                    isFeatureComparer={isFeatureComparer}
+                                    resetSearch={() => setSearch("")}
+                                    fetchEPCIMutate={fetchEPCIMutate}
+                                />
+                            </>
+                        )}
                     </StyledCollapseContent>
                 </Collapse>
             )}

@@ -1,14 +1,14 @@
 import axios from "axios";
 import type {
-    Autocompletion,
-    AutocompletionDto,
-} from "src/models/autocompletion/autocompletion.interface";
-import { fetchAutocompletionSerializer } from "src/models/autocompletion/autocompletion.serializer";
+    AutocompletionCommune,
+    AutocompletionCommuneDto,
+} from "models/autocompletion/commune/autocompletion.commune.interface";
+import { fetchAutocompletionSerializer } from "models/autocompletion/commune/autocompletion.commune.serializer";
 
 export default async (
     search: string,
     signal: AbortSignal | undefined
-): Promise<Autocompletion[]> =>
+): Promise<AutocompletionCommune[]> =>
     axios
         .get(
             `${process.env.NEXT_PUBLIC_TERRITOIRES_API_URL}/communes/autocomplete?field=commune&field=distributions_postales&q=${search}`,
@@ -18,8 +18,6 @@ export default async (
             ({
                 data: { suggestions },
             }: {
-                data: { suggestions: AutocompletionDto[] };
-            }) => {
-                return fetchAutocompletionSerializer(suggestions);
-            }
+                data: { suggestions: AutocompletionCommuneDto[] };
+            }) => fetchAutocompletionSerializer(suggestions)
         );

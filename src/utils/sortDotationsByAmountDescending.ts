@@ -1,4 +1,4 @@
-import type { Dotations } from "models/commune/commune.interface";
+import { Dotations } from "models/entity/entity.interface";
 
 export default (dotations: Dotations, currentYear: string): Dotations => {
     return Object.fromEntries(

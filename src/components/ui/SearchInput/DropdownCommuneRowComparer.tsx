@@ -1,29 +1,28 @@
-import { UsePostCommuneComparerProps } from "hooks/usePostCommuneComparer";
+import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { matomoTrackEvent } from "services/matomo";
-import { DropdownRowProps } from "./DropdownSearch";
+import { DropdownCommuneRowProps } from "./DropdownCommuneSearch";
 import StyledDropdownRow from "./StyledDropdownRow";
 
-interface DropdownRowComparerProps extends DropdownRowProps {
+interface DropdownCommuneRowComparerProps extends DropdownCommuneRowProps {
     resetSearch(): void;
-    fetchCommuneMutate(props: UsePostCommuneComparerProps): void;
+    fetchCommuneMutate(props: UsePostEntityComparerProps): void;
 }
 
-const DropdownRowComparer = ({
-    search,
+const DropdownCommuneRowComparer = ({
     resetSearch,
-    commune,
-    codeInseeFormatted,
+    libelle,
+    codeFormatted,
     codePostal,
     fetchCommuneMutate,
-}: DropdownRowComparerProps) => {
+}: DropdownCommuneRowComparerProps) => {
     return (
         <div
             onClick={async () => {
-                matomoTrackEvent(["Comparer", commune]);
+                matomoTrackEvent(["Comparer", libelle]);
                 try {
                     await fetchCommuneMutate({
-                        codeInsee: codeInseeFormatted,
-                        commune,
+                        code: codeFormatted,
+                        libelle,
                     });
                     resetSearch();
                 } catch (error) {
@@ -33,7 +32,7 @@ const DropdownRowComparer = ({
         >
             <StyledDropdownRow className="flex justify-between px-6 py-4">
                 <span>
-                    {commune} ({codeInseeFormatted})
+                    {libelle} ({codeFormatted})
                 </span>
                 <span>{codePostal}</span>
             </StyledDropdownRow>
@@ -41,4 +40,4 @@ const DropdownRowComparer = ({
     );
 };
 
-export default DropdownRowComparer;
+export default DropdownCommuneRowComparer;

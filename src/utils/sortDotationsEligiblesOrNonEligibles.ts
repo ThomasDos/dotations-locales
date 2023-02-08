@@ -1,5 +1,4 @@
-import type { Dotations } from "models/commune/commune.interface";
-
+import { Dotations } from "models/entity/entity.interface";
 import sortDotationsByAmountDescending from "./sortDotationsByAmountDescending";
 
 export default (

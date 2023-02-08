@@ -1,18 +1,18 @@
 //COMMUNE
-export interface CommuneDto {
-    code_insee: string;
+export interface EntityDto {
+    code: string;
     dotations: DotationsDto;
     criteres_generaux: CriteresDto;
 }
 
-export interface Commune {
-    codeInsee: string;
+export interface Entity {
+    code: string;
     dotations: Dotations;
     criteresGeneraux: Criteres;
-    annees: CommuneAnnee;
+    annees: EntityAnnee;
 }
 
-export type CommuneAnnee = string[];
+export type EntityAnnee = string[];
 //DOTATIONS
 
 export type DotationsDto = Record<

@@ -7,9 +7,9 @@ import router from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Alerter() {
-    const { commune, codeInsee } = router.query as {
-        commune: string;
-        codeInsee: string;
+    const { libelle, code } = router.query as {
+        libelle: string;
+        code: string;
     };
 
     const [userEmail, setUserEmail] = useState("");
@@ -19,10 +19,10 @@ export default function Alerter() {
         isLoading: postEmailIsLoading,
         isError: postEmailIsError,
         reset: postEmailReset,
-    } = usePostEmail(userEmail, codeInsee, commune);
+    } = usePostEmail(userEmail, code, libelle);
 
     useEffect(() => {
-        if (!commune || !codeInsee) {
+        if (!libelle || !code) {
             router.push("/");
         }
     }, []);
@@ -30,9 +30,9 @@ export default function Alerter() {
     return (
         <>
             <Head>
-                <title>Être alerté sur les changements de votre dotation</title>
+                <title>Être alerté sur les changements de vos dotations</title>
             </Head>
-            <SubHeader commune={commune} codeInsee={codeInsee} />
+            <SubHeader libelle={libelle} code={code} />
             <div className="py-10 sm:py-20 mx-auto w-5/6 sm:w-4/6 lg:w-1/2">
                 {postEmailSuccess ? (
                     <EmailSuccess
@@ -46,8 +46,8 @@ export default function Alerter() {
                         setUserEmail={setUserEmail}
                         postEmailIsLoading={postEmailIsLoading}
                         postEmailIsError={postEmailIsError}
-                        commune={commune}
-                        codeInsee={codeInsee}
+                        libelle={libelle}
+                        code={code}
                     />
                 )}
             </div>

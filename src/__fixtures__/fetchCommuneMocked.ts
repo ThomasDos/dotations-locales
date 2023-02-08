@@ -1,7 +1,7 @@
-import type { CommuneDto } from "src/models/commune/commune.interface";
+import { EntityDto } from "models/entity/entity.interface";
 
-export const fetchCommuneMocked: CommuneDto = {
-    code_insee: "42113",
+export const fetchCommuneMocked: EntityDto = {
+    code: "42113",
     criteres_generaux: {
         longueur_voirie: {
             annees: [

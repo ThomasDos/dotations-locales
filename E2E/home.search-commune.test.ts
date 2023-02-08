@@ -13,5 +13,5 @@ test("should get search input, type and click on result, then navigate to the co
         .click({ force: true });
     await page.waitForNavigation();
 
-    expect(page.url()).toBe("http://localhost:3000/93048?commune=Montreuil");
+    expect(page.url()).toBe("http://localhost:3000/93048?libelle=Montreuil");
 });

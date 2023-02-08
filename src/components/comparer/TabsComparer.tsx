@@ -1,11 +1,11 @@
 import { Tab, Tabs } from "components/ui";
-import { Dotation } from "models/commune/commune.interface";
+import { Dotation } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import {
     selectInitialAnnees,
     selectInitialDotations,
-} from "store/initialCommune.slice";
-import { selectCurrentYear } from "store/simulationCommune.slice";
+} from "store/initialEntity.slice";
+import { selectCurrentYear } from "store/simulationEntity.slice";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
 import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescending";

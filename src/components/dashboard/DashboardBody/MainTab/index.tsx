@@ -1,13 +1,13 @@
 import { Accordion, AccordionItem } from "@dataesr/react-dsfr";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
-import { dotationsMap } from "constants/communeMap";
-import type { Dotation, Dotations } from "models/commune/commune.interface";
+import { dotationsMap } from "constants/dotationsMap";
+import type { Dotation, Dotations } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import {
     selectAllYears,
     selectCurrentYear,
     selectLastYear,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import formatDotationsToExportCsv from "utils/formatDotationsToExportCsv";
 import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";

@@ -1,11 +1,11 @@
 import { Badge } from "@dataesr/react-dsfr";
 import { LabelGreyCustomCrossIcon, LabelPercentage } from "components/ui";
-import type { Critere } from "models/commune/commune.interface";
+import { Critere } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import {
     selectCurrentYear,
     selectLastYear,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";

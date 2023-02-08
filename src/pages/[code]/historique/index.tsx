@@ -2,7 +2,7 @@ import { SubHeader } from "components/dashboard";
 import HistoriqueTab from "components/historique";
 import { BaseCalculLoi, Tab, Tabs } from "components/ui";
 import _ from "lodash";
-import type { Dotation } from "models/commune/commune.interface";
+import { Dotation } from "models/entity/entity.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -11,8 +11,8 @@ import { useSelector } from "react-redux";
 import {
     selectInitialAnnees,
     selectInitialDotations,
-} from "store/initialCommune.slice";
-import { selectCurrentYear } from "store/simulationCommune.slice";
+} from "store/initialEntity.slice";
+import { selectCurrentYear } from "store/simulationEntity.slice";
 import styled from "styled-components";
 import getTabIndexDotationsNonEligibles from "utils/getTabIndexDotationsNonEligibles";
 import getTotalDotations from "utils/getTotalDotations";
@@ -28,9 +28,9 @@ const StyledDashboardBody = styled.div`
 
 const HistoriquePage = () => {
     const router = useRouter();
-    const { commune, codeInsee } = router.query as {
-        commune: string;
-        codeInsee: string;
+    const { libelle, code } = router.query as {
+        libelle: string;
+        code: string;
     };
 
     const dotations = useSelector(selectInitialDotations);
@@ -39,9 +39,9 @@ const HistoriquePage = () => {
 
     useEffect(() => {
         if (_.isEmpty(dotations)) {
-            void router.push(`/${codeInsee}?commune=${commune}`);
+            void router.push(`/${code}?libelle=${libelle}`);
         }
-    }, [dotations, codeInsee, commune, router]);
+    }, [dotations, code, libelle, router]);
 
     const dotationsByAmountDescending = sortDotationsByAmountDescending(
         dotations,
@@ -78,7 +78,7 @@ const HistoriquePage = () => {
             <Head>
                 <title>L&apos;historique de votre dotation</title>
             </Head>
-            <SubHeader commune={commune} codeInsee={codeInsee} />
+            <SubHeader libelle={libelle} code={code} />
             <span className="sm:hidden px-4 py-3 mb-6 flex items-center">
                 Historique sur {anneesLength} an
                 {anneesLength > 1 && "s"}

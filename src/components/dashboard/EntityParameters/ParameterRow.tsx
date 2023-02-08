@@ -1,12 +1,12 @@
 import { LabelText } from "components/ui";
-import type { Critere } from "models/commune/commune.interface";
+import type { Critere } from "models/entity/entity.interface";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectInitialCurrentYear } from "store/initialCommune.slice";
+import { selectInitialCurrentYear } from "store/initialEntity.slice";
 import {
     selectCurrentYear,
     selectLastYear,
-} from "store/simulationCommune.slice";
+} from "store/simulationEntity.slice";
 
 import ModalParameterSimulation from "./ModalParameterSimulation";
 import Value from "./Value";

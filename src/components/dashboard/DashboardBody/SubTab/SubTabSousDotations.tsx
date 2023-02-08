@@ -6,11 +6,12 @@ import type {
     Dotation,
     Dotations,
     SousDotations,
-} from "models/commune/commune.interface";
+} from "models/entity/entity.interface";
+
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
-import { selectCurrentYear } from "store/simulationCommune.slice";
+import { selectCurrentYear } from "store/simulationEntity.slice";
 import styled from "styled-components";
 import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";

@@ -1,4 +1,4 @@
-import type { Dotations } from "models/commune/commune.interface";
+import type { Dotations } from "models/entity/entity.interface";
 
 export default (dotations: Dotations, currentYear: string): number[] => {
     return Object.keys(dotations).reduce(

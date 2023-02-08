@@ -5,12 +5,12 @@ import postEmail from "services/postEmail";
 
 export default (
     email: string,
-    codeInsee: string,
-    commune: string
+    code: string,
+    entity: string
 ): UseMutationResult<any, AxiosError, string, Error> =>
     useMutation(
         ["postEmail", email],
-        async (userEmail: string) => postEmail(userEmail, codeInsee, commune),
+        async (userEmail: string) => postEmail(userEmail, code, entity),
         {
             onSuccess: () => {
                 toast.success("Merci pour votre souscription");

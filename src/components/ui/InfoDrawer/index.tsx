@@ -1,10 +1,10 @@
 import { SwipeableDrawer } from "@mui/material";
 import ImageFixed from "components/ui/ImageFixed";
 import useResize from "hooks/useResize";
-import { Dotation, Dotations } from "models/commune/commune.interface";
+import { Dotation, Dotations } from "models/entity/entity.interface";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectInitialDotations } from "store/initialCommune.slice";
+import { selectInitialDotations } from "store/initialEntity.slice";
 import styled from "styled-components";
 import DrawerLinks from "./DrawerLinks";
 

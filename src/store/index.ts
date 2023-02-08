@@ -3,15 +3,15 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import appSettingsReducer from "./appSettings.slice";
-import communesComparerReducer from "./communesComparer.slice";
-import initialCommuneReducer from "./initialCommune.slice";
-import simulationCommuneReducer from "./simulationCommune.slice";
+import entitiesComparerReducer from "./entitiesComparer.slice";
+import initialEntityReducer from "./initialEntity.slice";
+import simulationEntityReducer from "./simulationEntity.slice";
 
 const reducers = combineReducers({
     appSettings: appSettingsReducer,
-    initialCommune: initialCommuneReducer,
-    simulationCommune: simulationCommuneReducer,
-    communesComparer: communesComparerReducer,
+    initialEntity: initialEntityReducer,
+    simulationEntity: simulationEntityReducer,
+    entitiesComparer: entitiesComparerReducer,
 });
 
 const persistConfig = {

@@ -1,25 +1,25 @@
+import type { Entity } from "models/entity/entity.interface";
 import { postSimulationDeserializer } from "models/simulation/simulation.deserializer";
 import {
-    CommuneSimulation,
-    CommuneSimulationDto,
+    EntitySimulation,
+    EntitySimulationDto,
 } from "models/simulation/simulation.interface";
-import { fetchCommuneSerializerSimulation } from "models/simulation/simulation.serializer";
-import type { Commune } from "src/models/commune/commune.interface";
+import { fetchEntitySerializerSimulation } from "models/simulation/simulation.serializer";
 
 import apiDotations from "./apiDotations";
 
 export default async (
-    simulationCommune: Commune,
+    simulationEntity: Entity,
     selectLoiSimulation: string
-): Promise<CommuneSimulation> => {
+): Promise<EntitySimulation> => {
     const simulationDeserialized = postSimulationDeserializer(
-        simulationCommune,
+        simulationEntity,
         selectLoiSimulation
     );
 
     return apiDotations
         .post("/simulation/", simulationDeserialized)
-        .then(({ data }: { data: CommuneSimulationDto }) => {
-            return fetchCommuneSerializerSimulation(data);
+        .then(({ data }: { data: EntitySimulationDto }) => {
+            return fetchEntitySerializerSimulation(data);
         });
 };

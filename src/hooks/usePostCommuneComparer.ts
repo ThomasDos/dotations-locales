@@ -1,22 +1,22 @@
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import postCommuneComparer from "services/postCommuneComparer";
-import { addCommune } from "store/communesComparer.slice";
+import { addEntity } from "store/entitiesComparer.slice";
 
-export interface UsePostCommuneComparerProps {
-    codeInsee: string;
-    commune: string;
+export interface UsePostEntityComparerProps {
+    code: string;
+    libelle: string;
 }
 const usePostCommuneComparer = () => {
     const dispatch = useDispatch();
 
     return useMutation(
         ["postCommuneComparer"],
-        async ({ codeInsee, commune }: UsePostCommuneComparerProps) =>
-            postCommuneComparer(codeInsee, commune),
+        async ({ code, libelle }: UsePostEntityComparerProps) =>
+            postCommuneComparer(code, libelle),
         {
             onSuccess: communeComparer => {
-                dispatch(addCommune(communeComparer));
+                dispatch(addEntity(communeComparer));
             },
         }
     );

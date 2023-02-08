@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectSimulationAvertissementPrecisionSimulation } from "store/simulationCommune.slice";
+import { selectSimulationAvertissementPrecisionSimulation } from "store/simulationEntity.slice";
 import styled from "styled-components";
 import WarningDefaultMessage from "./WarningDefaultMessage";
 import WarningPrecisionAlert from "./WarningPrecisionAlert";

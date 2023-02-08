@@ -1,9 +1,9 @@
+import { AutocompletionEPCI } from "models/autocompletion/epci/autocompletion.epci.interface";
 import { useQuery } from "react-query";
 import fetchAutocompletionEPCI from "services/fetchAutocompletionEPCI";
-import type { Autocompletion } from "src/models/autocompletion/autocompletion.interface";
 
 export default (search: string) =>
-    useQuery<Autocompletion[]>(
+    useQuery<AutocompletionEPCI[]>(
         ["searchAutocompletionEPCI", search],
         async ({ signal }) => fetchAutocompletionEPCI(search, signal),
         {

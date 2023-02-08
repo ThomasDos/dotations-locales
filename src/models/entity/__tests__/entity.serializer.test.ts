@@ -3,15 +3,15 @@ import { fetchCommuneMocked } from "__fixtures__/fetchCommuneMocked";
 import {
     criteresSerializer,
     dotationSerializer,
-    fetchCommuneSerializer,
+    fetchEntitySerializer,
     sousDotationsSerializer,
-} from "../commune.serializer";
+} from "../entity.serializer";
 
-describe("fetchCommuneSerializer", () => {
+describe("fetchEntitySerializer", () => {
     it("should return serialized commune", () => {
-        expect(fetchCommuneSerializer(fetchCommuneMocked)).toEqual({
+        expect(fetchEntitySerializer(fetchCommuneMocked)).toEqual({
             annees: ["2022", "2021"],
-            codeInsee: "42113",
+            code: "42113",
             criteresGeneraux: {
                 longueurVoirie: {
                     annees: [

@@ -16,8 +16,8 @@ interface EmailFormProps {
     userEmail: string;
     setUserEmail(email: string): void;
     postEmailIsLoading: boolean;
-    commune: string;
-    codeInsee: string;
+    libelle: string;
+    code: string;
     postEmailIsError: boolean;
 }
 
@@ -26,8 +26,8 @@ export default function EmailForm({
     userEmail,
     setUserEmail,
     postEmailIsLoading,
-    commune,
-    codeInsee,
+    libelle,
+    code,
     postEmailIsError,
 }: EmailFormProps) {
     const [isChecked, setIsChecked] = useState(false);
@@ -67,7 +67,7 @@ export default function EmailForm({
                 :
             </div>
             <AlertRowIcon
-                text={`Mise à jour de mes dotations (${commune} ${codeInsee})`}
+                text={`Mise à jour de mes dotations (${libelle} ${code})`}
             />
             <AlertRowIcon
                 text="Simulation mes dotations avec les Projets de Lois de
