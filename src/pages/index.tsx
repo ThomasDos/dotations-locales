@@ -1,3 +1,4 @@
+import HomeRowGuideDownload from "components/home/HomeRowGuideDownload";
 import HomeRowImageText from "components/home/HomeRowImageText";
 import LandingIntroduction from "components/home/LandingIntroduction";
 import { SearchInput } from "components/ui";
@@ -161,6 +162,7 @@ const Home: NextPage = () => {
                         publiques
                         <strong> Data.gouv.fr.</strong>
                     </HomeRowImageText>
+                    <HomeRowGuideDownload />
                 </div>
 
                 <MainBottom>
