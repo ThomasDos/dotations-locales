@@ -1,4 +1,4 @@
-import { Title } from "@dataesr/react-dsfr";
+import { Badge, Title } from "@dataesr/react-dsfr";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import styled from "styled-components";
@@ -12,6 +12,8 @@ interface HomeRowImageTextProps {
     titleContent: string;
     children: ReactNode;
     priority?: boolean;
+    badgeText?: string;
+    badgeType?: "success" | "error" | "warning" | "new" | "info";
 }
 
 const StyledImageContainer = styled.div<{ imageWidth: number }>`
@@ -32,6 +34,8 @@ const HomeRowImageText = ({
     titleContent,
     children,
     priority,
+    badgeText,
+    badgeType,
 }: HomeRowImageTextProps) => {
     return (
         <div
@@ -44,7 +48,8 @@ const HomeRowImageText = ({
                     reverse ? "md:ml-14" : "md:mr-14"
                 }`}
             >
-                <Title as="h1">{titleContent}</Title>
+                {badgeText && <Badge type={badgeType} text={badgeText} />}
+                <Title as={badgeText ? "h3" : "h1"}>{titleContent}</Title>
                 <div>{children}</div>
             </div>
             <StyledImageContainer imageWidth={imageWidth}>
