@@ -17,10 +17,8 @@ const StyledParameterCard = styled.div<{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 1px solid var(--blue-france-850);
-    border-right: 1px solid var(--blue-france-850);
-    border-bottom: 1px solid
-        var(--${props => (props.isLast ? "blue-france-850" : "grey-950")});
+    border: 1px solid var(--grey-950);
+    border-bottom: ${({ isLast }) => (isLast ? "" : "none")};
     background-color: ${({ backgroundColor }) =>
         backgroundColor ? "var(--blue-france-975)" : "none"};
     padding: 16px;

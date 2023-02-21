@@ -29,7 +29,7 @@ const StyledDashboardBody = styled.div<{
     }
     @media (min-width: 940px) {
         padding: 56px 80px 60px 120px;
-        width: 75%;
+        width: 76%;
     }
 `;
 
