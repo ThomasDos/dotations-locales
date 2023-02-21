@@ -22,6 +22,10 @@ export default (
     dotationsKeys.forEach((dotationKey: string) => {
         const dotation = dotations[dotationKey];
         const dotationAmout = dotation.annees[0][currentYear];
+
+        //La DPEL ne faisait pas partie de la DGF doit être considéré différemment
+        if (dotation.label === "DPEL") return;
+
         if (dotationAmout) {
             dotationsEligibles[dotationKey] = dotation;
         } else {

@@ -89,7 +89,7 @@ export const dotationsMap: Record<string, DotationMap> = {
         key: "dotationsGeneralesFonctionnement",
         description: "Evolution de votre montant total de dotations",
         label: "Résumé",
-        title: "Dotations Générales de Fonctionnement (DGF)",
+        title: "Dotation Globale de Fonctionnement (DGF)",
         links: [
             {
                 linkText: "Dotation forfaitaire (DF)",

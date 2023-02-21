@@ -34,9 +34,9 @@ const TabsContainerComparer = () => {
     const dotationDGF: Dotation = {
         annees: anneesDotationsTotal,
         criteres: {},
-        description: "Dotations (DGF) par habitants",
+        description: "Dotation (DGF) par habitants",
         label: "Résumé",
-        title: "Dotations Générales de Fonctionnement (DGF)",
+        title: "Dotation Globale de Fonctionnement (DGF)",
         key: "",
     };
 
@@ -47,7 +47,7 @@ const TabsContainerComparer = () => {
                 <Tab label="Résumé">
                     <TabComparer
                         dotation={dotationDGF}
-                        title="Dotations Générales de Fonctionnement (DGF)"
+                        title="Dotation Globale de Fonctionnement (DGF)"
                         subtitle={`Comparaison ${currentYear}`}
                         isDGF
                     />

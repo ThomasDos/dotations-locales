@@ -5,7 +5,10 @@ export default (dotations: Dotations, year: string): number => {
     let total = 0;
 
     dotationsKeys.forEach((dotationKey: string) => {
-        const { annees } = dotations[dotationKey];
+        const { annees, label } = dotations[dotationKey];
+
+        //La DPEL ne faisait pas partie de la DGF ne doit pas être calculé dans le total de la DGF
+        if (label === "DPEL") return;
 
         const currentYearIndex = annees.findIndex(
             annee => Object.keys(annee)[0] === year
