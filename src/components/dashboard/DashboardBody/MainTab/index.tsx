@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from "@dataesr/react-dsfr";
+import { Accordion, AccordionItem, Badge } from "@dataesr/react-dsfr";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import { dotationsMap } from "constants/dotationsMap";
 import type { Dotation, Dotations } from "models/entity/entity.interface";
@@ -114,6 +114,12 @@ const MainTab = ({ dotations }: MainTabProps) => {
                     </AccordionItem>
                 </Accordion>
             )}
+            <div>
+                <div className="mb-4">
+                    <Badge type="new" text="Autres dotations (hors dgf)" />
+                </div>
+                <DotationCard dotation={dotations.dotationEluLocal} borderTop />
+            </div>
         </div>
     );
 };

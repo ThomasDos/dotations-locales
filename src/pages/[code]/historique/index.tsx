@@ -62,7 +62,7 @@ const HistoriquePage = () => {
         criteres: {},
         description: "",
         label: "Résumé",
-        title: "Dotations Générales de Fonctionnement (DGF)",
+        title: "Dotation Globale de Fonctionnement (DGF)",
         key: "",
     };
 
