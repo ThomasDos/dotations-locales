@@ -20,13 +20,15 @@ import SousDotationsContainer from "./SousDotationsContainer";
 
 const StyledDotationCard = styled.div<{
     borderTop: boolean;
+    borderBottom: boolean;
     hasBackgroundColor: boolean;
 }>`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border: 1px solid var(--blue-france-850);
+    border: 1px solid #e6e6e6;
     border-top: ${({ borderTop }) => !borderTop && "none"};
+    border-bottom: ${({ borderBottom }) => !borderBottom && "none"};
     background-color: ${({ hasBackgroundColor }) =>
         hasBackgroundColor && "var(--blue-france-975)"};
 
@@ -63,6 +65,7 @@ const StyledSpanNonEligible = styled.span`
 interface DotationCardProps {
     dotation: Dotation;
     borderTop: boolean;
+    borderBottom?: boolean;
     hasBackgroundColor?: boolean;
     handleClick?: () => void;
 }
@@ -70,6 +73,7 @@ interface DotationCardProps {
 const DotationCard = ({
     dotation,
     borderTop,
+    borderBottom = true,
     handleClick,
     hasBackgroundColor = false,
 }: DotationCardProps) => {
@@ -92,6 +96,7 @@ const DotationCard = ({
         <>
             <StyledDotationCard
                 borderTop={borderTop}
+                borderBottom={borderBottom}
                 hasBackgroundColor={hasBackgroundColor}
             >
                 <div className="flex flex-col sm:flex-row items-center sm:justify-between">

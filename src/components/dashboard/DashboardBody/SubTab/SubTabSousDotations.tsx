@@ -18,6 +18,7 @@ import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNo
 
 import DotationCard from "../DotationCard";
 import ParameterCard from "./ParameterCard";
+import ParameterCardTitle from "./ParameterCardTitle";
 
 const StyledContainerNonEligible = styled.div`
     border-top: 1px solid var(--blue-france-850);
@@ -57,7 +58,7 @@ const SubTabSousDotations = ({
                     dataCSV={dotationTotalExport.current}
                 />
             </div>
-            <DotationCard dotation={dotation} borderTop />
+            <DotationCard dotation={dotation} borderTop borderBottom />
 
             {sousDotations.map((sousDotationRecord: Dotations) => {
                 const keyName = Object.keys(sousDotationRecord)[0] as
@@ -86,14 +87,21 @@ const SubTabSousDotations = ({
                     Object.keys(criteresNonEligibles).length;
 
                 const ifPluralS = countNonEligiblesCriteres > 1 ? "s" : "";
-                const titleAccordion = `${countNonEligiblesCriteres} autre${ifPluralS} critere${ifPluralS} non éligible${ifPluralS}`;
+                const titleAccordion = `${countNonEligiblesCriteres} autre${ifPluralS} critère${ifPluralS} non éligible${ifPluralS}`;
+
+                const criteresLength = Object.keys(criteresEligibles).length;
+
                 return (
                     <div className="pt-10" key={sousDotation.title}>
                         <>
                             <DotationCard
                                 dotation={sousDotation}
                                 borderTop
-                                hasBackgroundColor
+                                borderBottom={!criteresLength}
+                            />
+
+                            <ParameterCardTitle
+                                criteresLength={criteresLength}
                             />
 
                             {!_.isEmpty(criteresEligibles) &&
