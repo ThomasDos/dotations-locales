@@ -14,6 +14,7 @@ interface HomeRowImageTextProps {
     priority?: boolean;
     badgeText?: string;
     badgeType?: "success" | "error" | "warning" | "new" | "info";
+    badgeHasIcon?: boolean;
 }
 
 const StyledImageContainer = styled.div<{ imageWidth: number }>`
@@ -36,6 +37,7 @@ const HomeRowImageText = ({
     priority,
     badgeText,
     badgeType,
+    badgeHasIcon = false,
 }: HomeRowImageTextProps) => {
     return (
         <div
@@ -48,7 +50,15 @@ const HomeRowImageText = ({
                     reverse ? "md:ml-14" : "md:mr-14"
                 }`}
             >
-                {badgeText && <Badge type={badgeType} text={badgeText} />}
+                {badgeText && (
+                    <div className="mb-4">
+                        <Badge
+                            type={badgeType}
+                            text={badgeText}
+                            hasIcon={badgeHasIcon}
+                        />
+                    </div>
+                )}
                 <Title as={badgeText ? "h3" : "h1"}>{titleContent}</Title>
                 <div>{children}</div>
             </div>

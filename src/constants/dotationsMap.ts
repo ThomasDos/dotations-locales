@@ -8,7 +8,7 @@ export const criteresMap: Record<string, string> = {
     chefLieuDepartementDansAgglomeration:
         "Appartenance à une agglomération avec le chef-lieu de département",
     effortFiscal: "Effort fiscal",
-    insulaire: "Entity insulaire",
+    insulaire: "Commune insulaire",
     longueurVoirie: "Longueur de voirie",
     nombreBeneficiairesAidesAuLogement:
         "Nombre de bénéficiaires des aides au logement",
@@ -35,7 +35,7 @@ export const criteresMap: Record<string, string> = {
     revenuTotal: "Revenu total",
     superficie: "Superficie",
     zoneDeMontagne: "Zone de montagne",
-    zrr: "Entity située en ZRR",
+    zrr: "Commune située en ZRR",
 };
 
 export const dotationsMap: Record<string, DotationMap> = {

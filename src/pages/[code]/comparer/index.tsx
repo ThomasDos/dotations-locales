@@ -2,6 +2,8 @@ import EmptySelectionComparer from "components/comparer/EmptySelectionComparer";
 import SearchInputComparer from "components/comparer/SearchInputComparer";
 import TabsContainerComparer from "components/comparer/TabsComparer";
 import { SubHeader } from "components/dashboard";
+import { Spinner } from "components/ui";
+import useDataEntityInit from "hooks/useDataEntityInit";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -27,6 +29,8 @@ const Comparer = () => {
 
     const dispatch = useDispatch();
 
+    const { showSpinner } = useDataEntityInit(code);
+
     const currentEntity = useSelector(selectInitialEntity);
     const entities = useSelector(selectEntities);
 
@@ -41,6 +45,20 @@ const Comparer = () => {
             dispatch(addEntity({ ...currentEntity, libelle }));
         }
     }, [entities]);
+
+    if (showSpinner) {
+        return (
+            <>
+                <Head>
+                    <title>Comparer votre dotation</title>
+                </Head>
+                <SubHeader libelle={libelle} code={code} />
+                <div className="w-auto my-40 flex justify-center">
+                    <Spinner size="md" />
+                </div>
+            </>
+        );
+    }
 
     return (
         <>

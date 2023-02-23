@@ -7,19 +7,12 @@ import CriteresGenerauxSimulation from "components/simulation/CriteresGenerauxSi
 import SimulationBanner from "components/simulation/SimulationBanner";
 import { Spinner } from "components/ui";
 import AlertDefaultModal from "components/ui/AlertModal";
-import useDashboardInit from "hooks/useDashboardInit";
-import useFetchCommune from "hooks/useFetchCommune";
-import useFetchEPCI from "hooks/useFetchEPCI";
+import useDataEntityInit from "hooks/useDataEntityInit";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-    selectIsCommune,
-    selectIsEPCI,
-    selectIsSimulation,
-} from "store/appSettings.slice";
-import { toastError } from "utils/customToasts";
+import { selectIsCommune, selectIsSimulation } from "store/appSettings.slice";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -28,7 +21,6 @@ const Dashboard = () => {
         code: string;
     };
 
-    const isEPCI = useSelector(selectIsEPCI);
     const isCommune = useSelector(selectIsCommune);
     const isSimulation = useSelector(selectIsSimulation);
     const [isCriteresGenerauxSimulation, setIsCriteresGenerauxSimulation] =
@@ -38,28 +30,13 @@ const Dashboard = () => {
     const [showAlertModal, setShowAlertModal] = useState(false);
     const [hasConfirmedAlert, setHasConfirmedAlert] = useState(false);
 
-    const {
-        data: fetchCommuneData,
-        error: fetchCommuneError,
-        isLoading: fetchCommuneIsLoading,
-    } = useFetchCommune(code, !!code && isCommune);
-
-    const {
-        data: fetchEPCIData,
-        error: fetchEPCIError,
-        isLoading: fetchEPCIIsLoading,
-    } = useFetchEPCI(code, !!code && isEPCI);
-
-    useDashboardInit(fetchCommuneData || fetchEPCIData);
+    const { showSpinner } = useDataEntityInit(code);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [isSimulation]);
 
     useEffect(() => {
-        if (!isEPCI && !isCommune) {
-            router.push("/");
-        }
         const tallyHasOpen = window.sessionStorage.getItem("tallyHasOpen");
         if (tallyHasOpen) return;
         //@ts-ignore
@@ -75,16 +52,7 @@ const Dashboard = () => {
         window.sessionStorage.setItem("tallyHasOpen", "true");
     }, []);
 
-    if (fetchCommuneError && fetchEPCIError) {
-        toastError("Une erreur est survenue avec cette commune");
-        router.push("/");
-    }
-
-    if (
-        (!fetchCommuneData && !fetchEPCIData) ||
-        fetchCommuneIsLoading ||
-        fetchEPCIIsLoading
-    ) {
+    if (showSpinner) {
         return (
             <>
                 <Head>

@@ -10,7 +10,7 @@ const HomeRowGuideDownload = () => {
             imageHeight={200}
             imageWidth={200}
             imageAlt="guide pratique: la dotation globale de fonctionnement"
-            titleContent="Le guide pratique de la Dotations Globale de Fonctionnement (DGF)"
+            titleContent="Le guide pratique de la Dotation Globale de Fonctionnement (DGF)"
         >
             Découvrez le guide de la DGCL qui vous aidera à mieux comprendre la
             DGF, le financement principal de l&apos;État pour les collectivités
