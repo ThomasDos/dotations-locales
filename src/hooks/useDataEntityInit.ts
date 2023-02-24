@@ -10,6 +10,7 @@ import {
 import {
     hydrateInitialEntity,
     selectInitialCode,
+    selectInitialEntity,
 } from "store/initialEntity.slice";
 import { hydrateSimulationEntity } from "store/simulationEntity.slice";
 import { toastError } from "utils/customToasts";
@@ -18,6 +19,7 @@ import useFetchEPCI from "./useFetchEPCI";
 
 export default (code: string) => {
     const initialCode = useSelector(selectInitialCode);
+    const initialEntity = useSelector(selectInitialEntity);
     const hasSameCode = code === initialCode;
 
     const dispatch = useDispatch();
@@ -38,13 +40,20 @@ export default (code: string) => {
         isLoading: fetchEPCIIsLoading,
     } = useFetchEPCI(code, !!code && isEPCI && !hasSameCode);
 
-    const fetchEntityData = fetchCommuneData || fetchEPCIData;
+    const isFetching = fetchCommuneIsLoading || fetchEPCIIsLoading;
+    const fetchEntityData = fetchCommuneData || fetchEPCIData || initialEntity;
+    const showSpinner = !fetchEntityData || isFetching;
+
+    if (fetchCommuneError || fetchEPCIError) {
+        toastError("Une erreur est survenue avec cette commune");
+        router.push("/");
+    }
 
     useEffect(() => {
-        if (!fetchEntityData || hasSameCode) return;
+        if (!fetchEntityData || isFetching || !code) return;
         dispatch(hydrateInitialEntity(fetchEntityData));
-        dispatch(hydrateSimulationEntity(fetchEntityData));
-    }, [fetchEntityData]);
+        !hasSameCode && dispatch(hydrateSimulationEntity(fetchEntityData));
+    }, [fetchEntityData, hasSameCode, isFetching]);
 
     useEffect(() => {
         if (code && !hasSameCode) {
@@ -56,23 +65,7 @@ export default (code: string) => {
         }
     }, [code]);
 
-    if (fetchCommuneError && fetchEPCIError) {
-        toastError("Une erreur est survenue avec cette commune");
-        router.push("/");
-    }
-
-    const showSpinner =
-        (!fetchCommuneData && !fetchEPCIData) ||
-        fetchCommuneIsLoading ||
-        fetchEPCIIsLoading;
-
     return {
-        fetchCommuneData,
-        fetchCommuneError,
-        fetchCommuneIsLoading,
-        fetchEPCIData,
-        fetchEPCIError,
-        fetchEPCIIsLoading,
         showSpinner,
     };
 };
