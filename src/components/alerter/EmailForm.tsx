@@ -31,6 +31,7 @@ export default function EmailForm({
     postEmailIsError,
 }: EmailFormProps) {
     const [isChecked, setIsChecked] = useState(false);
+    const [tryToSubmit, setTryToSubmit] = useState(false);
     return (
         <>
             <StyledTitle>S’abonner aux alertes</StyledTitle>
@@ -41,7 +42,14 @@ export default function EmailForm({
                 postEmailIsLoading={postEmailIsLoading}
                 postEmailIsError={postEmailIsError}
                 isChecked={isChecked}
+                setTryToSubmit={setTryToSubmit}
             />
+            {!isChecked && tryToSubmit && (
+                <div className="text-sm text-error-425">
+                    Merci de cocher la case de votre consentement ci-dessous
+                </div>
+            )}
+
             <div className="flex my-6">
                 <div>
                     <Checkbox

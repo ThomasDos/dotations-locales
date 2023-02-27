@@ -58,7 +58,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                 </div>
                 <div className="hidden md:flex mt-8">
                     <LinkIcon
-                        icon="euro"
+                        icon="euro-dsfr"
                         text="Dotations"
                         handleClick={() => {
                             dispatch(updateIsSimulationFalse());
@@ -78,7 +78,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                         />
                     )}
                     <LinkIcon
-                        icon="historique"
+                        icon="historique-dsfr"
                         text="Historique"
                         handleClick={() =>
                             router.push(
@@ -89,7 +89,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
 
                     {isCommune && (
                         <LinkIcon
-                            icon="comparer"
+                            icon="comparer-dsfr"
                             text="Comparer"
                             handleClick={() =>
                                 router.push(
@@ -100,7 +100,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                     )}
 
                     <LinkIcon
-                        icon="alerter"
+                        icon="alerter-dsfr"
                         text="M'alerter"
                         handleClick={() =>
                             router.push(`/${code}/alerter?libelle=${libelle}`)
@@ -141,7 +141,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                     );
                                 }}
                             >
-                                <LinkIcon icon="euro" text="Dotations" />
+                                <LinkIcon icon="euro-dsfr" text="Dotations" />
                             </MenuItem>
                             {isCommune && (
                                 <MenuItem
@@ -167,7 +167,10 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                     )
                                 }
                             >
-                                <LinkIcon icon="historique" text="Historique" />
+                                <LinkIcon
+                                    icon="historique-dsfr"
+                                    text="Historique"
+                                />
                             </MenuItem>
 
                             {isCommune && (
@@ -179,7 +182,10 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                         )
                                     }
                                 >
-                                    <LinkIcon icon="comparer" text="Comparer" />
+                                    <LinkIcon
+                                        icon="comparer-dsfr"
+                                        text="Comparer"
+                                    />
                                 </MenuItem>
                             )}
 
@@ -191,7 +197,10 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                     )
                                 }
                             >
-                                <LinkIcon icon="alerter" text="M'alerter" />
+                                <LinkIcon
+                                    icon="alerter-dsfr"
+                                    text="M'alerter"
+                                />
                             </MenuItem>
                         </Select>
                     </FormControl>

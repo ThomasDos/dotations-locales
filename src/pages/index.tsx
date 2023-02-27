@@ -4,6 +4,7 @@ import LandingIntroduction from "components/home/LandingIntroduction";
 import { SearchInput } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import useHomeInit from "hooks/useHomeInit";
+import useResize from "hooks/useResize";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
@@ -59,6 +60,7 @@ const StyledBottomLogoContainer = styled.div`
 
 const Home: NextPage = () => {
     useHomeInit();
+    const { windowWidth } = useResize();
 
     return (
         <>
@@ -74,16 +76,14 @@ const Home: NextPage = () => {
                 </div>
                 <div className="my-6 text-center px-10 md:px-0">
                     <span className="text-lg md:font-bold">
-                        Accédez facilement aux données de la dotation générale
-                        de fonctionnement (DGF)
-                        <br /> pour construire et anticiper le budget de votre
-                        collectivité.
+                        Recherchez votre commune, intercommunalité ou
+                        département
                     </span>
                 </div>
                 <SearchInput
                     placeholder={`${
-                        window.innerWidth > 480 ? "Nom de la c" : "C"
-                    }ollectivité ou code insee`}
+                        windowWidth > 480 ? "Recherche par n" : "N"
+                    }om, code insee ou code postal`}
                     textIcon="Rechercher"
                 />
 
@@ -100,10 +100,9 @@ const Home: NextPage = () => {
                     >
                         Le Service
                         <strong> Dotations Locales</strong> a pour objectif de
-                        vous aider et d’améliorer votre connaissance sur les
-                        dotations de votre collectivité afin de vous permettre
-                        d’anticiper et de construire sereinement votre budget
-                        local.
+                        rendre accessible et de faciliter l’exploitation des
+                        montants des dotations globales de fonctionnement de
+                        votre collectivité.
                     </HomeRowImageText>
 
                     <HomeRowImageText
@@ -112,7 +111,7 @@ const Home: NextPage = () => {
                         imageHeight={444}
                         imageWidth={444}
                         imageAlt="second row image"
-                        titleContent="Les données utiles pour construire votre budget"
+                        titleContent="Les données utiles pour comprendre votre budget"
                     >
                         Accédez rapidement aux informations et aux montants dont
                         vous avez besoin pour établir votre budget. <br />{" "}
@@ -128,7 +127,7 @@ const Home: NextPage = () => {
                         imageHeight={320}
                         imageWidth={320}
                         imageAlt="third row image"
-                        titleContent="Simuler, comparer et analyser l’évolution de vos dotations locales"
+                        titleContent="Comparez et analysez l’évolution de vos dotations"
                     >
                         Un outil pratique pour suivre l’évolution des montants,
                         comparer et analyser les critères et les données qui ont
@@ -142,6 +141,9 @@ const Home: NextPage = () => {
                         imageWidth={256}
                         imageAlt="fourth row image"
                         titleContent="Sur la base du moteur de calcul OpenFisca"
+                        badgeText="en béta"
+                        badgeType="new"
+                        badgeHasIcon
                     >
                         <strong>Dotations Locales</strong> s’appuie sur{" "}
                         <strong>OpenFisca</strong>, un moteur de calcul libre,

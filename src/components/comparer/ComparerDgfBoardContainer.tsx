@@ -1,8 +1,6 @@
-import { Collapse } from "@mui/material";
-import { useState } from "react";
+import { Accordion, AccordionItem } from "@dataesr/react-dsfr";
 import ComparerDgfBoard from "./ComparerDgfBoard";
 import ComparerDgfBoardPerHabitant from "./ComparerDgfBoardPerHabitant";
-import TitleCollapseDetails from "./TitleCollapseDetails";
 
 interface ComparerDgfBoardContainerProps {
     boardPerHabitant?: boolean;
@@ -11,22 +9,16 @@ interface ComparerDgfBoardContainerProps {
 const ComparerDgfBoardContainer = ({
     boardPerHabitant,
 }: ComparerDgfBoardContainerProps) => {
-    const [showDetails, setShowDetails] = useState(false);
-
     return (
-        <>
-            <TitleCollapseDetails
-                setShowDetails={setShowDetails}
-                showDetails={showDetails}
-            />
-            <Collapse in={showDetails}>
+        <Accordion>
+            <AccordionItem title="Données par communes">
                 {boardPerHabitant ? (
                     <ComparerDgfBoardPerHabitant />
                 ) : (
                     <ComparerDgfBoard />
                 )}
-            </Collapse>
-        </>
+            </AccordionItem>
+        </Accordion>
     );
 };
 

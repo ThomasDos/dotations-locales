@@ -37,6 +37,7 @@ interface EmailInputProps {
     postEmailIsLoading: boolean;
     postEmailIsError: boolean;
     isChecked: boolean;
+    setTryToSubmit(tryToSubit: boolean): void;
 }
 
 export default function EmailInput({
@@ -46,6 +47,7 @@ export default function EmailInput({
     postEmailIsLoading,
     postEmailIsError,
     isChecked,
+    setTryToSubmit,
 }: EmailInputProps) {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -82,17 +84,19 @@ export default function EmailInput({
                         setUserEmail(e.target.value);
                     }}
                 />
-                <button type="submit" role="button" disabled={!canSubmit}>
-                    <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
-                        {postEmailIsLoading ? (
-                            <Dots />
-                        ) : (
-                            <StyledSpanButton className="text-sm md:text-xl font-normal">
-                                Valider
-                            </StyledSpanButton>
-                        )}
-                    </StyledSearchButton>
-                </button>
+                <div onClick={() => setTryToSubmit(true)}>
+                    <button type="submit" role="button" disabled={!canSubmit}>
+                        <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
+                            {postEmailIsLoading ? (
+                                <Dots />
+                            ) : (
+                                <StyledSpanButton className="text-sm md:text-xl font-normal">
+                                    Valider
+                                </StyledSpanButton>
+                            )}
+                        </StyledSearchButton>
+                    </button>
+                </div>
             </StyledSearchInput>
         </form>
     );

@@ -1,7 +1,6 @@
 import ImageFixed from "components/ui/ImageFixed";
 import type { Dotation } from "models/entity/entity.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
-import { useMemo } from "react";
 
 import BarsChart from "./BarsChart";
 import HistoriqueBoard from "./HistoriqueBoard";
@@ -11,10 +10,7 @@ interface HistoriqueTabProps {
 }
 
 export default function HistoriqueTab({ dotation }: HistoriqueTabProps) {
-    const historiqueData = useMemo(
-        () => historiqueSerializer(dotation),
-        [dotation]
-    );
+    const historiqueData = historiqueSerializer(dotation);
 
     const historiqueDataIsEligible = !!historiqueData.reduce(
         (acc, annee) => annee.value + acc,

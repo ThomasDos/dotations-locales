@@ -1,12 +1,11 @@
 import { SubHeader } from "components/dashboard";
 import HistoriqueTab from "components/historique";
-import { BaseCalculLoi, Tab, Tabs } from "components/ui";
-import _ from "lodash";
+import { BaseCalculLoi, Spinner, Tab, Tabs } from "components/ui";
+import useDataEntityInit from "hooks/useDataEntityInit";
 import { Dotation } from "models/entity/entity.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import {
     selectInitialAnnees,
@@ -37,11 +36,7 @@ const HistoriquePage = () => {
     const currentYear = useSelector(selectCurrentYear);
     const annees = useSelector(selectInitialAnnees);
 
-    useEffect(() => {
-        if (_.isEmpty(dotations)) {
-            void router.push(`/${code}?libelle=${libelle}`);
-        }
-    }, [dotations, code, libelle, router]);
+    const { showSpinner } = useDataEntityInit(code);
 
     const dotationsByAmountDescending = sortDotationsByAmountDescending(
         dotations,
@@ -66,13 +61,23 @@ const HistoriquePage = () => {
         key: "",
     };
 
-    const historiqueData = useMemo(
-        () => historiqueSerializer(dotationDGF),
-        [dotationDGF]
-    );
+    const historiqueData = historiqueSerializer(dotationDGF);
 
     const anneesLength = historiqueData.length;
 
+    if (showSpinner) {
+        return (
+            <>
+                <Head>
+                    <title>L&apos;historique de votre dotation</title>
+                </Head>
+                <SubHeader libelle={libelle} code={code} />
+                <div className="w-auto my-40 flex justify-center">
+                    <Spinner size="md" />
+                </div>
+            </>
+        );
+    }
     return (
         <>
             <Head>

@@ -10,11 +10,11 @@ const HomeRowGuideDownload = () => {
             imageHeight={200}
             imageWidth={200}
             imageAlt="guide pratique: la dotation globale de fonctionnement"
-            titleContent="Le guide pratique de la Dotations Globale de Fonctionnement (DGF)"
+            titleContent="Le guide pratique de la Dotation Globale de Fonctionnement (DGF)"
         >
             Découvrez le guide de la DGCL qui vous aidera à mieux comprendre la
-            DGF, le financement principal de l&apos;État pour les collectivités
-            locales, comme les communes et les EPCI.
+            DGF, la principale dotation de fonctionnement de l&apos;État pour
+            les collectivités locales.
             <a
                 href="https://www.collectivites-locales.gouv.fr/files/Finances%20locales/guide_dgfavril2022.pdf"
                 download

@@ -32,9 +32,9 @@ const StyledBodyBoardHeaderTitle = styled.div`
 `;
 const StyledBodyBoardHeaderCol = styled.div`
     display: flex;
-    flex: 3;
+    flex: 4;
     @media (min-width: 640px) {
-        flex: 2;
+        flex: 3;
     }
 `;
 const StyledBodyBoardCol = styled.div`
@@ -68,10 +68,10 @@ const StyledBodyBoardRowDescription = styled.div`
 
 const StyledBodyBoardRowValues = styled.div`
     display: flex;
-    flex: 3;
+    flex: 4;
     white-space: nowrap;
     @media (min-width: 640px) {
-        flex: 2;
+        flex: 3;
     }
 `;
 const StyledBodyBoardRowValue = styled.div<{ hasValue: boolean }>`
