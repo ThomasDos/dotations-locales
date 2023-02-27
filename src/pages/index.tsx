@@ -70,8 +70,8 @@ const Home: NextPage = () => {
             <div className="flex flex-col items-center px-2 md:px-0">
                 <div className="pt-5 md:pt-20 text-center">
                     <h1 className="p-0 m-0">
-                        Évaluez le montant des dotations locales <br />
-                        de votre collectivité territoriale
+                        Consultez et analysez les dotations locales de <br />
+                        votre collectivité territoriale
                     </h1>
                 </div>
                 <div className="my-6 text-center px-10 md:px-0">
