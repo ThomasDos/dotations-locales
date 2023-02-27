@@ -99,9 +99,9 @@ const Home: NextPage = () => {
                         titleContent="Améliorons la connaissance sur les dotations d'état"
                     >
                         Le Service
-                        <strong> Dotations Locales</strong> a pour objectif
-                        d’améliorer votre connaissance et de faciliter l’accès
-                        aux montants des dotations globales de fonctionnement de
+                        <strong> Dotations Locales</strong> a pour objectif de
+                        rendre accessible et de faciliter l’exploitation des
+                        montants des dotations globales de fonctionnement de
                         votre collectivité.
                     </HomeRowImageText>
 
