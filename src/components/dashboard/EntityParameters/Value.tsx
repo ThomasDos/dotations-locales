@@ -27,6 +27,7 @@ const Value = ({
             lastYearValeur as number
         );
     }
+    //TODO: fix ternaire HELL !!
 
     return valeurIsLabel ? (
         valeur === "Oui" ? (
@@ -34,6 +35,8 @@ const Value = ({
         ) : (
             <LabelGreyCustomCrossIcon text="Non" />
         )
+    ) : valeurIsNotNumber ? (
+        <b> {valeur}</b>
     ) : (
         <div className="flex items-center whitespace-nowrap sm:ml-1">
             <span className="font-bold text-end">

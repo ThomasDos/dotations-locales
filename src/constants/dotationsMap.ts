@@ -7,9 +7,12 @@ export const criteresMap: Record<string, string> = {
     chefLieuArrondissement: "Chef-lieu d'arrondissement au 31 décembre 2014",
     chefLieuDepartementDansAgglomeration:
         "Appartenance à une agglomération avec le chef-lieu de département",
+    coefficientIntegrationFiscale: "Coefficient d'intégration fiscale",
+    departement: "Numéro de département",
     effortFiscal: "Effort fiscal",
     insulaire: "Commune insulaire",
     longueurVoirie: "Longueur de voirie",
+    natureJuridique: "Nature juridique",
     nombreBeneficiairesAidesAuLogement:
         "Nombre de bénéficiaires des aides au logement",
 
@@ -30,12 +33,20 @@ export const criteresMap: Record<string, string> = {
     potentielFinancier: "Potentiel financier",
     potentielFinancierParHabitant: "Potentiel financier par habitant",
     potentielFiscal: "Potentiel fiscal",
+    potentielFiscalParHabitant: "Potentiel fiscal par habitant",
     recettesReellesFonctionnement: "Recettes réelles fonctionnement",
+    regimeFiscal: "Régime fiscal",
     residencesSecondaires: "Résidences secondaires",
+    revenuEpci: "Revenu EPCI",
     revenuTotal: "Revenu total",
+    realimentation: "Réalimentation",
     superficie: "Superficie",
     zoneDeMontagne: "Zone de montagne",
     zrr: "Commune située en ZRR",
+    dotationDeBase: "Dotation de base",
+    dotationDePerequation: "Dotation de péréquation",
+    garantie: "Garantie",
+    plafonnement: "Plafonnement",
 };
 
 export const dotationsMap: Record<string, DotationMap> = {
