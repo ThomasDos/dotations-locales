@@ -22,12 +22,14 @@ interface LabelProps {
     percentage: number;
     valeur?: string;
     hasBackgroundColor?: boolean;
+    textBold?: boolean;
 }
 
 const LabelPercentage = ({
     percentage,
     valeur,
     hasBackgroundColor = true,
+    textBold = true,
 }: LabelProps) => {
     const percentageFormatted = String(percentage).replace(".", ",");
     const percentageLabelData: {
@@ -76,7 +78,9 @@ const LabelPercentage = ({
             className="text-sm flex items-center"
         >
             <div>{percentageLabelData.icon}</div>
-            <span className="ml-1 font-bold whitespace-nowrap">
+            <span
+                className={`ml-1 whitespace-nowrap ${textBold && "font-bold"}`}
+            >
                 {textLabel}
             </span>
         </StyledLabel>

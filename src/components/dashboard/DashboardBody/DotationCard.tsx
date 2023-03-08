@@ -14,7 +14,9 @@ import {
 } from "store/simulationEntity.slice";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
+import { RrfFormatted } from "utils/formatRrfEvolution";
 import getPercentageEvolution from "utils/getPercentageEvolution";
+import RrfContainer from "./RrfContainer";
 
 import SousDotationsContainer from "./SousDotationsContainer";
 
@@ -68,6 +70,7 @@ interface DotationCardProps {
     borderBottom?: boolean;
     hasBackgroundColor?: boolean;
     handleClick?: () => void;
+    rrfFormatted?: RrfFormatted | null;
 }
 
 const DotationCard = ({
@@ -76,6 +79,7 @@ const DotationCard = ({
     borderBottom = true,
     handleClick,
     hasBackgroundColor = false,
+    rrfFormatted,
 }: DotationCardProps) => {
     const [showInfoDrawer, setShowInfoDrawer] = useState(false);
     const currentYear = useSelector(selectCurrentYear);
@@ -164,6 +168,7 @@ const DotationCard = ({
                     <SousDotationsContainer sousDotations={sousDotations} />
                 )}
             </StyledDotationCard>
+            {!!rrfFormatted && <RrfContainer rrfFormatted={rrfFormatted} />}
             <InfoDrawer
                 showInfoDrawer={showInfoDrawer}
                 setShowInfoDrawer={setShowInfoDrawer}

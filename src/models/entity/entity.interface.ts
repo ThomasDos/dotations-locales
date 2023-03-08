@@ -3,6 +3,7 @@ export interface EntityDto {
     code: string;
     dotations: DotationsDto;
     criteres_generaux: CriteresDto;
+    part_dotation_rrf?: DotationRrfDto;
 }
 
 export interface Entity {
@@ -10,19 +11,29 @@ export interface Entity {
     dotations: Dotations;
     criteresGeneraux: Criteres;
     annees: EntityAnnee;
+    partDotationRrf?: DotationRrfDto;
 }
 
 export type EntityAnnee = string[];
 //DOTATIONS
 
-export type DotationsDto = Record<
-    string,
-    {
-        annees: DotationAnnee[];
-        sous_dotations?: SousDotationsDto;
-        criteres: CriteresDto;
-    }
->;
+export type DotationsDto = Record<string, DotationDto>;
+
+export interface DotationDto {
+    annees: DotationAnnee[];
+    sous_dotations?: SousDotationsDto;
+    criteres: CriteresDto;
+}
+
+export interface DotationRrfDto {
+    annees: Record<string, DotationRrfAnnee>[];
+}
+
+export interface DotationRrfAnnee {
+    valeur: number;
+    unite: string;
+}
+
 export type Dotations = Record<string, Dotation>;
 
 export interface Dotation {

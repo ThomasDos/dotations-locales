@@ -3,12 +3,14 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import { dotationsMap } from "constants/dotationsMap";
 import type { Dotation, Dotations } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
+import { selectInitialPartDotationRrf } from "store/initialEntity.slice";
 import {
     selectAllYears,
     selectCurrentYear,
     selectLastYear,
 } from "store/simulationEntity.slice";
 import formatDotationsToExportCsv from "utils/formatDotationsToExportCsv";
+import formatRrfEvolution from "utils/formatRrfEvolution";
 import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";
 
@@ -23,6 +25,9 @@ const MainTab = ({ dotations }: MainTabProps) => {
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
     const years = useSelector(selectAllYears);
+    const partDotationRrf = useSelector(selectInitialPartDotationRrf);
+
+    const rrfFormatted = formatRrfEvolution(partDotationRrf);
 
     const currentYearTotal = getTotalDotations(dotations, currentYear);
     const lastYearTotal = getTotalDotations(dotations, lastYear);
@@ -66,7 +71,11 @@ const MainTab = ({ dotations }: MainTabProps) => {
                     dataCSV={dotationsCurrentYearFormattedToExportCSV}
                 />
             </div>
-            <DotationCard dotation={dotationDGF} borderTop />
+            <DotationCard
+                dotation={dotationDGF}
+                borderTop
+                rrfFormatted={rrfFormatted}
+            />
             {countDotationsEligiblesDotations ? (
                 <>
                     <TitleDotationsEligibles

@@ -50,6 +50,11 @@ export const selectInitialCode = createSelector(
     state => state.code
 );
 
+export const selectInitialPartDotationRrf = createSelector(
+    selectSelf,
+    state => state.partDotationRrf
+);
+
 export const selectCurrentYearTotal = createSelector(
     selectInitialDotations,
     selectInitialAnnees,
