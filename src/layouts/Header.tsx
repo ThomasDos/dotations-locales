@@ -2,7 +2,6 @@ import Link from "next/link";
 import { matomoTrackEvent } from "services/matomo";
 import styled from "styled-components";
 
-import FichiersDisponiblesSelect from "components/fichiersDisponiblesSelect";
 import {
     BurgerMenu,
     HorizontalSeparator,
@@ -58,9 +57,7 @@ const HeaderContainer = () => {
                         </span>
                     </div>
                 </div>
-                <div className="w-3/12">
-                    <FichiersDisponiblesSelect />
-                </div>
+
                 <div>
                     <div className="hidden sm:flex items-center ml-8 py-5">
                         <Link

@@ -61,7 +61,7 @@ const SubTab = ({ dotation }: SubTabProps) => {
                 />
             ) : (
                 <>
-                    <div className="pb-4 flex justify-end">
+                    <div className="pb-4">
                         <DropdownMenuDownload
                             headers={[
                                 { label: title, key: "title" },

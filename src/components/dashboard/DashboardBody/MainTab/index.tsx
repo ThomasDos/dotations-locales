@@ -57,7 +57,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
 
     return (
         <div className="pt-10">
-            <div className="pb-4 flex justify-end">
+            <div className="pb-4">
                 <DropdownMenuDownload
                     headers={[
                         { label: "Dotations", key: "title" },

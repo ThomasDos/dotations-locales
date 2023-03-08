@@ -2,11 +2,18 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ImageFixed from "components/ui/ImageFixed";
+import { FICHIERS_DISPONIBLES } from "constants/fichiersDisponiblesMap";
 import React, { useState } from "react";
 import { CSVLink } from "react-csv";
 import { Headers } from "react-csv/components/CommonPropTypes";
+import { useSelector } from "react-redux";
+import fetchAndDownloadFichiersData from "services/fetchAndDownloadFichiersData";
 import { matomoTrackEvent } from "services/matomo";
+import { selectIsCommune } from "store/appSettings.slice";
+import { selectInitialCurrentYear } from "store/initialEntity.slice";
+import { selectCurrentYear } from "store/simulationEntity.slice";
 import styled from "styled-components";
+import { toastPromise } from "utils/customToasts";
 
 const StyledCustomSpan = styled.span`
     color: var(--blue-france-sun-113-625);
@@ -14,22 +21,23 @@ const StyledCustomSpan = styled.span`
     font-weight: 300;
 `;
 
-const StyledMenuItem = styled(MenuItem)`
-    padding: 0 !important;
-`;
+interface MenuItemCustomProps {
+    handleClose: () => void;
+    text: string;
+    handleClick?: () => void;
+}
 
 const MenuItemCustom = ({
     handleClose,
     text,
-}: {
-    handleClose: () => void;
-    text: string;
-}) => {
+    handleClick,
+}: MenuItemCustomProps) => {
     return (
-        <StyledMenuItem
+        <MenuItem
             onClick={() => {
                 matomoTrackEvent(["Fonction", `Exporter ${text}`]);
                 handleClose();
+                handleClick?.();
             }}
         >
             <div className="flex text-sm my-2 w-44 justify-between items-center">
@@ -42,7 +50,7 @@ const MenuItemCustom = ({
                     className="ml-2"
                 />
             </div>
-        </StyledMenuItem>
+        </MenuItem>
     );
 };
 
@@ -65,6 +73,36 @@ const DropdownMenuDownload = ({
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const currentYear = useSelector(selectCurrentYear);
+    const initialCurrentYear = useSelector(selectInitialCurrentYear);
+
+    const isCommune = useSelector(selectIsCommune);
+
+    const textMenuItemEntity = `Télécharger ${
+        isCommune ? "ma commune" : "mon intercommune"
+    } ${currentYear} (csv)`;
+
+    const textMenuItemEntities = `Télécharger toutes les ${
+        isCommune ? "communes" : "intercommunes"
+    } ${initialCurrentYear} (csv)`;
+
+    const handleDownloadFichier = () => {
+        const fichier = isCommune
+            ? "Répartition des critères des communes en 2022"
+            : "Répartition des critères des EPCI en 2022";
+        toastPromise(
+            fetchAndDownloadFichiersData(
+                fichier as keyof typeof FICHIERS_DISPONIBLES
+            ),
+            {
+                loading:
+                    "Préparation du fichier, merci de patienter jusqu'au téléchargement...",
+                success: "Fichier téléchargé",
+                error: "Une erreur est survenue, merci de réessayer",
+            }
+        );
+    };
+
     if (!dataCSV?.length) return null;
 
     return (
@@ -84,7 +122,7 @@ const DropdownMenuDownload = ({
                     />
                 }
             >
-                <StyledCustomSpan>Exporter</StyledCustomSpan>
+                <StyledCustomSpan>Télécharger</StyledCustomSpan>
             </Button>
             <Menu
                 id="basic-menu"
@@ -94,20 +132,24 @@ const DropdownMenuDownload = ({
                 MenuListProps={{
                     "aria-labelledby": "basic-button",
                 }}
+                PaperProps={{ sx: { width: isCommune ? "360px" : "400px" } }}
             >
-                <div className="px-6 py-4">
-                    <CSVLink
-                        data={dataCSV}
-                        download={"Dotations_Locales"}
-                        hidden={!hasDataCSV}
-                        headers={headers}
-                    >
-                        <MenuItemCustom
-                            handleClose={handleClose}
-                            text="Fichier csv"
-                        />
-                    </CSVLink>
-                </div>
+                <CSVLink
+                    data={dataCSV}
+                    download={"Dotations_Locales"}
+                    hidden={!hasDataCSV}
+                    headers={headers}
+                >
+                    <MenuItemCustom
+                        handleClose={handleClose}
+                        text={textMenuItemEntity}
+                    />
+                </CSVLink>
+                <MenuItemCustom
+                    handleClose={handleClose}
+                    text={textMenuItemEntities}
+                    handleClick={handleDownloadFichier}
+                />
             </Menu>
         </div>
     );

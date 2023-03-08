@@ -5,9 +5,12 @@ const fetchAndDownloadFichiersData = (
     fichier: keyof typeof FICHIERS_DISPONIBLES
 ) =>
     axios
-        .get(`${process.env.NEXT_PUBLIC_DOTATIONS_API_URL}/files/${fichier}`, {
-            responseType: "blob",
-        })
+        .get(
+            `${process.env.NEXT_PUBLIC_DOTATIONS_API_URL}/files/${FICHIERS_DISPONIBLES[fichier]}`,
+            {
+                responseType: "blob",
+            }
+        )
         .then(response => {
             const href = URL.createObjectURL(response.data);
             const link = document.createElement("a");

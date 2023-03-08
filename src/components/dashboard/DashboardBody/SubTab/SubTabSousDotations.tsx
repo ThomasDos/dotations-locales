@@ -49,7 +49,7 @@ const SubTabSousDotations = ({
 
     return (
         <>
-            <div className="pb-4 flex justify-end">
+            <div className="pb-4">
                 <DropdownMenuDownload
                     headers={[
                         { label: "Dotations", key: "title" },
