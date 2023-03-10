@@ -115,7 +115,7 @@ const DotationCard = ({
 
                             <IconInformation
                                 //TODO: réactiver drawer quand texte présent
-                                setShowDrawer={() => setShowInfoDrawer}
+                                setShowDrawer={() => setShowInfoDrawer(true)}
                             />
                         </div>
                         <span>
