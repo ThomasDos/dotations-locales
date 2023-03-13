@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { updateIsEPCITrue } from "store/appSettings.slice";
+import StyledDropdownRow from "../StyledDropdownRow";
 import { DropdownEPCIRowProps } from "./DropdownEPCISearch";
-import StyledDropdownRow from "./StyledDropdownRow";
 
 const DropdownEPCIRowLink = ({ code, libelle }: DropdownEPCIRowProps) => {
     const dispatch = useDispatch();

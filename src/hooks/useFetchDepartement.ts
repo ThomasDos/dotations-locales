@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { Entity } from "models/entity/entity.interface";
-import { useQuery } from "react-query";
 import fetchDepartement from "services/fetchDepartement";
 
 export default (code: string, enabled: boolean) =>

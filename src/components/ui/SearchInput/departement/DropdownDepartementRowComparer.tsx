@@ -1,7 +1,7 @@
 import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { matomoTrackEvent } from "services/matomo";
+import StyledDropdownRow from "../StyledDropdownRow";
 import { DropdownDepartementRowProps } from "./DropdownDepartementSearch";
-import StyledDropdownRow from "./StyledDropdownRow";
 
 interface DropdownDepartementRowComparerProps
     extends DropdownDepartementRowProps {

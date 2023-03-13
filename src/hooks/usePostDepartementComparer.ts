@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import postDepartementComparer from "services/postDepartementComparer";
 import { addEntity } from "store/entitiesComparer.slice";

@@ -7,7 +7,6 @@ import usePostCommuneComparer from "hooks/usePostCommuneComparer";
 import { useState } from "react";
 import styled from "styled-components";
 import Dots from "../Dots";
-import DropdownEPCISearch from "./DropdownEPCISearch";
 
 import useFetchAutocompletionDepartement from "hooks/useFetchAutocompletionDepartement";
 import usePostDepartementComparer from "hooks/usePostDepartementComparer";
@@ -19,8 +18,9 @@ import {
     selectIsDepartement,
     selectIsEPCI,
 } from "store/appSettings.slice";
-import DropdownCommuneSearch from "./DropdownCommuneSearch";
-import DropdownDepartementSearch from "./DropdownDepartementSearch";
+import DropdownCommuneSearch from "./commune/DropdownCommuneSearch";
+import DropdownDepartementSearch from "./departement/DropdownDepartementSearch";
+import DropdownEPCISearch from "./epci/DropdownEPCISearch";
 
 const StyledSearchButton = styled.div`
     background-color: var(--blue-france-sun-113-625);
@@ -107,15 +107,17 @@ const SearchInput = ({
 
     const {
         data: autocompletionCommune,
-        isLoading: searchResultCommuneIsLoading,
+        isInitialLoading: searchResultCommuneIsLoading,
     } = useFetchAutocompletionCommune(search);
 
-    const { data: autocompletionEPCI, isLoading: searchResultEPCIIsLoading } =
-        useFetchAutocompletionEPCI(search);
+    const {
+        data: autocompletionEPCI,
+        isInitialLoading: searchResultEPCIIsLoading,
+    } = useFetchAutocompletionEPCI(search);
 
     const {
         data: autocompletionDepartement,
-        isLoading: searchResultDepartementIsLoading,
+        isInitialLoading: searchResultDepartementIsLoading,
     } = useFetchAutocompletionDepartement(search);
 
     const {

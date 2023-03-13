@@ -36,19 +36,19 @@ export default (code: string) => {
     const {
         data: fetchCommuneData,
         error: fetchCommuneError,
-        isLoading: fetchCommuneIsLoading,
+        isInitialLoading: fetchCommuneIsLoading,
     } = useFetchCommune(code, !!code && isCommune && !hasSameCode);
 
     const {
         data: fetchEPCIData,
         error: fetchEPCIError,
-        isLoading: fetchEPCIIsLoading,
+        isInitialLoading: fetchEPCIIsLoading,
     } = useFetchEPCI(code, !!code && isEPCI && !hasSameCode);
 
     const {
         data: fetchDepartementData,
         error: fetchDepartementError,
-        isLoading: fetchDepartementIsLoading,
+        isInitialLoading: fetchDepartementIsLoading,
     } = useFetchDepartement(code, !!code && isDepartement && !hasSameCode);
 
     const isFetching =

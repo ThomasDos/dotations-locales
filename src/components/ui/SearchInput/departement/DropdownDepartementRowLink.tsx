@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { updateIsDepartementTrue } from "store/appSettings.slice";
+import StyledDropdownRow from "../StyledDropdownRow";
 import { DropdownDepartementRowProps } from "./DropdownDepartementSearch";
-import StyledDropdownRow from "./StyledDropdownRow";
 
 const DropdownDepartementRowLink = ({
     code,
