@@ -2,9 +2,12 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    resetAppSettings,
     selectIsCommune,
+    selectIsDepartement,
     selectIsEPCI,
     updateIsCommuneTrue,
+    updateIsDepartementTrue,
     updateIsEPCITrue,
 } from "store/appSettings.slice";
 import {
@@ -15,6 +18,7 @@ import {
 import { hydrateSimulationEntity } from "store/simulationEntity.slice";
 import { toastError } from "utils/customToasts";
 import useFetchCommune from "./useFetchCommune";
+import useFetchDepartement from "./useFetchDepartement";
 import useFetchEPCI from "./useFetchEPCI";
 
 export default (code: string) => {
@@ -27,6 +31,7 @@ export default (code: string) => {
 
     const isEPCI = useSelector(selectIsEPCI);
     const isCommune = useSelector(selectIsCommune);
+    const isDepartement = useSelector(selectIsDepartement);
 
     const {
         data: fetchCommuneData,
@@ -40,11 +45,26 @@ export default (code: string) => {
         isLoading: fetchEPCIIsLoading,
     } = useFetchEPCI(code, !!code && isEPCI && !hasSameCode);
 
-    const isFetching = fetchCommuneIsLoading || fetchEPCIIsLoading;
-    const fetchEntityData = fetchCommuneData || fetchEPCIData || initialEntity;
-    const showSpinner = !fetchEntityData || isFetching;
+    const {
+        data: fetchDepartementData,
+        error: fetchDepartementError,
+        isLoading: fetchDepartementIsLoading,
+    } = useFetchDepartement(code, !!code && isDepartement && !hasSameCode);
 
-    if (fetchCommuneError || fetchEPCIError) {
+    const isFetching =
+        fetchCommuneIsLoading ||
+        fetchEPCIIsLoading ||
+        fetchDepartementIsLoading;
+    const fetchEntityData =
+        fetchCommuneData ||
+        fetchEPCIData ||
+        fetchDepartementData ||
+        initialEntity;
+    const showSpinner = !fetchEntityData || isFetching;
+    const fetchEntityError =
+        fetchCommuneError || fetchEPCIError || fetchDepartementError;
+
+    if (fetchEntityError) {
         toastError("Une erreur est survenue avec cette commune");
         router.push("/");
     }
@@ -57,11 +77,25 @@ export default (code: string) => {
 
     useEffect(() => {
         if (code && !hasSameCode) {
-            const hasEPCICodeLength = code.length > 5;
+            const codeLength = code.length;
 
-            hasEPCICodeLength
-                ? dispatch(updateIsEPCITrue())
-                : dispatch(updateIsCommuneTrue());
+            switch (true) {
+                case codeLength === 2:
+                    dispatch(updateIsDepartementTrue());
+                    break;
+
+                case codeLength === 5:
+                    dispatch(updateIsCommuneTrue());
+                    break;
+
+                case codeLength === 9:
+                    dispatch(updateIsEPCITrue());
+                    break;
+
+                default:
+                    dispatch(resetAppSettings());
+                    break;
+            }
         }
     }, [code]);
 

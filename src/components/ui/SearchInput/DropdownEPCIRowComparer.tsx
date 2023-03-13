@@ -29,7 +29,7 @@ const DropdownEPCIRowComparer = ({
                 }
             }}
         >
-            <StyledDropdownRow className="flex justify-between px-6 py-4">
+            <StyledDropdownRow>
                 <span>
                     {libelle} ({code})
                 </span>

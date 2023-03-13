@@ -103,6 +103,14 @@ export const dotationsMap: Record<string, DotationMap> = {
         links: [],
         title: "Dotation élu local (DPEL)",
     },
+    dotationFonctionnementMinimale: {
+        description: "Dotation fonctionnement minimale",
+        info: "",
+        key: "dotationFonctionnementMinimale",
+        label: "DFM",
+        links: [],
+        title: "Dotation Fonctionnement Minimale (DFM)",
+    },
     dotationForfaitaire: {
         description:
             "Votre dotation forfaitaire est stable par rapport à l’année 2021",
@@ -111,6 +119,32 @@ export const dotationsMap: Record<string, DotationMap> = {
         label: "DF",
         links: [],
         title: "Dotation Forfaitaire (DF)",
+    },
+    dotationGlobaleFonctionnement: {
+        description: "Evolution de votre montant total de dotations",
+        info: `La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.
+                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
+        key: "dotationGlobaleFonctionnement",
+        label: "Résumé",
+        links: [
+            {
+                dotationKey: "dotationForfaitaire",
+                linkText: "Dotation forfaitaire (DF)",
+            },
+            {
+                dotationKey: "dotationNationalePerequation",
+                linkText: "Dotation nationale de péréquation (DNP)",
+            },
+            {
+                dotationKey: "dotationSolidariteRurale",
+                linkText: "Dotation de solidarité rurale (DSR)",
+            },
+            {
+                dotationKey: "dsuMontant",
+                linkText: "Dotation de solidarité urbaine (DSU)",
+            },
+        ],
+        title: "Dotation Globale de Fonctionnement (DGF)",
     },
     dotationGroupementsTouristiques: {
         description: "Lorem Ipsum DNP",
@@ -136,31 +170,13 @@ export const dotationsMap: Record<string, DotationMap> = {
         links: [],
         title: "Dotation Nationale de Péréquation (DNP)",
     },
-    dotationsGeneralesFonctionnement: {
-        description: "Evolution de votre montant total de dotations",
-        info: `La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.
-                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
-        key: "dotationsGeneralesFonctionnement",
-        label: "Résumé",
-        links: [
-            {
-                dotationKey: "dotationForfaitaire",
-                linkText: "Dotation forfaitaire (DF)",
-            },
-            {
-                dotationKey: "dotationNationalePerequation",
-                linkText: "Dotation nationale de péréquation (DNP)",
-            },
-            {
-                dotationKey: "dotationSolidariteRurale",
-                linkText: "Dotation de solidarité rurale (DSR)",
-            },
-            {
-                dotationKey: "dsuMontant",
-                linkText: "Dotation de solidarité urbaine (DSU)",
-            },
-        ],
-        title: "Dotation Globale de Fonctionnement (DGF)",
+    dotationPerequationUrbaine: {
+        description: "Dotation perequation urbaine",
+        info: "",
+        key: "dotationPerequationUrbaine",
+        label: "DPU",
+        links: [],
+        title: "Dotation Perequation Urbaine (DPU)",
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
