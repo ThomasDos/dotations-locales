@@ -23,6 +23,7 @@ export const fetchEntitySerializer = (rawResult: EntityDto): Entity => ({
     code: rawResult.code,
     criteresGeneraux: criteresSerializer(rawResult.criteres_generaux),
     dotations: dotationSerializer(rawResult.dotations),
+    partDotationRrf: rawResult.part_dotation_rrf,
 });
 
 export const anneesSerializer = (dotations: DotationsDto): EntityAnnee => {

@@ -151,7 +151,9 @@ export default function CriteresGenerauxCard({
                                     onClick={() => {
                                         const valueNumber =
                                             Number(critereValue);
-                                        if (valueNumber === 0) return;
+
+                                        if (Math.floor(valueNumber) <= 0)
+                                            return;
 
                                         handleChangeInput(valueNumber - 1);
                                     }}
