@@ -20,7 +20,7 @@ const StyledRrfContainer = styled.div`
 
 const RrfContainer = ({ rrfFormatted }: RrfContainerProps) => {
     const { rrfLabelText, rrfPercentageEvolution } = rrfFormatted;
-    console.log("rrfLabelText", rrfLabelText);
+
     return (
         <StyledRrfContainer>
             <span className="text-sm text-grey-mayback">
