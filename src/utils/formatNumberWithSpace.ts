@@ -6,10 +6,11 @@
  */
 
 export default (numberToFormat: number): string => {
-    const formatted = String(Math.round(numberToFormat)).replace(
-        /(.)(?=(\d{3})+$)/g,
-        "$1 "
-    );
+    const numberRounded =
+        numberToFormat > 10
+            ? Math.round(numberToFormat)
+            : numberToFormat.toFixed(2);
+    const formatted = String(numberRounded).replace(/(.)(?=(\d{3})+$)/g, "$1 ");
 
     return formatted;
 };
