@@ -22,7 +22,7 @@ export const criteresMap: Record<string, string> = {
     dnpMontantPartPrincipale: "Montant part principale",
     dotationDeBase: "Dotation de base",
     dotationDePerequation: "Dotation de péréquation",
-    dpomSocle: "Montant de dotation de péréquation (DPOM)",
+    dpom: "Montant de dotation de péréquation (DPOM)",
     ecretementDotationForfaitaire: "Ecrêtement de la dotation forfaitaire",
     effortFiscal: "Effort fiscal",
     epci: "Nom de l'EPCI",
