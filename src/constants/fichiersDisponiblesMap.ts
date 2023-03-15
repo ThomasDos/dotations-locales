@@ -12,4 +12,8 @@ export const FICHIERS_DISPONIBLES = {
         "criteres_repartition_EPCI_2021.csv",
     "Répartition des critères des EPCI en 2022":
         "criteres_repartition_EPCI_2022.csv",
+    "Répartition des critères des départements en 2022":
+        "criteres_repartition_departement_2022.csv",
+    "Répartition des critères des départements en 2021":
+        "criteres_repartition_departement_2021.csv",
 };

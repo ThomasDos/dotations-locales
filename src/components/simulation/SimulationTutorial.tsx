@@ -1,6 +1,9 @@
 import ImageFixed from "components/ui/ImageFixed";
-import { useDispatch } from "react-redux";
-import { updateIsSimulationFalse } from "store/appSettings.slice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    selectEntityDenomination,
+    updateIsSimulationFalse,
+} from "store/appSettings.slice";
 import styled from "styled-components";
 
 const StyledSpanTitle = styled.span`
@@ -16,6 +19,8 @@ const StyledCancelSimulation = styled.span`
 
 function SimulationTutorial() {
     const dispatch = useDispatch();
+    const entityDenomination = useSelector(selectEntityDenomination);
+
     return (
         <div className="flex items-center justify-center flex-col">
             <ImageFixed
@@ -33,7 +38,7 @@ function SimulationTutorial() {
             </span>
 
             <span className="mt-8">
-                2. Modifiez les données de votre commune
+                2. Modifiez les données de votre {entityDenomination}
             </span>
 
             <div

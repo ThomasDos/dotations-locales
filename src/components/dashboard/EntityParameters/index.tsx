@@ -2,10 +2,10 @@ import { Button, LabelPercentage } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
 import type { Criteres } from "models/entity/entity.interface";
-import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
+    selectEntityDenomination,
     selectIsCommune,
     selectIsEPCI,
     selectIsSimulation,
@@ -78,16 +78,7 @@ const EntityParameters = ({
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
 
-    const entity = useMemo(() => {
-        switch (true) {
-            case isCommune:
-                return "commune";
-            case isEPCI:
-                return "intercommunalité";
-            default:
-                return "commune";
-        }
-    }, [isCommune, isEPCI]);
+    const entityDenomination = useSelector(selectEntityDenomination);
 
     if (_.isEmpty(initialEntity.criteresGeneraux)) return null;
 
@@ -127,7 +118,7 @@ const EntityParameters = ({
                     <span className="font-bold">
                         {isSimulation
                             ? "Données modifiables"
-                            : `Données connues de votre ${entity}`}
+                            : `Données connues de votre ${entityDenomination}`}
                     </span>
 
                     <ImageFixed

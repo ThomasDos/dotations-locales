@@ -9,7 +9,13 @@ import { Headers } from "react-csv/components/CommonPropTypes";
 import { useSelector } from "react-redux";
 import fetchAndDownloadFichiersData from "services/fetchAndDownloadFichiersData";
 import { matomoTrackEvent } from "services/matomo";
-import { selectIsCommune } from "store/appSettings.slice";
+import {
+    selectEntitiesDenomination,
+    selectEntityDenomination,
+    selectIsCommune,
+    selectIsDepartement,
+    selectIsEPCI,
+} from "store/appSettings.slice";
 import { selectInitialCurrentYear } from "store/initialEntity.slice";
 import { selectCurrentYear } from "store/simulationEntity.slice";
 import styled from "styled-components";
@@ -77,22 +83,36 @@ const DropdownMenuDownload = ({
     const initialCurrentYear = useSelector(selectInitialCurrentYear);
 
     const isCommune = useSelector(selectIsCommune);
+    const isDepartement = useSelector(selectIsDepartement);
+    const isEPCI = useSelector(selectIsEPCI);
+
+    const entityDenomination = useSelector(selectEntityDenomination);
+    const entitiesDenomination = useSelector(selectEntitiesDenomination);
 
     const textMenuItemEntity = `Télécharger ${
-        isCommune ? "ma commune" : "mon intercommune"
-    } ${currentYear} (csv)`;
+        isCommune ? "ma" : "mon"
+    } ${entityDenomination} ${currentYear} (csv)`;
 
-    const textMenuItemEntities = `Télécharger toutes les ${
-        isCommune ? "communes" : "intercommunes"
-    } ${initialCurrentYear} (csv)`;
+    const textMenuItemEntities = `Télécharger ${
+        isCommune ? "toutes les" : "tous les"
+    } ${entitiesDenomination} ${initialCurrentYear} (csv)`;
 
     const handleDownloadFichier = () => {
-        const fichier = isCommune
-            ? "Répartition des critères des communes en 2022"
-            : "Répartition des critères des EPCI en 2022";
+        const fichier = () => {
+            if (isCommune) {
+                return "Répartition des critères des communes en 2022";
+            }
+            if (isDepartement) {
+                return "Répartition des critères des départements en 2022";
+            }
+            if (isEPCI) {
+                return "Répartition des critères des EPCI en 2022";
+            }
+        };
+
         toastPromise(
             fetchAndDownloadFichiersData(
-                fichier as keyof typeof FICHIERS_DISPONIBLES
+                fichier() as keyof typeof FICHIERS_DISPONIBLES
             ),
             {
                 loading:
@@ -136,7 +156,7 @@ const DropdownMenuDownload = ({
             >
                 <CSVLink
                     data={dataCSV}
-                    download={"Dotations_Locales"}
+                    download={`Dotations_Locales_${entityDenomination}_${currentYear}`}
                     hidden={!hasDataCSV}
                     headers={headers}
                 >

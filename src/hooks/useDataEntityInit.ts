@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     resetAppSettings,
+    selectEntityDenomination,
     selectIsCommune,
     selectIsDepartement,
     selectIsEPCI,
@@ -32,6 +33,7 @@ export default (code: string) => {
     const isEPCI = useSelector(selectIsEPCI);
     const isCommune = useSelector(selectIsCommune);
     const isDepartement = useSelector(selectIsDepartement);
+    const entityDenomination = useSelector(selectEntityDenomination);
 
     const {
         data: fetchCommuneData,
@@ -65,7 +67,7 @@ export default (code: string) => {
         fetchCommuneError || fetchEPCIError || fetchDepartementError;
 
     if (fetchEntityError) {
-        toastError("Une erreur est survenue avec cette commune");
+        toastError(`Une erreur est survenue avec votre ${entityDenomination}`);
         router.push("/");
     }
 

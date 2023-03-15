@@ -88,4 +88,42 @@ export const selectIsDepartement = createSelector(
     state => state.isDepartement
 );
 
+export const selectEntityDenomination = createSelector(
+    selectSelf,
+    ({ isDepartement, isCommune, isEPCI }) => {
+        switch (true) {
+            case isCommune:
+                return "commune";
+
+            case isDepartement:
+                return "département";
+
+            case isEPCI:
+                return "EPCI";
+
+            default:
+                return "entité";
+        }
+    }
+);
+
+export const selectEntitiesDenomination = createSelector(
+    selectSelf,
+    ({ isDepartement, isCommune, isEPCI }) => {
+        switch (true) {
+            case isCommune:
+                return "communes";
+
+            case isDepartement:
+                return "départements";
+
+            case isEPCI:
+                return "EPCI";
+
+            default:
+                return "entités";
+        }
+    }
+);
+
 export default appSettingsSlice.reducer;
