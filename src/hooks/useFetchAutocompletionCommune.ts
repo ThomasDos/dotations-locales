@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import type { AutocompletionCommune } from "models/autocompletion/commune/autocompletion.commune.interface";
-import { useQuery } from "react-query";
 import fetchAutocompletionCommune from "services/fetchAutocompletionCommune";
 
 export default (search: string) =>

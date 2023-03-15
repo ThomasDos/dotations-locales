@@ -47,7 +47,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
             { [lastYear]: lastYearTotal },
         ],
         criteres: {},
-        ...dotationsMap.dotationsGeneralesFonctionnement,
+        ...dotationsMap.dotationGlobaleFonctionnement,
     };
 
     const headersYears = years.map((year: string) => ({

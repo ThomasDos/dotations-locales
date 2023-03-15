@@ -1,25 +1,26 @@
 import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { matomoTrackEvent } from "services/matomo";
-import { DropdownEPCIRowProps } from "./DropdownEPCISearch";
-import StyledDropdownRow from "./StyledDropdownRow";
+import StyledDropdownRow from "../StyledDropdownRow";
+import { DropdownDepartementRowProps } from "./DropdownDepartementSearch";
 
-interface DropdownEPCIRowComparerProps extends DropdownEPCIRowProps {
+interface DropdownDepartementRowComparerProps
+    extends DropdownDepartementRowProps {
     resetSearch(): void;
-    fetchEPCIMutate(props: UsePostEntityComparerProps): void;
+    fetchDepartementMutate(props: UsePostEntityComparerProps): void;
 }
 
-const DropdownEPCIRowComparer = ({
+const DropdownDepartementRowComparer = ({
     resetSearch,
     libelle,
     code,
-    fetchEPCIMutate,
-}: DropdownEPCIRowComparerProps) => {
+    fetchDepartementMutate,
+}: DropdownDepartementRowComparerProps) => {
     return (
         <div
             onClick={async () => {
                 matomoTrackEvent(["Comparer", libelle]);
                 try {
-                    await fetchEPCIMutate({
+                    await fetchDepartementMutate({
                         code,
                         libelle,
                     });
@@ -29,7 +30,7 @@ const DropdownEPCIRowComparer = ({
                 }
             }}
         >
-            <StyledDropdownRow className="flex justify-between px-6 py-4">
+            <StyledDropdownRow>
                 <span>
                     {libelle} ({code})
                 </span>
@@ -38,4 +39,4 @@ const DropdownEPCIRowComparer = ({
     );
 };
 
-export default DropdownEPCIRowComparer;
+export default DropdownDepartementRowComparer;

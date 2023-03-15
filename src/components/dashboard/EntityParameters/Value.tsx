@@ -19,7 +19,6 @@ const Value = ({
     const { valeur, unite } = currentYearCritereGeneralSimulation;
     const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
-    const valeurIsLabel = valeur === "Non" || valeur === "Oui";
     let percentageEvolution = 0;
     if (!valeurIsNotNumber && valeur != 0) {
         percentageEvolution = getPercentageEvolution(
@@ -27,17 +26,18 @@ const Value = ({
             lastYearValeur as number
         );
     }
-    //TODO: fix ternaire HELL !!
 
-    return valeurIsLabel ? (
-        valeur === "Oui" ? (
-            <Badge text="Oui" type="success" hasIcon />
-        ) : (
-            <LabelGreyCustomCrossIcon text="Non" />
-        )
-    ) : valeurIsNotNumber ? (
-        <b> {valeur}</b>
-    ) : (
+    if (valeurIsNotNumber) {
+        if (valeur === "Oui") {
+            return <Badge text="Oui" type="success" hasIcon />;
+        }
+        if (valeur === "Non") {
+            return <LabelGreyCustomCrossIcon text="Non" />;
+        }
+        return <b>{valeur}</b>;
+    }
+
+    return (
         <div className="flex items-center whitespace-nowrap sm:ml-1">
             <span className="font-bold text-end">
                 {Number(valeur) === 0 ? (

@@ -4,7 +4,7 @@ import apiDotations from "./apiDotations";
 
 export default async (code: string): Promise<Entity> =>
     apiDotations
-        .post("/commune/", {
+        .post("/departement/", {
             code,
         })
         .then(({ data }: { data: EntityDto }) => fetchEntitySerializer(data));

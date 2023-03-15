@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { AutocompletionEPCI } from "models/autocompletion/epci/autocompletion.epci.interface";
-import { useQuery } from "react-query";
 import fetchAutocompletionEPCI from "services/fetchAutocompletionEPCI";
 
 export default (search: string) =>

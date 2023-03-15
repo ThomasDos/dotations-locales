@@ -1,5 +1,5 @@
+import { useMutation } from "@tanstack/react-query";
 import { Entity } from "models/entity/entity.interface";
-import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import postSimulation from "services/postSimulation";
 import { hydrateSimulationEntity } from "store/simulationEntity.slice";

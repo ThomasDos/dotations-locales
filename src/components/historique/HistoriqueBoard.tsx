@@ -4,6 +4,8 @@ import {
     HistoriqueDotation,
     HistoriqueDotations,
 } from "models/historique/historique.interface";
+import { useSelector } from "react-redux";
+import { selectEntityDenomination } from "store/appSettings.slice";
 
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
@@ -100,6 +102,8 @@ export default function HistoriqueBoard({
     dotationLabel,
 }: HistoriqueBoardProps) {
     const { windowWidth } = useResize();
+    const entityDenomination = useSelector(selectEntityDenomination);
+
     return (
         <StyledHistoriqueBoard>
             <StyledBodyBoardHeader>
@@ -159,7 +163,7 @@ export default function HistoriqueBoard({
             </StyledBodyBoardRow>
             <StyledBodyBoardRow isLastRow>
                 <StyledBodyBoardRowDescription>
-                    Evolution de la commune %
+                    Evolution de votre {entityDenomination} %
                 </StyledBodyBoardRowDescription>
                 <StyledBodyBoardRowAnnees>
                     {historiqueData.map(

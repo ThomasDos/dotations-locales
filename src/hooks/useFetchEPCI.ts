@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { Entity } from "models/entity/entity.interface";
-import { useQuery } from "react-query";
 import fetchEPCI from "services/fetchEPCI";
 
 const useFetchEPCI = (code: string, enabled: boolean) =>

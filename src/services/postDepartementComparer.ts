@@ -6,7 +6,7 @@ import apiDotations from "./apiDotations";
 
 export default async (code: string, libelle: string): Promise<EntityComparer> =>
     apiDotations
-        .post("/commune/", {
+        .post("/departement/", {
             code,
         })
         .then(({ data }: { data: EntityDto }) => {
