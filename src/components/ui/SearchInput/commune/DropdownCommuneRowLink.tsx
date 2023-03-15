@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import { updateIsCommuneTrue } from "store/appSettings.slice";
+import StyledDropdownRow from "../StyledDropdownRow";
 import { DropdownCommuneRowProps } from "./DropdownCommuneSearch";
-import StyledDropdownRow from "./StyledDropdownRow";
 
 const DropdownCommuneRowLink = ({
     libelle,
@@ -19,7 +19,7 @@ const DropdownCommuneRowLink = ({
                     dispatch(updateIsCommuneTrue());
                 }}
             >
-                <StyledDropdownRow className="flex justify-between px-6 py-4">
+                <StyledDropdownRow>
                     <span>
                         {libelle} ({codeFormatted})
                     </span>

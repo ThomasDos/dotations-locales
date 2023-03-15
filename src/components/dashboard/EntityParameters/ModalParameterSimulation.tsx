@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectEntityDenomination } from "store/appSettings.slice";
 import {
     selectSimulationEntity,
     updateSimulationCritereValeur,
@@ -81,6 +82,8 @@ function ModalParameterSimulation({
     const { code } = useRouter().query;
     const { isLoading } = usePostSimulation(`${code}`);
     const simulationEntity = useSelector(selectSimulationEntity);
+    const entityDenomination = useSelector(selectEntityDenomination);
+
     const [fetchSimulation, setFetchsimulation] = useState(false);
 
     const { valeur } = currentYearCritereGeneralSimulation;
@@ -152,7 +155,9 @@ function ModalParameterSimulation({
                         height={16}
                         alt="Une fleche vers la droite pour fermer la modal et revenir à la simulation"
                     />
-                    <span className="ml-2">Données de votre commune</span>
+                    <span className="ml-2">
+                        Données de votre {entityDenomination}
+                    </span>
                 </StyledModalHeader>
                 <StyledModalBody>
                     <StyledModalEditor>

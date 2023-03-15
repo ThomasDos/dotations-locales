@@ -5,7 +5,7 @@ import apiDotations from "./apiDotations";
 
 export default async (code: string): Promise<Entity> =>
     apiDotations
-        .post(`/epci/`, {
+        .post("/epci/", {
             code,
         })
         .then(({ data }: { data: EntityDto }) => fetchEntitySerializer(data));

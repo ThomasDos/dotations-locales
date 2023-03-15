@@ -1,7 +1,7 @@
 import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { matomoTrackEvent } from "services/matomo";
+import StyledDropdownRow from "../StyledDropdownRow";
 import { DropdownCommuneRowProps } from "./DropdownCommuneSearch";
-import StyledDropdownRow from "./StyledDropdownRow";
 
 interface DropdownCommuneRowComparerProps extends DropdownCommuneRowProps {
     resetSearch(): void;
@@ -30,7 +30,7 @@ const DropdownCommuneRowComparer = ({
                 }
             }}
         >
-            <StyledDropdownRow className="flex justify-between px-6 py-4">
+            <StyledDropdownRow>
                 <span>
                     {libelle} ({codeFormatted})
                 </span>

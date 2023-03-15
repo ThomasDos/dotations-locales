@@ -6,7 +6,20 @@
  */
 
 export default (numberToFormat: number): string => {
-    const formatted = String(Math.round(numberToFormat)).replace(
+    const numberRounded = () => {
+        if (!numberToFormat) {
+            return numberToFormat;
+        }
+
+        const numberHasDecimal = numberToFormat % 1 !== 0;
+        const numberIsSmallNumber = numberToFormat < 10;
+
+        return numberIsSmallNumber && numberHasDecimal
+            ? numberToFormat.toFixed(2)
+            : Math.round(numberToFormat);
+    };
+
+    const formatted = String(numberRounded()).replace(
         /(.)(?=(\d{3})+$)/g,
         "$1 "
     );

@@ -1,21 +1,24 @@
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
-import { updateIsEPCITrue } from "store/appSettings.slice";
-import { DropdownEPCIRowProps } from "./DropdownEPCISearch";
-import StyledDropdownRow from "./StyledDropdownRow";
+import { updateIsDepartementTrue } from "store/appSettings.slice";
+import StyledDropdownRow from "../StyledDropdownRow";
+import { DropdownDepartementRowProps } from "./DropdownDepartementSearch";
 
-const DropdownEPCIRowLink = ({ code, libelle }: DropdownEPCIRowProps) => {
+const DropdownDepartementRowLink = ({
+    code,
+    libelle,
+}: DropdownDepartementRowProps) => {
     const dispatch = useDispatch();
     return (
         <Link href={{ pathname: `/${code}`, query: { libelle } }}>
             <div
                 onClick={() => {
-                    matomoTrackEvent(["Recherche EPCI", libelle]);
-                    dispatch(updateIsEPCITrue());
+                    matomoTrackEvent(["Recherche Département", libelle]);
+                    dispatch(updateIsDepartementTrue());
                 }}
             >
-                <StyledDropdownRow className="flex justify-between px-6 py-4">
+                <StyledDropdownRow>
                     <span>
                         {libelle} ({code})
                     </span>
@@ -25,4 +28,4 @@ const DropdownEPCIRowLink = ({ code, libelle }: DropdownEPCIRowProps) => {
     );
 };
 
-export default DropdownEPCIRowLink;
+export default DropdownDepartementRowLink;

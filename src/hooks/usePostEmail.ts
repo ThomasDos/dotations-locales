@@ -1,6 +1,6 @@
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
-import { useMutation, UseMutationResult } from "react-query";
 import postEmail from "services/postEmail";
 
 export default (

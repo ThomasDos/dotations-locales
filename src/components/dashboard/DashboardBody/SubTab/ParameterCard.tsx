@@ -1,14 +1,6 @@
-import { Badge } from "@dataesr/react-dsfr";
-import { LabelGreyCustomCrossIcon, LabelPercentage } from "components/ui";
 import { Critere } from "models/entity/entity.interface";
-import { useSelector } from "react-redux";
-import {
-    selectCurrentYear,
-    selectLastYear,
-} from "store/simulationEntity.slice";
 import styled from "styled-components";
-import formatNumberWithSpace from "utils/formatNumberWithSpace";
-import getPercentageEvolution from "utils/getPercentageEvolution";
+import ParameterCardValue from "./ParameterCardValue";
 
 const StyledParameterCard = styled.div<{
     backgroundColor: boolean;
@@ -46,71 +38,24 @@ const ParameterCard = ({
 }: ParameterCardProps) => {
     const { description } = critere;
 
-    const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
-
-    const currentYearCritere = critere.annees[0][currentYear];
-    const lastYearCritere = critere.annees[1][lastYear];
-
-    const { valeur: currentYearValeur, unite } = currentYearCritere;
-    const { valeur: lastYearValeur } = lastYearCritere;
-
-    const valeurToNumber = Number(currentYearCritere.valeur);
-    const valeurIsNotNumber = isNaN(valeurToNumber);
-
-    const valeurIsLabel =
-        currentYearValeur === "Non" || currentYearValeur === "Oui";
-
-    let percentageEvolution = 0;
-    if (!valeurIsNotNumber) {
-        percentageEvolution = getPercentageEvolution(
-            currentYearValeur as number,
-            lastYearValeur as number
-        );
-    }
-
     return (
         <StyledParameterCard
             backgroundColor={backgroundColor}
             isLast={!!isLast}
         >
-            <div className="flex flex-col justify-center items-center">
-                <StyledCardTitle>{description}</StyledCardTitle>
-                {/* 
+            <>
+                <div className="flex flex-col justify-center items-center">
+                    <StyledCardTitle>{description}</StyledCardTitle>
+                    {/* 
                     //TODO: réactiver quand feature info prête
                     { && (
                         <div className="cursor-help">
                             <IconInformation />
                         </div>
                     )} */}
-            </div>
-            {currentYearValeur ? (
-                <div className="flex flex-col items-end">
-                    <div className="flex items-center">
-                        {valeurIsLabel ? (
-                            currentYearValeur === "Oui" ? (
-                                <Badge text="Oui" type="success" hasIcon />
-                            ) : (
-                                <LabelGreyCustomCrossIcon text="Non" />
-                            )
-                        ) : Number(currentYearValeur) === 0 ? (
-                            <LabelGreyCustomCrossIcon text="Non éligible" />
-                        ) : (
-                            <LabelPercentage
-                                valeur={`${formatNumberWithSpace(
-                                    Number(currentYearValeur)
-                                )} ${unite ? " " + unite : ""}`}
-                                percentage={percentageEvolution}
-                                hasBackgroundColor={false}
-                            />
-                        )}
-                    </div>
                 </div>
-            ) : (
-                <div>
-                    <LabelGreyCustomCrossIcon text="Non éligible" />
-                </div>
-            )}
+                <ParameterCardValue critere={critere} />
+            </>
         </StyledParameterCard>
     );
 };

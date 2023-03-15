@@ -1,25 +1,25 @@
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
-import postEPCIComparer from "services/postEPCIComparer";
+import postDepartementComparer from "services/postDepartementComparer";
 import { addEntity } from "store/entitiesComparer.slice";
 
 export interface UsePostEntityComparerProps {
     code: string;
     libelle: string;
 }
-const usePostEPCIComparer = () => {
+const usePostDepartementComparer = () => {
     const dispatch = useDispatch();
 
     return useMutation(
-        ["postEPCIComparer"],
+        ["postDepartementComparer"],
         async ({ code, libelle }: UsePostEntityComparerProps) =>
-            postEPCIComparer(code, libelle),
+            postDepartementComparer(code, libelle),
         {
-            onSuccess: EPCIComparer => {
-                dispatch(addEntity(EPCIComparer));
+            onSuccess: DepartementComparer => {
+                dispatch(addEntity(DepartementComparer));
             },
         }
     );
 };
 
-export default usePostEPCIComparer;
+export default usePostDepartementComparer;
