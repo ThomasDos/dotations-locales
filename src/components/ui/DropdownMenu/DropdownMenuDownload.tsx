@@ -106,7 +106,7 @@ const DropdownMenuDownload = ({
                 return "Répartition des critères des départements en 2022";
             }
             if (isEPCI) {
-                return "Répartition des critères des EPCI en 2022";
+                return "Répartition des critères des intercommunalités en 2022";
             }
         };
 

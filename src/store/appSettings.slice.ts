@@ -99,7 +99,7 @@ export const selectEntityDenomination = createSelector(
                 return "département";
 
             case isEPCI:
-                return "EPCI";
+                return "intercommunalité";
 
             default:
                 return "entité";
@@ -118,7 +118,7 @@ export const selectEntitiesDenomination = createSelector(
                 return "départements";
 
             case isEPCI:
-                return "EPCI";
+                return "intercommunalités";
 
             default:
                 return "entités";

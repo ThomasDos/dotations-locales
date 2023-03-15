@@ -8,9 +8,9 @@ export const FICHIERS_DISPONIBLES = {
     "DPEL en 2020": "DPEL_2020.csv",
     "DPEL en 2021": "DPEL_2021.csv",
     "DPEL en 2022": "DPEL_2022.csv",
-    "Répartition des critères des EPCI en 2021":
+    "Répartition des critères des intercommunalités en 2021":
         "criteres_repartition_EPCI_2021.csv",
-    "Répartition des critères des EPCI en 2022":
+    "Répartition des critères des intercommunalités en 2022":
         "criteres_repartition_EPCI_2022.csv",
     "Répartition des critères des départements en 2022":
         "criteres_repartition_departement_2022.csv",
