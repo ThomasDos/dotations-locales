@@ -76,7 +76,8 @@ const Home: NextPage = () => {
                 </div>
                 <div className="my-6 text-center px-10 md:px-0">
                     <span className="text-lg md:font-bold">
-                        Recherchez votre commune, EPCI ou département
+                        Recherchez votre commune, intercommunalité ou
+                        département
                     </span>
                 </div>
                 <SearchInput
