@@ -96,13 +96,13 @@ const Home: NextPage = () => {
                         imageHeight={444}
                         imageWidth={444}
                         imageAlt="first row image"
-                        titleContent="Améliorons la connaissance sur les dotations d'état"
+                        titleContent="Améliorons la connaissance sur les dotations d'État"
                     >
                         Le Service
                         <strong> Dotations Locales</strong> a pour objectif de
                         rendre accessible et de faciliter l’exploitation des
-                        montants des dotations globales de fonctionnement de
-                        votre collectivité.
+                        montants attribués au titre de la dotation globale de
+                        fonctionnement de votre collectivité.
                     </HomeRowImageText>
 
                     <HomeRowImageText

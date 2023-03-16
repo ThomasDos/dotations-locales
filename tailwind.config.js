@@ -10,6 +10,7 @@ module.exports = {
             "grey-mayback": "#666666",
             "grey-200": "rgb(229 231 235)",
             "grey-625-425": "#929292",
+            "grey-200-850": "#3A3A3A",
             dark: {
                 "grey-600": "rgb(75 85 99)",
                 white: "#ffffff",

@@ -5,9 +5,7 @@ import type { Criteres } from "models/entity/entity.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
-    selectEntityDenomination,
     selectIsCommune,
-    selectIsEPCI,
     selectIsSimulation,
     updateIsSimulationTrue,
 } from "store/appSettings.slice";
@@ -71,14 +69,11 @@ const EntityParameters = ({
     const initialEntity = useSelector(selectInitialEntity);
     const isSimulation = useSelector(selectIsSimulation);
     const isCommune = useSelector(selectIsCommune);
-    const isEPCI = useSelector(selectIsEPCI);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
-
-    const entityDenomination = useSelector(selectEntityDenomination);
 
     if (_.isEmpty(initialEntity.criteresGeneraux)) return null;
 
@@ -117,8 +112,8 @@ const EntityParameters = ({
                 <div className="mb-4 flex justify-between items-center">
                     <span className="font-bold">
                         {isSimulation
-                            ? "Données modifiables"
-                            : `Données connues de votre ${entityDenomination}`}
+                            ? "Critères généraux modifiables"
+                            : `Critères généraux`}
                     </span>
 
                     <ImageFixed

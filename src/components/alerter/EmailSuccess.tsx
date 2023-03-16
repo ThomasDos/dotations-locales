@@ -2,7 +2,7 @@ import ImageFixed from "components/ui/ImageFixed";
 import styled from "styled-components";
 
 const StyledMerci = styled.div`
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     line-height: 56px;
     color: var(--blue-france-113);
@@ -16,21 +16,19 @@ const StyledRetour = styled.div`
     font-size: 14px;
     line-height: 19px;
     cursor: pointer;
+    text-decoration: underline;
 `;
 
 interface EmailSuccessProps {
-    postEmailReset(): void;
-    setUserEmail(email: string): void;
+    textLink: string;
+    onClickLink(): void;
+    userEmail: string;
 }
 export default function EmailSuccess({
-    postEmailReset,
-    setUserEmail,
+    textLink,
+    onClickLink,
+    userEmail,
 }: EmailSuccessProps) {
-    const handleReset = () => {
-        setUserEmail("");
-        postEmailReset();
-    };
-
     return (
         <div className="text-center">
             <ImageFixed
@@ -40,12 +38,19 @@ export default function EmailSuccess({
                 height={72}
                 alt="icone de l'email correctement enregistré"
             />
-            <StyledMerci className="my-4">Merci</StyledMerci>
-            <StyledValidationText className="mb-4 text-lg">
-                <div>Inscription transmise</div>
-                <div>Surveillez votre messagerie</div>
+            <StyledMerci className="my-4">Bienvenue parmi nous !</StyledMerci>
+            <StyledValidationText className="mb-6">
+                <div className="font-bold my-6 text-lg">
+                    Nous sommes heureux de vous accueillir parmi nos
+                    utilisateurs
+                </div>
+                <div>
+                    Pour finaliser votre inscription, il vous suffit de cliquer
+                    sur le lien de confirmation qui se trouve dans l&apos;email
+                    que nous venons d’envoyer à : <u>{userEmail}</u>
+                </div>
             </StyledValidationText>
-            <StyledRetour onClick={handleReset}>retour</StyledRetour>
+            <StyledRetour onClick={onClickLink}>{textLink}</StyledRetour>
         </div>
     );
 }

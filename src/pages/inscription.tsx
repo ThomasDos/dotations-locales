@@ -1,60 +1,51 @@
-import EmailForm from "components/alerter/EmailForm";
 import EmailSuccess from "components/alerter/EmailSuccess";
-import { SubHeader } from "components/dashboard";
+import EmailFormInscription from "components/inscription/EmailFormInscription";
 import usePostEmail from "hooks/usePostEmail";
 import Head from "next/head";
-import router from "next/router";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
-export default function Alerter() {
-    const { libelle, code } = router.query as {
-        libelle: string;
-        code: string;
-    };
-
+const Inscription = () => {
+    const router = useRouter();
+    const [userEntite, setUserEntite] = useState({ code: "", libelle: "" });
+    const { code, libelle } = userEntite;
     const [userEmail, setUserEmail] = useState("");
     const {
         mutate: postEmail,
         isSuccess: postEmailSuccess,
         isLoading: postEmailIsLoading,
-        isError: postEmailIsError,
-        reset: postEmailReset,
     } = usePostEmail(userEmail, code, libelle);
-
-    useEffect(() => {
-        if (!libelle || !code) {
-            router.push("/");
-        }
-    }, []);
 
     return (
         <>
             <Head>
-                <title>Être alerté sur les changements de vos dotations</title>
+                <title>
+                    Inscrivez-vous pour être alerté de la publication de vos
+                    dotations.
+                </title>
             </Head>
-            <SubHeader libelle={libelle} code={code} />
             <div className="py-10 sm:py-20 mx-auto w-5/6 sm:w-4/6 lg:w-1/2">
                 {postEmailSuccess ? (
                     <EmailSuccess
                         userEmail={userEmail}
-                        textLink="Retour"
+                        textLink="Visiter le site Dotations Locales"
                         onClickLink={() => {
-                            setUserEmail("");
-                            postEmailReset();
+                            router.push("/");
                         }}
                     />
                 ) : (
-                    <EmailForm
+                    <EmailFormInscription
                         postEmail={postEmail}
                         userEmail={userEmail}
                         setUserEmail={setUserEmail}
                         postEmailIsLoading={postEmailIsLoading}
-                        postEmailIsError={postEmailIsError}
-                        libelle={libelle}
-                        code={code}
+                        userEntite={userEntite}
+                        setUserEntite={setUserEntite}
                     />
                 )}
             </div>
         </>
     );
-}
+};
+
+export default Inscription;

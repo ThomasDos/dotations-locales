@@ -83,6 +83,7 @@ const FooterContainer = () => {
                 >
                     statistiques
                 </FooterLink>
+                <FooterLink href="/inscription">Inscription</FooterLink>
             </FooterBottom>
         </FooterMain>
     );
