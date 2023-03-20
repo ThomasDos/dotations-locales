@@ -40,22 +40,6 @@ const Dashboard = () => {
         window.scrollTo(0, 0);
     }, [isSimulation]);
 
-    useEffect(() => {
-        const tallyHasOpen = window.sessionStorage.getItem("tallyHasOpen");
-        if (tallyHasOpen) return;
-        //@ts-ignore
-        window.Tally?.openPopup(process.env.NEXT_PUBLIC_API_TALLY, {
-            autoClose: 3000,
-            doNotShowAfterSubmit: true,
-            emoji: {
-                animation: "wave",
-                text: "👋",
-            },
-            hideTitle: true,
-        });
-        window.sessionStorage.setItem("tallyHasOpen", "true");
-    }, []);
-
     if (showSpinner) {
         return (
             <>
