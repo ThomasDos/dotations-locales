@@ -89,6 +89,7 @@ const Home: NextPage = () => {
 
                 <div className="md:mx-60 text-center md:text-left">
                     <LandingIntroduction />
+                    <HomeRowGuideDownload />
 
                     <HomeRowImageText
                         priority
@@ -164,7 +165,6 @@ const Home: NextPage = () => {
                         publiques
                         <strong> Data.gouv.fr.</strong>
                     </HomeRowImageText>
-                    <HomeRowGuideDownload />
                 </div>
 
                 <MainBottom>
