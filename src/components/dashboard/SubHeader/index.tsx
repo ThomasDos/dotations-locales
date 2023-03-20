@@ -65,18 +65,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                             return router.push(`/${code}?libelle=${libelle}`);
                         }}
                     />
-                    {isCommune && (
-                        <LinkIcon
-                            icon="simulation"
-                            text="Simulation"
-                            handleClick={() => {
-                                dispatch(updateIsSimulationTrue());
-                                return router.push(
-                                    `/${code}?libelle=${libelle}`
-                                );
-                            }}
-                        />
-                    )}
+
                     <LinkIcon
                         icon="historique-dsfr"
                         text="Historique"
@@ -106,6 +95,19 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                             router.push(`/${code}/alerter?libelle=${libelle}`)
                         }
                     />
+
+                    {isCommune && (
+                        <LinkIcon
+                            icon="simulation"
+                            text="Simulation (Beta)"
+                            handleClick={() => {
+                                dispatch(updateIsSimulationTrue());
+                                return router.push(
+                                    `/${code}?libelle=${libelle}`
+                                );
+                            }}
+                        />
+                    )}
                 </div>
                 <div className="w-full md:hidden">
                     <FormControl
@@ -143,22 +145,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                             >
                                 <LinkIcon icon="euro-dsfr" text="Dotations" />
                             </MenuItem>
-                            {isCommune && (
-                                <MenuItem
-                                    value="Simulation"
-                                    onClick={() => {
-                                        dispatch(updateIsSimulationTrue());
-                                        return router.push(
-                                            `/${code}?libelle=${libelle}`
-                                        );
-                                    }}
-                                >
-                                    <LinkIcon
-                                        icon="simulation"
-                                        text="Simulation"
-                                    />
-                                </MenuItem>
-                            )}
+
                             <MenuItem
                                 value="Historique"
                                 onClick={() =>
@@ -202,6 +189,23 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                     text="M'alerter"
                                 />
                             </MenuItem>
+
+                            {isCommune && (
+                                <MenuItem
+                                    value="Simulation"
+                                    onClick={() => {
+                                        dispatch(updateIsSimulationTrue());
+                                        return router.push(
+                                            `/${code}?libelle=${libelle}`
+                                        );
+                                    }}
+                                >
+                                    <LinkIcon
+                                        icon="simulation"
+                                        text="Simulation (Beta)"
+                                    />
+                                </MenuItem>
+                            )}
                         </Select>
                     </FormControl>
                 </div>
