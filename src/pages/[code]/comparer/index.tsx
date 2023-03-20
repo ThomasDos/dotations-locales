@@ -1,4 +1,4 @@
-import EmptySelectionComparer from "components/comparer/EmptySelectionComparer";
+import AlertMessageComparer from "components/comparer/AlertMessageComparer";
 import SearchInputComparer from "components/comparer/SearchInputComparer";
 import TabsContainerComparer from "components/comparer/TabsComparer";
 import { SubHeader } from "components/dashboard";
@@ -14,7 +14,7 @@ import { selectInitialEntity } from "store/initialEntity.slice";
 import styled from "styled-components";
 
 const StyledComparerBody = styled.div`
-    padding: 24px 16px 0;
+    padding: 24px 16px 60px;
     @media (min-width: 940px) {
         padding: 56px 80px 60px 120px;
     }
@@ -71,7 +71,7 @@ const Comparer = () => {
                 {entities.length > 1 ? (
                     <TabsContainerComparer />
                 ) : (
-                    <EmptySelectionComparer />
+                    <AlertMessageComparer />
                 )}
             </StyledComparerBody>
         </>

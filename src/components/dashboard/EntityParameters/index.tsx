@@ -4,11 +4,7 @@ import _ from "lodash";
 import type { Criteres } from "models/entity/entity.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
-import {
-    selectIsCommune,
-    selectIsSimulation,
-    updateIsSimulationTrue,
-} from "store/appSettings.slice";
+import { selectIsCommune, selectIsSimulation } from "store/appSettings.slice";
 import {
     selectCurrentYearTotal,
     selectInitialEntity,
@@ -160,6 +156,8 @@ const EntityParameters = ({
                 ) : (
                     isCommune && (
                         <div>
+                            {/*
+                            TODO: réactiver quand business décidera
                             <Button
                                 icon="calculator"
                                 text="Créer une simulation"
@@ -171,7 +169,7 @@ const EntityParameters = ({
 
                                     dispatch(updateIsSimulationTrue());
                                 }}
-                            />
+                            /> */}
                         </div>
                     )
                 )}
