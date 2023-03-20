@@ -37,6 +37,8 @@ export const criteresSerializer = (rawCriteres: CriteresDto): Criteres => {
 
     const newObjectCriteres: Criteres = {};
     rawCriteresKeys.forEach((key: string) => {
+        if (!rawCriteres[key]) return;
+
         const keyCamelCase = convertSnakeCaseToCamelCase(key);
 
         newObjectCriteres[keyCamelCase] = {
