@@ -40,20 +40,13 @@ const SearchInputInscription = ({
         setSearch("");
     };
 
-    const {
-        data: autocompletionCommune,
-        isInitialLoading: searchResultCommuneIsLoading,
-    } = useFetchAutocompletionCommune(search);
+    const { data: autocompletionCommune } =
+        useFetchAutocompletionCommune(search);
 
-    const {
-        data: autocompletionEPCI,
-        isInitialLoading: searchResultEPCIIsLoading,
-    } = useFetchAutocompletionEPCI(search);
+    const { data: autocompletionEPCI } = useFetchAutocompletionEPCI(search);
 
-    const {
-        data: autocompletionDepartement,
-        isInitialLoading: searchResultDepartementIsLoading,
-    } = useFetchAutocompletionDepartement(search);
+    const { data: autocompletionDepartement } =
+        useFetchAutocompletionDepartement(search);
 
     const autocompletionCommuneFormatted = autocompletionCommune?.slice(0, 5);
     const autocompletionEPCIFormatted = autocompletionEPCI?.slice(0, 3);

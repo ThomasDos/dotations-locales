@@ -31,7 +31,7 @@ const Dashboard = () => {
         useState(true && !simulationIsDifferentThanInitial);
     const [displayMobileCriteresGeneraux, setDisplayMobileCriteresGeneraux] =
         useState(false);
-    const [showAlertModal, setShowAlertModal] = useState(false);
+    const [showAlertModal, setShowAlertModal] = useState(true);
     const [hasConfirmedAlert, setHasConfirmedAlert] = useState(false);
 
     const { showSpinner } = useDataEntityInit(code);

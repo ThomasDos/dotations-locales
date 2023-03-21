@@ -84,7 +84,7 @@ function ModalParameterSimulation({
     const simulationEntity = useSelector(selectSimulationEntity);
     const entityDenomination = useSelector(selectEntityDenomination);
 
-    const [fetchSimulation, setFetchsimulation] = useState(false);
+    const [fetchSimulation, setFetchSimulation] = useState(false);
 
     const { valeur } = currentYearCritereGeneralSimulation;
     const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
@@ -97,7 +97,7 @@ function ModalParameterSimulation({
     useEffect(() => {
         if (fetchSimulation) {
             //UPDATE postSimulationMutate si besoin
-            setFetchsimulation(false);
+            setFetchSimulation(false);
         }
     }, [simulationEntity]);
     const handleModalClose = () => {
@@ -111,7 +111,7 @@ function ModalParameterSimulation({
                 valeur: Number(entityInput),
             })
         );
-        setFetchsimulation(true);
+        setFetchSimulation(true);
         handleModalClose();
     };
 

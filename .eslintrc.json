@@ -1,6 +1,6 @@
 {
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint", "jest"],
+    "plugins": ["@typescript-eslint", "jest", "unused-imports"],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
     },
@@ -19,7 +19,18 @@
                 "@typescript-eslint/ban-ts-comment": "off",
                 "@typescript-eslint/prefer-ts-expect-error": "off",
                 "react-hooks/exhaustive-deps": "off",
-                "@typescript-eslint/no-dynamic-delete": "off"
+                "@typescript-eslint/no-dynamic-delete": "off",
+                "no-unused-vars": "off",
+                "unused-imports/no-unused-imports": "error",
+                "unused-imports/no-unused-vars": [
+                    "warn",
+                    {
+                        "vars": "all",
+                        "varsIgnorePattern": "^_",
+                        "args": "after-used",
+                        "argsIgnorePattern": "^_"
+                    }
+                ]
             }
         },
         {
