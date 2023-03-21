@@ -1,3 +1,4 @@
+import capitalizeEveryFirstLetter from "utils/capitalizeEveryFirstLetter";
 import type {
     AutocompletionCommune,
     AutocompletionCommuneDistributionPostale,
@@ -28,6 +29,7 @@ const autocompletionSerializer = (
         distributionPostale =>
             distributionPostalesSerializer(distributionPostale)
     ),
+    libelle: capitalizeEveryFirstLetter(rawAutocompletion.libelle),
 });
 
 export const fetchAutocompletionSerializer = (

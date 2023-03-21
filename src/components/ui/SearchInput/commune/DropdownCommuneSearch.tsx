@@ -30,8 +30,7 @@ const DropdownCommuneSearch = ({
                     (autocompletionEntity: AutocompletionCommune) => {
                         const { codeCommuneInsee: code, codePostal } =
                             autocompletionEntity.distributionsPostales[0];
-                        const { LIBELLE: libelle } =
-                            autocompletionEntity.commune;
+                        const { libelle } = autocompletionEntity;
                         const codeFormatted = formatCodeMetropole(code);
 
                         return isFeatureComparer ? (

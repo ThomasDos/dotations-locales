@@ -4,6 +4,7 @@ export interface AutocompletionCommuneDto {
     commune: Entity;
     distance: number;
     distributions_postales: AutocompletionCommuneDistributionPostaleDto[];
+    libelle: string;
 }
 
 export interface AutocompletionCommune {
@@ -12,6 +13,7 @@ export interface AutocompletionCommune {
     commune: Entity;
     distance: number;
     distributionsPostales: AutocompletionCommuneDistributionPostale[];
+    libelle: string;
 }
 
 interface Entity {
