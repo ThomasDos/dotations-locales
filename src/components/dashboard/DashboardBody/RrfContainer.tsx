@@ -32,6 +32,7 @@ const RrfContainer = ({ rrfFormatted }: RrfContainerProps) => {
                 textBold={false}
                 percentage={rrfPercentageEvolution}
                 valeur={rrfLabelText}
+                showPercentageEvolution
             />
         </StyledRrfContainer>
     );

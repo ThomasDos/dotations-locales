@@ -86,7 +86,7 @@ export default function CriteresGenerauxSimulation({
         selectSimulationCriteresGeneraux
     );
 
-    const [fetchSimulation, setFetchsimulation] = useState(false);
+    const [fetchSimulation, setFetchSimulation] = useState(false);
     const [criteres, setCriteres] = useState(criteresGenerauxSimulation);
     const [selectLoiSimulation, setSelectLoiSimulation] = useState(
         initialLoiSimulationValue(radioButtonLawAvailable)
@@ -119,7 +119,7 @@ export default function CriteresGenerauxSimulation({
             toastError(
                 "Merci de modifier les données pour créer une simulation."
             );
-            setFetchsimulation(false);
+            setFetchSimulation(false);
         }
     }, [fetchSimulation, simulationIsDifferentThanInitial]);
 
@@ -197,7 +197,7 @@ export default function CriteresGenerauxSimulation({
                                 criteresGeneraux: criteres,
                             })
                         );
-                        setFetchsimulation(true);
+                        setFetchSimulation(true);
                     }}
                     isLoading={isLoading}
                 />

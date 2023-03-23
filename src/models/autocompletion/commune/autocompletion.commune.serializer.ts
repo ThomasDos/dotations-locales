@@ -1,3 +1,4 @@
+import capitalizeEveryFirstLetter from "utils/capitalizeEveryFirstLetter";
 import type {
     AutocompletionCommune,
     AutocompletionCommuneDistributionPostale,
@@ -5,7 +6,7 @@ import type {
     AutocompletionCommuneDto,
 } from "./autocompletion.commune.interface";
 
-const distributionPostalesSerializer = (
+export const distributionPostalesSerializer = (
     raw: AutocompletionCommuneDistributionPostaleDto
 ): AutocompletionCommuneDistributionPostale => {
     return {
@@ -22,12 +23,8 @@ const autocompletionSerializer = (
 ): AutocompletionCommune => ({
     autocompletion: rawAutocompletion.autocompletion,
     code: rawAutocompletion.code,
-    commune: rawAutocompletion.commune,
     distance: rawAutocompletion.distance,
-    distributionsPostales: rawAutocompletion.distributions_postales.map(
-        distributionPostale =>
-            distributionPostalesSerializer(distributionPostale)
-    ),
+    libelle: capitalizeEveryFirstLetter(rawAutocompletion.libelle),
 });
 
 export const fetchAutocompletionSerializer = (

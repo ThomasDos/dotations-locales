@@ -19,7 +19,6 @@ const StyledHeaderBody = styled.div`
 `;
 
 const HeaderContainer = () => {
-    const win: Window = window;
     return (
         <div>
             <StyledHeaderBody className="w-full flex justify-between">

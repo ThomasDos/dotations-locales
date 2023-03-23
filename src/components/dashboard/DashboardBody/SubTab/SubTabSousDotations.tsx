@@ -1,5 +1,3 @@
-import { Accordion } from "@dataesr/react-dsfr";
-import AccordionItemStyled from "components/ui/Accordion/AccordionItemStyled";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
 import _ from "lodash";
 import type {
@@ -10,20 +8,13 @@ import type {
 
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { matomoTrackEvent } from "services/matomo";
 import { selectCurrentYear } from "store/simulationEntity.slice";
-import styled from "styled-components";
 import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
 import ParameterCard from "./ParameterCard";
 import ParameterCardTitle from "./ParameterCardTitle";
-
-const StyledContainerNonEligible = styled.div`
-    border-top: 1px solid var(--blue-france-850);
-    border-bottom: 1px solid var(--blue-france-850);
-`;
 
 interface SubTabSousDotationsProps {
     dotation: Dotation;
@@ -82,14 +73,13 @@ const SubTabSousDotations = ({
                         sousDotation.criteres,
                         currentYear
                     );
-                const countNonEligiblesCriteres =
-                    !_.isEmpty(criteresNonEligibles) &&
-                    Object.keys(criteresNonEligibles).length;
 
-                const ifPluralS = countNonEligiblesCriteres > 1 ? "s" : "";
-                const titleAccordion = `${countNonEligiblesCriteres} autre${ifPluralS} critère${ifPluralS} non éligible${ifPluralS}`;
+                const criteresSorted = {
+                    ...criteresEligibles,
+                    ...criteresNonEligibles,
+                };
 
-                const criteresLength = Object.keys(criteresEligibles).length;
+                const criteresLength = Object.keys(criteresSorted).length;
 
                 return (
                     <div className="pt-10" key={sousDotation.title}>
@@ -104,8 +94,8 @@ const SubTabSousDotations = ({
                                 criteresLength={criteresLength}
                             />
 
-                            {!_.isEmpty(criteresEligibles) &&
-                                Object.keys(criteresEligibles).map(
+                            {!_.isEmpty(criteresSorted) &&
+                                Object.keys(criteresSorted).map(
                                     (
                                         criteresKey: string,
                                         indexEligible: number
@@ -118,7 +108,7 @@ const SubTabSousDotations = ({
                                                 ]
                                             }
                                             isLast={
-                                                Object.keys(criteresEligibles)
+                                                Object.keys(criteresSorted)
                                                     .length -
                                                     1 ===
                                                 indexEligible
@@ -126,45 +116,6 @@ const SubTabSousDotations = ({
                                         />
                                     )
                                 )}
-
-                            {!!countNonEligiblesCriteres && (
-                                <Accordion className="my-10">
-                                    <AccordionItemStyled
-                                        title={titleAccordion}
-                                        className="box-border"
-                                        onClick={() => {
-                                            matomoTrackEvent([
-                                                "Fonction",
-                                                "Afficher critères non éligibles",
-                                            ]);
-                                        }}
-                                    >
-                                        <StyledContainerNonEligible>
-                                            {Object.keys(
-                                                criteresNonEligibles
-                                            ).map(
-                                                (
-                                                    critereNonEligibleKey: string
-                                                ) => {
-                                                    return (
-                                                        <ParameterCard
-                                                            key={
-                                                                critereNonEligibleKey
-                                                            }
-                                                            critere={
-                                                                sousDotation
-                                                                    .criteres[
-                                                                    critereNonEligibleKey
-                                                                ]
-                                                            }
-                                                        />
-                                                    );
-                                                }
-                                            )}
-                                        </StyledContainerNonEligible>
-                                    </AccordionItemStyled>
-                                </Accordion>
-                            )}
                         </>
                     </div>
                 );

@@ -11,7 +11,7 @@ export default async (
 ): Promise<AutocompletionCommune[]> =>
     axios
         .get(
-            `${process.env.NEXT_PUBLIC_TERRITOIRES_API_URL}/communes/autocomplete?field=commune&field=distributions_postales&q=${search}`,
+            `${process.env.NEXT_PUBLIC_TERRITOIRES_API_URL}/communes/autocomplete?q=${search}`,
             { signal }
         )
         .then(

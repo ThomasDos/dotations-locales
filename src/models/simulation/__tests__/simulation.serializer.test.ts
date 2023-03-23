@@ -5,7 +5,7 @@ describe("fetchEntitySerializer", () => {
     it("should return serialized commune", () => {
         expect(fetchEntitySerializerSimulation(postSimulationMocked)).toEqual({
             annees: ["2022", "2021"],
-            avertissementPrecisionSimulation: true,
+            avertissementPrecisionSimulation: false,
             code: "42113",
             criteresGeneraux: {
                 longueurVoirie: {

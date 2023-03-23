@@ -142,7 +142,7 @@ const Home: NextPage = () => {
                         imageWidth={256}
                         imageAlt="fourth row image"
                         titleContent="Sur la base du moteur de calcul OpenFisca"
-                        badgeText="en béta"
+                        badgeText="en beta"
                         badgeType="new"
                         badgeHasIcon
                     >

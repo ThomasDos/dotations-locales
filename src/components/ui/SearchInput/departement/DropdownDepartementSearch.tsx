@@ -1,5 +1,6 @@
 import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { AutocompletionDepartement } from "models/autocompletion/departement/autocompletion.departement.interface";
+import capitalizeEveryFirstLetter from "utils/capitalizeEveryFirstLetter";
 import DropdownDepartementRowComparer from "./DropdownDepartementRowComparer";
 import DropdownDepartementRowLink from "./DropdownDepartementRowLink";
 
@@ -26,7 +27,10 @@ const DropdownDepartementSearch = ({
             {!!autocompletionDepartement &&
                 autocompletionDepartement.map(
                     (entity: AutocompletionDepartement) => {
-                        const { code, libelle } = entity;
+                        const { code } = entity;
+                        const libelle = capitalizeEveryFirstLetter(
+                            entity.libelle
+                        );
                         //TODO: rétablir quand comparer pour Département prêt
                         return isFeatureComparer && false ? (
                             <DropdownDepartementRowComparer

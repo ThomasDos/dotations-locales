@@ -1,5 +1,6 @@
 import { UsePostEntityComparerProps } from "hooks/usePostCommuneComparer";
 import { AutocompletionEPCI } from "models/autocompletion/epci/autocompletion.epci.interface";
+import capitalizeEveryFirstLetter from "utils/capitalizeEveryFirstLetter";
 import DropdownEPCIRowComparer from "./DropdownEPCIRowComparer";
 import DropdownEPCIRowLink from "./DropdownEPCIRowLink";
 
@@ -25,7 +26,8 @@ const DropdownEPCISearch = ({
         <>
             {!!autocompletionEPCI &&
                 autocompletionEPCI.map((entity: AutocompletionEPCI) => {
-                    const { code, libelle } = entity;
+                    const { code } = entity;
+                    const libelle = capitalizeEveryFirstLetter(entity.libelle);
                     //TODO: rétablier quand comparer pour EPCI prêt
                     return isFeatureComparer && false ? (
                         <DropdownEPCIRowComparer

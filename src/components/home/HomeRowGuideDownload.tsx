@@ -16,7 +16,7 @@ const HomeRowGuideDownload = () => {
             DGF, la principale dotation de fonctionnement de l&apos;État pour
             les collectivités locales.
             <a
-                href="https://www.collectivites-locales.gouv.fr/files/Finances%20locales/guide_dgfavril2022.pdf"
+                href="https://www.collectivites-locales.gouv.fr/files/Finances%20locales/guide_dgf2023%20gouv.pdf"
                 download
                 rel="noopener noreferrer"
                 target="_"

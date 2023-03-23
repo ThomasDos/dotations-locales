@@ -22,11 +22,11 @@ const DropdownCommuneSearchInscription = ({
             {!!autocompletionCommune &&
                 autocompletionCommune.map(
                     (autocompletionEntity: AutocompletionCommune) => {
-                        const { codeCommuneInsee: code, codePostal } =
-                            autocompletionEntity.distributionsPostales[0];
-                        const { LIBELLE: libelle } =
-                            autocompletionEntity.commune;
+                        const { libelle, code } = autocompletionEntity;
                         const codeFormatted = formatCodeMetropole(code);
+
+                        const codePostal =
+                            autocompletionEntity.autocompletion.split(" ")[0];
 
                         return (
                             <DropdownCommuneRowLinkInscription

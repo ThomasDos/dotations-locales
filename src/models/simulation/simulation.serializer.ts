@@ -12,6 +12,8 @@ export const fetchEntitySerializerSimulation = (
     code: rawResult.code,
     criteresGeneraux: criteresSerializer(rawResult.criteres_generaux),
     dotations: dotationSerializer(rawResult.dotations),
-    avertissementPrecisionSimulation:
-        rawResult.avertissement_precision_simulation,
+    //TODO: Remettre en dynamique quand on voudra le message de précision
+    // avertissementPrecisionSimulation:
+    //     rawResult.avertissement_precision_simulation,
+    avertissementPrecisionSimulation: false,
 });

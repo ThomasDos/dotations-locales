@@ -21,15 +21,6 @@ const ContainerRadioStyled = styled.div<{ disabled: boolean }>`
     align-items: center;
 `;
 
-const ProchainementStyled = styled.div`
-    font-size: 14px;
-    background-color: var(--blue-france-925);
-    padding: 3px 10px 4px;
-    gap: 4px;
-    border-radius: 30px;
-    flex: 1;
-`;
-
 const StyledLoiSpan = styled.span`
     flex: 2;
 `;

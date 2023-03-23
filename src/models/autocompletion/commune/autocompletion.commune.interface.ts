@@ -1,20 +1,18 @@
 export interface AutocompletionCommuneDto {
     autocompletion: string;
     code: string;
-    commune: Entity;
     distance: number;
-    distributions_postales: AutocompletionCommuneDistributionPostaleDto[];
+    libelle: string;
 }
 
 export interface AutocompletionCommune {
     autocompletion: string;
     code: string;
-    commune: Entity;
     distance: number;
-    distributionsPostales: AutocompletionCommuneDistributionPostale[];
+    libelle: string;
 }
 
-interface Entity {
+export interface Entity {
     ARR: string;
     CAN: string;
     COM: string;
