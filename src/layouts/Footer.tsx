@@ -30,7 +30,7 @@ const FooterContainer = () => {
 
                     <ImageFixed
                         className="ml-5"
-                        src="/images/incubateur-territoires.png"
+                        src="/icons/anct-logo.svg"
                         height={90}
                         width={160}
                         alt="logo incubateur territoires"
