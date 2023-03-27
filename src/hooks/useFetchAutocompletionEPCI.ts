@@ -5,11 +5,5 @@ import fetchAutocompletionEPCI from "services/fetchAutocompletionEPCI";
 export default (search: string) =>
     useQuery<AutocompletionEPCI[]>(
         ["searchAutocompletionEPCI", search],
-        async ({ signal }) => fetchAutocompletionEPCI(search, signal),
-        {
-            onError: err => {
-                //TODO: manage error
-                return err;
-            },
-        }
+        async ({ signal }) => fetchAutocompletionEPCI(search, signal)
     );

@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    selectFeaturesComparer,
+    selectFeaturesSimulation,
     selectIsCommune,
     updateIsSimulationFalse,
     updateIsSimulationTrue,
@@ -27,6 +29,8 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const isCommune = useSelector(selectIsCommune);
+    const featuresSimulation = useSelector(selectFeaturesSimulation);
+    const featuresComparer = useSelector(selectFeaturesComparer);
 
     const pathnameFiltered = useMemo(() => {
         if (router.pathname.includes("historique")) {
@@ -76,7 +80,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                         }
                     />
 
-                    {isCommune && (
+                    {featuresComparer && (
                         <LinkIcon
                             icon="comparer-dsfr"
                             text="Comparer"
@@ -96,7 +100,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                         }
                     />
 
-                    {isCommune && (
+                    {isCommune && featuresSimulation && (
                         <LinkIcon
                             icon="simulation"
                             text="Simulation (Beta)"
@@ -160,7 +164,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                 />
                             </MenuItem>
 
-                            {isCommune && (
+                            {featuresComparer && (
                                 <MenuItem
                                     value="Comparer"
                                     onClick={() =>
@@ -190,7 +194,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                 />
                             </MenuItem>
 
-                            {isCommune && (
+                            {isCommune && featuresSimulation && (
                                 <MenuItem
                                     value="Simulation"
                                     onClick={() => {

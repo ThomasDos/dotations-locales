@@ -28,8 +28,7 @@ const DropdownEPCISearch = ({
                 autocompletionEPCI.map((entity: AutocompletionEPCI) => {
                     const { code } = entity;
                     const libelle = capitalizeEveryFirstLetter(entity.libelle);
-                    //TODO: rétablier quand comparer pour EPCI prêt
-                    return isFeatureComparer && false ? (
+                    return isFeatureComparer ? (
                         <DropdownEPCIRowComparer
                             code={code}
                             libelle={libelle}
