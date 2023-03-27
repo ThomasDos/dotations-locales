@@ -56,6 +56,7 @@ export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
     const newObjectDotations: Dotations = {};
     rawDotationsKeys.forEach((key: string) => {
         const keyCamelCase = convertSnakeCaseToCamelCase(key);
+        if (!dotationsMap[keyCamelCase]) return;
 
         newObjectDotations[keyCamelCase] = {
             key: dotationsMap[keyCamelCase].key,

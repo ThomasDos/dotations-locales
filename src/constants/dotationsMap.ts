@@ -82,15 +82,23 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationAmenagementCommunesOutreMer: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_amenagement_communes_outre_mer",
+        key: "dotationAmenagementCommunesOutreMer",
         label: "DACOM",
         links: [],
         title: "Dotation aménagement communes outre mer (DACOM)",
     },
+    dotationBiodiversite: {
+        description: "Lorem Ipsum DNP",
+        info: "",
+        key: "dotationBiodiversite",
+        label: "DB",
+        links: [],
+        title: "Dotation biodiversité (DB)",
+    },
     dotationCompensation: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_compensation",
+        key: "dotationCompensation",
         label: "DC",
         links: [],
         title: "Dotation compensation (DC)",
@@ -98,7 +106,7 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationEluLocal: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_elu_local",
+        key: "dotationEluLocal",
         label: "DPEL",
         links: [],
         title: "Dotation élu local (DPEL)",
@@ -123,7 +131,7 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationGlobaleFonctionnement: {
         description: "Evolution de votre montant total de dotations",
         info: `La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.
-                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
+                                                                                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
         key: "dotationGlobaleFonctionnement",
         label: "Résumé",
         links: [
@@ -149,7 +157,7 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationGroupementsTouristiques: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_groupements_touristiques",
+        key: "dotationGroupementsTouristiques",
         label: "DGT",
         links: [],
         title: "Dotation groupements touristiques (DGT)",
@@ -157,7 +165,7 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationIntercommunalite: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_intercommunalite",
+        key: "dotationIntercommunalite",
         label: "DI",
         links: [],
         title: "Dotation intercommunalité (DI)",
