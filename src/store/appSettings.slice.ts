@@ -19,8 +19,8 @@ const initialState: AppSettings = {
     isCommune: false,
     isDepartement: false,
     features: {
-        simulation: true,
-        comparer: true,
+        simulation: process.env.NEXT_PUBLIC_FEATURES_SIMULATION === "true",
+        comparer: process.env.NEXT_PUBLIC_FEATURES_COMPARER === "true",
     },
 };
 
