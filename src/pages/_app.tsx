@@ -16,7 +16,6 @@ import { persistor, store } from "store/index";
 import Layout from "../layouts";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-    console.log("process.env", process.env.NEXT_PUBLIC_FEATURES_SIMULATION);
     const [queryClient] = useState(
         () =>
             new QueryClient({
