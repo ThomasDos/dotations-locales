@@ -23,30 +23,49 @@ const HeaderContainer = () => {
         <div>
             <StyledHeaderBody className="w-full flex justify-between">
                 <div className="flex">
-                    <div>
-                        <Link href="/">
-                            <div
-                                onClick={() => {
-                                    matomoTrackEvent(["Navigation", "Accueil"]);
-                                }}
-                            >
-                                <ImageFixed
-                                    className="hidden sm:block cursor-pointer"
-                                    src="/images/marianne-text-header-lg.png"
-                                    height={90}
-                                    width={88}
-                                    alt="Logo de la marianne qui redirige vers l'accueil"
-                                />
+                    <div className="flex items-center">
+                        <div>
+                            <Link href="/">
+                                <div
+                                    onClick={() => {
+                                        matomoTrackEvent([
+                                            "Navigation",
+                                            "Accueil",
+                                        ]);
+                                    }}
+                                >
+                                    <ImageFixed
+                                        className="hidden sm:block cursor-pointer"
+                                        src="/icons/marianne-logo.svg"
+                                        height={55.88}
+                                        width={64.12}
+                                        alt="Logo de la marianne qui redirige vers l'accueil"
+                                    />
 
-                                <ImageFixed
-                                    className="sm:hidden cursor-pointer"
-                                    src="/images/marianne-text-header-sm.png"
-                                    height={78}
-                                    width={174}
-                                    alt="Logo de la marianne qui redirige vers l'accueil"
-                                />
-                            </div>
-                        </Link>
+                                    <ImageFixed
+                                        className="sm:hidden cursor-pointer"
+                                        src="/icons/marianne-logo-sm.svg"
+                                        height={78}
+                                        width={174}
+                                        alt="Logo de la marianne qui redirige vers l'accueil"
+                                    />
+                                </div>
+                            </Link>
+                        </div>
+                        <ImageFixed
+                            src="/icons/anct-logo.svg"
+                            height={55.67}
+                            width={161.63}
+                            alt="Logo de l'anct"
+                            className="sm:flex items-center sm:ml-8 hidden"
+                        />
+                        <ImageFixed
+                            src="/icons/anct-logo.svg"
+                            height={28}
+                            width={82}
+                            alt="Logo de l'anct"
+                            className="sm:hidden"
+                        />
                     </div>
                     <div className="ml-10 py-5 md:block hidden">
                         <h6 className="p-0 m-0">Dotations Locales</h6>

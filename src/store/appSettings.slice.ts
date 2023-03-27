@@ -7,6 +7,10 @@ interface AppSettings {
     isEPCI: boolean;
     isCommune: boolean;
     isDepartement: boolean;
+    features: {
+        simulation: boolean;
+        comparer: boolean;
+    };
 }
 
 const initialState: AppSettings = {
@@ -14,6 +18,10 @@ const initialState: AppSettings = {
     isEPCI: false,
     isCommune: false,
     isDepartement: false,
+    features: {
+        simulation: true,
+        comparer: true,
+    },
 };
 
 const appSettingsSlice = createSlice({
@@ -86,6 +94,21 @@ export const selectIsCommune = createSelector(
 export const selectIsDepartement = createSelector(
     selectSelf,
     state => state.isDepartement
+);
+
+export const selectFeatures = createSelector(
+    selectSelf,
+    state => state.features
+);
+
+export const selectFeaturesComparer = createSelector(
+    selectFeatures,
+    state => state.comparer
+);
+
+export const selectFeaturesSimulation = createSelector(
+    selectFeatures,
+    state => state.simulation
 );
 
 export const selectEntityDenomination = createSelector(
