@@ -82,29 +82,37 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationAmenagementCommunesOutreMer: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_amenagement_communes_outre_mer",
+        key: "dotationAmenagementCommunesOutreMer",
         label: "DACOM",
         links: [],
-        title: "Dotation aménagement communes outre mer (DACOM)",
+        title: "Dotation Aménagement Communes Outre Mer (DACOM)",
+    },
+    dotationBiodiversite: {
+        description: "Lorem Ipsum DNP",
+        info: "",
+        key: "dotationBiodiversite",
+        label: "DPB",
+        links: [],
+        title: "Dotation pour la Protection de la Biodiversité (DPB)",
     },
     dotationCompensation: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_compensation",
+        key: "dotationCompensation",
         label: "DC",
         links: [],
-        title: "Dotation compensation (DC)",
+        title: "Dotation Compensation (DC)",
     },
     dotationEluLocal: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_elu_local",
+        key: "dotationEluLocal",
         label: "DPEL",
         links: [],
-        title: "Dotation élu local (DPEL)",
+        title: "Dotation Élu Local (DPEL)",
     },
     dotationFonctionnementMinimale: {
-        description: "Dotation fonctionnement minimale",
+        description: "Dotation Fonctionnement Minimale",
         info: "",
         key: "dotationFonctionnementMinimale",
         label: "DFM",
@@ -123,25 +131,25 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationGlobaleFonctionnement: {
         description: "Evolution de votre montant total de dotations",
         info: `La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.
-                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
+                                                                                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
         key: "dotationGlobaleFonctionnement",
         label: "Résumé",
         links: [
             {
                 dotationKey: "dotationForfaitaire",
-                linkText: "Dotation forfaitaire (DF)",
+                linkText: "Dotation Forfaitaire (DF)",
             },
             {
                 dotationKey: "dotationNationalePerequation",
-                linkText: "Dotation nationale de péréquation (DNP)",
+                linkText: "Dotation Nationale de Péréquation (DNP)",
             },
             {
                 dotationKey: "dotationSolidariteRurale",
-                linkText: "Dotation de solidarité rurale (DSR)",
+                linkText: "Dotation de Solidarité Rurale (DSR)",
             },
             {
                 dotationKey: "dsuMontant",
-                linkText: "Dotation de solidarité urbaine (DSU)",
+                linkText: "Dotation de Solidarité Urbaine (DSU)",
             },
         ],
         title: "Dotation Globale de Fonctionnement (DGF)",
@@ -149,18 +157,18 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationGroupementsTouristiques: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_groupements_touristiques",
+        key: "dotationGroupementsTouristiques",
         label: "DGT",
         links: [],
-        title: "Dotation groupements touristiques (DGT)",
+        title: "Dotation Groupements Touristiques (DGT)",
     },
     dotationIntercommunalite: {
         description: "Lorem Ipsum DNP",
         info: "",
-        key: "dotation_intercommunalite",
+        key: "dotationIntercommunalite",
         label: "DI",
         links: [],
-        title: "Dotation intercommunalité (DI)",
+        title: "Dotation Intercommunalité (DI)",
     },
     dotationNationalePerequation: {
         description: "Lorem Ipsum DNP",
@@ -171,12 +179,12 @@ export const dotationsMap: Record<string, DotationMap> = {
         title: "Dotation Nationale de Péréquation (DNP)",
     },
     dotationPerequationUrbaine: {
-        description: "Dotation perequation urbaine",
+        description: "Dotation péréquation urbaine",
         info: "",
         key: "dotationPerequationUrbaine",
         label: "DPU",
         links: [],
-        title: "Dotation Perequation Urbaine (DPU)",
+        title: "Dotation Péréquation Urbaine (DPU)",
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
@@ -186,15 +194,15 @@ export const dotationsMap: Record<string, DotationMap> = {
         links: [
             {
                 dotationKey: "dsrFractionBourgCentre",
-                linkText: "Fraction Bourg-centre",
+                linkText: "Fraction Bourg-Centre",
             },
             {
                 dotationKey: "dsrFractionPerequation",
-                linkText: "Fraction péréquation",
+                linkText: "Fraction Péréquation",
             },
             {
                 dotationKey: "dsrFractionCible",
-                linkText: "Fraction cible",
+                linkText: "Fraction Cible",
             },
         ],
         title: "Dotation Solidarité Rurale (DSR)",

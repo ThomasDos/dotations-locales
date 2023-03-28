@@ -88,15 +88,15 @@ describe("fetchEntitySerializer", () => {
                     links: [
                         {
                             dotationKey: "dsrFractionBourgCentre",
-                            linkText: "Fraction Bourg-centre",
+                            linkText: "Fraction Bourg-Centre",
                         },
                         {
                             dotationKey: "dsrFractionPerequation",
-                            linkText: "Fraction péréquation",
+                            linkText: "Fraction Péréquation",
                         },
                         {
                             dotationKey: "dsrFractionCible",
-                            linkText: "Fraction cible",
+                            linkText: "Fraction Cible",
                         },
                     ],
                     sousDotations: [

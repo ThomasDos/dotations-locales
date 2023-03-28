@@ -4,10 +4,13 @@ import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    selectFeaturesComparer,
+    selectFeaturesSimulation,
     selectIsCommune,
     updateIsSimulationFalse,
     updateIsSimulationTrue,
 } from "store/appSettings.slice";
+import { selectInitialCriteresGenerauxIsEmpty } from "store/initialEntity.slice";
 import styled from "styled-components";
 
 const StyledHeaderDashboard = styled.div`
@@ -27,7 +30,11 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const isCommune = useSelector(selectIsCommune);
-
+    const featuresSimulation = useSelector(selectFeaturesSimulation);
+    const featuresComparer = useSelector(selectFeaturesComparer);
+    const initialCriteresGenerauxIsEmpty = useSelector(
+        selectInitialCriteresGenerauxIsEmpty
+    );
     const pathnameFiltered = useMemo(() => {
         if (router.pathname.includes("historique")) {
             return "Historique";
@@ -42,6 +49,10 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
         return "Dotations";
     }, [router.pathname]);
     const [modeSelected, setModeSelected] = useState(pathnameFiltered);
+
+    const simulationIsEnabled =
+        isCommune && featuresSimulation && !initialCriteresGenerauxIsEmpty;
+    const comparerIsEnabled = featuresComparer;
 
     return (
         <>
@@ -76,7 +87,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                         }
                     />
 
-                    {isCommune && (
+                    {comparerIsEnabled && (
                         <LinkIcon
                             icon="comparer-dsfr"
                             text="Comparer"
@@ -96,7 +107,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                         }
                     />
 
-                    {isCommune && (
+                    {simulationIsEnabled && (
                         <LinkIcon
                             icon="simulation"
                             text="Simulation (Beta)"
@@ -160,7 +171,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                 />
                             </MenuItem>
 
-                            {isCommune && (
+                            {comparerIsEnabled && (
                                 <MenuItem
                                     value="Comparer"
                                     onClick={() =>
@@ -190,7 +201,7 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
                                 />
                             </MenuItem>
 
-                            {isCommune && (
+                            {simulationIsEnabled && (
                                 <MenuItem
                                     value="Simulation"
                                     onClick={() => {

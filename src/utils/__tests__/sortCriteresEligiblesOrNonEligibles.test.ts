@@ -5,7 +5,16 @@ describe("sortCriteresEligiblesOrNonEligibles(Criteres: Criteres, currentYear: s
     it("should return an object with the'criteres eligibles' and 'criteres non eligibles' sorted", () => {
         const currentYear = "2022";
         const result = sortCriteresEligiblesOrNonEligibles(
-            criteresMocked,
+            {
+                ...criteresMocked,
+                zoneMontagne: {
+                    annees: [
+                        { "2022": { unite: null, valeur: "Non" } },
+                        { "2021": { unite: null, valeur: "Non" } },
+                    ],
+                    description: "Zone de montagne",
+                },
+            },
             currentYear
         );
 
@@ -68,7 +77,15 @@ describe("sortCriteresEligiblesOrNonEligibles(Criteres: Criteres, currentYear: s
                     description: "Superficie",
                 },
             },
-            criteresNonEligibles: {},
+            criteresNonEligibles: {
+                zoneMontagne: {
+                    annees: [
+                        { "2022": { unite: null, valeur: "Non" } },
+                        { "2021": { unite: null, valeur: "Non" } },
+                    ],
+                    description: "Zone de montagne",
+                },
+            },
         };
 
         expect(result).toEqual(expectedResult);

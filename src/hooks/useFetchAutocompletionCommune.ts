@@ -5,11 +5,5 @@ import fetchAutocompletionCommune from "services/fetchAutocompletionCommune";
 export default (search: string) =>
     useQuery<AutocompletionCommune[]>(
         ["searchAutocompletion", search],
-        async ({ signal }) => fetchAutocompletionCommune(search, signal),
-        {
-            onError: err => {
-                //TODO: manage error
-                return err;
-            },
-        }
+        async ({ signal }) => fetchAutocompletionCommune(search, signal)
     );

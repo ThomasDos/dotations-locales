@@ -1,4 +1,5 @@
 import { fetchCommuneMocked } from "__fixtures__/fetchCommuneMocked";
+import { CritereAnnee } from "../entity.interface";
 
 import {
     criteresSerializer,
@@ -9,7 +10,24 @@ import {
 
 describe("fetchEntitySerializer", () => {
     it("should return serialized commune", () => {
-        expect(fetchEntitySerializer(fetchCommuneMocked)).toEqual({
+        expect(
+            fetchEntitySerializer({
+                ...fetchCommuneMocked,
+                dotations: {
+                    ...fetchCommuneMocked.dotations,
+                    dotationTest: {
+                        annees: [{ "2022": 0 }, { "2021": 0 }],
+                        criteres: {},
+                    },
+                },
+                criteres_generaux: {
+                    ...fetchCommuneMocked.criteres_generaux,
+                    testNullCritere: null as unknown as {
+                        annees: CritereAnnee[];
+                    },
+                },
+            })
+        ).toEqual({
             annees: ["2022", "2021"],
             code: "42113",
             criteresGeneraux: {
@@ -93,15 +111,15 @@ describe("fetchEntitySerializer", () => {
                     links: [
                         {
                             dotationKey: "dsrFractionBourgCentre",
-                            linkText: "Fraction Bourg-centre",
+                            linkText: "Fraction Bourg-Centre",
                         },
                         {
                             dotationKey: "dsrFractionPerequation",
-                            linkText: "Fraction péréquation",
+                            linkText: "Fraction Péréquation",
                         },
                         {
                             dotationKey: "dsrFractionCible",
-                            linkText: "Fraction cible",
+                            linkText: "Fraction Cible",
                         },
                     ],
                     sousDotations: [
@@ -153,6 +171,7 @@ describe("fetchEntitySerializer", () => {
                     title: "Dotation Solidarité Urbaine (DSU)",
                 },
             },
+            partDotationRrf: undefined,
         });
     });
 });
@@ -246,15 +265,15 @@ describe("dotationSerializer", () => {
                 links: [
                     {
                         dotationKey: "dsrFractionBourgCentre",
-                        linkText: "Fraction Bourg-centre",
+                        linkText: "Fraction Bourg-Centre",
                     },
                     {
                         dotationKey: "dsrFractionPerequation",
-                        linkText: "Fraction péréquation",
+                        linkText: "Fraction Péréquation",
                     },
                     {
                         dotationKey: "dsrFractionCible",
-                        linkText: "Fraction cible",
+                        linkText: "Fraction Cible",
                     },
                 ],
                 sousDotations: [
@@ -352,5 +371,9 @@ describe("sousDotationsSerializer", () => {
                 },
             },
         ]);
+    });
+
+    it("should return empty array if no sous dotations", () => {
+        expect(sousDotationsSerializer(undefined)).toEqual([]);
     });
 });

@@ -5,11 +5,5 @@ import fetchAutocompletionDepartement from "services/fetchAutocompletionDepartem
 export default (search: string) =>
     useQuery<AutocompletionDepartement[]>(
         ["searchAutocompletionDepartement", search],
-        async ({ signal }) => fetchAutocompletionDepartement(search, signal),
-        {
-            onError: err => {
-                //TODO: manage error
-                return err;
-            },
-        }
+        async ({ signal }) => fetchAutocompletionDepartement(search, signal)
     );

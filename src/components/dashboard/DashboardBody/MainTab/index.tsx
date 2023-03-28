@@ -123,15 +123,23 @@ const MainTab = ({ dotations }: MainTabProps) => {
                     </AccordionItem>
                 </Accordion>
             )}
-            {dotations.dotationEluLocal && (
+            {(dotations.dotationEluLocal || dotations.dotationBiodiversite) && (
                 <div>
                     <div className="mb-4">
                         <Badge type="new" text="Autres dotations (hors dgf)" />
                     </div>
-                    <DotationCard
-                        dotation={dotations.dotationEluLocal}
-                        borderTop
-                    />
+                    {dotations.dotationEluLocal && (
+                        <DotationCard
+                            dotation={dotations.dotationEluLocal}
+                            borderTop
+                        />
+                    )}
+                    {dotations.dotationBiodiversite && (
+                        <DotationCard
+                            dotation={dotations.dotationBiodiversite}
+                            borderTop
+                        />
+                    )}
                 </div>
             )}
         </div>

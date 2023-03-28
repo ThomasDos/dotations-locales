@@ -246,5 +246,76 @@ describe("simulation deserializer", () => {
                 zone_de_montagne: true,
             });
         });
+        it("should return a deserialized post simulation data with criteres generaux", () => {
+            expect(
+                postSimulationDataDeserializer({
+                    longueurVoirie: {
+                        annees: [
+                            { "2022": { unite: "km", valeur: "9290" } },
+                            { "2021": { unite: "km", valeur: "9290" } },
+                        ],
+                        description: "Longueur de voirie",
+                    },
+                    placesCaravanesAvantMajoration: {
+                        annees: [
+                            { "2022": { unite: null, valeur: "0" } },
+                            { "2021": { unite: null, valeur: "0" } },
+                        ],
+                        description: "Places caravanes avant majoration",
+                    },
+                    populationEnfants: {
+                        annees: [
+                            { "2022": { unite: null, valeur: "43" } },
+                            { "2021": { unite: null, valeur: "43" } },
+                        ],
+                        description: "Population 3 à 16 ans",
+                    },
+                    populationInsee: {
+                        annees: [
+                            { "2022": { unite: null, valeur: "248" } },
+                            { "2021": { unite: null, valeur: "248" } },
+                        ],
+                        description: "Population DGF",
+                    },
+                    potentielFinancierParHabitant: {
+                        annees: [
+                            { "2022": { unite: "€", valeur: "742.818548" } },
+                            { "2021": { unite: "€", valeur: "742.818548" } },
+                        ],
+                        description: "Potentiel financier par habitant",
+                    },
+                    residencesSecondaires: {
+                        annees: [
+                            { "2022": { unite: null, valeur: "14" } },
+                            { "2021": { unite: null, valeur: "14" } },
+                        ],
+                        description: "Résidences secondaires",
+                    },
+                    superficie: {
+                        annees: [
+                            { "2022": { unite: "m²", valeur: "622" } },
+                            { "2021": { unite: "m²", valeur: "622" } },
+                        ],
+                        description: "Superficie",
+                    },
+                    zoneDeMontagne: {
+                        annees: [
+                            { "2022": { unite: null, valeur: "Non" } },
+                            { "2021": { unite: null, valeur: "Non" } },
+                        ],
+                        description: "Zone de montagne",
+                    },
+                })
+            ).toEqual({
+                longueur_voirie: 9290,
+                places_caravanes_avant_majoration: 0,
+                population_enfants: 43,
+                population_insee: 248,
+                potentiel_financier_par_habitant: 742.818548,
+                residences_secondaires: 14,
+                superficie: 622,
+                zone_de_montagne: false,
+            });
+        });
     });
 });

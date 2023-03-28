@@ -31,8 +31,7 @@ const DropdownDepartementSearch = ({
                         const libelle = capitalizeEveryFirstLetter(
                             entity.libelle
                         );
-                        //TODO: rétablir quand comparer pour Département prêt
-                        return isFeatureComparer && false ? (
+                        return isFeatureComparer ? (
                             <DropdownDepartementRowComparer
                                 code={code}
                                 libelle={libelle}

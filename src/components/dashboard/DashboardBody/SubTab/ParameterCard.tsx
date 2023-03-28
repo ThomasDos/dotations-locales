@@ -47,7 +47,7 @@ const ParameterCard = ({
                 <div className="flex flex-col justify-center items-center">
                     <StyledCardTitle>{description}</StyledCardTitle>
                     {/* 
-                    //TODO: réactiver quand feature info prête
+                    //TODO: réactiver quand feature info prête 
                     { && (
                         <div className="cursor-help">
                             <IconInformation />

@@ -16,21 +16,35 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
         font-size: 16px !important;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 1080px) {
+        button {
+            padding: 11px !important;
+            font-size: 14px !important;
+        }
+    }
+
+    @media (max-width: 900px) {
         button {
             padding: 10px !important;
-            font-size: 14px !important;
+        }
+    }
+
+    @media (max-width: 540px) {
+        button {
+            font-size: 12px !important;
+            padding: 8px !important;
         }
     }
 
     @media (max-width: 480px) {
         button {
-            font-size: 12px !important;
+            padding: 6px !important;
         }
     }
-    @media (max-width: 420px) {
+
+    @media (max-width: 440px) {
         button {
-            padding: 6px !important;
+            padding: 2.5px !important;
             padding-bottom: 12px !important;
         }
     }

@@ -4,7 +4,11 @@ import _ from "lodash";
 import type { Criteres } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
-import { selectIsCommune, selectIsSimulation } from "store/appSettings.slice";
+import {
+    selectFeaturesSimulation,
+    selectIsCommune,
+    selectIsSimulation,
+} from "store/appSettings.slice";
 import {
     selectCurrentYearTotal,
     selectInitialEntity,
@@ -69,6 +73,8 @@ const EntityParameters = ({
     );
     const currentYear = useSelector(selectCurrentYear);
     const lastYear = useSelector(selectLastYear);
+
+    const featuresSimulation = useSelector(selectFeaturesSimulation);
 
     if (_.isEmpty(initialEntity.criteresGeneraux)) return null;
 
@@ -179,7 +185,8 @@ const EntityParameters = ({
                             />
                         </div>
                     ) : (
-                        isCommune && (
+                        isCommune &&
+                        featuresSimulation && (
                             <div>
                                 {/*
                             TODO: réactiver quand business décidera

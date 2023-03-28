@@ -1,4 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
+import stringToBoolean from "utils/stringToBoolean";
 
 import type { RootState } from ".";
 
@@ -19,8 +20,10 @@ const initialState: AppSettings = {
     isCommune: false,
     isDepartement: false,
     features: {
-        simulation: true,
-        comparer: true,
+        simulation: stringToBoolean(
+            process.env.NEXT_PUBLIC_FEATURES_SIMULATION
+        ),
+        comparer: stringToBoolean(process.env.NEXT_PUBLIC_FEATURES_COMPARER),
     },
 };
 

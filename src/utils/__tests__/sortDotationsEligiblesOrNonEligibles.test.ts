@@ -88,4 +88,11 @@ describe("sortDotationsEligiblesOrNonEligibles(dotations: Dotations, currentYear
             sortDotationsEligiblesOrNonEligibles(dotationsMocked, "2022")
         ).toEqual(expectedResult);
     });
+
+    it("should return object with empty dotationsEligibles and dotationsNonEligibles if dotations is empty", () => {
+        expect(sortDotationsEligiblesOrNonEligibles({}, "2022")).toEqual({
+            dotationsEligibles: {},
+            dotationsNonEligibles: {},
+        });
+    });
 });

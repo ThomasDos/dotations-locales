@@ -1,6 +1,5 @@
 import {
     IconCopyWithSuccess,
-    IconInformation,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
@@ -113,10 +112,11 @@ const DotationCard = ({
                                 {title}
                             </StyledCardTitle>
 
-                            <IconInformation
+                            {/* 
                                 //TODO: réactiver drawer quand texte présent
+                            <IconInformation
                                 setShowDrawer={() => setShowInfoDrawer}
-                            />
+                            /> */}
                         </div>
                         <span>
                             Évolution du montant {lastYear} / {currentYear}.

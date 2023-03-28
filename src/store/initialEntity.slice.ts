@@ -82,4 +82,9 @@ export const selectInitialLastYear = createSelector(
     initialAnnees => initialAnnees[1]
 );
 
+export const selectInitialCriteresGenerauxIsEmpty = createSelector(
+    selectInitialCriteresGeneraux,
+    criteresGeneraux => Object.keys(criteresGeneraux).length === 0
+);
+
 export default initialEntitySlice.reducer;

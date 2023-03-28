@@ -11,8 +11,13 @@ import useDataEntityInit from "hooks/useDataEntityInit";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectIsCommune, selectIsSimulation } from "store/appSettings.slice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    selectFeaturesSimulation,
+    selectIsCommune,
+    selectIsSimulation,
+    updateIsSimulationFalse,
+} from "store/appSettings.slice";
 import { selectSimulationIsDifferentThanInitial } from "store/simulationEntity.slice";
 
 const Dashboard = () => {
@@ -21,9 +26,10 @@ const Dashboard = () => {
         libelle: string;
         code: string;
     };
-
+    const dispatch = useDispatch();
     const isCommune = useSelector(selectIsCommune);
     const isSimulation = useSelector(selectIsSimulation);
+    const featuresSimulation = useSelector(selectFeaturesSimulation);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
@@ -39,6 +45,12 @@ const Dashboard = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [isSimulation]);
+
+    useEffect(() => {
+        if (!featuresSimulation) {
+            dispatch(updateIsSimulationFalse());
+        }
+    }, []);
 
     if (showSpinner) {
         return (

@@ -6,4 +6,9 @@ describe("formatNumberWithSpace(numberToFormat: number)", () => {
 
         expect(formatNumberWithSpace(numberToFormat)).toEqual("123 456 789");
     });
+    it("should return 0 if numberToFormat is 0", () => {
+        const numberToFormat = 0;
+
+        expect(formatNumberWithSpace(numberToFormat)).toEqual("0");
+    });
 });
