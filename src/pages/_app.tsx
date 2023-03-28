@@ -30,18 +30,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
     useEffect(() => {
         if (process.env.NODE_ENV !== "development") {
-            const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? "";
-            const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL ?? "";
-            hotjar.initialize(
-                Number(process.env.NEXT_PUBLIC_APP_HOTJAR),
-                6,
-                false
-            );
-            matomoInit({
-                excludeUrlsPatterns: [/^localhost:.+/g],
-                siteId: matomoSiteId,
-                url: matomoUrl,
-            });
+            const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID;
+            const matomoUrl = process.env.NEXT_PUBLIC_MATOMO_URL;
+            const hotjarId = process.env.NEXT_PUBLIC_APP_HOTJAR;
+
+            if (hotjarId) {
+                hotjar.initialize(
+                    Number(process.env.NEXT_PUBLIC_APP_HOTJAR),
+                    6,
+                    false
+                );
+            }
+            if (matomoSiteId && matomoUrl) {
+                matomoInit({
+                    excludeUrlsPatterns: [/^localhost:.+/g],
+                    siteId: matomoSiteId,
+                    url: matomoUrl,
+                });
+            }
         }
     }, []);
 
