@@ -85,15 +85,15 @@ export const dotationsMap: Record<string, DotationMap> = {
         key: "dotationAmenagementCommunesOutreMer",
         label: "DACOM",
         links: [],
-        title: "Dotation aménagement communes outre mer (DACOM)",
+        title: "Dotation Aménagement Communes Outre Mer (DACOM)",
     },
     dotationBiodiversite: {
         description: "Lorem Ipsum DNP",
         info: "",
         key: "dotationBiodiversite",
-        label: "DB",
+        label: "DPB",
         links: [],
-        title: "Dotation biodiversité (DB)",
+        title: "Dotation pour la Protection de la Biodiversité (DPB)",
     },
     dotationCompensation: {
         description: "Lorem Ipsum DNP",
@@ -101,7 +101,7 @@ export const dotationsMap: Record<string, DotationMap> = {
         key: "dotationCompensation",
         label: "DC",
         links: [],
-        title: "Dotation compensation (DC)",
+        title: "Dotation Compensation (DC)",
     },
     dotationEluLocal: {
         description: "Lorem Ipsum DNP",
@@ -109,10 +109,10 @@ export const dotationsMap: Record<string, DotationMap> = {
         key: "dotationEluLocal",
         label: "DPEL",
         links: [],
-        title: "Dotation élu local (DPEL)",
+        title: "Dotation Élu Local (DPEL)",
     },
     dotationFonctionnementMinimale: {
-        description: "Dotation fonctionnement minimale",
+        description: "Dotation Fonctionnement Minimale",
         info: "",
         key: "dotationFonctionnementMinimale",
         label: "DFM",
@@ -137,19 +137,19 @@ export const dotationsMap: Record<string, DotationMap> = {
         links: [
             {
                 dotationKey: "dotationForfaitaire",
-                linkText: "Dotation forfaitaire (DF)",
+                linkText: "Dotation Forfaitaire (DF)",
             },
             {
                 dotationKey: "dotationNationalePerequation",
-                linkText: "Dotation nationale de péréquation (DNP)",
+                linkText: "Dotation Nationale de Péréquation (DNP)",
             },
             {
                 dotationKey: "dotationSolidariteRurale",
-                linkText: "Dotation de solidarité rurale (DSR)",
+                linkText: "Dotation de Solidarité Rurale (DSR)",
             },
             {
                 dotationKey: "dsuMontant",
-                linkText: "Dotation de solidarité urbaine (DSU)",
+                linkText: "Dotation de Solidarité Urbaine (DSU)",
             },
         ],
         title: "Dotation Globale de Fonctionnement (DGF)",
@@ -160,7 +160,7 @@ export const dotationsMap: Record<string, DotationMap> = {
         key: "dotationGroupementsTouristiques",
         label: "DGT",
         links: [],
-        title: "Dotation groupements touristiques (DGT)",
+        title: "Dotation Groupements Touristiques (DGT)",
     },
     dotationIntercommunalite: {
         description: "Lorem Ipsum DNP",
@@ -168,7 +168,7 @@ export const dotationsMap: Record<string, DotationMap> = {
         key: "dotationIntercommunalite",
         label: "DI",
         links: [],
-        title: "Dotation intercommunalité (DI)",
+        title: "Dotation Intercommunalité (DI)",
     },
     dotationNationalePerequation: {
         description: "Lorem Ipsum DNP",
@@ -179,12 +179,12 @@ export const dotationsMap: Record<string, DotationMap> = {
         title: "Dotation Nationale de Péréquation (DNP)",
     },
     dotationPerequationUrbaine: {
-        description: "Dotation perequation urbaine",
+        description: "Dotation péréquation urbaine",
         info: "",
         key: "dotationPerequationUrbaine",
         label: "DPU",
         links: [],
-        title: "Dotation Perequation Urbaine (DPU)",
+        title: "Dotation Péréquation Urbaine (DPU)",
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
@@ -194,15 +194,15 @@ export const dotationsMap: Record<string, DotationMap> = {
         links: [
             {
                 dotationKey: "dsrFractionBourgCentre",
-                linkText: "Fraction Bourg-centre",
+                linkText: "Fraction Bourg-Centre",
             },
             {
                 dotationKey: "dsrFractionPerequation",
-                linkText: "Fraction péréquation",
+                linkText: "Fraction Péréquation",
             },
             {
                 dotationKey: "dsrFractionCible",
-                linkText: "Fraction cible",
+                linkText: "Fraction Cible",
             },
         ],
         title: "Dotation Solidarité Rurale (DSR)",

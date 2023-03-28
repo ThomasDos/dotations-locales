@@ -3,7 +3,10 @@ import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import { selectIsSimulation } from "store/appSettings.slice";
-import { selectInitialDotations } from "store/initialEntity.slice";
+import {
+    selectInitialCriteresGenerauxIsEmpty,
+    selectInitialDotations,
+} from "store/initialEntity.slice";
 import {
     selectCurrentYear,
     selectSimulationDotations,
@@ -18,6 +21,7 @@ import SubTab from "./SubTab";
 
 const StyledDashboardBody = styled.div<{
     displayMobileCriteresGeneraux: boolean;
+    initialCriteresGenerauxIsEmpty: boolean;
 }>`
     display: ${({ displayMobileCriteresGeneraux }) =>
         displayMobileCriteresGeneraux ? "none" : "block"};
@@ -25,11 +29,13 @@ const StyledDashboardBody = styled.div<{
     padding: 24px 16px 16px;
     @media (min-width: 768px) {
         display: block;
-        width: 70%;
+        width: ${({ initialCriteresGenerauxIsEmpty }) =>
+            !initialCriteresGenerauxIsEmpty && "70%"};
     }
     @media (min-width: 940px) {
         padding: 56px 80px 60px 120px;
-        width: 76%;
+        width: ${({ initialCriteresGenerauxIsEmpty }) =>
+            !initialCriteresGenerauxIsEmpty && "76%"};
     }
 `;
 
@@ -46,6 +52,9 @@ const DashboardBody = ({
     const simulationDotations = useSelector(selectSimulationDotations);
     const initialDotations = useSelector(selectInitialDotations);
     const currentYear = useSelector(selectCurrentYear);
+    const initialCriteresGenerauxIsEmpty = useSelector(
+        selectInitialCriteresGenerauxIsEmpty
+    );
     const dotations = isSimulation ? simulationDotations : initialDotations;
 
     if (_.isEmpty(dotations)) return null;
@@ -62,6 +71,7 @@ const DashboardBody = ({
     return (
         <StyledDashboardBody
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
+            initialCriteresGenerauxIsEmpty={initialCriteresGenerauxIsEmpty}
         >
             <>
                 <div className="w-full mb-6 md:mb-10 flex flex-col">
@@ -74,16 +84,18 @@ const DashboardBody = ({
                     </div>
                     <div className="flex w-full items-center justify-between">
                         <BaseCalculLoi />
-                        <ImageFixed
-                            className="flex flex-1 md:hidden justify-end"
-                            width={48}
-                            height={48}
-                            alt="Configuration des critères généraux"
-                            src="/icons/settings-mobile.svg"
-                            onClick={() => {
-                                setDisplayMobileCriteresGeneraux(true);
-                            }}
-                        />
+                        {!initialCriteresGenerauxIsEmpty && (
+                            <ImageFixed
+                                className="flex flex-1 md:hidden justify-end"
+                                width={48}
+                                height={48}
+                                alt="Configuration des critères généraux"
+                                src="/icons/settings-mobile.svg"
+                                onClick={() => {
+                                    setDisplayMobileCriteresGeneraux(true);
+                                }}
+                            />
+                        )}
                     </div>
                 </div>
 
