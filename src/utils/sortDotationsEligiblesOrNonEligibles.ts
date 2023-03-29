@@ -23,7 +23,7 @@ export default (
         const dotation = dotations[dotationKey];
         const dotationAmout = dotation.annees[0][currentYear];
 
-        //La DPEL et la DB ne font pas partie de la DGF et doivent être considéré différemment
+        //La DPEL et la DPB ne font pas partie de la DGF et doivent être considéré différemment
         if (dotation.label === "DPEL" || dotation.label === "DPB") return;
 
         if (dotationAmout) {
