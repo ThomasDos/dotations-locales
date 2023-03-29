@@ -53,51 +53,53 @@ export default (code: string) => {
         isInitialLoading: fetchDepartementIsLoading,
     } = useFetchDepartement(code, !!code && isDepartement && !hasSameCode);
 
-    const isFetching =
+    const fetchEntityIsLoading =
         fetchCommuneIsLoading ||
         fetchEPCIIsLoading ||
         fetchDepartementIsLoading;
+
     const fetchEntityData =
         fetchCommuneData ||
         fetchEPCIData ||
         fetchDepartementData ||
         initialEntity;
-    const showSpinner = !fetchEntityData || isFetching;
+
+    const showSpinner = !fetchEntityData || fetchEntityIsLoading;
+
     const fetchEntityError =
         fetchCommuneError || fetchEPCIError || fetchDepartementError;
 
-    if (fetchEntityError) {
+    if (fetchEntityError && !showSpinner && !fetchEntityData) {
         toastError(`Une erreur est survenue avec votre ${entityDenomination}`);
         router.push("/");
     }
 
     useEffect(() => {
-        if (!fetchEntityData || isFetching || !code) return;
+        if (!fetchEntityData || fetchEntityIsLoading || !code) return;
         dispatch(hydrateInitialEntity(fetchEntityData));
         !hasSameCode && dispatch(hydrateSimulationEntity(fetchEntityData));
-    }, [fetchEntityData, hasSameCode, isFetching]);
+    }, [fetchEntityData, hasSameCode, fetchEntityIsLoading]);
 
     useEffect(() => {
         if (code && !hasSameCode) {
             const codeLength = code.length;
 
-            switch (true) {
-                case codeLength === 2:
-                    dispatch(updateIsDepartementTrue());
-                    break;
-
-                case codeLength === 5:
-                    dispatch(updateIsCommuneTrue());
-                    break;
-
-                case codeLength === 9:
-                    dispatch(updateIsEPCITrue());
-                    break;
-
-                default:
-                    dispatch(resetAppSettings());
-                    break;
+            if (codeLength === 2 || codeLength === 3) {
+                dispatch(updateIsDepartementTrue());
+                return;
             }
+
+            if (codeLength === 5) {
+                dispatch(updateIsCommuneTrue());
+                return;
+            }
+
+            if (codeLength === 9) {
+                dispatch(updateIsEPCITrue());
+                return;
+            }
+
+            dispatch(resetAppSettings());
         }
     }, [code]);
 

@@ -2,7 +2,7 @@
 export interface EntityDto {
     code: string;
     dotations: DotationsDto;
-    criteres_generaux: CriteresDto;
+    criteres_generaux?: CriteresDto | null;
     part_dotation_rrf?: DotationRrfDto;
 }
 

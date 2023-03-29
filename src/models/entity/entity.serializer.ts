@@ -31,7 +31,9 @@ export const anneesSerializer = (dotations: DotationsDto): EntityAnnee => {
     return dotations[firstDotation].annees.map(annee => Object.keys(annee)[0]);
 };
 
-export const criteresSerializer = (rawCriteres: CriteresDto): Criteres => {
+export const criteresSerializer = (
+    rawCriteres?: CriteresDto | null
+): Criteres => {
     if (_.isEmpty(rawCriteres)) return {};
     const rawCriteresKeys = Object.keys(rawCriteres);
 
