@@ -69,7 +69,7 @@ export default (code: string) => {
     const fetchEntityError =
         fetchCommuneError || fetchEPCIError || fetchDepartementError;
 
-    if (fetchEntityError && !showSpinner && !fetchEntityData) {
+    if (fetchEntityError && !fetchEntityIsLoading && !fetchEntityData) {
         toastError(`Une erreur est survenue avec votre ${entityDenomination}`);
         router.push("/");
     }
