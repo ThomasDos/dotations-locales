@@ -75,13 +75,13 @@ const FooterContainer = () => {
                     href="https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText"
                     target="_"
                 >
-                    licence AGPL3
+                    Licence AGPL3
                 </FooterLink>
                 <FooterLink
                     href="https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=259&period=range&date=previous30#?period=range&date=previous30&category=Dashboard_Dashboard&subcategory=1&idSite=259"
                     target="_"
                 >
-                    statistiques
+                    Statistiques
                 </FooterLink>
                 <FooterLink href="/inscription">Inscription</FooterLink>
             </FooterBottom>

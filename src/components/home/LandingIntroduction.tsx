@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@dataesr/react-dsfr";
 import { ImageFixed } from "components/ui";
 import styled from "styled-components";
@@ -15,10 +16,13 @@ const LandingIntroduction = () => {
                 </div>
 
                 <div className="sm:mr-8 text-justify">
-                    Les montants des dotations sont calculés sur la base de la{" "}
-                    <b>loi de finances 2022</b> avec les{" "}
-                    <b>critères de répartitions 2022</b>. Pour rappel, seule la
-                    notification officielle de la DGF fait foi.
+                    Pour rappel, seule la notification officielle émise par la{" "}
+                    <Link
+                        href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/dotations_en_ligne.php"
+                        rel="noopener noreferrer"
+                        target="_">
+                            Direction Générale des Collectivités Locales (DGCL)
+                    </Link> fait foi. Notre plateforme vous en facilite l{"'"}accès et la compréhension.
                 </div>
             </div>
             <ImageFixed

@@ -46,7 +46,7 @@ const ParameterCardValue = ({ critere }: ParameterCardValueProps) => {
     );
 
     if (!Number(currentYearValeur)) {
-        return <LabelGreyCustomCrossIcon text="Non éligible" />;
+        return <LabelGreyCustomCrossIcon text="Non applicable" />;
     }
 
     return (

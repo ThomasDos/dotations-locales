@@ -187,7 +187,7 @@ const Home: NextPage = () => {
 
                         <div>
                             <div className="text-2xl font-bold mb-4">
-                                Service soutenu par France relance
+                                Service soutenu par le plan France Relance
                             </div>
                             <span>
                                 Dotations locales est née du constat d’une

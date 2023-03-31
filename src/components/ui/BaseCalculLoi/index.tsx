@@ -24,7 +24,7 @@ const StyledLoiLabel = styled.div`
     align-self: center;
 `;
 //TODO: gerer dynamiquement back
-const lois = ["Loi en vigueur 2022", "Critères de répartition 2022"];
+const lois = ["Loi en vigueur 2023"];
 
 export default function BaseCalculLoi() {
     return (

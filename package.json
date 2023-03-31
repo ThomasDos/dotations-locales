@@ -20,7 +20,8 @@
         "test:playwright:recorded": "yarn playwright test --trace on && yarn playwright show-report",
         "test:playwright:codegen": "yarn playwright codegen http://localhost:3000",
         "git": "git add . && git-cz && git push",
-        "rebase": "git checkout main && git pull && git rebase origin/develop && git push -f && git checkout -"
+        "rebase": "git checkout main && git pull && git rebase origin/develop && git push -f && git checkout -",
+        "clean": "rm -Rf node_modules/"
     },
     "dependencies": {
         "@dataesr/react-dsfr": "3.5.6",
