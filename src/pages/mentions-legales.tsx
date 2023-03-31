@@ -33,7 +33,7 @@ export default function MentionsLegales() {
                 <SectionMentionsLegales title="Directeur de la publication">
                     <div>
                         <span>
-                            Bérengère Aujard, Directrice, Mission Incubateur des
+                            Julie Ripa, Directrice, Mission Incubateur des
                             Territoires
                         </span>
                     </div>
@@ -58,12 +58,6 @@ export default function MentionsLegales() {
                             >
                                 Gitlab
                             </Link>
-                        </span>
-                        <br />
-                        <br />
-                        <span>
-                            Nous utilisons des frameworks libres : Framework1 ,
-                            Framework2 et le Système de Design de l&apos;État.
                         </span>
                     </div>
                 </SectionMentionsLegales>
