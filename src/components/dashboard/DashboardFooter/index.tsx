@@ -14,24 +14,13 @@ const StyledFooter = styled.div`
 export default function DashboardFooter() {
     return (
         <StyledFooter>
-            Les montants des dotations sont calculés sur la base de la{" "}
+            Pour rappel, seule la notification officielle émise par la{" "}
             <Link
-                href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044637640"
+                href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/dotations_en_ligne.php"
                 rel="noopener noreferrer"
-                target="_"
-            >
-                loi de finances 2022{" "}
-            </Link>
-            avec les{" "}
-            <Link
-                href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/informations_repartition.php"
-                rel="noopener noreferrer"
-                target="_"
-            >
-                critères de répartitions 2022.
-            </Link>
-            <br />
-            Pour rappel, seule la notification officielle de la DGF fait foi.
+                target="_">
+                    Direction Générale des Collectivités Locales (DGCL)
+            </Link> fait foi. Notre plateforme vous en facilite l'accès et la compréhension.
         </StyledFooter>
     );
 }
