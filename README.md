@@ -12,9 +12,9 @@ Pour `Next.js` et le gestionnaire de dépendances, installer l'interpréteur Jav
 
 ### Installation du gestionnaire de dépendances Yarn
 
-Vous pouvez installer les dépendances de ce dépôt avec le gestionnaire de dépendances [Yarn v2+](https://yarnpkg.com).
+Vous pouvez installer les dépendances de ce dépôt avec le gestionnaire de dépendances [Yarn v1](https://classic.yarnpkg.com).
 
-Vous retrouverez les étapes d'installation de Yarn et de ses propres dépendances est dans sa [documentation officielle](https://yarnpkg.com/getting-started/install).
+Vous retrouverez les étapes d'installation de Yarn et de ses propres dépendances est dans sa [documentation officielle](https://classic.yarnpkg.com/en/docs/install).
 
 > Nous conseillons l'emploi de Node.js dans sa version LTS (long-term support, soit à date, la version 16.17.0 ou supérieure).
 
