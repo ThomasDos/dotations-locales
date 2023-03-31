@@ -20,7 +20,7 @@ export default function DashboardFooter() {
                 rel="noopener noreferrer"
                 target="_">
                     Direction Générale des Collectivités Locales (DGCL)
-            </Link> fait foi. Notre plateforme vous en facilite l'accès et la compréhension.
+            </Link> fait foi. Notre plateforme vous en facilite l{"'"}accès et la compréhension.
         </StyledFooter>
     );
 }
