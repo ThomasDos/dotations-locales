@@ -33,7 +33,7 @@ export default function MentionsLegales() {
                 <SectionMentionsLegales title="Directeur de la publication">
                     <div>
                         <span>
-                            Bérengère Aujard, Directrice, Mission Incubateur des
+                            Julie Ripa, Directrice, Mission Incubateur des
                             Territoires
                         </span>
                     </div>
@@ -58,12 +58,6 @@ export default function MentionsLegales() {
                             >
                                 Gitlab
                             </Link>
-                        </span>
-                        <br />
-                        <br />
-                        <span>
-                            Nous utilisons des frameworks libres : Framework1 ,
-                            Framework2 et le Système de Design de l&apos;État.
                         </span>
                     </div>
                 </SectionMentionsLegales>
@@ -112,15 +106,16 @@ export default function MentionsLegales() {
                     <div>
                         <span>
                             L&apos;Incubateur des Territoires a choisi de placer
-                            par défaut ses documents sous Licence Ouverte / Open
+                            par défaut ses documents sous Licence Ouverte / Open
                             Licence 2.0. Cela signifie que, sauf mention
                             contraire, vous êtes libres de réutiliser toute
                             information publique mise à disposition sur ce site,
-                            gratuitement et sans restriction d’usage, à la seule
-                            condition de citer la source de l’information
-                            (Dotations Locales - Incubateur des Territoires) et
-                            la date de dernière mise à jour de l’information
-                            réutilisée (par exemple avec un lien hypertexte).
+                            gratuitement et sans restriction d&apos;usage, à la
+                            seule condition de citer la source de
+                            l&apos;information (Dotations Locales - Incubateur
+                            des Territoires) et la date de dernière mise à jour
+                            de l&apos;information réutilisée (par exemple avec
+                            un lien hypertexte).
                         </span>
                     </div>
                 </SectionMentionsLegales>
@@ -145,13 +140,23 @@ export default function MentionsLegales() {
                             partie des documents administratifs mis à
                             disposition sur ce site, vous vous engagez à
                             respecter les termes de la licence de réutilisation.
-                            Par défaut, c’est-à-dire sauf mention contraire, les
-                            jeux de données peuvent être exploités dans les
-                            conditions fixées par la [Licence Ouverte / Open
-                            Licence
-                            2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence),
-                            que vous pouvez
-                            télécharger [ici](https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf).
+                            Par défaut, c&apos;est-à-dire sauf mention
+                            contraire, les jeux de données peuvent être
+                            exploités dans les conditions fixées par la{" "}
+                            <Link
+                                href="https://www.etalab.gouv.fr/licence-ouverte-open-licence"
+                                target="_"
+                            >
+                                Licence Ouverte / Open Licence 2.0
+                            </Link>
+                            , que vous pouvez télécharger{" "}
+                            <Link
+                                href="https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf"
+                                target="_"
+                            >
+                                ici
+                            </Link>
+                            .
                         </span>
                     </div>
                 </SectionMentionsLegales>
