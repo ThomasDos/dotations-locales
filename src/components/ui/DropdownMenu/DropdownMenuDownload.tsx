@@ -81,6 +81,9 @@ const DropdownMenuDownload = ({
     };
     const currentYear = useSelector(selectCurrentYear);
     const initialCurrentYear = useSelector(selectInitialCurrentYear);
+    
+    const temporaryNationlFilesYear = "2022";  
+    // TODO: replace with const initialCurrentYear = useSelector(selectInitialCurrentYear); 
 
     const isCommune = useSelector(selectIsCommune);
     const isDepartement = useSelector(selectIsDepartement);
@@ -95,7 +98,7 @@ const DropdownMenuDownload = ({
 
     const textMenuItemEntities = `Télécharger ${
         isCommune ? "toutes les" : "tous les"
-    } ${entitiesDenomination} ${initialCurrentYear} (csv)`;
+    } ${entitiesDenomination} ${temporaryNationlFilesYear} (csv)`;
 
     const handleDownloadFichier = () => {
         const fichier = () => {
