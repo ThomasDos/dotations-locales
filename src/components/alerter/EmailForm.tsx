@@ -1,5 +1,4 @@
 import { Checkbox } from "@mui/material";
-import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import AlertRowIcon from "./AlertRowIcon";
@@ -61,12 +60,6 @@ export default function EmailForm({
                     Je consens à ce que mon adresse email soit utilisée afin de
                     recevoir les alertes et informations du service Dotations
                     Locales.{" "}
-                    <Link
-                        href="https://www.economie.gouv.fr/politique-confidentialite"
-                        target="_"
-                    >
-                        Consulter notre politique de confidentialité
-                    </Link>
                 </span>
             </div>
 

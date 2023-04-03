@@ -101,9 +101,9 @@ const Home: NextPage = () => {
                     >
                         Le Service
                         <strong> Dotations Locales</strong> a pour objectif de
-                        rendre accessible et de faciliter l’exploitation des
-                        montants attribués au titre de la dotation globale de
-                        fonctionnement de votre collectivité.
+                        rendre accessible et de faciliter l&apos;exploitation
+                        des montants attribués au titre de la dotation globale
+                        de fonctionnement de votre collectivité.
                     </HomeRowImageText>
 
                     <HomeRowImageText
@@ -128,11 +128,12 @@ const Home: NextPage = () => {
                         imageHeight={320}
                         imageWidth={320}
                         imageAlt="third row image"
-                        titleContent="Comparez et analysez l’évolution de vos dotations"
+                        titleContent="Comparez et analysez l'évolution de vos dotations"
                     >
-                        Un outil pratique pour suivre l’évolution des montants,
-                        comparer et analyser les critères et les données qui ont
-                        un impact fort sur les fonds qui vous sont attribués.
+                        Un outil pratique pour suivre l&apos;évolution des
+                        montants, comparer et analyser les critères et les
+                        données qui ont un impact fort sur les fonds qui vous
+                        sont attribués.
                     </HomeRowImageText>
 
                     <HomeRowImageText
@@ -146,7 +147,7 @@ const Home: NextPage = () => {
                         badgeType="new"
                         badgeHasIcon
                     >
-                        <strong>Dotations Locales</strong> s’appuie sur{" "}
+                        <strong>Dotations Locales</strong> s&apos;appuie sur{" "}
                         <strong>OpenFisca</strong>, un moteur de calcul libre,
                         collaboratif et transparent qui permet de simuler
                         l&lsquo;impact de réformes sur les dotations des
@@ -160,7 +161,7 @@ const Home: NextPage = () => {
                         imageAlt="fifth row image"
                         titleContent="Des données libres et partagées en Open Data"
                     >
-                        L’ensemble des données de votre collectivité sont
+                        L&apos;ensemble des données de votre collectivité sont
                         collectées automatiquement à partir des plateformes
                         publiques
                         <strong> Data.gouv.fr.</strong>
@@ -190,14 +191,14 @@ const Home: NextPage = () => {
                                 Service soutenu par le plan France Relance
                             </div>
                             <span>
-                                Dotations locales est née du constat d’une
+                                Dotations locales est née du constat d&apos;une
                                 évolution des concours financiers aux budgets
-                                des territoires et de l’absence d’outils
-                                partagés permettant d’en anticiper les effets.
-                                Or, les données ouvertes sur les territoires
-                                ainsi que la naissance d’un modèle open source
-                                des règles de calcul des dotations rendent cela
-                                possible.
+                                des territoires et de l&apos;absence
+                                d&apos;outils partagés permettant d&apos;en
+                                anticiper les effets. Or, les données ouvertes
+                                sur les territoires ainsi que la naissance
+                                d&apos;un modèle open source des règles de
+                                calcul des dotations rendent cela possible.
                             </span>
                         </div>
                     </MainBottomBody>
