@@ -12,7 +12,7 @@ export default (numberToFormat: number): string => {
         }
 
         const numberHasDecimal = numberToFormat % 1 !== 0;
-        const numberIsSmallNumber = numberToFormat < 10;
+        const numberIsSmallNumber = numberToFormat < 100;
 
         return numberIsSmallNumber && numberHasDecimal
             ? numberToFormat.toFixed(2)
