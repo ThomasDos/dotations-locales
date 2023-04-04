@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     selectFeaturesSimulation,
+    selectFichiersWithEntity,
     selectIsCommune,
     selectIsSimulation,
     updateIsSimulationFalse,
@@ -41,6 +42,12 @@ const Dashboard = () => {
     const [hasConfirmedAlert, setHasConfirmedAlert] = useState(false);
 
     const { showSpinner } = useDataEntityInit(code);
+
+    const fichiersWithEntity = useSelector(selectFichiersWithEntity);
+    console.log(
+        "🚀 ~ file: index.tsx:47 ~ Dashboard ~ fichiersWithEntity:",
+        fichiersWithEntity
+    );
 
     useEffect(() => {
         window.scrollTo(0, 0);
