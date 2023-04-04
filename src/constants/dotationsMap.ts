@@ -87,6 +87,14 @@ export const dotationsMap: Record<string, DotationMap> = {
         links: [],
         title: "Dotation Aménagement Communes Outre Mer (DACOM)",
     },
+    dotationAmorcage: {
+        description: "Lorem Ipsum DNP",
+        info: "",
+        key: "dotationAmorcage",
+        label: "DA",
+        links: [],
+        title: "Dotation Amorçage (DA)",
+    },
     dotationBiodiversite: {
         description: "Lorem Ipsum DNP",
         info: "",
@@ -131,7 +139,7 @@ export const dotationsMap: Record<string, DotationMap> = {
     dotationGlobaleFonctionnement: {
         description: "Evolution de votre montant total de dotations",
         info: `La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.
-                                                                                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
+                                                                                                                                                                                                                                                                <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.`,
         key: "dotationGlobaleFonctionnement",
         label: "Résumé",
         links: [

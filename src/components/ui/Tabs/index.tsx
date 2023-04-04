@@ -25,7 +25,10 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
 
     @media (max-width: 900px) {
         button {
-            padding: 10px !important;
+            padding: 8px !important;
+        }
+        ul {
+            padding-left: 2px !important;
         }
     }
 
@@ -38,13 +41,13 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
 
     @media (max-width: 480px) {
         button {
-            padding: 6px !important;
+            padding: 5px !important;
         }
     }
 
     @media (max-width: 440px) {
         button {
-            padding: 2.5px !important;
+            padding: 1px !important;
             padding-bottom: 12px !important;
         }
     }
