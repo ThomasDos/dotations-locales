@@ -19,12 +19,9 @@ const Value = ({
     const { valeur, unite } = currentYearCritereGeneralSimulation;
     const valeurToNumber = Number(currentYearCritereGeneralSimulation.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
-    let percentageEvolution = 0;
+    let percentageEvolution;
     if (!valeurIsNotNumber && valeur != 0) {
-        percentageEvolution = getPercentageEvolution(
-            valeur as number,
-            lastYearValeur as number
-        );
+        percentageEvolution = getPercentageEvolution(valeur, lastYearValeur);
     }
 
     if (valeurIsNotNumber) {

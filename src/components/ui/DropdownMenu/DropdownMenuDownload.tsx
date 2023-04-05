@@ -16,7 +16,6 @@ import {
     selectIsDepartement,
     selectIsEPCI,
 } from "store/appSettings.slice";
-import { selectInitialCurrentYear } from "store/initialEntity.slice";
 import { selectCurrentYear } from "store/simulationEntity.slice";
 import styled from "styled-components";
 import { toastPromise } from "utils/customToasts";
@@ -80,10 +79,9 @@ const DropdownMenuDownload = ({
         setAnchorEl(null);
     };
     const currentYear = useSelector(selectCurrentYear);
-    const initialCurrentYear = useSelector(selectInitialCurrentYear);
-    
-    const temporaryNationlFilesYear = "2022";  
-    // TODO: replace with const initialCurrentYear = useSelector(selectInitialCurrentYear); 
+
+    const temporaryNationlFilesYear = "2022";
+    // TODO: replace with const initialCurrentYear = useSelector(selectInitialCurrentYear);
 
     const isCommune = useSelector(selectIsCommune);
     const isDepartement = useSelector(selectIsDepartement);
