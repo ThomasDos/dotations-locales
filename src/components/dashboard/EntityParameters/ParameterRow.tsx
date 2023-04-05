@@ -31,7 +31,7 @@ const ParameterRow = ({
         critereGeneral.annees[0][currentYear];
     const currentYearCritereGeneralInitial =
         initialCritereGeneral.annees[0][initialCurrentYear];
-    const { valeur: lastYearValeur } = critereGeneral.annees[1][lastYear];
+    const lastYearValeur = critereGeneral.annees[1][lastYear]?.valeur;
 
     const valueIsModified = useMemo(
         () =>

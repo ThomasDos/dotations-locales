@@ -8,7 +8,13 @@ export interface RrfFormatted {
 const formatRrfEvolution = (
     partDotationRrf?: DotationRrfDto
 ): null | RrfFormatted => {
-    if (!partDotationRrf) return null;
+    if (
+        !partDotationRrf ||
+        !partDotationRrf.annees[0] ||
+        !partDotationRrf.annees[1]
+    )
+        return null;
+
     const [currentYearRrf] = Object.keys(partDotationRrf.annees[0]);
     const [lastYear] = Object.keys(partDotationRrf.annees[1]);
     const rrfPercentage = partDotationRrf.annees[0][currentYearRrf].valeur;

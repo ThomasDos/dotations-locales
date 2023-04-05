@@ -21,12 +21,12 @@ const ParameterCardValue = ({ critere }: ParameterCardValueProps) => {
     const lastYearCritere = critere.annees[1][lastYear];
 
     const { valeur: currentYearValeur, unite } = currentYearCritere;
-    const { valeur: lastYearValeur } = lastYearCritere;
+    const lastYearValeur = lastYearCritere?.valeur;
 
     const valeurToNumber = Number(currentYearCritere.valeur);
     const valeurIsNotNumber = isNaN(valeurToNumber);
 
-    let percentageEvolution = 0;
+    let percentageEvolution;
 
     if (valeurIsNotNumber) {
         if (currentYearValeur === "Oui") {
@@ -41,8 +41,8 @@ const ParameterCardValue = ({ critere }: ParameterCardValueProps) => {
     }
 
     percentageEvolution = getPercentageEvolution(
-        currentYearValeur as number,
-        lastYearValeur as number
+        currentYearValeur,
+        lastYearValeur
     );
 
     if (!Number(currentYearValeur)) {
