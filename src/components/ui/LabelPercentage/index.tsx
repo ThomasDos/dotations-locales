@@ -19,7 +19,7 @@ const StyledLabel = styled.div<LabelContainerProps>`
 `;
 
 interface LabelProps {
-    percentage: number;
+    percentage: number | null;
     valeur?: string;
     hasBackgroundColor?: boolean;
     textBold?: boolean;
@@ -39,6 +39,14 @@ const LabelPercentage = ({
         icon: JSX.Element | null;
         startUnit: string;
     } = useMemo(() => {
+        if (percentage === null) {
+            return {
+                backgroundColor: "blue-france-950",
+                icon: null,
+                startUnit: "",
+            };
+        }
+
         if (percentage > 0) {
             return {
                 backgroundColor: "success-975",
@@ -71,6 +79,8 @@ const LabelPercentage = ({
         }
         return `${percentageLabelData.startUnit}${percentageFormatted}%`;
     }, [valeur, percentage]);
+
+    if (percentage === null && !valeur) return null;
 
     return (
         <StyledLabel

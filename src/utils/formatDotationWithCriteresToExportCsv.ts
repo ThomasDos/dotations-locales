@@ -24,6 +24,7 @@ const formatDotationWithCriteresToExportCsv = (
 
             annees.forEach(annee => {
                 const anneeKey = Object.keys(annee)[0];
+                if (!annee[anneeKey]?.valeur) return;
                 dotationFormatted[anneeKey] = String(annee[anneeKey].valeur);
             });
 

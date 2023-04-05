@@ -6,20 +6,26 @@ const StyledTagData = styled.div<{ position?: string }>`
 `;
 
 interface TagDataProps {
-    percentage: number;
+    percentage?: number | null;
     valeur?: string;
     position?: string;
 }
 
 const TagData = ({ percentage, valeur, position }: TagDataProps) => {
-    const percentageIsPositive = percentage >= 0;
+    const percentageIsPositive = percentage && percentage >= 0;
 
     return (
         <StyledTagData
             className="text-sm flex items-center"
             position={position}
         >
-            {percentageIsPositive ? <IconVectorUp /> : <IconVectorDown />}
+            {percentage ? (
+                percentageIsPositive ? (
+                    <IconVectorUp />
+                ) : (
+                    <IconVectorDown />
+                )
+            ) : null}
             <span className="ml-1 font-bold">{valeur}</span>
         </StyledTagData>
     );

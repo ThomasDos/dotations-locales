@@ -17,7 +17,7 @@ export default (
 
     let valeur = null;
     if (~getHabitantsIndex) {
-        valeur = annees[getHabitantsIndex][year].valeur;
+        valeur = annees[getHabitantsIndex][year]?.valeur;
     }
 
     if (!valeur) return 0;
