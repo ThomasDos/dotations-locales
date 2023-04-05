@@ -185,4 +185,10 @@ export const selectFichiersWithEntity = createSelector(
     }
 );
 
+export const selectFichiersWithEntityAndDotation = (dotation: string) =>
+    createSelector(selectFichiersWithEntity, fichiersWithEntity => {
+        if (!fichiersWithEntity) return null;
+        return fichiersWithEntity[dotation];
+    });
+
 export default appSettingsSlice.reducer;

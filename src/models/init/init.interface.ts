@@ -19,14 +19,13 @@ export interface InitNationalFichiersDto {
 
 export type InitData = Record<"commune" | "epci" | "departement", InitEntity>;
 
-export type InitEntity = Record<
-    string,
-    {
-        nationalCriteres: null | InitNationalFichiers;
-        nationalMontants: null | InitNationalFichiers;
-        sousDotations: null | InitEntity[];
-    }
->;
+export type InitEntity = Record<string, InitEntityFichiers>;
+
+export interface InitEntityFichiers {
+    nationalCriteres: null | InitNationalFichiers;
+    nationalMontants: null | InitNationalFichiers;
+    sousDotations: null | InitEntity[];
+}
 
 export interface InitNationalFichiers {
     label: string;
