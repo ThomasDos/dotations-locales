@@ -1,6 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import stringToBoolean from "utils/stringToBoolean";
 
+import { InitData } from "models/init/init.interface";
 import type { RootState } from ".";
 
 interface AppSettings {
@@ -12,6 +13,7 @@ interface AppSettings {
         simulation: boolean;
         comparer: boolean;
     };
+    fichiers: InitData | null;
 }
 
 const initialState: AppSettings = {
@@ -25,13 +27,17 @@ const initialState: AppSettings = {
         ),
         comparer: stringToBoolean(process.env.NEXT_PUBLIC_FEATURES_COMPARER),
     },
+    fichiers: null,
 };
 
 const appSettingsSlice = createSlice({
     initialState,
     name: "appSettings",
     reducers: {
-        resetAppSettings: () => initialState,
+        resetAppSettings: state => ({
+            ...initialState,
+            fichiers: state.fichiers,
+        }),
         updateIsSimulationFalse: state => {
             state.isSimulation = false;
         },
@@ -62,6 +68,9 @@ const appSettingsSlice = createSlice({
             state.isEPCI = false;
             state.isCommune = false;
         },
+        hydrateFichiers: (state, action) => {
+            state.fichiers = action.payload;
+        },
     },
 });
 
@@ -75,6 +84,7 @@ export const {
     updateIsCommuneTrue,
     updateIsDepartementFalse,
     updateIsDepartementTrue,
+    hydrateFichiers,
 } = appSettingsSlice.actions;
 
 const selectSelf = (state: RootState) => state[appSettingsSlice.name];
@@ -151,5 +161,34 @@ export const selectEntitiesDenomination = createSelector(
         }
     }
 );
+
+export const selectFichiers = createSelector(
+    selectSelf,
+    state => state.fichiers
+);
+
+export const selectFichiersWithEntity = createSelector(
+    selectFichiers,
+    selectIsCommune,
+    selectIsDepartement,
+    selectIsEPCI,
+    (fichiers, isCommune, isDepartement, isEPCI) => {
+        if (!fichiers) return null;
+
+        const { commune, departement, epci } = fichiers;
+
+        if (isCommune) return commune;
+        if (isDepartement) return departement;
+        if (isEPCI) return epci;
+
+        return null;
+    }
+);
+
+export const selectFichiersWithEntityAndDotation = (dotation: string) =>
+    createSelector(selectFichiersWithEntity, fichiersWithEntity => {
+        if (!fichiersWithEntity) return null;
+        return fichiersWithEntity[dotation];
+    });
 
 export default appSettingsSlice.reducer;
