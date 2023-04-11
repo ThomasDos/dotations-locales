@@ -3,14 +3,13 @@ export type InitDataDto = Record<
     InitEntityDto
 >;
 
-export type InitEntityDto = Record<
-    string,
-    {
-        national_criteres: null | InitNationalFichiersDto;
-        national_montants: null | InitNationalFichiersDto;
-        sous_dotations: null | InitEntityDto[];
-    }
->;
+export type InitEntityDto = Record<string, InitEntityFichiersDto>;
+
+interface InitEntityFichiersDto {
+    national_criteres: null | InitNationalFichiersDto;
+    national_montants: null | InitNationalFichiersDto;
+    sous_dotations: null | InitEntityDto[];
+}
 
 export interface InitNationalFichiersDto {
     label: string;
