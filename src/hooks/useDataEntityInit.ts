@@ -64,18 +64,22 @@ export default (code: string) => {
         fetchDepartementData ||
         initialEntity;
 
-    const showSpinner = !fetchEntityData || fetchEntityIsLoading;
+    const showSpinner = !fetchEntityData.code || fetchEntityIsLoading;
 
     const fetchEntityError =
         fetchCommuneError || fetchEPCIError || fetchDepartementError;
 
-    if (fetchEntityError && !fetchEntityIsLoading && !fetchEntityData) {
+    if (
+        fetchEntityError &&
+        !fetchEntityIsLoading &&
+        (!fetchEntityData.code || fetchEntityData.code !== code)
+    ) {
         toastError(`Une erreur est survenue avec votre ${entityDenomination}`);
         router.push("/");
     }
 
     useEffect(() => {
-        if (!fetchEntityData || fetchEntityIsLoading || !code) return;
+        if (!fetchEntityData.code || fetchEntityIsLoading || !code) return;
         dispatch(hydrateInitialEntity(fetchEntityData));
         !hasSameCode && dispatch(hydrateSimulationEntity(fetchEntityData));
     }, [fetchEntityData, hasSameCode, fetchEntityIsLoading]);

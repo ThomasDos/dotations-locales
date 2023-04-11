@@ -4,6 +4,7 @@ import "styles/variables.css";
 
 import { init as matomoInit } from "@socialgouv/matomo-next";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import App from "components/app";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -13,9 +14,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "store/index";
 
-import Layout from "../layouts";
-
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const AppWrapper = ({ Component, pageProps, router }: AppProps) => {
     const [queryClient] = useState(
         () =>
             new QueryClient({
@@ -58,9 +57,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                     <Head>
                         <title>Dotations Locales</title>
                     </Head>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
+                    <App
+                        Component={Component}
+                        pageProps={pageProps}
+                        router={router}
+                    />
                     <Toaster containerStyle={{ textAlign: "center" }} />
                 </QueryClientProvider>
             </PersistGate>
@@ -68,4 +69,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     );
 };
 
-export default MyApp;
+export default AppWrapper;

@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ImageFixed from "components/ui/ImageFixed";
-import { FICHIERS_DISPONIBLES } from "constants/fichiersDisponiblesMap";
+import { InitEntityFichiers } from "models/init/init.interface";
 import React, { useState } from "react";
 import { CSVLink } from "react-csv";
 import { Headers } from "react-csv/components/CommonPropTypes";
@@ -10,11 +10,8 @@ import { useSelector } from "react-redux";
 import fetchAndDownloadFichiersData from "services/fetchAndDownloadFichiersData";
 import { matomoTrackEvent } from "services/matomo";
 import {
-    selectEntitiesDenomination,
     selectEntityDenomination,
     selectIsCommune,
-    selectIsDepartement,
-    selectIsEPCI,
 } from "store/appSettings.slice";
 import { selectCurrentYear } from "store/simulationEntity.slice";
 import styled from "styled-components";
@@ -62,11 +59,13 @@ const MenuItemCustom = ({
 interface DropdownMenuDownloadProps {
     dataCSV: {}[] | [][];
     headers: Headers;
+    fichiers?: InitEntityFichiers | null;
 }
 
 const DropdownMenuDownload = ({
     dataCSV,
     headers,
+    fichiers,
 }: DropdownMenuDownloadProps) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
@@ -80,48 +79,21 @@ const DropdownMenuDownload = ({
     };
     const currentYear = useSelector(selectCurrentYear);
 
-    const temporaryNationlFilesYear = "2022";
-    // TODO: replace with const initialCurrentYear = useSelector(selectInitialCurrentYear);
-
     const isCommune = useSelector(selectIsCommune);
-    const isDepartement = useSelector(selectIsDepartement);
-    const isEPCI = useSelector(selectIsEPCI);
 
     const entityDenomination = useSelector(selectEntityDenomination);
-    const entitiesDenomination = useSelector(selectEntitiesDenomination);
 
     const textMenuItemEntity = `Télécharger ${
         isCommune ? "ma" : "mon"
     } ${entityDenomination} ${currentYear} (csv)`;
 
-    const textMenuItemEntities = `Télécharger ${
-        isCommune ? "toutes les" : "tous les"
-    } ${entitiesDenomination} ${temporaryNationlFilesYear} (csv)`;
-
-    const handleDownloadFichier = () => {
-        const fichier = () => {
-            if (isCommune) {
-                return "Répartition des critères des communes en 2022";
-            }
-            if (isDepartement) {
-                return "Répartition des critères des départements en 2022";
-            }
-            if (isEPCI) {
-                return "Répartition des critères des intercommunalités en 2022";
-            }
-        };
-
-        toastPromise(
-            fetchAndDownloadFichiersData(
-                fichier() as keyof typeof FICHIERS_DISPONIBLES
-            ),
-            {
-                loading:
-                    "Préparation du fichier, merci de patienter jusqu'au téléchargement...",
-                success: "Fichier téléchargé",
-                error: "Une erreur est survenue, merci de réessayer",
-            }
-        );
+    const handleDownloadFichier = (fichier: string) => {
+        toastPromise(fetchAndDownloadFichiersData(fichier), {
+            loading:
+                "Préparation du fichier, merci de patienter jusqu'au téléchargement...",
+            success: "Fichier téléchargé",
+            error: "Une erreur est survenue, merci de réessayer",
+        });
     };
 
     if (!dataCSV?.length) return null;
@@ -166,11 +138,29 @@ const DropdownMenuDownload = ({
                         text={textMenuItemEntity}
                     />
                 </CSVLink>
-                <MenuItemCustom
-                    handleClose={handleClose}
-                    text={textMenuItemEntities}
-                    handleClick={handleDownloadFichier}
-                />
+                {fichiers?.nationalCriteres && (
+                    <MenuItemCustom
+                        handleClose={handleClose}
+                        text={fichiers?.nationalCriteres.label}
+                        handleClick={() =>
+                            handleDownloadFichier(
+                                fichiers?.nationalCriteres?.nomFichier as string
+                            )
+                        }
+                    />
+                )}
+
+                {fichiers?.nationalMontants && (
+                    <MenuItemCustom
+                        handleClose={handleClose}
+                        text={fichiers?.nationalMontants.label}
+                        handleClick={() =>
+                            handleDownloadFichier(
+                                fichiers?.nationalMontants?.nomFichier as string
+                            )
+                        }
+                    />
+                )}
             </Menu>
         </div>
     );
