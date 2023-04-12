@@ -1,27 +1,18 @@
-import Dots from "components/ui/Dots";
-import { FormEvent, useMemo } from "react";
-import toast from "react-hot-toast";
 import styled from "styled-components";
-import isValidEmail from "utils/isValidEmail";
-
-const StyledSearchButton = styled.div`
-    background-color: var(--blue-france-sun-113-625);
-    border-top-right-radius: 4px;
-    gap: 8px;
-`;
 
 const StyledSearchInput = styled.div<{ isError?: boolean }>`
     border-bottom: ${({ isError }) =>
         `2px solid var(--${
             isError ? "error-425" : "blue-france-sun-113-625"
         })`};
+    width: 100%;
+    @media (min-width: 768px) {
+        width: 83%;
+    }
 `;
 
-const StyledSpanButton = styled.span`
-    color: var(--blue-france-975);
-`;
 const StyledInput = styled.input`
-    flex: 1;
+    width: 100%;
     background: var(--grey-950);
     color: var(--grey-425);
     font-style: italic;
@@ -33,71 +24,31 @@ const StyledInput = styled.input`
 interface EmailInputProps {
     userEmail: string;
     setUserEmail(email: string): void;
-    postEmail(email: string): void;
-    postEmailIsLoading: boolean;
     postEmailIsError: boolean;
-    isChecked: boolean;
-    setTryToSubmit(tryToSubit: boolean): void;
+    valideUserEmail: boolean;
 }
 
 export default function EmailInput({
     userEmail,
     setUserEmail,
-    postEmail,
-    postEmailIsLoading,
     postEmailIsError,
-    isChecked,
-    setTryToSubmit,
+    valideUserEmail,
 }: EmailInputProps) {
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!isChecked) {
-            return toast.error("Merci de d'accepter les conditions");
-        }
-        const emailIsValid = isValidEmail(userEmail);
-        if (!emailIsValid) {
-            return toast.error("Votre email est invalide");
-        }
-
-        postEmail(userEmail);
-    };
-    const valideUserEmail = useMemo(
-        () => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail),
-        [userEmail]
-    );
-
-    const canSubmit = isChecked && !postEmailIsLoading && valideUserEmail;
-
     return (
-        <form onSubmit={handleSubmit}>
-            <StyledSearchInput
-                className="flex md:w-5/6 my-8"
-                isError={postEmailIsError || !valideUserEmail}
-            >
-                <StyledInput
-                    autoFocus
-                    type="text"
-                    placeholder="Votre e-mail"
-                    className="pl-4"
-                    value={userEmail}
-                    onChange={e => {
-                        setUserEmail(e.target.value);
-                    }}
-                />
-                <div onClick={() => setTryToSubmit(true)}>
-                    <button type="submit" role="button" disabled={!canSubmit}>
-                        <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
-                            {postEmailIsLoading ? (
-                                <Dots />
-                            ) : (
-                                <StyledSpanButton className="text-sm md:text-xl font-normal">
-                                    Valider
-                                </StyledSpanButton>
-                            )}
-                        </StyledSearchButton>
-                    </button>
-                </div>
-            </StyledSearchInput>
-        </form>
+        <StyledSearchInput
+            className="mt-8"
+            isError={postEmailIsError || !valideUserEmail}
+        >
+            <StyledInput
+                autoFocus
+                type="text"
+                placeholder="Votre adresse électronique (ex. : nom@domaine.fr)"
+                className="pl-4 py-3"
+                value={userEmail}
+                onChange={e => {
+                    setUserEmail(e.target.value);
+                }}
+            />
+        </StyledSearchInput>
     );
 }

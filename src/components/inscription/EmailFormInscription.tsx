@@ -126,10 +126,7 @@ export default function EmailFormInscription({
                     Je consens à ce que mon adresse email soit utilisée afin de
                     recevoir les alertes et informations du service Dotations
                     Locales.{" "}
-                    <Link
-                        href="https://www.economie.gouv.fr/politique-confidentialite"
-                        target="_"
-                    >
+                    <Link href="/cgu" target="_">
                         Consulter notre politique de confidentialité
                     </Link>
                 </span>
