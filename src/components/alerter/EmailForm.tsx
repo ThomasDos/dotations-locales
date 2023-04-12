@@ -33,7 +33,7 @@ export default function EmailForm({
     const [tryToSubmit, setTryToSubmit] = useState(false);
     return (
         <>
-            <StyledTitle>S’abonner aux alertes</StyledTitle>
+            <StyledTitle>S&apos;abonner aux alertes</StyledTitle>
             <EmailInput
                 postEmail={postEmail}
                 userEmail={userEmail}
@@ -64,15 +64,11 @@ export default function EmailForm({
             </div>
 
             <div className="text-lg">
-                S’abonner aux alertes c’est recevoir des informations concernant
-                :
+                S&apos;abonner aux alertes c&apos;est recevoir des informations
+                concernant :
             </div>
             <AlertRowIcon
                 text={`Mise à jour de mes dotations (${libelle} ${code})`}
-            />
-            <AlertRowIcon
-                text="Simulation de mes dotations avec les Projets de Lois de
-                    Finances (PLF)"
             />
             <AlertRowIcon text="Accès en exclusivité à de nouvelles fonctionnalités" />
         </>
