@@ -80,8 +80,8 @@ export default function EmailFormInscription({
             <div className="flex flex-col items-center mb-6">
                 <Badge text="inscription" type="info" />
                 <StyledTitle>
-                    Inscrivez-vous pour être alerté de la publication de vos
-                    dotations pour 2023.
+                    Inscrivez-vous pour être averti de toute nouveauté sur la
+                    plateforme.
                 </StyledTitle>
             </div>
             <StyledInputContainer>

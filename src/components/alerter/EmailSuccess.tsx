@@ -47,7 +47,7 @@ export default function EmailSuccess({
                 <div>
                     Pour finaliser votre inscription, il vous suffit de cliquer
                     sur le lien de confirmation qui se trouve dans l&apos;email
-                    que nous venons d’envoyer à : <u>{userEmail}</u>
+                    que nous venons d&apos;envoyer à : <u>{userEmail}</u>
                 </div>
             </StyledValidationText>
             <StyledRetour onClick={onClickLink}>{textLink}</StyledRetour>
