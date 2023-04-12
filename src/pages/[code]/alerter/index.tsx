@@ -50,8 +50,6 @@ export default function Alerter() {
                         setUserEmail={setUserEmail}
                         postEmailIsLoading={postEmailIsLoading}
                         postEmailIsError={postEmailIsError}
-                        libelle={libelle}
-                        code={code}
                     />
                 )}
             </div>
