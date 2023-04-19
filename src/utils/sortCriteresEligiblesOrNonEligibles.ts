@@ -1,7 +1,7 @@
 import type { Criteres } from "models/entity/entity.interface";
 import sortCriteresByAmountDescending from "./sortCriteresByAmountDescending";
 
-export default (
+const sortCriteresEligiblesOrNonEligibles = (
     Criteres: Criteres,
     currentYear: string
 ): {
@@ -21,7 +21,7 @@ export default (
 
     criteresKeys.forEach((critereKey: string) => {
         const critere = Criteres[critereKey];
-        const critereAmount = critere.annees[0][currentYear].valeur;
+        const critereAmount = critere.annees[0]?.[currentYear]?.valeur;
         if (critereAmount && critereAmount != 0 && critereAmount != "Non") {
             criteresEligibles[critereKey] = critere;
         } else {
@@ -39,3 +39,5 @@ export default (
         criteresNonEligibles,
     };
 };
+
+export default sortCriteresEligiblesOrNonEligibles;

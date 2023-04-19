@@ -11,6 +11,7 @@ export interface Entity {
     dotations: Dotations;
     criteresGeneraux: Criteres;
     annees: EntityAnnee;
+    anneesCriteres: EntityAnnee;
     partDotationRrf?: DotationRrfDto;
 }
 

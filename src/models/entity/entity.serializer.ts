@@ -20,6 +20,7 @@ import type {
 
 export const fetchEntitySerializer = (rawResult: EntityDto): Entity => ({
     annees: anneesSerializer(rawResult.dotations),
+    anneesCriteres: anneesCriteresSerializer(rawResult.criteres_generaux),
     code: rawResult.code,
     criteresGeneraux: criteresSerializer(rawResult.criteres_generaux),
     dotations: dotationSerializer(rawResult.dotations),
@@ -29,6 +30,18 @@ export const fetchEntitySerializer = (rawResult: EntityDto): Entity => ({
 export const anneesSerializer = (dotations: DotationsDto): EntityAnnee => {
     const [firstDotation] = Object.keys(dotations);
     return dotations[firstDotation].annees.map(annee => Object.keys(annee)[0]);
+};
+
+export const anneesCriteresSerializer = (
+    criteresGeneraux?: CriteresDto | null
+): EntityAnnee => {
+    if (!criteresGeneraux) return [];
+    const [firstCritere] = Object.keys(criteresGeneraux);
+    const criteresGenerauxAnnees = criteresGeneraux[firstCritere].annees;
+
+    if (!criteresGenerauxAnnees || !criteresGenerauxAnnees.length) return [];
+
+    return criteresGenerauxAnnees.map(annee => Object.keys(annee)[0]);
 };
 
 export const criteresSerializer = (

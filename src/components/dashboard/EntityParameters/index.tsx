@@ -1,6 +1,5 @@
 import { Button, LabelPercentage } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
-import _ from "lodash";
 import type { Criteres } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
@@ -11,19 +10,20 @@ import {
 } from "store/appSettings.slice";
 import {
     selectCurrentYearTotal,
+    selectInitialCriteresGenerauxIsEmpty,
     selectInitialEntity,
     selectLastYearTotal,
 } from "store/initialEntity.slice";
 import {
-    selectCurrentYear,
-    selectLastYear,
+    selectCurrentYearCriteres,
+    selectLastYearCriteres,
     selectSimulationEntity,
     selectSimulationIsDifferentThanInitial,
 } from "store/simulationEntity.slice";
 import styled from "styled-components";
-import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantPopulationInsee";
 import getPercentageEvolution from "utils/getPercentageEvolution";
 
+import getDotationPerHabitantPopulationDgf from "utils/getDotationPerHabitantPopulationDgf";
 import ParameterRow from "./ParameterRow";
 
 const StyledEntityParameters = styled.div<{
@@ -71,12 +71,16 @@ const EntityParameters = ({
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
-    const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
+    const currentYearCriteres = useSelector(selectCurrentYearCriteres);
+    const lastYearCriteres = useSelector(selectLastYearCriteres);
 
     const featuresSimulation = useSelector(selectFeaturesSimulation);
 
-    if (_.isEmpty(initialEntity.criteresGeneraux)) return null;
+    const isInitialCriteresGenerauxEmpty = useSelector(
+        selectInitialCriteresGenerauxIsEmpty
+    );
+
+    if (isInitialCriteresGenerauxEmpty) return null;
 
     const { criteresGeneraux: initialCriteresGeneraux } = initialEntity as {
         criteresGeneraux: Criteres;
@@ -87,16 +91,15 @@ const EntityParameters = ({
 
     const criteresGenerauxKeys = Object.keys(criteresGeneraux);
 
-    const currentYearDotationPerHabitant =
-        getDotationPerHabitantPopulationInsee(
-            criteresGeneraux,
-            currentYear,
-            currentYearTotal
-        );
-
-    const lastYearDotationPerHabitant = getDotationPerHabitantPopulationInsee(
+    const currentYearDotationPerHabitant = getDotationPerHabitantPopulationDgf(
         criteresGeneraux,
-        lastYear,
+        currentYearCriteres,
+        currentYearTotal
+    );
+
+    const lastYearDotationPerHabitant = getDotationPerHabitantPopulationDgf(
+        criteresGeneraux,
+        lastYearCriteres,
         lastYearTotal
     );
 
@@ -112,7 +115,9 @@ const EntityParameters = ({
             <div className="sticky top-10 w-full">
                 {(!isSimulation || simulationIsDifferentThanInitial) && (
                     <div className="text-center mb-10">
-                        <span className="flex font-bold">Synthèse</span>
+                        <span className="flex font-bold">
+                            Synthèse {currentYearCriteres}
+                        </span>
                         <div className="bg-white rounded-lg py-4 px-16 my-6">
                             <span className="text-sm">
                                 Dotation (DGF) / habitant
