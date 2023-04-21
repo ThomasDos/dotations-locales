@@ -3,6 +3,7 @@ import stringToBoolean from "utils/stringToBoolean";
 
 import { InitData } from "models/init/init.interface";
 import type { RootState } from ".";
+import { selectInitialCriteresGenerauxIsEmpty } from "./initialEntity.slice";
 
 interface AppSettings {
     isSimulation: boolean;
@@ -122,6 +123,14 @@ export const selectFeaturesComparer = createSelector(
 export const selectFeaturesSimulation = createSelector(
     selectFeatures,
     state => state.simulation
+);
+
+export const selectSimulationIsEnabled = createSelector(
+    selectFeaturesSimulation,
+    selectIsCommune,
+    selectInitialCriteresGenerauxIsEmpty,
+    (featuresSimulation, isCommune, initialCriteresGenerauxIsEmpty) =>
+        isCommune && featuresSimulation && !initialCriteresGenerauxIsEmpty
 );
 
 export const selectEntityDenomination = createSelector(

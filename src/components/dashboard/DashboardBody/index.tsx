@@ -84,18 +84,16 @@ const DashboardBody = ({
                     </div>
                     <div className="flex w-full items-center justify-between">
                         <BaseCalculLoi />
-                        {!initialCriteresGenerauxIsEmpty && (
-                            <ImageFixed
-                                className="flex flex-1 md:hidden justify-end"
-                                width={48}
-                                height={48}
-                                alt="Configuration des critères généraux"
-                                src="/icons/settings-mobile.svg"
-                                onClick={() => {
-                                    setDisplayMobileCriteresGeneraux(true);
-                                }}
-                            />
-                        )}
+                        <ImageFixed
+                            className="flex flex-1 md:hidden justify-end"
+                            width={48}
+                            height={48}
+                            alt="Configuration des critères généraux"
+                            src="/icons/settings-mobile.svg"
+                            onClick={() => {
+                                setDisplayMobileCriteresGeneraux(true);
+                            }}
+                        />
                     </div>
                 </div>
 
