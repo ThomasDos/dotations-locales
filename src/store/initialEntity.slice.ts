@@ -63,7 +63,10 @@ export const selectInitialPartDotationRrf = createSelector(
 
 export const selectCurrentYearInitialPartDotationRrf = createSelector(
     selectInitialPartDotationRrf,
-    partDotationRrf => Object.keys(partDotationRrf?.annees[0] ?? [])[0]
+    partDotationRrf => {
+        if (!partDotationRrf?.annees?.length) return null;
+        return Object.keys(partDotationRrf.annees[0])[0];
+    }
 );
 
 export const selectCurrentYearTotal = createSelector(

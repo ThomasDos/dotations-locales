@@ -1,4 +1,4 @@
-import { Button, LabelPercentage } from "components/ui";
+import { Button } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import type { Criteres } from "models/entity/entity.interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +27,7 @@ import getPercentageEvolution from "utils/getPercentageEvolution";
 import getDotationPerHabitantPopulationDgf from "utils/getDotationPerHabitantPopulationDgf";
 import NoCriteresPlaceHolder from "../NoCriteresPlaceHolder";
 import ParameterRow from "./ParameterRow";
+import SynthesePerHabitant from "./SynthesePerHabitant";
 
 const StyledEntityParameters = styled.div<{
     displayMobileCriteresGeneraux: boolean;
@@ -64,6 +65,7 @@ const EntityParameters = ({
     displayMobileCriteresGeneraux,
     setDisplayMobileCriteresGeneraux,
 }: EntityParametersProps) => {
+    const dispatch = useDispatch();
     const simulationEntity = useSelector(selectSimulationEntity);
     const currentYearTotal = useSelector(selectCurrentYearTotal);
     const lastYearTotal = useSelector(selectLastYearTotal);
@@ -81,8 +83,6 @@ const EntityParameters = ({
     const isInitialCriteresGenerauxEmpty = useSelector(
         selectInitialCriteresGenerauxIsEmpty
     );
-
-    const dispatch = useDispatch();
 
     const { criteresGeneraux: initialCriteresGeneraux } = initialEntity as {
         criteresGeneraux: Criteres;
@@ -110,13 +110,20 @@ const EntityParameters = ({
         lastYearDotationPerHabitant
     );
 
+    const displayNoCriteresPlaceHolder =
+        (isDotationsAnneesDifferentThanCriteresAnnees ||
+            isInitialCriteresGenerauxEmpty) &&
+        !isSimulation;
+
+    const displaySynthese =
+        (!isSimulation || simulationIsDifferentThanInitial) &&
+        !!currentYearDotationPerHabitant;
+
     return (
         <StyledEntityParameters
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
         >
-            {(isDotationsAnneesDifferentThanCriteresAnnees ||
-                isInitialCriteresGenerauxEmpty) &&
-            !isSimulation ? (
+            {displayNoCriteresPlaceHolder ? (
                 <NoCriteresPlaceHolder
                     setDisplayMobileCriteresGeneraux={
                         setDisplayMobileCriteresGeneraux
@@ -124,32 +131,14 @@ const EntityParameters = ({
                 />
             ) : (
                 <div className="sticky top-10 w-full">
-                    {(!isSimulation || simulationIsDifferentThanInitial) &&
-                        !!currentYearDotationPerHabitant && (
-                            <div className="text-center mb-10">
-                                <span className="flex font-bold">
-                                    Synthèse par habitant
-                                </span>
-                                <div className="bg-white rounded-lg py-4 px-16 my-6">
-                                    <span className="text-sm">
-                                        Dotation (DGF) / habitant
-                                    </span>
-                                    <div className="flex justify-center mt-2 items-center">
-                                        <span className="font-bold text-xl mr-2">
-                                            {Math.round(
-                                                currentYearDotationPerHabitant
-                                            )}
-                                            €
-                                        </span>
-                                        {!!percentageEvolution && (
-                                            <LabelPercentage
-                                                percentage={percentageEvolution}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                    {displaySynthese && (
+                        <SynthesePerHabitant
+                            percentageEvolution={percentageEvolution}
+                            currentYearDotationPerHabitant={
+                                currentYearDotationPerHabitant
+                            }
+                        />
+                    )}
                     <div className="w-full">
                         <div className="mb-4 flex justify-between items-center">
                             <span className="font-bold">
@@ -210,7 +199,6 @@ const EntityParameters = ({
                         ) : (
                             simulationIsEnabled && (
                                 <div>
-                                    TODO: réactiver quand business décidera
                                     <Button
                                         icon="calculator"
                                         text="Créer une simulation"
