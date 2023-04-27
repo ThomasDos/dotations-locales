@@ -5,12 +5,10 @@ import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     selectFeaturesComparer,
-    selectFeaturesSimulation,
-    selectIsCommune,
+    selectSimulationIsEnabled,
     updateIsSimulationFalse,
     updateIsSimulationTrue,
 } from "store/appSettings.slice";
-import { selectInitialCriteresGenerauxIsEmpty } from "store/initialEntity.slice";
 import styled from "styled-components";
 
 const StyledHeaderDashboard = styled.div`
@@ -29,12 +27,9 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
     const entityWithCode = `${libelle} (${code})`;
     const dispatch = useDispatch();
     const router = useRouter();
-    const isCommune = useSelector(selectIsCommune);
-    const featuresSimulation = useSelector(selectFeaturesSimulation);
     const featuresComparer = useSelector(selectFeaturesComparer);
-    const initialCriteresGenerauxIsEmpty = useSelector(
-        selectInitialCriteresGenerauxIsEmpty
-    );
+    const simulationIsEnabled = useSelector(selectSimulationIsEnabled);
+
     const pathnameFiltered = useMemo(() => {
         if (router.pathname.includes("historique")) {
             return "Historique";
@@ -50,8 +45,6 @@ const SubHeader = ({ libelle, code }: SubHeaderProps) => {
     }, [router.pathname]);
     const [modeSelected, setModeSelected] = useState(pathnameFiltered);
 
-    const simulationIsEnabled =
-        isCommune && featuresSimulation && !initialCriteresGenerauxIsEmpty;
     const comparerIsEnabled = featuresComparer;
 
     return (

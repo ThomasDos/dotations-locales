@@ -13,12 +13,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    selectFeaturesSimulation,
     selectIsCommune,
     selectIsSimulation,
+    selectSimulationIsEnabled,
     updateIsSimulationFalse,
 } from "store/appSettings.slice";
-import { selectSimulationIsDifferentThanInitial } from "store/simulationEntity.slice";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -29,12 +28,10 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const isCommune = useSelector(selectIsCommune);
     const isSimulation = useSelector(selectIsSimulation);
-    const featuresSimulation = useSelector(selectFeaturesSimulation);
-    const simulationIsDifferentThanInitial = useSelector(
-        selectSimulationIsDifferentThanInitial
-    );
+    const simulationIsEnabled = useSelector(selectSimulationIsEnabled);
+
     const [isCriteresGenerauxSimulation, setIsCriteresGenerauxSimulation] =
-        useState(true && !simulationIsDifferentThanInitial);
+        useState(true);
     const [displayMobileCriteresGeneraux, setDisplayMobileCriteresGeneraux] =
         useState(false);
     const [showAlertModal, setShowAlertModal] = useState(true);
@@ -47,7 +44,7 @@ const Dashboard = () => {
     }, [isSimulation]);
 
     useEffect(() => {
-        if (!featuresSimulation) {
+        if (!simulationIsEnabled) {
             dispatch(updateIsSimulationFalse());
         }
     }, []);

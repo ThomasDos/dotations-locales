@@ -1,30 +1,33 @@
-import { Button, LabelPercentage } from "components/ui";
+import { Button } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
-import _ from "lodash";
 import type { Criteres } from "models/entity/entity.interface";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
-    selectFeaturesSimulation,
-    selectIsCommune,
     selectIsSimulation,
+    selectSimulationIsEnabled,
+    updateIsSimulationTrue,
 } from "store/appSettings.slice";
 import {
     selectCurrentYearTotal,
+    selectInitialCriteresGenerauxIsEmpty,
     selectInitialEntity,
+    selectIsDotationsAnneesDifferentThanCriteresAnnees,
     selectLastYearTotal,
 } from "store/initialEntity.slice";
 import {
-    selectCurrentYear,
-    selectLastYear,
+    selectCurrentYearCriteres,
+    selectLastYearCriteres,
     selectSimulationEntity,
     selectSimulationIsDifferentThanInitial,
 } from "store/simulationEntity.slice";
 import styled from "styled-components";
-import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantPopulationInsee";
 import getPercentageEvolution from "utils/getPercentageEvolution";
 
+import getDotationPerHabitantPopulationDgf from "utils/getDotationPerHabitantPopulationDgf";
+import NoCriteresPlaceHolder from "../NoCriteresPlaceHolder";
 import ParameterRow from "./ParameterRow";
+import SynthesePerHabitant from "./SynthesePerHabitant";
 
 const StyledEntityParameters = styled.div<{
     displayMobileCriteresGeneraux: boolean;
@@ -62,21 +65,24 @@ const EntityParameters = ({
     displayMobileCriteresGeneraux,
     setDisplayMobileCriteresGeneraux,
 }: EntityParametersProps) => {
+    const dispatch = useDispatch();
     const simulationEntity = useSelector(selectSimulationEntity);
     const currentYearTotal = useSelector(selectCurrentYearTotal);
     const lastYearTotal = useSelector(selectLastYearTotal);
     const initialEntity = useSelector(selectInitialEntity);
     const isSimulation = useSelector(selectIsSimulation);
-    const isCommune = useSelector(selectIsCommune);
     const simulationIsDifferentThanInitial = useSelector(
         selectSimulationIsDifferentThanInitial
     );
-    const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
-
-    const featuresSimulation = useSelector(selectFeaturesSimulation);
-
-    if (_.isEmpty(initialEntity.criteresGeneraux)) return null;
+    const currentYearCriteres = useSelector(selectCurrentYearCriteres);
+    const lastYearCriteres = useSelector(selectLastYearCriteres);
+    const simulationIsEnabled = useSelector(selectSimulationIsEnabled);
+    const isDotationsAnneesDifferentThanCriteresAnnees = useSelector(
+        selectIsDotationsAnneesDifferentThanCriteresAnnees
+    );
+    const isInitialCriteresGenerauxEmpty = useSelector(
+        selectInitialCriteresGenerauxIsEmpty
+    );
 
     const { criteresGeneraux: initialCriteresGeneraux } = initialEntity as {
         criteresGeneraux: Criteres;
@@ -87,16 +93,15 @@ const EntityParameters = ({
 
     const criteresGenerauxKeys = Object.keys(criteresGeneraux);
 
-    const currentYearDotationPerHabitant =
-        getDotationPerHabitantPopulationInsee(
-            criteresGeneraux,
-            currentYear,
-            currentYearTotal
-        );
-
-    const lastYearDotationPerHabitant = getDotationPerHabitantPopulationInsee(
+    const currentYearDotationPerHabitant = getDotationPerHabitantPopulationDgf(
         criteresGeneraux,
-        lastYear,
+        currentYearCriteres,
+        currentYearTotal
+    );
+
+    const lastYearDotationPerHabitant = getDotationPerHabitantPopulationDgf(
+        criteresGeneraux,
+        lastYearCriteres,
         lastYearTotal
     );
 
@@ -105,108 +110,113 @@ const EntityParameters = ({
         lastYearDotationPerHabitant
     );
 
+    const displayNoCriteresPlaceHolder =
+        (isDotationsAnneesDifferentThanCriteresAnnees ||
+            isInitialCriteresGenerauxEmpty) &&
+        !isSimulation;
+
+    const displaySynthese =
+        (!isSimulation || simulationIsDifferentThanInitial) &&
+        !!currentYearDotationPerHabitant;
+
     return (
         <StyledEntityParameters
             displayMobileCriteresGeneraux={displayMobileCriteresGeneraux}
         >
-            <div className="sticky top-10 w-full">
-                {(!isSimulation || simulationIsDifferentThanInitial) && (
-                    <div className="text-center mb-10">
-                        <span className="flex font-bold">Synthèse</span>
-                        <div className="bg-white rounded-lg py-4 px-16 my-6">
-                            <span className="text-sm">
-                                Dotation (DGF) / habitant
-                            </span>
-                            <div className="flex justify-center mt-2 items-center">
-                                <span className="font-bold text-xl mr-2">
-                                    {Math.round(currentYearDotationPerHabitant)}
-                                    €
-                                </span>
-                                {!!percentageEvolution && (
-                                    <LabelPercentage
-                                        percentage={percentageEvolution}
-                                    />
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                )}
-                <div className="w-full">
-                    <div className="mb-4 flex justify-between items-center">
-                        <span className="font-bold">
-                            {isSimulation
-                                ? "Critères généraux modifiables"
-                                : `Critères généraux`}
-                        </span>
-
-                        <ImageFixed
-                            src="/icons/cross-filled.svg"
-                            height={48}
-                            width={48}
-                            alt="Icone de croix pour fermer les critères généraux"
-                            className="md:hidden"
-                            onClick={() => {
-                                setDisplayMobileCriteresGeneraux(false);
-                            }}
-                        />
-                    </div>
-                    <div>
-                        {criteresGenerauxKeys.map(
-                            (critereGeneralKey: string) => {
-                                return (
-                                    <ParameterRow
-                                        key={critereGeneralKey}
-                                        critereGeneralKey={critereGeneralKey}
-                                        critereGeneral={
-                                            criteresGeneraux[critereGeneralKey]
-                                        }
-                                        initialCritereGeneral={
-                                            initialCriteresGeneraux[
-                                                critereGeneralKey
-                                            ]
-                                        }
-                                    />
-                                );
+            {displayNoCriteresPlaceHolder ? (
+                <NoCriteresPlaceHolder
+                    setDisplayMobileCriteresGeneraux={
+                        setDisplayMobileCriteresGeneraux
+                    }
+                />
+            ) : (
+                <div className="sticky top-10 w-full">
+                    {displaySynthese && (
+                        <SynthesePerHabitant
+                            percentageEvolution={percentageEvolution}
+                            currentYearDotationPerHabitant={
+                                currentYearDotationPerHabitant
                             }
-                        )}
-                    </div>
-                    {isSimulation ? (
-                        <div>
-                            <Button
-                                text="Modifier les données"
+                        />
+                    )}
+                    <div className="w-full">
+                        <div className="mb-4 flex justify-between items-center">
+                            <span className="font-bold">
+                                {isSimulation
+                                    ? "Critères généraux modifiables"
+                                    : `Critères généraux`}
+                            </span>
+
+                            <ImageFixed
+                                src="/icons/cross-filled.svg"
+                                height={48}
+                                width={48}
+                                alt="Icone de croix pour fermer les critères généraux"
+                                className="md:hidden"
                                 onClick={() => {
-                                    matomoTrackEvent([
-                                        "Simulation",
-                                        "Modifier les données",
-                                    ]);
-                                    setIsCriteresGenerauxSimulation(true);
-                                    window.scrollTo(0, 0);
+                                    setDisplayMobileCriteresGeneraux(false);
                                 }}
                             />
                         </div>
-                    ) : (
-                        isCommune &&
-                        featuresSimulation && (
+                        <div>
+                            {criteresGenerauxKeys.map(
+                                (critereGeneralKey: string) => {
+                                    return (
+                                        <ParameterRow
+                                            key={critereGeneralKey}
+                                            critereGeneralKey={
+                                                critereGeneralKey
+                                            }
+                                            critereGeneral={
+                                                criteresGeneraux[
+                                                    critereGeneralKey
+                                                ]
+                                            }
+                                            initialCritereGeneral={
+                                                initialCriteresGeneraux[
+                                                    critereGeneralKey
+                                                ]
+                                            }
+                                        />
+                                    );
+                                }
+                            )}
+                        </div>
+                        {isSimulation ? (
                             <div>
-                                {/*
-                            TODO: réactiver quand business décidera
-                            <Button
-                                icon="calculator"
-                                text="Créer une simulation"
-                                onClick={() => {
-                                    matomoTrackEvent([
-                                        "Simulation",
-                                        "Créer une simulation",
-                                    ]);
-
-                                    dispatch(updateIsSimulationTrue());
-                                }}
-                            /> */}
+                                <Button
+                                    text="Modifier les données"
+                                    onClick={() => {
+                                        matomoTrackEvent([
+                                            "Simulation",
+                                            "Modifier les données",
+                                        ]);
+                                        setIsCriteresGenerauxSimulation(true);
+                                        window.scrollTo(0, 0);
+                                    }}
+                                />
                             </div>
-                        )
-                    )}
+                        ) : (
+                            simulationIsEnabled && (
+                                <div>
+                                    <Button
+                                        icon="calculator"
+                                        text="Créer une simulation"
+                                        onClick={() => {
+                                            matomoTrackEvent([
+                                                "Simulation",
+                                                "Créer une simulation",
+                                            ]);
+
+                                            dispatch(updateIsSimulationTrue());
+                                        }}
+                                    />
+                                </div>
+                            )
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
         </StyledEntityParameters>
     );
 };

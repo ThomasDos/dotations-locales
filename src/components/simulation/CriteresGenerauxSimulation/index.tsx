@@ -13,6 +13,7 @@ import {
 import styled from "styled-components";
 import { toastError, toastPromise } from "utils/customToasts";
 
+import WarningDefaultMessage from "../WarningDefaultMessage";
 import CriteresGenerauxCard from "./CriteresGenerauxCard";
 import RadioGroupContainer from "./RadioGroupContainer";
 
@@ -202,6 +203,11 @@ export default function CriteresGenerauxSimulation({
                     isLoading={isLoading}
                 />
             </div>
+
+            <WarningDefaultMessage
+                backgroundColor="#FFE8E5"
+                containerClassName="p-5 text-center"
+            />
         </div>
     );
 }

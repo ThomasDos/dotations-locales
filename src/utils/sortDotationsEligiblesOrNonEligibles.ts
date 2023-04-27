@@ -19,12 +19,14 @@ export default (
         };
     }
 
+    //La DPEL et la DPB ne font pas partie de la DGF et doivent être considéré différemment
+    const dotationKeyToIgnore = ["DPEL", "DPB"];
+
     dotationsKeys.forEach((dotationKey: string) => {
         const dotation = dotations[dotationKey];
         const dotationAmout = dotation.annees[0][currentYear];
 
-        //La DPEL et la DPB ne font pas partie de la DGF et doivent être considéré différemment
-        if (dotation.label === "DPEL" || dotation.label === "DPB") return;
+        if (dotationKeyToIgnore.includes(dotation.label)) return;
 
         if (dotationAmout) {
             dotationsEligibles[dotationKey] = dotation;

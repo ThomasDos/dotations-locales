@@ -7,9 +7,8 @@ export default (
     yearTotal: number
 ): number => {
     if (_.isEmpty(criteres)) return 0;
-    const {
-        populationInsee: { annees },
-    } = criteres;
+
+    const annees = criteres?.populationInsee?.annees;
     if (!annees) return 0;
     const getHabitantsIndex = annees.findIndex(
         annee => Object.keys(annee)[0] === String(year)

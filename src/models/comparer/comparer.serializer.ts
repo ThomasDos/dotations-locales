@@ -136,12 +136,15 @@ export const dotationsDgfBoardSerializer = (
         .filter(Boolean);
 export const dotationsDgfBoardPopulationsSerializer = (
     entities: EntitiesComparer,
-    year: string
+    year: string,
+    yearCriteres: string
 ) =>
     entities.map(({ libelle, code, criteresGeneraux, dotations }) => {
-        const populationInsee = +getPopulationInsee(criteresGeneraux, year);
-        const dotationsDf = dotations.dotationForfaitaire;
-        const populationDgf = +getPopulationDgf(dotationsDf.criteres, year);
+        const populationInsee = +getPopulationInsee(
+            criteresGeneraux,
+            yearCriteres
+        );
+        const populationDgf = +getPopulationDgf(criteresGeneraux, yearCriteres);
         const totalDotations = getTotalDotations(dotations, year);
         const totalDotationsFomatted = `${formatNumberWithSpace(
             totalDotations / 1000

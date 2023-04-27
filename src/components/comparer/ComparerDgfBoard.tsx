@@ -57,9 +57,12 @@ export default function ComparerDgfBoard() {
                         </StyledBodyBoardRowDescription>
                         <StyledBodyBoardRowValues>
                             {dotations.map(
-                                ({ value }: DotationFormattedChartComparer) => (
+                                (
+                                    { value }: DotationFormattedChartComparer,
+                                    index
+                                ) => (
                                     <StyledBodyBoardRowValue
-                                        key={value}
+                                        key={value + index}
                                         hasValue={!!value}
                                     >
                                         {formatNumberWithSpace(value / 1000)}
