@@ -3,7 +3,10 @@ import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownloa
 import { dotationsMap } from "constants/dotationsMap";
 import type { Dotation, Dotations } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
-import { selectInitialPartDotationRrf } from "store/initialEntity.slice";
+import {
+    selectInitialPartDotationRrf,
+    selectIsDotationsAnneesDifferentThanDotationRrfAnnees,
+} from "store/initialEntity.slice";
 import {
     selectAllYears,
     selectCurrentYear,
@@ -26,8 +29,13 @@ const MainTab = ({ dotations }: MainTabProps) => {
     const lastYear = useSelector(selectLastYear);
     const years = useSelector(selectAllYears);
     const partDotationRrf = useSelector(selectInitialPartDotationRrf);
+    const isDotationsAnneesDifferentThanDotationRrfAnnees = useSelector(
+        selectIsDotationsAnneesDifferentThanDotationRrfAnnees
+    );
 
-    const rrfFormatted = formatRrfEvolution(partDotationRrf);
+    const rrfFormatted = isDotationsAnneesDifferentThanDotationRrfAnnees
+        ? null
+        : formatRrfEvolution(partDotationRrf);
 
     const currentYearTotal = getTotalDotations(dotations, currentYear);
     const lastYearTotal = getTotalDotations(dotations, lastYear);

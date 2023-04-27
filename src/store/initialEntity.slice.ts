@@ -61,6 +61,11 @@ export const selectInitialPartDotationRrf = createSelector(
     state => state.partDotationRrf
 );
 
+export const selectCurrentYearInitialPartDotationRrf = createSelector(
+    selectInitialPartDotationRrf,
+    partDotationRrf => Object.keys(partDotationRrf?.annees[0] ?? [])[0]
+);
+
 export const selectCurrentYearTotal = createSelector(
     selectInitialDotations,
     selectInitialAnnees,
@@ -109,6 +114,13 @@ export const selectIsDotationsAnneesDifferentThanCriteresAnnees =
         selectInitialAnnees,
         selectInitialAnneesCriteres,
         (annees, anneesCriteres) => annees[0] !== anneesCriteres[0]
+    );
+
+export const selectIsDotationsAnneesDifferentThanDotationRrfAnnees =
+    createSelector(
+        selectInitialAnnees,
+        selectCurrentYearInitialPartDotationRrf,
+        (annees, currentYear) => annees[0] !== currentYear
     );
 
 export default initialEntitySlice.reducer;

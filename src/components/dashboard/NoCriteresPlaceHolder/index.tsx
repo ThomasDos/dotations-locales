@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { matomoTrackEvent } from "services/matomo";
 import {
+    selectIsCommune,
     selectSimulationIsEnabled,
     updateIsSimulationTrue,
 } from "store/appSettings.slice";
@@ -24,6 +25,7 @@ const NoCriteresPlaceHolder = ({
     const dispatch = useDispatch();
     const simulationIsEnabled = useSelector(selectSimulationIsEnabled);
     const currentYear = useSelector(selectCurrentYear);
+    const isCommune = useSelector(selectIsCommune);
 
     return (
         <>
@@ -38,10 +40,12 @@ const NoCriteresPlaceHolder = ({
                 }}
             />
             <div className="flex flex-col">
-                <PlaceHolderCard
-                    badgeText="Nouveau"
-                    bodyText="Découvrez le montant de votre Dotation pour la Protection de la Biodiversité (DPB)"
-                />
+                {isCommune && (
+                    <PlaceHolderCard
+                        badgeText="Nouveau"
+                        bodyText="Découvrez le montant de votre Dotation pour la Protection de la Biodiversité (DPB)"
+                    />
+                )}
                 <PlaceHolderCard
                     badgeText="Prochainement"
                     bodyText={`Soyez alerté dès que les critères ${currentYear} seront en ligne ! Inscrivez-vous maintenant pour ne rien manquer.`}
@@ -54,7 +58,7 @@ const NoCriteresPlaceHolder = ({
                 {simulationIsEnabled && (
                     <PlaceHolderCard
                         badgeText="En BETA"
-                        bodyText="Vous connaissez les données et critères qui ont évolués pour votre collectivité"
+                        bodyText="Connaissez-vous l'impact de vos critères sur vos dotations ?"
                         buttonText="Testez le simulateur"
                         buttonIcon="calculator"
                         buttonOnClick={() => {
