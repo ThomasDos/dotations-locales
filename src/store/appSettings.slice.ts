@@ -14,7 +14,7 @@ interface AppSettings {
         simulation: boolean;
         comparer: boolean;
     };
-    fichiers: InitData | null;
+    init: InitData | null;
 }
 
 const initialState: AppSettings = {
@@ -28,7 +28,7 @@ const initialState: AppSettings = {
         ),
         comparer: stringToBoolean(process.env.NEXT_PUBLIC_FEATURES_COMPARER),
     },
-    fichiers: null,
+    init: null,
 };
 
 const appSettingsSlice = createSlice({
@@ -37,7 +37,7 @@ const appSettingsSlice = createSlice({
     reducers: {
         resetAppSettings: state => ({
             ...initialState,
-            fichiers: state.fichiers,
+            init: state.init,
         }),
         updateIsSimulationFalse: state => {
             state.isSimulation = false;
@@ -69,8 +69,8 @@ const appSettingsSlice = createSlice({
             state.isEPCI = false;
             state.isCommune = false;
         },
-        hydrateFichiers: (state, action) => {
-            state.fichiers = action.payload;
+        hydrateInit: (state, action) => {
+            state.init = action.payload;
         },
     },
 });
@@ -85,7 +85,7 @@ export const {
     updateIsCommuneTrue,
     updateIsDepartementFalse,
     updateIsDepartementTrue,
-    hydrateFichiers,
+    hydrateInit,
 } = appSettingsSlice.actions;
 
 const selectSelf = (state: RootState) => state[appSettingsSlice.name];
@@ -171,20 +171,22 @@ export const selectEntitiesDenomination = createSelector(
     }
 );
 
-export const selectFichiers = createSelector(
-    selectSelf,
-    state => state.fichiers
+export const selectInit = createSelector(selectSelf, state => state.init);
+
+export const selectSourcesDonnees = createSelector(
+    selectInit,
+    init => init?.sourcesDonnees
 );
 
 export const selectFichiersWithEntity = createSelector(
-    selectFichiers,
+    selectSourcesDonnees,
     selectIsCommune,
     selectIsDepartement,
     selectIsEPCI,
-    (fichiers, isCommune, isDepartement, isEPCI) => {
-        if (!fichiers) return null;
+    (sourcesDonnees, isCommune, isDepartement, isEPCI) => {
+        if (!sourcesDonnees) return null;
 
-        const { commune, departement, epci } = fichiers;
+        const { commune, departement, epci } = sourcesDonnees;
 
         if (isCommune) return commune;
         if (isDepartement) return departement;

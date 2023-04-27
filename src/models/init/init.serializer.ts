@@ -8,13 +8,24 @@ import {
     InitNationalFichiersDto,
 } from "./init.interface";
 
-export const fetchInitSerializer = (rawInitResult: InitDataDto): InitData => ({
-    commune: initEntitySerializer(rawInitResult.commune),
-    epci: initEntitySerializer(rawInitResult.epci),
-    departement: initEntitySerializer(rawInitResult.departement),
+export const fetchInitSerializer = ({
+    sources_donnees,
+    base_calcul,
+    derniere_maj_donnees,
+    simulation_periodes,
+}: InitDataDto): InitData => ({
+    sourcesDonnees: {
+        commune: initEntitySerializer(sources_donnees?.commune),
+        epci: initEntitySerializer(sources_donnees?.epci),
+        departement: initEntitySerializer(sources_donnees?.departement),
+    },
+    baseCalcul: base_calcul,
+    derniereMajDonnees: derniere_maj_donnees,
+    simulationPeriodes: simulation_periodes,
 });
 
 const initEntitySerializer = (rawInitEntity: InitEntityDto): InitEntity => {
+    if (!rawInitEntity) return {} as InitEntity;
     const rawInitEntityKeys = Object.keys(rawInitEntity);
 
     const newObjectEntity: InitEntity = {};

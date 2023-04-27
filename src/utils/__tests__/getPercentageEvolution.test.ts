@@ -24,4 +24,16 @@ describe("getPercentageEvolution(currentValue: number, previousValue: number)", 
 
         expect(evolutionResult).toBe(257.14);
     });
+
+    it("should return null if one of the values is null", () => {
+        const currentValue = 25;
+        const previousValue = null;
+
+        const evolutionResult = getPercentageEvolution(
+            currentValue,
+            previousValue
+        );
+
+        expect(evolutionResult).toBeNull();
+    });
 });

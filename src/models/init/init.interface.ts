@@ -1,4 +1,11 @@
-export type InitDataDto = Record<
+export interface InitDataDto {
+    sources_donnees: InitDataSourcesDonneesDto;
+    base_calcul: string;
+    derniere_maj_donnees: string;
+    simulation_periodes: { annee: string; label: string }[];
+}
+
+export type InitDataSourcesDonneesDto = Record<
     "commune" | "epci" | "departement",
     InitEntityDto
 >;
@@ -16,7 +23,17 @@ export interface InitNationalFichiersDto {
     nom_fichier: string;
 }
 
-export type InitData = Record<"commune" | "epci" | "departement", InitEntity>;
+export type InitData = {
+    sourcesDonnees: InitDataSourcesDonnees;
+    baseCalcul: string;
+    derniereMajDonnees: string;
+    simulationPeriodes: { annee: string; label: string }[];
+};
+
+export type InitDataSourcesDonnees = Record<
+    "commune" | "epci" | "departement",
+    InitEntity
+>;
 
 export type InitEntity = Record<string, InitEntityFichiers>;
 
