@@ -8,10 +8,11 @@ import type {
 
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { selectCurrentYear } from "store/simulationEntity.slice";
+import { selectCurrentYearCriteres } from "store/simulationEntity.slice";
 import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
+import { selectIsDotationsAnneesDifferentThanCriteresAnnees } from "store/initialEntity.slice";
 import DotationCard from "../DotationCard";
 import ParameterCard from "./ParameterCard";
 import ParameterCardTitle from "./ParameterCardTitle";
@@ -25,7 +26,10 @@ const SubTabSousDotations = ({
     dotation,
     sousDotations,
 }: SubTabSousDotationsProps) => {
-    const currentYear = useSelector(selectCurrentYear);
+    const currentYearCriteres = useSelector(selectCurrentYearCriteres);
+    const isDotationsAnneesDifferentThanCriteresAnnees = useSelector(
+        selectIsDotationsAnneesDifferentThanCriteresAnnees
+    );
 
     const dotationTotalExport = useRef<{}[]>([]);
 
@@ -71,7 +75,7 @@ const SubTabSousDotations = ({
                 const { criteresEligibles, criteresNonEligibles } =
                     sortCriteresEligiblesOrNonEligibles(
                         sousDotation.criteres,
-                        currentYear
+                        currentYearCriteres
                     );
 
                 const criteresSorted = {
@@ -87,35 +91,43 @@ const SubTabSousDotations = ({
                             <DotationCard
                                 dotation={sousDotation}
                                 borderTop
-                                borderBottom={!criteresLength}
+                                borderBottom={
+                                    !criteresLength ||
+                                    isDotationsAnneesDifferentThanCriteresAnnees
+                                }
                             />
 
-                            <ParameterCardTitle
-                                criteresLength={criteresLength}
-                            />
+                            {!isDotationsAnneesDifferentThanCriteresAnnees && (
+                                <>
+                                    <ParameterCardTitle
+                                        criteresLength={criteresLength}
+                                    />
 
-                            {!_.isEmpty(criteresSorted) &&
-                                Object.keys(criteresSorted).map(
-                                    (
-                                        criteresKey: string,
-                                        indexEligible: number
-                                    ) => (
-                                        <ParameterCard
-                                            key={criteresKey}
-                                            critere={
-                                                sousDotation.criteres[
-                                                    criteresKey
-                                                ]
-                                            }
-                                            isLast={
-                                                Object.keys(criteresSorted)
-                                                    .length -
-                                                    1 ===
-                                                indexEligible
-                                            }
-                                        />
-                                    )
-                                )}
+                                    {!_.isEmpty(criteresSorted) &&
+                                        Object.keys(criteresSorted).map(
+                                            (
+                                                criteresKey: string,
+                                                indexEligible: number
+                                            ) => (
+                                                <ParameterCard
+                                                    key={criteresKey}
+                                                    critere={
+                                                        sousDotation.criteres[
+                                                            criteresKey
+                                                        ]
+                                                    }
+                                                    isLast={
+                                                        Object.keys(
+                                                            criteresSorted
+                                                        ).length -
+                                                            1 ===
+                                                        indexEligible
+                                                    }
+                                                />
+                                            )
+                                        )}
+                                </>
+                            )}
                         </>
                     </div>
                 );

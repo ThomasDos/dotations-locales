@@ -1,4 +1,5 @@
 import {
+    anneesCriteresSerializer,
     anneesSerializer,
     criteresSerializer,
     dotationSerializer,
@@ -12,6 +13,7 @@ export const fetchEntitySerializerSimulation = (
     code: rawResult.code,
     criteresGeneraux: criteresSerializer(rawResult.criteres_generaux),
     dotations: dotationSerializer(rawResult.dotations),
+    anneesCriteres: anneesCriteresSerializer(rawResult.criteres_generaux),
     //TODO: Remettre en dynamique quand on voudra le message de précision
     // avertissementPrecisionSimulation:
     //     rawResult.avertissement_precision_simulation,

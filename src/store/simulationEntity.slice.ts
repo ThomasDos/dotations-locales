@@ -5,6 +5,7 @@ import { Criteres, Entity, EntityAnnee } from "models/entity/entity.interface";
 import { EntitySimulation } from "models/simulation/simulation.interface";
 import {
     selectInitialAnnees,
+    selectInitialAnneesCriteres,
     selectInitialCriteresGeneraux,
 } from "store/initialEntity.slice";
 
@@ -13,6 +14,7 @@ import { selectIsSimulation } from "./appSettings.slice";
 
 const initialState: EntitySimulation = {
     annees: [],
+    anneesCriteres: [],
     code: "",
     criteresGeneraux: {},
     dotations: {},
@@ -77,6 +79,11 @@ export const selectSimulationAnnees = createSelector(
     state => state.annees
 );
 
+export const selectSimulationAnneesCriteres = createSelector(
+    selectSelf,
+    state => state.anneesCriteres
+);
+
 export const selectSimulationAvertissementPrecisionSimulation = createSelector(
     selectSelf,
     state => state.avertissementPrecisionSimulation
@@ -85,25 +92,27 @@ export const selectSimulationAvertissementPrecisionSimulation = createSelector(
 export const selectSimulationIsDifferentThanInitial = createSelector(
     selectSimulationCriteresGeneraux,
     selectInitialCriteresGeneraux,
-    selectSimulationAnnees,
-    selectInitialAnnees,
+    selectSimulationAnneesCriteres,
+    selectInitialAnneesCriteres,
     (
         simulationCriteresGeneraux: Criteres,
         initialCriteresGeneraux: Criteres,
-        simulationAnnees: EntityAnnee,
-        initialAnnees: EntityAnnee
+        simulationAnneesCriteres: EntityAnnee,
+        initialAnneesCriteres: EntityAnnee
     ): boolean => {
         const criteresGenerauxKeys = Object.keys(simulationCriteresGeneraux);
 
-        return !!criteresGenerauxKeys.find((initialCritereKey: string) => {
+        return !!criteresGenerauxKeys.find((critereKey: string) => {
             const initialCurrentYear =
-                initialCriteresGeneraux[initialCritereKey].annees[0][
-                    initialAnnees[0]
+                initialCriteresGeneraux[critereKey].annees[0]?.[
+                    initialAnneesCriteres?.[0]
                 ];
             const simulationCurrentYear =
-                simulationCriteresGeneraux[initialCritereKey].annees[0][
-                    simulationAnnees[0]
+                simulationCriteresGeneraux[critereKey].annees[0]?.[
+                    simulationAnneesCriteres?.[0]
                 ];
+
+            if (!initialCurrentYear || !simulationCurrentYear) return false;
 
             return initialCurrentYear.valeur != simulationCurrentYear.valeur;
         });
@@ -131,6 +140,30 @@ export const selectAllYears = createSelector(
     selectInitialAnnees,
     (isSimulation, simulationAnnees, initialAnnees) =>
         isSimulation ? simulationAnnees : initialAnnees
+);
+
+export const selectCurrentYearCriteres = createSelector(
+    selectIsSimulation,
+    selectSimulationAnneesCriteres,
+    selectInitialAnneesCriteres,
+    (isSimulation, simulationAnneesCriteres, initialAnneesCriteres) =>
+        isSimulation ? simulationAnneesCriteres[0] : initialAnneesCriteres[0]
+);
+
+export const selectLastYearCriteres = createSelector(
+    selectIsSimulation,
+    selectSimulationAnneesCriteres,
+    selectInitialAnneesCriteres,
+    (isSimulation, simulationAnneesCriteres, initialAnneesCriteres) =>
+        isSimulation ? simulationAnneesCriteres[1] : initialAnneesCriteres[1]
+);
+
+export const selectAllYearsCriteres = createSelector(
+    selectIsSimulation,
+    selectSimulationAnneesCriteres,
+    selectInitialAnneesCriteres,
+    (isSimulation, simulationAnneesCriteres, initialAnneesCriteres) =>
+        isSimulation ? simulationAnneesCriteres : initialAnneesCriteres
 );
 
 export default simulationEntitySlice.reducer;

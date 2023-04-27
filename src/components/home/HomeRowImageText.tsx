@@ -1,6 +1,6 @@
 import { Badge, Title } from "@dataesr/react-dsfr";
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import styled from "styled-components";
 
 interface HomeRowImageTextProps {
@@ -13,7 +13,7 @@ interface HomeRowImageTextProps {
     children: ReactNode;
     priority?: boolean;
     badgeText?: string;
-    badgeType?: "success" | "error" | "warning" | "new" | "info";
+    badgeType?: ComponentProps<typeof Badge>["type"];
     badgeHasIcon?: boolean;
 }
 

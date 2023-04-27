@@ -4,10 +4,10 @@ import {
     Radio,
     RadioGroup,
 } from "@mui/material";
-import LabelProchainement from "components/ui/LabelText/LabelProchainement";
 import styled from "styled-components";
 
 import type { LawAvailable } from ".";
+import LawCardBody from "./LawCardBody";
 
 const ContainerRadioStyled = styled.div<{ disabled: boolean }>`
     border: ${({ disabled }) =>
@@ -19,10 +19,6 @@ const ContainerRadioStyled = styled.div<{ disabled: boolean }>`
     flex: 1;
     display: flex;
     align-items: center;
-`;
-
-const StyledLoiSpan = styled.span`
-    flex: 2;
 `;
 
 interface RadioGroupContainerProps {
@@ -90,15 +86,10 @@ export default function RadioGroupContainer({
                                                 padding: 0,
                                             }}
                                         />
-                                        <div className="flex flex-1 items-center justify-between">
-                                            <StyledLoiSpan>
-                                                {disabled
-                                                    ? "Projet de loi"
-                                                    : "Loi en vigueur"}{" "}
-                                                {value}
-                                            </StyledLoiSpan>
-                                            {disabled && <LabelProchainement />}
-                                        </div>
+                                        <LawCardBody
+                                            disabled={disabled}
+                                            value={value}
+                                        />
                                     </ContainerRadioStyled>
                                 }
                                 label=""

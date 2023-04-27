@@ -1,13 +1,13 @@
 import { LabelText } from "components/ui";
 import type { Critere } from "models/entity/entity.interface";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectInitialCurrentYear } from "store/initialEntity.slice";
 import {
-    selectCurrentYear,
-    selectLastYear,
+    selectCurrentYearCriteres,
+    selectLastYearCriteres,
 } from "store/simulationEntity.slice";
 
+import { selectInitialCurrentYearCriteres } from "store/initialEntity.slice";
 import ModalParameterSimulation from "./ModalParameterSimulation";
 import Value from "./Value";
 
@@ -23,9 +23,9 @@ const ParameterRow = ({
     initialCritereGeneral,
 }: EntityRowProps) => {
     const [showModal, setShowModal] = useState(false);
-    const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
-    const initialCurrentYear = useSelector(selectInitialCurrentYear);
+    const currentYear = useSelector(selectCurrentYearCriteres);
+    const lastYear = useSelector(selectLastYearCriteres);
+    const initialCurrentYear = useSelector(selectInitialCurrentYearCriteres);
 
     const currentYearCritereGeneralSimulation =
         critereGeneral.annees[0][currentYear];
@@ -33,15 +33,9 @@ const ParameterRow = ({
         initialCritereGeneral.annees[0][initialCurrentYear];
     const lastYearValeur = critereGeneral.annees[1][lastYear]?.valeur;
 
-    const valueIsModified = useMemo(
-        () =>
-            currentYearCritereGeneralSimulation.valeur !=
-            currentYearCritereGeneralInitial.valeur,
-        [
-            currentYearCritereGeneralSimulation.valeur,
-            currentYearCritereGeneralInitial.valeur,
-        ]
-    );
+    const valueIsModified =
+        currentYearCritereGeneralSimulation.valeur !=
+        currentYearCritereGeneralInitial.valeur;
 
     if (currentYearCritereGeneralSimulation.valeur === "Non") return null;
 

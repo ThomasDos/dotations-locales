@@ -1,7 +1,10 @@
 import { dotationsDgfBoardPopulationsSerializer } from "models/comparer/comparer.serializer";
 import { useSelector } from "react-redux";
 import { selectEntities } from "store/entitiesComparer.slice";
-import { selectInitialCurrentYear } from "store/initialEntity.slice";
+import {
+    selectInitialCurrentYear,
+    selectInitialCurrentYearCriteres,
+} from "store/initialEntity.slice";
 
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import {
@@ -18,10 +21,12 @@ import {
 export default function ComparerDgfBoardPerHabitant() {
     const entities = useSelector(selectEntities);
     const year = useSelector(selectInitialCurrentYear);
+    const yearCriteres = useSelector(selectInitialCurrentYearCriteres);
 
     const dotationsDgfBoardPopulations = dotationsDgfBoardPopulationsSerializer(
         entities,
-        year
+        year,
+        yearCriteres
     );
     const dotationsDgfBoardPopulationsDescending =
         dotationsDgfBoardPopulations.sort(
@@ -61,9 +66,9 @@ export default function ComparerDgfBoardPerHabitant() {
                                 {titleRow}
                             </StyledBodyBoardRowDescription>
                             <StyledBodyBoardRowValues>
-                                {values.map(value => (
+                                {values.map((value, index) => (
                                     <StyledBodyBoardRowValue
-                                        key={value}
+                                        key={(value as string) + index}
                                         hasValue={!!value}
                                     >
                                         {isNaN(+value)

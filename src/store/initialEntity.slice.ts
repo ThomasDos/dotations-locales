@@ -8,6 +8,7 @@ import type { RootState } from ".";
 
 const initialState: Entity = {
     annees: [],
+    anneesCriteres: [],
     code: "",
     criteresGeneraux: {},
     dotations: {},
@@ -45,6 +46,11 @@ export const selectInitialAnnees = createSelector(
     state => state.annees
 );
 
+export const selectInitialAnneesCriteres = createSelector(
+    selectSelf,
+    state => state.anneesCriteres
+);
+
 export const selectInitialCode = createSelector(
     selectSelf,
     state => state.code
@@ -53,6 +59,14 @@ export const selectInitialCode = createSelector(
 export const selectInitialPartDotationRrf = createSelector(
     selectSelf,
     state => state.partDotationRrf
+);
+
+export const selectCurrentYearInitialPartDotationRrf = createSelector(
+    selectInitialPartDotationRrf,
+    partDotationRrf => {
+        if (!partDotationRrf?.annees?.length) return null;
+        return Object.keys(partDotationRrf.annees[0])[0];
+    }
 );
 
 export const selectCurrentYearTotal = createSelector(
@@ -77,6 +91,11 @@ export const selectInitialCurrentYear = createSelector(
     initialAnnees => initialAnnees[0]
 );
 
+export const selectInitialCurrentYearCriteres = createSelector(
+    selectInitialAnneesCriteres,
+    initialAnneesCriteres => initialAnneesCriteres[0]
+);
+
 export const selectInitialLastYear = createSelector(
     selectInitialAnnees,
     initialAnnees => initialAnnees[1]
@@ -84,7 +103,27 @@ export const selectInitialLastYear = createSelector(
 
 export const selectInitialCriteresGenerauxIsEmpty = createSelector(
     selectInitialCriteresGeneraux,
-    criteresGeneraux => Object.keys(criteresGeneraux).length === 0
+    criteresGeneraux => {
+        const hasNoCriteres = Object.keys(criteresGeneraux).length === 0;
+        const criteresAreEmpty = Object.values(criteresGeneraux).every(
+            critere => !critere.annees.length
+        );
+        return hasNoCriteres || criteresAreEmpty;
+    }
 );
+
+export const selectIsDotationsAnneesDifferentThanCriteresAnnees =
+    createSelector(
+        selectInitialAnnees,
+        selectInitialAnneesCriteres,
+        (annees, anneesCriteres) => annees[0] !== anneesCriteres[0]
+    );
+
+export const selectIsDotationsAnneesDifferentThanDotationRrfAnnees =
+    createSelector(
+        selectInitialAnnees,
+        selectCurrentYearInitialPartDotationRrf,
+        (annees, currentYear) => annees[0] !== currentYear
+    );
 
 export default initialEntitySlice.reducer;

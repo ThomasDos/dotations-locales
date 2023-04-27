@@ -3,8 +3,8 @@ import { LabelGreyCustomCrossIcon, LabelPercentage } from "components/ui";
 import { Critere } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import {
-    selectCurrentYear,
-    selectLastYear,
+    selectCurrentYearCriteres,
+    selectLastYearCriteres,
 } from "store/simulationEntity.slice";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getPercentageEvolution from "utils/getPercentageEvolution";
@@ -14,11 +14,13 @@ interface ParameterCardValueProps {
 }
 
 const ParameterCardValue = ({ critere }: ParameterCardValueProps) => {
-    const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
+    const currentYearCriteres = useSelector(selectCurrentYearCriteres);
+    const lastYearCriteres = useSelector(selectLastYearCriteres);
 
-    const currentYearCritere = critere.annees[0][currentYear];
-    const lastYearCritere = critere.annees[1][lastYear];
+    if (!currentYearCriteres) return null;
+
+    const currentYearCritere = critere.annees[0][currentYearCriteres];
+    const lastYearCritere = critere.annees[1][lastYearCriteres];
 
     const { valeur: currentYearValeur, unite } = currentYearCritere;
     const lastYearValeur = lastYearCritere?.valeur;
