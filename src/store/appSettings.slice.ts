@@ -125,14 +125,6 @@ export const selectFeaturesSimulation = createSelector(
     state => state.simulation
 );
 
-export const selectSimulationIsEnabled = createSelector(
-    selectFeaturesSimulation,
-    selectIsCommune,
-    selectInitialCriteresGenerauxIsEmpty,
-    (featuresSimulation, isCommune, initialCriteresGenerauxIsEmpty) =>
-        isCommune && featuresSimulation && !initialCriteresGenerauxIsEmpty
-);
-
 export const selectEntityDenomination = createSelector(
     selectSelf,
     ({ isDepartement, isCommune, isEPCI }) => {
@@ -177,6 +169,36 @@ export const selectSourcesDonnees = createSelector(
     selectInit,
     init => init?.sourcesDonnees
 );
+export const selectBaseCalcul = createSelector(
+    selectInit,
+    init => init?.baseCalcul
+);
+
+export const selectSimulationPeriodes = createSelector(
+    selectInit,
+    init => init?.simulationPeriodes
+);
+export const selectDerniereMajDonneess = createSelector(
+    selectInit,
+    init => init?.derniereMajDonnees
+);
+
+export const selectSimulationIsEnabled = createSelector(
+    selectFeaturesSimulation,
+    selectIsCommune,
+    selectInitialCriteresGenerauxIsEmpty,
+    selectSimulationPeriodes,
+    (
+        featuresSimulation,
+        isCommune,
+        initialCriteresGenerauxIsEmpty,
+        simulationPeriodes
+    ) =>
+        isCommune &&
+        featuresSimulation &&
+        !initialCriteresGenerauxIsEmpty &&
+        simulationPeriodes?.length
+);
 
 export const selectFichiersWithEntity = createSelector(
     selectSourcesDonnees,
@@ -198,8 +220,8 @@ export const selectFichiersWithEntity = createSelector(
 
 export const selectFichiersWithEntityAndDotation = (dotation: string) =>
     createSelector(selectFichiersWithEntity, fichiersWithEntity => {
-        if (!fichiersWithEntity) return null;
-        return fichiersWithEntity[dotation];
+        if (!fichiersWithEntity?.[dotation]) return null;
+        return fichiersWithEntity[dotation].fichiers;
     });
 
 export default appSettingsSlice.reducer;
