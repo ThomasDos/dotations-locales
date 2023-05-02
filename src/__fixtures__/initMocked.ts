@@ -289,7 +289,16 @@ export const initEntityMocked: InitEntity = {
             },
             sousDotations: null,
         },
-        liensExternes: null,
+        liensExternes: [
+            {
+                label: "Note DGCL",
+                url: "http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=168",
+            },
+            {
+                label: "Article Legifrance",
+                url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070633/LEGISCTA000041426784/#LEGISCTA000041426784",
+            },
+        ],
     },
     dotationBiodiversite: {
         fichiers: {
@@ -300,7 +309,7 @@ export const initEntityMocked: InitEntity = {
             },
             sousDotations: null,
         },
-        liensExternes: null,
+        liensExternes: [],
     },
     dotationEluLocal: {
         fichiers: {
@@ -311,7 +320,12 @@ export const initEntityMocked: InitEntity = {
             },
             sousDotations: null,
         },
-        liensExternes: null,
+        liensExternes: [
+            {
+                label: "Note DGCL",
+                url: "http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=165",
+            },
+        ],
     },
     dotationForfaitaire: {
         fichiers: {
@@ -322,7 +336,16 @@ export const initEntityMocked: InitEntity = {
             },
             sousDotations: null,
         },
-        liensExternes: null,
+        liensExternes: [
+            {
+                label: "Note DGCL",
+                url: "http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=188",
+            },
+            {
+                label: "Article Legifrance",
+                url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000046873855/2023-01-01",
+            },
+        ],
     },
     dotationNationalePerequation: {
         fichiers: {
@@ -333,9 +356,30 @@ export const initEntityMocked: InitEntity = {
             },
             sousDotations: null,
         },
-        liensExternes: null,
+        liensExternes: [
+            {
+                label: "Note DGCL",
+                url: "http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=190",
+            },
+            {
+                label: "Article Legifrance",
+                url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044980613/2023-01-01",
+            },
+        ],
     },
-    dotationSolidariteRurale: { fichiers: null, liensExternes: null },
+    dotationSolidariteRurale: {
+        fichiers: null,
+        liensExternes: [
+            {
+                label: "Note DGCL",
+                url: "http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=181",
+            },
+            {
+                label: "Article Legifrance",
+                url: "https://www.legifrance.gouv.fr/codes/id/LEGIARTI000046873852/2023-01-01/",
+            },
+        ],
+    },
     dsuMontant: {
         fichiers: {
             nationalCriteres: null,
@@ -345,6 +389,15 @@ export const initEntityMocked: InitEntity = {
             },
             sousDotations: null,
         },
-        liensExternes: null,
+        liensExternes: [
+            {
+                label: "Note DGCL",
+                url: "http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=179",
+            },
+            {
+                label: "Article Legifrance",
+                url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070633/LEGISCTA000006197674/#LEGISCTA000006197674",
+            },
+        ],
     },
 };
