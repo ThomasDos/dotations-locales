@@ -8,71 +8,71 @@ import {
     InitNationalFichiersDto,
 } from "./init.interface";
 
-export const fetchInitSerializer = (rawInitResult: InitDataDto): InitData => ({
-    commune: initEntitySerializer(rawInitResult.commune),
-    epci: initEntitySerializer(rawInitResult.epci),
-    departement: initEntitySerializer(rawInitResult.departement),
-});
+export const fetchInitSerializer = (data: InitDataDto): InitData => {
+    if (!data) return {} as InitData;
 
-const initEntitySerializer = (rawInitEntity: InitEntityDto): InitEntity => {
+    const {
+        sources_donnees,
+        base_calcul,
+        derniere_maj_donnees,
+        simulation_periodes,
+    } = data;
+
+    return {
+        sourcesDonnees: {
+            commune: initEntitySerializer(sources_donnees?.commune),
+            epci: initEntitySerializer(sources_donnees?.epci),
+            departement: initEntitySerializer(sources_donnees?.departement),
+        },
+        baseCalcul: base_calcul,
+        derniereMajDonnees: derniere_maj_donnees,
+        simulationPeriodes: simulation_periodes,
+    };
+};
+
+export function initEntitySerializer(
+    rawInitEntity: InitEntityDto | null
+): InitEntity | null {
+    if (!rawInitEntity) return null;
     const rawInitEntityKeys = Object.keys(rawInitEntity);
-
     const newObjectEntity: InitEntity = {};
     rawInitEntityKeys.forEach((key: string) => {
-        if (!rawInitEntity[key]) return;
-
         const keyCamelCase = convertSnakeCaseToCamelCase(key);
 
+        const fichiers = rawInitEntity[key].fichiers;
+        const liensExternes = rawInitEntity[key].liens_externes;
+        if (!fichiers) {
+            return (newObjectEntity[keyCamelCase] = {
+                fichiers: null,
+                liensExternes,
+            });
+        }
+
         newObjectEntity[keyCamelCase] = {
-            nationalCriteres: initNationalFichiersSerializer(
-                rawInitEntity[key].national_criteres
-            ),
-            nationalMontants: initNationalFichiersSerializer(
-                rawInitEntity[key].national_montants
-            ),
-            sousDotations: initSousDotationsSerializer(
-                rawInitEntity[key].sous_dotations
-            ),
+            fichiers: {
+                nationalCriteres: initNationalFichiersSerializer(
+                    fichiers.national_criteres
+                ),
+                nationalMontants: initNationalFichiersSerializer(
+                    fichiers.national_montants
+                ),
+                sousDotations:
+                    fichiers.sous_dotations &&
+                    fichiers.sous_dotations.map(initEntitySerializer),
+            },
+            liensExternes,
         };
     });
 
     return newObjectEntity;
-};
+}
 
-const initNationalFichiersSerializer = (
+function initNationalFichiersSerializer(
     rawInitNationalFichiers: InitNationalFichiersDto | null
-): InitNationalFichiers | null => {
+): InitNationalFichiers | null {
     if (!rawInitNationalFichiers) return null;
     return {
         label: rawInitNationalFichiers.label,
         nomFichier: rawInitNationalFichiers.nom_fichier,
     };
-};
-
-const initSousDotationsSerializer = (
-    rawInitSousDotations: InitEntityDto[] | null
-): InitEntity[] | null => {
-    if (!rawInitSousDotations) return null;
-    return rawInitSousDotations.map((sousDotation: InitEntityDto) => {
-        const rawSousDotationsKeys = Object.keys(sousDotation);
-
-        const newObjectSousDotations: InitEntity = {};
-        rawSousDotationsKeys.forEach((key: string) => {
-            if (!sousDotation[key]) return;
-
-            const keyCamelCase = convertSnakeCaseToCamelCase(key);
-
-            newObjectSousDotations[keyCamelCase] = {
-                nationalCriteres: initNationalFichiersSerializer(
-                    sousDotation[key].national_criteres
-                ),
-                nationalMontants: initNationalFichiersSerializer(
-                    sousDotation[key].national_montants
-                ),
-                sousDotations: null,
-            };
-        });
-
-        return newObjectSousDotations;
-    });
-};
+}

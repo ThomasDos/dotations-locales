@@ -1,7 +1,6 @@
 import BadgeEnBeta from "components/ui/Badge/BadgeEnBeta";
-import LabelProchainement from "components/ui/LabelText/LabelProchainement";
 import { useSelector } from "react-redux";
-import { selectCurrentYear } from "store/simulationEntity.slice";
+import { selectInitialCurrentYear } from "store/initialEntity.slice";
 import styled from "styled-components";
 
 const StyledLoiSpan = styled.span`
@@ -9,26 +8,25 @@ const StyledLoiSpan = styled.span`
 `;
 
 interface LawCardBodyProps {
-    value: string;
-    disabled: boolean;
+    annee: string;
+    label: string;
 }
 
-function LawCardBody({ disabled, value }: LawCardBodyProps) {
-    const currentYear = useSelector(selectCurrentYear);
-    const deltaYearLawAndActual = Number(value) - Number(currentYear);
+function LawCardBody({ annee, label }: LawCardBodyProps) {
+    const currentYear = useSelector(selectInitialCurrentYear);
+    const deltaYearLawAndActual = Number(annee) - Number(currentYear);
 
     const textYearFormatted =
         deltaYearLawAndActual === 0
-            ? "(en vigueur)"
-            : `(N${deltaYearLawAndActual})`;
+            ? " (en vigueur)"
+            : ` (N${deltaYearLawAndActual})`;
 
     return (
         <div className="flex flex-1 items-center justify-between">
             <StyledLoiSpan>
-                {disabled ? "Projet de loi" : "Loi en vigueur"} {value}{" "}
-                {textYearFormatted}
+                {label} {textYearFormatted}
             </StyledLoiSpan>
-            {disabled ? <LabelProchainement /> : <BadgeEnBeta />}
+            <BadgeEnBeta />
         </div>
     );
 }

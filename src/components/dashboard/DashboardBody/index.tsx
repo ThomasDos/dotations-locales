@@ -18,6 +18,7 @@ import sortDotationsByAmountDescending from "utils/sortDotationsByAmountDescendi
 import SimulationWarning from "components/simulation/SimulationWarning";
 import MainTab from "./MainTab";
 import SubTab from "./SubTab";
+import MajLoi from "./SubTab/MajLoi";
 
 const StyledDashboardBody = styled.div<{
     displayMobileCriteresGeneraux: boolean;
@@ -36,6 +37,19 @@ const StyledDashboardBody = styled.div<{
         padding: 56px 80px 60px 120px;
         width: ${({ initialCriteresGenerauxIsEmpty }) =>
             !initialCriteresGenerauxIsEmpty && "76%"};
+    }
+`;
+
+const StyledInfosContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex: 4;
+    align-items: center;
+    @media (min-width: 768px) {
+        width: 100%;
+        border-top: solid 1px var(--blue-france-925);
+        padding-top: 16px;
+        margin-top: 16px;
     }
 `;
 
@@ -82,8 +96,11 @@ const DashboardBody = ({
                                 : `Dotations pour ${currentYear}`}
                         </span>
                     </div>
-                    <div className="flex w-full items-center justify-between">
-                        <BaseCalculLoi />
+                    <div className="flex w-full items-end justify-between">
+                        <StyledInfosContainer>
+                            <BaseCalculLoi />
+                            <MajLoi />
+                        </StyledInfosContainer>
                         <ImageFixed
                             className="flex flex-1 md:hidden justify-end"
                             width={48}

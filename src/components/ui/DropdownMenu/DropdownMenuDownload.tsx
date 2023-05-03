@@ -60,12 +60,14 @@ interface DropdownMenuDownloadProps {
     dataCSV: {}[] | [][];
     headers: Headers;
     fichiers?: InitEntityFichiers | null;
+    fichiersEntity?: string | null;
 }
 
 const DropdownMenuDownload = ({
     dataCSV,
     headers,
     fichiers,
+    fichiersEntity,
 }: DropdownMenuDownloadProps) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
@@ -85,7 +87,9 @@ const DropdownMenuDownload = ({
 
     const textMenuItemEntity = `Télécharger ${
         isCommune ? "ma" : "mon"
-    } ${entityDenomination} ${currentYear} (csv)`;
+    } ${entityDenomination} ${currentYear} ${
+        fichiersEntity ? `- ${fichiersEntity}` : ""
+    } (csv)`;
 
     const handleDownloadFichier = (fichier: string) => {
         toastPromise(fetchAndDownloadFichiersData(fichier), {
