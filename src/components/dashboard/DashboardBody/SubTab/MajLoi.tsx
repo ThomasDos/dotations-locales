@@ -1,9 +1,9 @@
 import { ImageFixed } from "components/ui";
 import { useSelector } from "react-redux";
-import { selectDerniereMajDonneess } from "store/appSettings.slice";
+import { selectDerniereMajDonnees } from "store/appSettings.slice";
 
 function MajLoi() {
-    const derniereMajDonnees = useSelector(selectDerniereMajDonneess);
+    const derniereMajDonnees = useSelector(selectDerniereMajDonnees);
     if (!derniereMajDonnees) return null;
     const dateFormatted = new Date(derniereMajDonnees).toLocaleDateString();
     return (

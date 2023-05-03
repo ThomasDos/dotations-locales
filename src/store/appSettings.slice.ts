@@ -178,7 +178,7 @@ export const selectSimulationPeriodes = createSelector(
     selectInit,
     init => init?.simulationPeriodes
 );
-export const selectDerniereMajDonneess = createSelector(
+export const selectDerniereMajDonnees = createSelector(
     selectInit,
     init => init?.derniereMajDonnees
 );

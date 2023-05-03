@@ -20,9 +20,9 @@ export const fetchInitSerializer = (data: InitDataDto): InitData => {
 
     return {
         sourcesDonnees: {
-            commune: initEntitySerializer(sources_donnees.commune),
-            epci: initEntitySerializer(sources_donnees.epci),
-            departement: initEntitySerializer(sources_donnees.departement),
+            commune: initEntitySerializer(sources_donnees?.commune),
+            epci: initEntitySerializer(sources_donnees?.epci),
+            departement: initEntitySerializer(sources_donnees?.departement),
         },
         baseCalcul: base_calcul,
         derniereMajDonnees: derniere_maj_donnees,
