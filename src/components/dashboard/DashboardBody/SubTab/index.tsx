@@ -26,7 +26,7 @@ const SubTab = ({ dotation }: SubTabProps) => {
         selectIsDotationsAnneesDifferentThanCriteresAnnees
     );
 
-    const { annees } = dotation;
+    const { annees, label } = dotation;
 
     const years = annees.map(annee => Object.keys(annee)[0]);
     const headersYears = years.map((year: string) => ({
@@ -63,6 +63,7 @@ const SubTab = ({ dotation }: SubTabProps) => {
                             ]}
                             dataCSV={dotationFormattedToExportCsv}
                             fichiers={dotationFichiers}
+                            fichiersEntity={label}
                         />
                     </div>
                     <>

@@ -1,16 +1,6 @@
+import { useSelector } from "react-redux";
+import { selectBaseCalcul } from "store/appSettings.slice";
 import styled from "styled-components";
-
-const StyledBaseCalculLoi = styled.div`
-    display: flex;
-    flex: 2;
-    @media (min-width: 768px) {
-        width: 100%;
-        border-top: solid 1px var(--blue-france-925);
-        padding-top: 16px;
-        margin-top: 16px;
-        align-items: center;
-    }
-`;
 
 const StyledLoiLabel = styled.div`
     font-size: 12px;
@@ -23,18 +13,16 @@ const StyledLoiLabel = styled.div`
     display: flex;
     align-self: center;
 `;
-//TODO: gerer dynamiquement back
-const lois = ["Loi en vigueur 2023"];
 
 export default function BaseCalculLoi() {
+    const baseCalcul = useSelector(selectBaseCalcul);
+    if (!baseCalcul) return null;
     return (
-        <StyledBaseCalculLoi>
+        <div className="flex items-center">
             <span className="text-sm mr-1 hidden md:block">
                 Base de calcul :{" "}
             </span>
-            {lois.map((loi: string) => (
-                <StyledLoiLabel key={loi}>{loi}</StyledLoiLabel>
-            ))}
-        </StyledBaseCalculLoi>
+            <StyledLoiLabel>{baseCalcul}</StyledLoiLabel>
+        </div>
     );
 }

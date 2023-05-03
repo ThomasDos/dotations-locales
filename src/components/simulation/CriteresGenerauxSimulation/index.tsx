@@ -13,6 +13,8 @@ import {
 import styled from "styled-components";
 import { toastError, toastPromise } from "utils/customToasts";
 
+import { InitSimulationPeriode } from "models/init/init.interface";
+import { selectSimulationPeriodes } from "store/appSettings.slice";
 import WarningDefaultMessage from "../WarningDefaultMessage";
 import CriteresGenerauxCard from "./CriteresGenerauxCard";
 import RadioGroupContainer from "./RadioGroupContainer";
@@ -43,34 +45,6 @@ interface CriteresGenerauxSimulationProps {
     setShowAlertModal(show: boolean): void;
 }
 
-export interface LawAvailable {
-    disabled: boolean;
-    value: string;
-}
-
-const initialLoiSimulationValue = (
-    lawAvailable: LawAvailable[]
-): LawAvailable => {
-    if (lawAvailable.length === 1) {
-        return lawAvailable[0];
-    }
-
-    const hasLawAvailable = lawAvailable.filter(law => !law.disabled);
-    const hasOnlyOneLawAvailable = hasLawAvailable.length === 1;
-
-    if (hasOnlyOneLawAvailable) {
-        return hasLawAvailable[0];
-    }
-
-    return { disabled: false, value: "" };
-};
-
-//TODO: remplacer en valeur dynamique back
-const radioButtonLawAvailable: LawAvailable[] = [
-    { disabled: false, value: "2022" },
-    { disabled: true, value: "2023" },
-];
-
 export default function CriteresGenerauxSimulation({
     setIsCriteresGenerauxSimulation,
     setDisplayMobileCriteresGeneraux,
@@ -86,12 +60,13 @@ export default function CriteresGenerauxSimulation({
     const criteresGenerauxSimulation = useSelector(
         selectSimulationCriteresGeneraux
     );
+    const simulationPeriodes = useSelector(selectSimulationPeriodes);
 
     const [fetchSimulation, setFetchSimulation] = useState(false);
     const [criteres, setCriteres] = useState(criteresGenerauxSimulation);
-    const [selectLoiSimulation, setSelectLoiSimulation] = useState(
-        initialLoiSimulationValue(radioButtonLawAvailable)
-    );
+    const [selectLoiSimulation, setSelectLoiSimulation] = useState<
+        InitSimulationPeriode | undefined
+    >(simulationPeriodes?.[0]);
 
     useEffect(() => {
         if (fetchSimulation && simulationIsDifferentThanInitial) {
@@ -106,7 +81,7 @@ export default function CriteresGenerauxSimulation({
                             ...criteres,
                         },
                     },
-                    selectLoiSimulation: selectLoiSimulation.value,
+                    selectLoiSimulation: selectLoiSimulation?.annee as string,
                 }),
                 {
                     success: "Votre simulation est prête !",
@@ -141,8 +116,8 @@ export default function CriteresGenerauxSimulation({
             <div className="flex flex-col mb-12 sm:mb-20">
                 <SpanTitleStyled>1. Simuler avec :</SpanTitleStyled>
                 <RadioGroupContainer
-                    radioButtonLawAvailable={radioButtonLawAvailable}
-                    selectLoiSimulation={selectLoiSimulation.value}
+                    radioButtonLawAvailable={simulationPeriodes}
+                    selectLoiSimulation={selectLoiSimulation}
                     setSelectLoiSimulation={setSelectLoiSimulation}
                 />
             </div>

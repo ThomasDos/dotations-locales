@@ -6,7 +6,7 @@ import { HistoriqueDotations } from "./historique.interface";
 export const historiqueSerializer = (
     dotation: Dotation
 ): HistoriqueDotations => {
-    if (_.isEmpty(dotation.annees)) return [];
+    if (_.isEmpty(dotation?.annees)) return [];
 
     return dotation.annees
         .map(annee => {

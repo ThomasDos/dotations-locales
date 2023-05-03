@@ -11,4 +11,10 @@ describe("formatNumberWithSpace(numberToFormat: number)", () => {
 
         expect(formatNumberWithSpace(numberToFormat)).toEqual("0");
     });
+
+    it("should return a number with 2 decimals if numberToFormat is a small number with decimals", () => {
+        const numberToFormat = 12.345;
+
+        expect(formatNumberWithSpace(numberToFormat)).toEqual("12.35");
+    });
 });

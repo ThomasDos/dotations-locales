@@ -11,4 +11,8 @@ describe("Historique serializer", () => {
             { label: "264K€", value: 263676, year: "2022" },
         ]);
     });
+
+    it("should return an empty array if dotation.annees is empty", () => {
+        expect(historiqueSerializer(dotationsMocked.dotationEmpty)).toEqual([]);
+    });
 });

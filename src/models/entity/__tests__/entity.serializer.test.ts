@@ -2,6 +2,7 @@ import { fetchCommuneMocked } from "__fixtures__/fetchCommuneMocked";
 import { CritereAnnee } from "../entity.interface";
 
 import {
+    anneesCriteresSerializer,
     criteresSerializer,
     dotationSerializer,
     fetchEntitySerializer,
@@ -376,5 +377,29 @@ describe("sousDotationsSerializer", () => {
 
     it("should return empty array if no sous dotations", () => {
         expect(sousDotationsSerializer(undefined)).toEqual([]);
+    });
+});
+
+describe("anneesCriteresSerializer", () => {
+    it("should return serialized annees criteres", () => {
+        expect(
+            anneesCriteresSerializer(fetchCommuneMocked.criteres_generaux)
+        ).toEqual(["2022", "2021"]);
+    });
+
+    it("should return empty array if no annees criteres", () => {
+        expect(anneesCriteresSerializer(undefined)).toEqual([]);
+    });
+
+    it("should return empty array if the first critere has no annees", () => {
+        expect(
+            anneesCriteresSerializer({
+                ...fetchCommuneMocked.criteres_generaux,
+                longueur_voirie: {
+                    ...fetchCommuneMocked.criteres_generaux?.longueur_voirie,
+                    annees: [],
+                },
+            })
+        ).toEqual([]);
     });
 });

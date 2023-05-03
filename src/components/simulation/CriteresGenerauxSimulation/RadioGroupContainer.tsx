@@ -6,13 +6,14 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 
-import type { LawAvailable } from ".";
+import {
+    InitSimulationPeriode,
+    InitSimulationPeriodes,
+} from "models/init/init.interface";
 import LawCardBody from "./LawCardBody";
 
-const ContainerRadioStyled = styled.div<{ disabled: boolean }>`
-    border: ${({ disabled }) =>
-        !disabled && "2px solid var(--blue-france-113)"};
-    background-color: ${({ disabled }) => disabled && "var(--grey-950)"};
+const ContainerRadioStyled = styled.div`
+    border: 2px solid var(--blue-france-113);
     padding: 16px;
     gap: 10px;
     border-radius: 4px;
@@ -22,9 +23,9 @@ const ContainerRadioStyled = styled.div<{ disabled: boolean }>`
 `;
 
 interface RadioGroupContainerProps {
-    radioButtonLawAvailable: LawAvailable[];
-    selectLoiSimulation: string;
-    setSelectLoiSimulation: (loi: LawAvailable) => void;
+    radioButtonLawAvailable?: InitSimulationPeriodes;
+    selectLoiSimulation?: InitSimulationPeriode;
+    setSelectLoiSimulation: (loi: InitSimulationPeriode) => void;
 }
 
 export default function RadioGroupContainer({
@@ -32,13 +33,10 @@ export default function RadioGroupContainer({
     selectLoiSimulation,
     setSelectLoiSimulation,
 }: RadioGroupContainerProps) {
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value: string = event.target.value;
-        const disabled: boolean =
-            radioButtonLawAvailable.find(
-                (lawAvailable: LawAvailable) => value === lawAvailable.value
-            )?.disabled ?? false;
-        setSelectLoiSimulation({ disabled, value });
+    if (!radioButtonLawAvailable) return null;
+
+    const handleChange = (annee: string, label: string) => {
+        setSelectLoiSimulation({ label, annee });
     };
 
     return (
@@ -59,23 +57,25 @@ export default function RadioGroupContainer({
                     }}
                 >
                     {radioButtonLawAvailable.map(
-                        ({ value, disabled }: LawAvailable) => (
+                        ({ annee, label }: InitSimulationPeriode) => (
                             <FormControlLabel
-                                key={value}
-                                value={value}
+                                key={label}
+                                value={annee}
                                 sx={{ flex: 1 }}
                                 control={
-                                    <ContainerRadioStyled disabled={disabled}>
+                                    <ContainerRadioStyled>
                                         <Radio
-                                            disabled={disabled}
                                             checked={
-                                                selectLoiSimulation === value
+                                                selectLoiSimulation?.annee ===
+                                                annee
                                             }
-                                            onChange={handleChange}
-                                            value={value}
+                                            onChange={() =>
+                                                handleChange(annee, label)
+                                            }
+                                            value={annee}
                                             name="radio-buttons"
                                             inputProps={{
-                                                "aria-label": value,
+                                                "aria-label": annee,
                                             }}
                                             sx={{
                                                 "&.Mui-checked": {
@@ -87,8 +87,8 @@ export default function RadioGroupContainer({
                                             }}
                                         />
                                         <LawCardBody
-                                            disabled={disabled}
-                                            value={value}
+                                            annee={annee}
+                                            label={label}
                                         />
                                     </ContainerRadioStyled>
                                 }
