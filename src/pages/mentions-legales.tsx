@@ -1,12 +1,15 @@
 import SectionMentionsLegales from "components/mentionsLegales/SectionMentionsLegales";
-import SubHeaderMentionsLegales from "components/mentionsLegales/SubHeaderMentionsLegales";
+import { SubHeaderSidePage } from "components/ui";
 import Link from "next/link";
 
 export default function MentionsLegales() {
     return (
         <>
-            <SubHeaderMentionsLegales />
-            <div className="pt-3 pb-14 w-8/12 mx-auto flex flex-col">
+            <SubHeaderSidePage
+                title="Mentions Légales"
+                maj="Dernière mise à jour : 18 septembre 2022"
+            />
+            <div className="pt-3 pb-14 px-4 md:px-0 md:w-8/12 mx-auto flex flex-col">
                 <SectionMentionsLegales title="Editeur">
                     <div>
                         <span>
