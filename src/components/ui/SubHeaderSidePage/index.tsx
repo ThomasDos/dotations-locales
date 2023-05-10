@@ -9,15 +9,20 @@ const TitleSubHeader = styled.span`
     color: var(--blue-france-113);
 `;
 
-export default function SubHeaderMentionsLegales() {
+interface SubHeaderSidePageProps {
+    title: string;
+    maj: string;
+}
+
+export default function SubHeaderSidePage({
+    title,
+    maj,
+}: SubHeaderSidePageProps) {
     return (
         <div className="py-8 w-8/12 mx-auto flex flex-col">
-            <BreadCrumbsTwoLinks
-                firstLink="Accueil"
-                secondLink="Mentions Legales"
-            />
-            <TitleSubHeader>Mentions Légales</TitleSubHeader>
-            <span>Dernière mise à jour : 18 septembre 2022</span>
+            <BreadCrumbsTwoLinks firstLink="Accueil" secondLink={title} />
+            <TitleSubHeader>{title}</TitleSubHeader>
+            <span>{maj}</span>
         </div>
     );
 }
