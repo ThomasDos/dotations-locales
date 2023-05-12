@@ -72,7 +72,7 @@ const FooterContainer = () => {
                     Mentions Légales
                 </FooterLink>
                 <FooterLink href="/declaration-accessibilite">
-                    Déclaration d&apos;Accessibilité
+                    Accessibilité : non conforme
                 </FooterLink>
                 <FooterLink
                     href="https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText"
