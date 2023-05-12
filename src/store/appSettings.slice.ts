@@ -200,7 +200,7 @@ export const selectSimulationIsEnabled = createSelector(
         simulationPeriodes?.length
 );
 
-export const selectFichiersWithEntity = createSelector(
+export const selectSourcesDonneesEntityWithEntity = createSelector(
     selectSourcesDonnees,
     selectIsCommune,
     selectIsDepartement,
@@ -218,10 +218,31 @@ export const selectFichiersWithEntity = createSelector(
     }
 );
 
-export const selectFichiersWithEntityAndDotation = (dotation: string) =>
-    createSelector(selectFichiersWithEntity, fichiersWithEntity => {
-        if (!fichiersWithEntity?.[dotation]) return null;
-        return fichiersWithEntity[dotation].fichiers;
-    });
+export const selectSourcesDonneesDotationWithDotation = (dotation: string) =>
+    createSelector(
+        selectSourcesDonneesEntityWithEntity,
+        sourcesDonneesEntityWithEntity => {
+            if (!sourcesDonneesEntityWithEntity?.[dotation]) return null;
+            return sourcesDonneesEntityWithEntity[dotation];
+        }
+    );
+
+export const selectFichiersDotationWithDotation = (dotation: string) =>
+    createSelector(
+        selectSourcesDonneesEntityWithEntity,
+        sourcesDonneesEntityWithEntity => {
+            if (!sourcesDonneesEntityWithEntity?.[dotation]) return null;
+            return sourcesDonneesEntityWithEntity[dotation].fichiers;
+        }
+    );
+
+export const selectLiensExternesDotationWithDotation = (dotation: string) =>
+    createSelector(
+        selectSourcesDonneesEntityWithEntity,
+        sourcesDonneesEntityWithEntity => {
+            if (!sourcesDonneesEntityWithEntity?.[dotation]) return null;
+            return sourcesDonneesEntityWithEntity[dotation].liensExternes;
+        }
+    );
 
 export default appSettingsSlice.reducer;
