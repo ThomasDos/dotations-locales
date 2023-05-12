@@ -117,7 +117,26 @@ export default function MentionsLegales() {
                 <SectionMentionsLegales title="Licence">
                     <div>
                         <span>
-                            L&apos;Incubateur des Territoires a choisi de placer
+                            Le 
+                            <Link
+                                href="https://gitlab.com/incubateur-territoires/startups/dotations-locales"
+                                rel="noopener noreferrer"
+                                target="_"
+                            >
+                            code source du frontal et du dorsal 
+                            </Link>
+                            de Dotations Locales est placé sous
+                            <Link
+                                href="https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText"
+                                rel="noopener noreferrer"
+                                target="_"
+                            >
+                                Licence AGPL 3 ou supérieure
+                            </Link>
+                            .
+                        </span>
+                        <span>
+                            Par ailleurs, l&apos;Incubateur des Territoires a choisi de placer
                             par défaut ses documents sous Licence Ouverte / Open
                             Licence 2.0. Cela signifie que, sauf mention
                             contraire, vous êtes libres de réutiliser toute
