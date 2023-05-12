@@ -54,7 +54,7 @@ export default function DeclarationAccessibilite() {
                     <li>
                         Adresse&nbsp;:{" "}
                         <span>
-                            Agence Nationale de la Cohésion des Territoires,
+                            Agence nationale de la cohésion des territoires,
                             Mission incubateur de services numériques, 20,
                             avenue de Ségur, TSA 10717, 75 334 Paris Cedex 07
                         </span>

@@ -21,7 +21,14 @@ export default function MentionsLegales() {
                         <br />
                         <br />
                         <span>
-                            https://agence-cohesion-territoires.gouv.fr/ <br />
+                            <Link
+                                href="https://agence-cohesion-territoires.gouv.fr/"
+                                rel="noopener noreferrer"
+                                target="_"
+                            >
+                                Agence nationale de la cohésion des territoires
+                            </Link>
+                            <br />
                             Mission incubateur de services numériques
                             <br />
                             20, avenue de Ségur, TSA 10717, 75 334 Paris Cedex
