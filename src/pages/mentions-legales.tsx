@@ -54,7 +54,7 @@ export default function MentionsLegales() {
                         <span>
                             Ce site est conçu et développé par l&apos;équipe
                             Dotations Locales de l&apos;Incubateur des
-                            Territories.De nouvelles fonctionnalités sont
+                            Territoires.De nouvelles fonctionnalités sont
                             ajoutées en continu.
                         </span>
                         <br />
@@ -66,8 +66,9 @@ export default function MentionsLegales() {
                                 rel="noopener noreferrer"
                                 target="_"
                             >
-                                Gitlab
+                                GitLab
                             </Link>
+                            .
                         </span>
                     </div>
                 </SectionMentionsLegales>
@@ -106,8 +107,9 @@ export default function MentionsLegales() {
                                 rel="noopener noreferrer"
                                 target="_"
                             >
-                                Gitlab
+                                GitLab
                             </Link>
+                            .
                         </span>
                     </div>
                 </SectionMentionsLegales>
