@@ -1,6 +1,5 @@
 import {
     IconCopyWithSuccess,
-    IconInformation,
     LabelGreyCustomCrossIcon,
     LabelPercentage,
 } from "components/ui";
@@ -105,21 +104,17 @@ const DotationCard = ({
             >
                 <div className="flex flex-col sm:flex-row items-center sm:justify-between">
                     <div className="flex flex-col items-center sm:items-start">
-                        <div className="flex">
-                            <StyledCardTitle
-                                className="mb-2 mr-1"
-                                onClick={handleClick}
-                            >
+                        <div className="flex flex-col mb-2">
+                            <StyledCardTitle onClick={handleClick}>
                                 {title}
                             </StyledCardTitle>
 
-                            {
-                                <IconInformation
-                                    setShowDrawer={() =>
-                                        setShowInfoDrawer(true)
-                                    }
-                                />
-                            }
+                            <span
+                                onClick={() => setShowInfoDrawer(true)}
+                                className="text-sm cursor-pointer text-color-primary w-fit underline"
+                            >
+                                plus d&apos;infos
+                            </span>
                         </div>
                         <span>
                             Évolution du montant {lastYear} / {currentYear}.
