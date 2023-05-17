@@ -1,3 +1,4 @@
+import HomeNewsBanner from "components/home/HomeNewsBanner";
 import HomeRowGuideDownload from "components/home/HomeRowGuideDownload";
 import HomeRowImageText from "components/home/HomeRowImageText";
 import LandingIntroduction from "components/home/LandingIntroduction";
@@ -67,6 +68,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>Dotations Locales</title>
             </Head>
+            <HomeNewsBanner />
             <div className="flex flex-col items-center px-2 md:px-0">
                 <div className="pt-5 md:pt-20 text-center">
                     <h1 className="p-0 m-0">
