@@ -44,10 +44,11 @@ const StyledSpanTotalNumber = styled.span`
     font-weight: 700;
 `;
 
-const StyledCardTitle = styled.span`
+const StyledCardTitle = styled.h4`
     font-size: 22px;
     line-height: 28px;
     font-weight: 700;
+    margin: 0;
 
     @media (max-width: 640px) {
         text-align: center;
@@ -104,7 +105,7 @@ const DotationCard = ({
             >
                 <div className="flex flex-col sm:flex-row items-center sm:justify-between">
                     <div className="flex flex-col items-center sm:items-start">
-                        <div className="flex flex-col mb-2">
+                        <div className="flex flex-col mb-1 md:mb-2">
                             <StyledCardTitle onClick={handleClick}>
                                 {title}
                             </StyledCardTitle>
