@@ -1,7 +1,7 @@
 import Dots from "components/ui/Dots";
 import { useState } from "react";
 
-export default function Stats() {
+export default function Statistiques() {
     const [iframeLoaded, setIframeLoaded] = useState(false);
 
     const handleOnLoad = () => setIframeLoaded(true);
