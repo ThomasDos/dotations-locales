@@ -6,7 +6,7 @@ import { selectCurrentYearCriteres } from "store/simulationEntity.slice";
 import formatDotationWithCriteresToExportCsv from "utils/formatDotationWithCriteresToExportCsv";
 import sortCriteresEligiblesOrNonEligibles from "utils/sortCriteresEligiblesOrNonEligibles";
 
-import { selectFichiersWithEntityAndDotation } from "store/appSettings.slice";
+import { selectFichiersDotationWithDotation } from "store/appSettings.slice";
 import { selectIsDotationsAnneesDifferentThanCriteresAnnees } from "store/initialEntity.slice";
 import DotationCard from "../DotationCard";
 import ParameterCard from "./ParameterCard";
@@ -20,7 +20,7 @@ interface SubTabProps {
 const SubTab = ({ dotation }: SubTabProps) => {
     const currentYearCriteres = useSelector(selectCurrentYearCriteres);
     const dotationFichiers = useSelector(
-        selectFichiersWithEntityAndDotation(dotation.key)
+        selectFichiersDotationWithDotation(dotation.key)
     );
     const isDotationsAnneesDifferentThanCriteresAnnees = useSelector(
         selectIsDotationsAnneesDifferentThanCriteresAnnees

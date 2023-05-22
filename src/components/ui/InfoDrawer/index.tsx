@@ -2,10 +2,23 @@ import { SwipeableDrawer } from "@mui/material";
 import ImageFixed from "components/ui/ImageFixed";
 import useResize from "hooks/useResize";
 import { Dotation, Dotations } from "models/entity/entity.interface";
+import {
+    InitEntityFichiers,
+    InitNationalFichiers,
+} from "models/init/init.interface";
+import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import fetchAndDownloadFichiersData from "services/fetchAndDownloadFichiersData";
+import { matomoTrackEvent } from "services/matomo";
+import {
+    selectDerniereMajDonnees,
+    selectIsCommune,
+    selectSourcesDonneesDotationWithDotation,
+} from "store/appSettings.slice";
 import { selectInitialDotations } from "store/initialEntity.slice";
 import styled from "styled-components";
+import { toastPromise } from "utils/customToasts";
 import DrawerLinks from "./DrawerLinks";
 
 interface InfoDrawerProps {
@@ -40,6 +53,40 @@ const StyledDotationTitle = styled.div`
     margin-bottom: 8px;
 `;
 
+const StyledSectionTitle = styled.p`
+    font-size: 14px;
+    margin-top: 40px;
+    margin-bottom: 4px;
+    color: var(--grey-425);
+`;
+
+const StyledSectionRow = styled.div`
+    color: var(--blue-france-113);
+    margin: 4px 0;
+    cursor: pointer;
+`;
+
+function DownloadFileRow({ label }: { label: string }) {
+    return (
+        <div
+            onClick={() => {
+                matomoTrackEvent(["Fonction", `Télécharger > Info : ${label}`]);
+            }}
+        >
+            <div className="flex text-sm my-2 items-center hover:underline">
+                <ImageFixed
+                    src="/icons/file-download-empty.svg"
+                    width={24}
+                    height={24}
+                    alt="icone pour exporter"
+                    className="mr-2"
+                />
+                <span>{label}</span>
+            </div>
+        </div>
+    );
+}
+
 export default function InfoDrawer({
     showInfoDrawer,
     setShowInfoDrawer,
@@ -47,6 +94,16 @@ export default function InfoDrawer({
 }: InfoDrawerProps) {
     const [currentDotation, setCurrentDotation] = useState<Dotation>(dotation);
     const dotations = useSelector(selectInitialDotations);
+    const sourcesDonneesDotationWithDotation = useSelector(
+        selectSourcesDonneesDotationWithDotation(currentDotation.key)
+    );
+    const isCommune = useSelector(selectIsCommune);
+    const derniereMajDonnees = useSelector(selectDerniereMajDonnees);
+
+    const fichiers = sourcesDonneesDotationWithDotation?.fichiers;
+    const liensExternes = sourcesDonneesDotationWithDotation?.liensExternes;
+
+    const fichiersIsEmpty = !Object.values(fichiers ?? {})?.find(Boolean);
 
     const handleClose = () => {
         setShowInfoDrawer(false);
@@ -68,6 +125,15 @@ export default function InfoDrawer({
             newDotation = dotations[dotationKey];
         }
         setCurrentDotation(newDotation);
+    };
+
+    const handleDownloadFichier = (fichier: string) => {
+        toastPromise(fetchAndDownloadFichiersData(fichier), {
+            loading:
+                "Préparation du fichier, merci de patienter jusqu'au téléchargement...",
+            success: "Fichier téléchargé",
+            error: "Une erreur est survenue, merci de réessayer",
+        });
     };
 
     const { title, info, links } = currentDotation;
@@ -99,18 +165,15 @@ export default function InfoDrawer({
             <StyledDrawerBody>
                 <div className="mb-10">
                     <StyledDotationTitle>{title}</StyledDotationTitle>
-                    {/* 
-                    TODO: décommenter quand on aura la date dernier MAJ
+
                     <div className="text-sm flex items-center">
                         <div className="mr-2">
-                            Dernière mise à jour : 29 juillet 2022
+                            Dernière mise à jour :{" "}
+                            {new Date(
+                                derniereMajDonnees as string
+                            ).toLocaleDateString()}
                         </div>
-                        <LabelText
-                            text="DGCL"
-                            backgroundColor="var(--blue-france-925)"
-                            color="var(--blue-france-113)"
-                        />
-                    </div> */}
+                    </div>
                 </div>
 
                 <div className="mb-10">{textFormatted?.[0]}</div>
@@ -126,17 +189,52 @@ export default function InfoDrawer({
                         <InfoDrawerDropdown title="Critères concernés" />
                         <InfoDrawerDropdown title="Formule de calcul" lastRow />
                     </div> */}
-
-                {!!links?.length && (
+                {/* TODO: fix avec departement et EPCI */}
+                {!!links?.length && isCommune && (
                     <DrawerLinks
                         links={links}
                         handleChangeInfoDotation={handleChangeInfoDotation}
                     />
                 )}
 
-                {/* <div className="text-sm text-grey-mayback">
-                    Pour aller plus loin
-                </div> */}
+                {!fichiersIsEmpty && (
+                    <>
+                        <StyledSectionTitle>A télécharger</StyledSectionTitle>
+                        {Object.values(fichiers as InitEntityFichiers).map(
+                            (fichier: InitNationalFichiers) => {
+                                if (!fichier) return null;
+                                const { label, nomFichier } = fichier;
+                                return (
+                                    <StyledSectionRow
+                                        key={label}
+                                        onClick={() =>
+                                            handleDownloadFichier(nomFichier)
+                                        }
+                                    >
+                                        <DownloadFileRow label={label} />
+                                    </StyledSectionRow>
+                                );
+                            }
+                        )}
+                    </>
+                )}
+
+                {!!liensExternes?.length && (
+                    <>
+                        <StyledSectionTitle>
+                            Pour aller plus loin
+                        </StyledSectionTitle>
+                        <div className="flex flex-col">
+                            {liensExternes.map(({ label, url }) => (
+                                <StyledSectionRow key={label}>
+                                    <Link href={url} target="_">
+                                        {label}
+                                    </Link>
+                                </StyledSectionRow>
+                            ))}
+                        </div>
+                    </>
+                )}
             </StyledDrawerBody>
         </SwipeableDrawer>
     );

@@ -19,7 +19,11 @@ export default function HomeNewsBanner() {
     return (
         <StyledContainer>
             <Badge text="INFO" type="info" isSmall={windowWidth < 768} />
+
+            {/* <Badge text="NOUVEAU" type="info" isSmall={windowWidth < 768} /> */}
             <span className="ml-2 text-color-primary font-bold md:text-base text-sm">
+                {/* Découvrez votre montant de votre dotation pour la Protection de
+                la Biodiversité (DPB) 🌿 */}
                 Retrouvez-nous à{" "}
                 <Link
                     href="https://agence-cohesion-territoires.gouv.fr/anctour"

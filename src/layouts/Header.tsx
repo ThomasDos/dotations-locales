@@ -67,13 +67,15 @@ const HeaderContainer = () => {
                             className="sm:hidden"
                         />
                     </div>
-                    <div className="ml-10 py-5 md:block hidden">
-                        <h6 className="p-0 m-0">Dotations Locales</h6>
-                        <span>
-                            Tout savoir sur les dotations d&apos;État de votre
-                            collectivité
-                        </span>
-                    </div>
+                    <Link href="/" style={{ backgroundImage: "none" }}>
+                        <div className="ml-10 py-5 md:block hidden">
+                            <h6 className="p-0 m-0">Dotations Locales</h6>
+                            <span>
+                                Tout savoir sur les dotations d&apos;État de
+                                votre collectivité
+                            </span>
+                        </div>
+                    </Link>
                 </div>
 
                 <div>

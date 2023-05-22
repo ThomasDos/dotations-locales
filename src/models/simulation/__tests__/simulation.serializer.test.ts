@@ -72,7 +72,7 @@ describe("fetchEntitySerializer", () => {
                     criteres: {},
                     description:
                         "Votre dotation forfaitaire est stable par rapport à l’année 2021",
-                    info: "",
+                    info: "La dotation forfaitaire des communes (DF) est, avec la dotation d'aménagement, l’une des composantes majeures de la dotation globale de fonctionnement (DGF). La DF est  la principale dotation de l’État aux collectivités locales. Il s’agit d’une contribution de base à la couverture des charges de fonctionnement des communes.",
                     key: "dotationForfaitaire",
                     label: "DF",
                     links: [],
