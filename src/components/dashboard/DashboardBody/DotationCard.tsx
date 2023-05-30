@@ -112,7 +112,7 @@ const DotationCard = ({
 
                             <span
                                 onClick={() => setShowInfoDrawer(true)}
-                                className="text-sm cursor-pointer text-color-primary w-fit underline"
+                                className="text-sm cursor-pointer text-color-primary w-fit underline underline-offset-4"
                             >
                                 plus d&apos;infos
                             </span>
