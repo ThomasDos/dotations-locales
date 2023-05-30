@@ -7,8 +7,11 @@ import {
     selectInitialAnnees,
     selectInitialAnneesCriteres,
     selectInitialCriteresGeneraux,
+    selectInitialDotations,
 } from "store/initialEntity.slice";
 
+import { dotationsMap } from "constants/dotationsMap";
+import getTotalDotations from "utils/getTotalDotations";
 import type { RootState } from ".";
 import { selectIsSimulation } from "./appSettings.slice";
 
@@ -164,6 +167,32 @@ export const selectAllYearsCriteres = createSelector(
     selectInitialAnneesCriteres,
     (isSimulation, simulationAnneesCriteres, initialAnneesCriteres) =>
         isSimulation ? simulationAnneesCriteres : initialAnneesCriteres
+);
+
+export const selectCurrentDotationsAccordingToSimulationMode = createSelector(
+    selectIsSimulation,
+    selectSimulationDotations,
+    selectInitialDotations,
+    (isSimulation, simulationDotations, initialDotations) =>
+        isSimulation ? simulationDotations : initialDotations
+);
+
+export const selectDotationDGF = createSelector(
+    selectCurrentYear,
+    selectLastYear,
+    selectCurrentDotationsAccordingToSimulationMode,
+    (currentYear, lastYear, dotations) => {
+        const currentYearTotal = getTotalDotations(dotations, currentYear);
+        const lastYearTotal = getTotalDotations(dotations, lastYear);
+        return {
+            annees: [
+                { [currentYear]: currentYearTotal },
+                { [lastYear]: lastYearTotal },
+            ],
+            criteres: {},
+            ...dotationsMap.dotationGlobaleFonctionnement,
+        };
+    }
 );
 
 export default simulationEntitySlice.reducer;

@@ -87,6 +87,12 @@ export const dotationsMap: Record<string, DotationMap> = {
         label: "DACOM",
         links: [],
         title: "Dotation Aménagement Communes Outre Mer (DACOM)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationAmorcage: {
         description: "Lorem Ipsum DNP",
@@ -96,6 +102,12 @@ Fonctionnant comme “un bonus de DGF”, la dotation d'amorçage est un soutien
         label: "DA",
         links: [],
         title: "Dotation Amorçage (DA)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationBiodiversite: {
         description: "Lorem Ipsum DNP",
@@ -104,6 +116,12 @@ Fonctionnant comme “un bonus de DGF”, la dotation d'amorçage est un soutien
         label: "DPB",
         links: [],
         title: "Dotation pour la Protection de la Biodiversité (DPB)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationCompensation: {
         description: "Lorem Ipsum DNP",
@@ -113,6 +131,12 @@ C'est une dotation “figée”, basée sur des données anciennes. Elle n'évol
         label: "DC",
         links: [],
         title: "Dotation Compensation (DC)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationEluLocal: {
         description: "Lorem Ipsum DNP",
@@ -122,6 +146,12 @@ Elle est destinée à accompagner les communes face aux dépenses obligatoires e
         label: "DPEL",
         links: [],
         title: "Dotation Élu Local (DPEL)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationFonctionnementMinimale: {
         description: "Dotation Fonctionnement Minimale",
@@ -130,6 +160,12 @@ Elle est destinée à accompagner les communes face aux dépenses obligatoires e
         label: "DFM",
         links: [],
         title: "Dotation Fonctionnement Minimale (DFM)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationForfaitaire: {
         description:
@@ -139,6 +175,12 @@ Il s'agit d'une contribution de base à la couverture des charges de fonctionnem
         key: "dotationForfaitaire",
         label: "DF",
         links: [],
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
         title: "Dotation Forfaitaire (DF)",
     },
     dotationGlobaleFonctionnement: {
@@ -146,24 +188,58 @@ Il s'agit d'une contribution de base à la couverture des charges de fonctionnem
         info: "La dotation globale de fonctionnement (DGF), instituée par la loi du 3 janvier 1979, est un prélèvement opéré sur le budget de l'État et distribué aux collectivités locales pour la première fois en 1979.                                                                                                                                                                                                                                           <br>Son montant est établi selon un mode de prélèvement et de répartition fixé chaque année par la loi de finances. Elle est versée aux régions depuis 2004. Cette dotation est constituée d'une dotation forfaitaire et d'une dotation de péréquation.",
         key: "dotationGlobaleFonctionnement",
         label: "Résumé",
-        links: [
-            {
-                dotationKey: "dotationForfaitaire",
-                linkText: "Dotation Forfaitaire (DF)",
-            },
-            {
-                dotationKey: "dotationNationalePerequation",
-                linkText: "Dotation Nationale de Péréquation (DNP)",
-            },
-            {
-                dotationKey: "dotationSolidariteRurale",
-                linkText: "Dotation de Solidarité Rurale (DSR)",
-            },
-            {
-                dotationKey: "dsuMontant",
-                linkText: "Dotation de Solidarité Urbaine (DSU)",
-            },
-        ],
+        links: {
+            commune: [
+                {
+                    dotationKey: "dotationForfaitaire",
+                    linkText: "Dotation Forfaitaire (DF)",
+                },
+                {
+                    dotationKey: "dotationNationalePerequation",
+                    linkText: "Dotation Nationale de Péréquation (DNP)",
+                },
+                {
+                    dotationKey: "dotationSolidariteRurale",
+                    linkText: "Dotation de Solidarité Rurale (DSR)",
+                },
+                {
+                    dotationKey: "dsuMontant",
+                    linkText: "Dotation de Solidarité Urbaine (DSU)",
+                },
+            ],
+            epci: [
+                {
+                    dotationKey: "dotationCompensation",
+                    linkText: "Dotation Compensation (DC)",
+                },
+                {
+                    dotationKey: "dotationIntercommunalite",
+                    linkText: "Dotation Intercommunalité (DI)",
+                },
+                {
+                    dotationKey: "dotationGroupementsTouristiques",
+                    linkText: "Dotation Groupements Touristiques (DGT)",
+                },
+            ],
+            departement: [
+                {
+                    dotationKey: "dotationForfaitaire",
+                    linkText: "Dotation Forfaitaire (DF)",
+                },
+                {
+                    dotationKey: "dotationPerequationUrbaine",
+                    linkText: "Dotation de Péréquation Urbaine (DPU)",
+                },
+                {
+                    dotationKey: "dotationCompensation",
+                    linkText: "Dotation Compensation (DC)",
+                },
+                {
+                    dotationKey: "dotationFonctionnementMinimale",
+                    linkText: "Dotation Fonctionnement Minimale (DFM)",
+                },
+            ],
+        },
         title: "Dotation Globale de Fonctionnement (DGF)",
     },
     dotationGroupementsTouristiques: {
@@ -173,6 +249,12 @@ Il s'agit d'une contribution de base à la couverture des charges de fonctionnem
         label: "DGT",
         links: [],
         title: "Dotation Groupements Touristiques (DGT)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationIntercommunalite: {
         description: "Lorem Ipsum DNP",
@@ -182,6 +264,12 @@ Elle dépend à la fois de critères de répartition et, de manière importante,
         label: "DI",
         links: [],
         title: "Dotation Intercommunalité (DI)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationNationalePerequation: {
         description: "Lorem Ipsum DNP",
@@ -191,6 +279,12 @@ Après prélèvement de la quote-part destinée aux communes des départements e
         label: "DNP",
         links: [],
         title: "Dotation Nationale de Péréquation (DNP)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationPerequationUrbaine: {
         description: "Dotation péréquation urbaine",
@@ -199,6 +293,12 @@ Après prélèvement de la quote-part destinée aux communes des départements e
         label: "DPU",
         links: [],
         title: "Dotation Péréquation Urbaine (DPU)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dotationSolidariteRurale: {
         description: "Légère augmentation en 2022 dû à la part Bourg Centre",
@@ -220,6 +320,12 @@ Après prélèvement de la quote-part destinée aux communes des départements e
             },
         ],
         title: "Dotation Solidarité Rurale (DSR)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
     dsuMontant: {
         description: "Dotation pour les communes urbaines",
@@ -229,6 +335,12 @@ Après prélèvement de la quote-part destinée aux communes des départements e
         label: "DSU",
         links: [],
         title: "Dotation Solidarité Urbaine (DSU)",
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+        ],
     },
 };
 
@@ -237,21 +349,54 @@ export const sousDotationsMap: Record<string, DotationMap> = {
         description: "Montant de la commune éligible",
         info: "La DSR fraction bourg centre est à destination des communes subissant des charges liées à leur rôle structurant par la qualité et le nombre d'équipements qu'elles regroupent et la capacité d'attraction qui en découle. Elle est attribuée aux communes de moins de 10 000 habitants, chef-lieu de canton, bureau centralisateur ou comprenant au minimum 15 % de la population du canton",
         key: "dsrFractionBourgCentre",
-        label: "",
-        title: "Part Bourg Centre",
+        label: "Fraction Bourg Centre",
+        title: "Fraction Bourg Centre",
+        links: [],
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+            {
+                dotationKey: "dotationSolidariteRurale",
+                linkText: "DSR",
+            },
+        ],
     },
     dsrFractionCible: {
         description: "Non éligible à la Part Cible",
         info: "La DSR fraction cible est attribuée aux 10 000 communes les plus défavorisées du territoire national en fonction de deux indices financiers : le revenu par habitant et le potentiel financier par habitant.",
         key: "dsrFractionCible",
-        label: "",
-        title: "Part Cible",
+        label: "Fraction Cible",
+        title: "Fraction Cible",
+        links: [],
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+            {
+                dotationKey: "dotationSolidariteRurale",
+                linkText: "DSR",
+            },
+        ],
     },
     dsrFractionPerequation: {
         description: "Montant de la commune éligible à la Péréquation",
         info: "La DSR fraction péréquation est attribuée aux communes de moins de 10 000 habitants dont le potentiel financier par habitant est inférieur au double du potentiel financier moyen de la strate démographique.",
         key: "dsrFractionPerequation",
-        label: "",
-        title: "Part Péréquation",
+        label: "Fraction Péréquation",
+        title: "Fraction Péréquation",
+        links: [],
+        backLinks: [
+            {
+                dotationKey: "dotationGlobaleFonctionnement",
+                linkText: "DGF",
+            },
+            {
+                dotationKey: "dotationSolidariteRurale",
+                linkText: "DSR",
+            },
+        ],
     },
 };

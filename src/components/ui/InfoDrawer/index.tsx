@@ -1,7 +1,7 @@
 import { SwipeableDrawer } from "@mui/material";
 import ImageFixed from "components/ui/ImageFixed";
 import useResize from "hooks/useResize";
-import { Dotation, Dotations } from "models/entity/entity.interface";
+import { Dotation, Dotations, Links } from "models/entity/entity.interface";
 import {
     InitEntityFichiers,
     InitNationalFichiers,
@@ -14,11 +14,16 @@ import { matomoTrackEvent } from "services/matomo";
 import {
     selectDerniereMajDonnees,
     selectIsCommune,
+    selectIsDepartement,
+    selectIsEPCI,
     selectSourcesDonneesDotationWithDotation,
 } from "store/appSettings.slice";
 import { selectInitialDotations } from "store/initialEntity.slice";
+import { selectDotationDGF } from "store/simulationEntity.slice";
 import styled from "styled-components";
 import { toastPromise } from "utils/customToasts";
+import formatDotationLinks from "utils/formatDotationLinks";
+import DrawerCrumbBreads from "./DrawerCrumbBreads";
 import DrawerLinks from "./DrawerLinks";
 
 interface InfoDrawerProps {
@@ -31,8 +36,6 @@ const StyledDrawerHeader = styled.div`
     display: flex;
     align-items: center;
     padding: 15px 0 15px 20px;
-    background-color: var(--grey-975);
-    cursor: pointer;
     @media (min-width: 720px) {
         padding: 30px 0 30px 40px;
     }
@@ -94,10 +97,13 @@ export default function InfoDrawer({
 }: InfoDrawerProps) {
     const [currentDotation, setCurrentDotation] = useState<Dotation>(dotation);
     const dotations = useSelector(selectInitialDotations);
+    const dotationDGF = useSelector(selectDotationDGF);
     const sourcesDonneesDotationWithDotation = useSelector(
         selectSourcesDonneesDotationWithDotation(currentDotation.key)
     );
     const isCommune = useSelector(selectIsCommune);
+    const isDepartement = useSelector(selectIsDepartement);
+    const isEPCI = useSelector(selectIsEPCI);
     const derniereMajDonnees = useSelector(selectDerniereMajDonnees);
 
     const fichiers = sourcesDonneesDotationWithDotation?.fichiers;
@@ -113,18 +119,19 @@ export default function InfoDrawer({
     };
 
     const handleChangeInfoDotation = (dotationKey: string) => {
-        let newDotation: Dotation;
+        if (dotationKey === "dotationGlobaleFonctionnement") {
+            return setCurrentDotation(dotationDGF);
+        }
         if (currentDotation.key === "dotationSolidariteRurale") {
             const sousDotation = currentDotation.sousDotations?.find(
                 sousDotation => Object.keys(sousDotation)[0] === dotationKey
             ) as Dotations;
-            newDotation = sousDotation[
-                Object.keys(sousDotation)[0]
-            ] satisfies Dotation;
-        } else {
-            newDotation = dotations[dotationKey];
+            return setCurrentDotation(
+                sousDotation[Object.keys(sousDotation)[0]] satisfies Dotation
+            );
         }
-        setCurrentDotation(newDotation);
+
+        setCurrentDotation(dotations[dotationKey]);
     };
 
     const handleDownloadFichier = (fichier: string) => {
@@ -137,6 +144,13 @@ export default function InfoDrawer({
     };
 
     const { title, info, links } = currentDotation;
+    const linksFormatted: Links = formatDotationLinks({
+        links,
+        dotation: currentDotation,
+        isCommune,
+        isDepartement,
+        isEPCI,
+    });
     const { windowWidth } = useResize();
 
     const textFormatted = info?.split("<br>");
@@ -153,14 +167,23 @@ export default function InfoDrawer({
             onClose={handleClose}
             onOpen={() => setShowInfoDrawer(true)}
         >
-            <StyledDrawerHeader onClick={handleClose}>
-                <ImageFixed
-                    src="/icons/cross-blue.svg"
-                    width={16}
-                    height={16}
-                    alt="Une croix pour fermer la modal"
+            <StyledDrawerHeader>
+                <div
+                    className="p-2 cursor-pointer bg-grey-975"
+                    onClick={handleClose}
+                >
+                    <ImageFixed
+                        src="/icons/cross-grey-diagonal.svg"
+                        width={16}
+                        height={16}
+                        alt="Une croix pour fermer la modal"
+                    />
+                </div>
+                <DrawerCrumbBreads
+                    backLinks={currentDotation.backLinks}
+                    handleChangeInfoDotation={handleChangeInfoDotation}
+                    currentDotationLabel={currentDotation.label}
                 />
-                <span className="text-sm text-color-primary">Fermer</span>
             </StyledDrawerHeader>
             <StyledDrawerBody>
                 <div className="mb-10">
@@ -189,13 +212,11 @@ export default function InfoDrawer({
                         <InfoDrawerDropdown title="Critères concernés" />
                         <InfoDrawerDropdown title="Formule de calcul" lastRow />
                     </div> */}
-                {/* TODO: fix avec departement et EPCI */}
-                {!!links?.length && isCommune && (
-                    <DrawerLinks
-                        links={links}
-                        handleChangeInfoDotation={handleChangeInfoDotation}
-                    />
-                )}
+
+                <DrawerLinks
+                    links={linksFormatted}
+                    handleChangeInfoDotation={handleChangeInfoDotation}
+                />
 
                 {!fichiersIsEmpty && (
                     <>
