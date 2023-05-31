@@ -82,6 +82,7 @@ export const dotationSerializer = (rawDotations: DotationsDto): Dotations => {
             title: dotationsMap[keyCamelCase].title,
             info: dotationsMap[keyCamelCase].info,
             links: dotationsMap[keyCamelCase].links,
+            backLinks: dotationsMap[keyCamelCase].backLinks,
 
             ...(rawDotations[key].sous_dotations && {
                 sousDotations: sousDotationsSerializer(
@@ -113,6 +114,8 @@ export const sousDotationsSerializer = (
                 label: sousDotationsMap[keyCamelCase].label,
                 title: sousDotationsMap[keyCamelCase].title,
                 info: sousDotationsMap[keyCamelCase].info,
+                links: sousDotationsMap[keyCamelCase].links,
+                backLinks: sousDotationsMap[keyCamelCase].backLinks,
             };
         });
         return newObjectSousDotations;

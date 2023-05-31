@@ -46,8 +46,18 @@ export interface Dotation {
     title: string;
     label: string;
     info?: string;
-    links?: { linkText: string; dotationKey: string }[];
+    links?: Links | DgfLink;
+    backLinks?: Links;
 }
+
+interface Link {
+    linkText: string;
+    dotationKey: string;
+}
+
+export type Links = Link[];
+
+export type DgfLink = Record<string, Links>;
 
 export type SousDotationsDto = DotationsDto[];
 export type SousDotations = Dotations[];

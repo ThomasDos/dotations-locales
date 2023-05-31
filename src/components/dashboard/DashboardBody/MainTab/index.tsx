@@ -1,7 +1,6 @@
 import { Accordion, AccordionItem, Badge } from "@dataesr/react-dsfr";
 import DropdownMenuDownload from "components/ui/DropdownMenu/DropdownMenuDownload";
-import { dotationsMap } from "constants/dotationsMap";
-import type { Dotation, Dotations } from "models/entity/entity.interface";
+import type { Dotations } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import {
     selectInitialPartDotationRrf,
@@ -10,11 +9,10 @@ import {
 import {
     selectAllYears,
     selectCurrentYear,
-    selectLastYear,
+    selectDotationDGF,
 } from "store/simulationEntity.slice";
 import formatDotationsToExportCsv from "utils/formatDotationsToExportCsv";
 import formatRrfEvolution from "utils/formatRrfEvolution";
-import getTotalDotations from "utils/getTotalDotations";
 import sortDotationsEligiblesOrNonEligibles from "utils/sortDotationsEligiblesOrNonEligibles";
 
 import DotationCard from "../DotationCard";
@@ -26,7 +24,6 @@ interface MainTabProps {
 
 const MainTab = ({ dotations }: MainTabProps) => {
     const currentYear = useSelector(selectCurrentYear);
-    const lastYear = useSelector(selectLastYear);
     const years = useSelector(selectAllYears);
     const partDotationRrf = useSelector(selectInitialPartDotationRrf);
     const isDotationsAnneesDifferentThanDotationRrfAnnees = useSelector(
@@ -37,9 +34,6 @@ const MainTab = ({ dotations }: MainTabProps) => {
         ? null
         : formatRrfEvolution(partDotationRrf);
 
-    const currentYearTotal = getTotalDotations(dotations, currentYear);
-    const lastYearTotal = getTotalDotations(dotations, lastYear);
-
     const { dotationsEligibles, dotationsNonEligibles } =
         sortDotationsEligiblesOrNonEligibles(dotations, currentYear);
     const dotationsEligiblesKeys = Object.keys(dotationsEligibles);
@@ -49,15 +43,7 @@ const MainTab = ({ dotations }: MainTabProps) => {
     const countDotationsNonEligiblesDotations =
         dotationsNonEligiblesKeys.length;
 
-    const dotationDGF: Dotation = {
-        annees: [
-            { [currentYear]: currentYearTotal },
-            { [lastYear]: lastYearTotal },
-        ],
-        criteres: {},
-        ...dotationsMap.dotationGlobaleFonctionnement,
-    };
-
+    const dotationDGF = useSelector(selectDotationDGF);
     const headersYears = years.map((year: string) => ({
         label: `Montant de l'année ${year}`,
         key: year,
