@@ -72,7 +72,7 @@ const FooterContainer = () => {
                     Mentions Légales
                 </FooterLink>
                 <FooterLink href="/declaration-accessibilite">
-                    Déclaration d&apos;Accessibilité
+                    Accessibilité : non conforme
                 </FooterLink>
                 <FooterLink href="/statistiques">Statistiques</FooterLink>
                 <FooterLink href="/inscription">Inscription</FooterLink>

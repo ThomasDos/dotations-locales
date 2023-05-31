@@ -21,7 +21,14 @@ export default function MentionsLegales() {
                         <br />
                         <br />
                         <span>
-                            https://agence-cohesion-territoires.gouv.fr/ <br />
+                            <Link
+                                href="https://agence-cohesion-territoires.gouv.fr/"
+                                rel="noopener noreferrer"
+                                target="_"
+                            >
+                                Agence nationale de la cohésion des territoires
+                            </Link>
+                            <br />
                             Mission incubateur de services numériques
                             <br />
                             20, avenue de Ségur, TSA 10717, 75 334 Paris Cedex
@@ -47,7 +54,7 @@ export default function MentionsLegales() {
                         <span>
                             Ce site est conçu et développé par l&apos;équipe
                             Dotations Locales de l&apos;Incubateur des
-                            Territories.De nouvelles fonctionnalités sont
+                            Territoires.De nouvelles fonctionnalités sont
                             ajoutées en continu.
                         </span>
                         <br />
@@ -59,8 +66,9 @@ export default function MentionsLegales() {
                                 rel="noopener noreferrer"
                                 target="_"
                             >
-                                Gitlab
+                                GitLab
                             </Link>
+                            .
                         </span>
                     </div>
                 </SectionMentionsLegales>
@@ -99,8 +107,9 @@ export default function MentionsLegales() {
                                 rel="noopener noreferrer"
                                 target="_"
                             >
-                                Gitlab
+                                GitLab
                             </Link>
+                            .
                         </span>
                     </div>
                 </SectionMentionsLegales>
@@ -108,7 +117,26 @@ export default function MentionsLegales() {
                 <SectionMentionsLegales title="Licence">
                     <div>
                         <span>
-                            L&apos;Incubateur des Territoires a choisi de placer
+                            Le 
+                            <Link
+                                href="https://gitlab.com/incubateur-territoires/startups/dotations-locales"
+                                rel="noopener noreferrer"
+                                target="_"
+                            >
+                            code source du frontal et du dorsal 
+                            </Link>
+                            de Dotations Locales est placé sous
+                            <Link
+                                href="https://spdx.org/licenses/AGPL-3.0-or-later.html#licenseText"
+                                rel="noopener noreferrer"
+                                target="_"
+                            >
+                                Licence AGPL 3 ou supérieure
+                            </Link>
+                            .
+                        </span>
+                        <span>
+                            Par ailleurs, l&apos;Incubateur des Territoires a choisi de placer
                             par défaut ses documents sous Licence Ouverte / Open
                             Licence 2.0. Cela signifie que, sauf mention
                             contraire, vous êtes libres de réutiliser toute
