@@ -15,7 +15,7 @@ export default function Statistiques() {
             )}
             <div className={iframeLoaded ? "opacity-100" : "opacity-0"}>
                 <iframe
-                    src="https://metabase-temp.osc-fr1.scalingo.io/public/dashboard/8e3483fc-d819-4253-8474-751cb4007b8f"
+                    src="http://metabase.dotations.incubateur.anct.gouv.fr/public/dashboard/9de68249-8963-42f7-9a1d-b1493ea652a5"
                     width="100%"
                     height="800"
                     onLoad={handleOnLoad}
