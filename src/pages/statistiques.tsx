@@ -15,7 +15,7 @@ export default function Statistiques() {
             )}
             <div className={iframeLoaded ? "opacity-100" : "opacity-0"}>
                 <iframe
-                    src="http://metabase.dotations.incubateur.anct.gouv.fr/public/dashboard/9de68249-8963-42f7-9a1d-b1493ea652a5"
+                    src="https://metabase.dotations.incubateur.anct.gouv.fr/public/dashboard/9de68249-8963-42f7-9a1d-b1493ea652a5"
                     width="100%"
                     height="800"
                     onLoad={handleOnLoad}
