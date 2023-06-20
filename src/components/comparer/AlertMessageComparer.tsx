@@ -7,8 +7,9 @@ const StyledContainer = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-
+    margin-bottom: 180px;
     @media (min-width: 640px) {
+        margin-bottom: 380px;
         width: 75%;
     }
 

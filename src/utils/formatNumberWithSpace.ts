@@ -5,7 +5,7 @@
  * @returns : string
  */
 
-export default (numberToFormat: number): string => {
+function formatNumberWithSpace(numberToFormat: number): string {
     const numberRounded = () => {
         if (!numberToFormat) {
             return numberToFormat;
@@ -25,4 +25,6 @@ export default (numberToFormat: number): string => {
     );
 
     return formatted;
-};
+}
+
+export default formatNumberWithSpace;

@@ -19,3 +19,14 @@ export type DotationsFormattedChartComparer = DotationFormattedChartComparer[];
 
 export type DotationsFormattedBoardDgfComparer =
     DotationFormattedBoardDgfComparer[];
+
+export interface DotationEchelonFormated {
+    totalDotation: number;
+    libelle: string;
+    evolutionDotations: number | null;
+    strate: number;
+    dotationDgfPerHabitant: number;
+    code: string;
+}
+
+export type DotationsEchelonFormated = DotationEchelonFormated[];

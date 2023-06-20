@@ -29,6 +29,9 @@ describe("fetchEntitySerializer", () => {
                 },
             })
         ).toEqual({
+            echelons: {},
+            libelle: "Mocked Commune",
+            partDotationRrf: { annees: [] },
             annees: ["2022", "2021"],
             anneesCriteres: ["2022", "2021"],
             code: "42113",

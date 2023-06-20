@@ -4,6 +4,8 @@ export interface EntityDto {
     dotations: DotationsDto;
     criteres_generaux?: CriteresDto | null;
     part_dotation_rrf?: DotationRrfDto;
+    echelons?: Echelons;
+    libelle: string;
 }
 
 export interface Entity {
@@ -13,6 +15,8 @@ export interface Entity {
     annees: EntityAnnee;
     anneesCriteres: EntityAnnee;
     partDotationRrf?: DotationRrfDto;
+    echelons?: Echelons;
+    libelle: string;
 }
 
 export type EntityAnnee = string[];
@@ -29,6 +33,8 @@ export interface DotationDto {
 export interface DotationRrfDto {
     annees: Record<string, DotationRrfAnnee>[];
 }
+
+export type Echelons = Record<string, string[]>;
 
 export interface DotationRrfAnnee {
     valeur: number;

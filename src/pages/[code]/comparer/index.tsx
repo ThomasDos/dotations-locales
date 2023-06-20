@@ -1,8 +1,9 @@
 import AlertMessageComparer from "components/comparer/AlertMessageComparer";
+import TabEchelon from "components/comparer/ComparerEchelon/TabEchelon";
 import SearchInputComparer from "components/comparer/SearchInputComparer";
 import TabsContainerComparer from "components/comparer/TabsComparer";
 import { SubHeader } from "components/dashboard";
-import { Spinner } from "components/ui";
+import { Spinner, Tab, TabsComparer } from "components/ui";
 import useDataEntityInit from "hooks/useDataEntityInit";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -32,6 +33,7 @@ const Comparer = () => {
     const { showSpinner } = useDataEntityInit(code);
 
     const currentEntity = useSelector(selectInitialEntity);
+
     const entities = useSelector(selectEntities);
 
     const featuresComparer = useSelector(selectFeaturesComparer);
@@ -66,12 +68,24 @@ const Comparer = () => {
             </Head>
             <SubHeader libelle={libelle} code={code} />
             <StyledComparerBody>
-                <SearchInputComparer />
-                {entities.length > 1 ? (
-                    <TabsContainerComparer />
-                ) : (
-                    <AlertMessageComparer />
-                )}
+                <TabsComparer>
+                    {/* @ts-ignore */}
+                    <Tab label="Dans mon département">
+                        <TabEchelon />
+                    </Tab>
+
+                    {/* @ts-ignore */}
+                    <Tab label="Personnalisation">
+                        <div className="mt-10">
+                            <SearchInputComparer />
+                            {entities.length > 1 ? (
+                                <TabsContainerComparer />
+                            ) : (
+                                <AlertMessageComparer />
+                            )}
+                        </div>
+                    </Tab>
+                </TabsComparer>
             </StyledComparerBody>
         </>
     );

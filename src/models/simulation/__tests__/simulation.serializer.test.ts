@@ -4,6 +4,7 @@ import { fetchEntitySerializerSimulation } from "../simulation.serializer";
 describe("fetchEntitySerializer", () => {
     it("should return serialized commune", () => {
         expect(fetchEntitySerializerSimulation(postSimulationMocked)).toEqual({
+            libelle: "Mocked Commune",
             annees: ["2022", "2021"],
             anneesCriteres: ["2022", "2021"],
             avertissementPrecisionSimulation: false,

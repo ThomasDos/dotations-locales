@@ -12,6 +12,7 @@ const initialState: Entity = {
     code: "",
     criteresGeneraux: {},
     dotations: {},
+    libelle: "",
 };
 
 const initialEntitySlice = createSlice({
