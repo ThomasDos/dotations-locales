@@ -17,7 +17,7 @@ import type {
     SousDotations,
     SousDotationsDto,
 } from "./entity.interface";
-
+//TODO: update strate et eche:lons quand back ready
 export const fetchEntitySerializer = (rawResult: EntityDto): Entity => ({
     annees: anneesSerializer(rawResult.dotations),
     anneesCriteres: anneesCriteresSerializer(rawResult.criteres_generaux),
@@ -27,6 +27,7 @@ export const fetchEntitySerializer = (rawResult: EntityDto): Entity => ({
     partDotationRrf: rawResult.part_dotation_rrf,
     echelons: rawResult.echelons,
     libelle: rawResult.libelle,
+    strate: rawResult.strate ?? Math.ceil(Math.random() * 5),
 });
 
 export const anneesSerializer = (dotations: DotationsDto): EntityAnnee => {

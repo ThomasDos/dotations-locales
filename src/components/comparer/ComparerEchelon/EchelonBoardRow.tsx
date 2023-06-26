@@ -1,6 +1,7 @@
 import HorizontalBarOnBarBackground from "components/ui/BarChart/HorizontalBarOnBarBackground";
 import useResize from "hooks/useResize";
 import { DotationEchelonFormated } from "models/comparer/comparer.interface";
+import Link from "next/link";
 import styled from "styled-components";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
@@ -38,11 +39,11 @@ function EchelonBoardRow({
     } = entity;
 
     const { windowWidth } = useResize();
-    const fixedWidth = windowWidth > 640 ? 100 : 25;
-    const fixedDividerBarWidth = windowWidth > 640 ? 1 : 4;
-    const barWidth =
-        ((totalDotation / highestDotationDgf) * 100) / fixedDividerBarWidth;
-    const emptyBarWidth = fixedWidth - barWidth;
+    const fixedBarWidth = windowWidth > 640 ? 100 : 25;
+    const barWidthRatio = windowWidth > 640 ? 1 : 4;
+    const calculatedBarWidth =
+        ((totalDotation / highestDotationDgf) * 100) / barWidthRatio;
+    const emptyBarWidth = fixedBarWidth - calculatedBarWidth;
     const isCurrentEntity = entityLibelle === libelle;
     return (
         <StyledRowContainer
@@ -56,12 +57,14 @@ function EchelonBoardRow({
                     isCurrentEntity ? "font-bold" : ""
                 }`}
             >
-                {isCurrentEntity && <span className="text-xs">⭐️</span>}
-                {entityLibelle} ({code})
+                <Link href={`/${code}?libelle=${entityLibelle}`} target="_">
+                    {isCurrentEntity && <span className="text-xs">⭐️</span>}
+                    {entityLibelle} ({code})
+                </Link>
             </div>
             <StyledSpanEntityValue>
                 <HorizontalBarOnBarBackground
-                    widthValueBar={barWidth}
+                    widthValueBar={calculatedBarWidth}
                     widthEmptyBar={emptyBarWidth}
                 />
             </StyledSpanEntityValue>

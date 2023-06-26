@@ -1,6 +1,6 @@
 import { EntityDto } from "models/entity/entity.interface";
 
-const arrayCommunes = [
+const communeEchelonMocked = [
     {
         code: "64004",
         dotations: {
@@ -1947,6 +1947,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Abitain",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "60022",
@@ -3985,6 +3986,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Andrein",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64025",
@@ -5932,6 +5934,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Angous",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64032",
@@ -7879,6 +7882,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Araujuzon",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64075",
@@ -9826,6 +9830,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Araux",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64082",
@@ -11773,6 +11778,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Autox",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64083",
@@ -13720,6 +13726,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Auterrive",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64096",
@@ -15667,6 +15674,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Vegas",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64099",
@@ -17614,6 +17622,7 @@ const arrayCommunes = [
             },
         },
         libelle: "San francisco",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64112",
@@ -19561,10 +19570,12 @@ const arrayCommunes = [
             },
         },
         libelle: "Tijuanna",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64149",
         libelle: "Bugnein",
+        strate: Math.ceil(Math.random() * 5),
         dotations: {
             dotation_forfaitaire: {
                 annees: [
@@ -23455,6 +23466,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Burgaronne",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64168",
@@ -25402,6 +25414,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Carresse-Cassaber",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64170",
@@ -27349,6 +27362,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Castagnede",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64176",
@@ -29296,6 +29310,7 @@ const arrayCommunes = [
             },
         },
         libelle: "Castetbon",
+        strate: Math.ceil(Math.random() * 5),
     },
     {
         code: "64178",
@@ -31243,7 +31258,8 @@ const arrayCommunes = [
             },
         },
         libelle: "Castetnau-Camblong",
+        strate: Math.ceil(Math.random() * 5),
     },
 ] as any as EntityDto[];
 
-export default arrayCommunes;
+export default communeEchelonMocked;

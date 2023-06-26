@@ -1,4 +1,4 @@
-import arrayCommunes from "__fixtures__/arrayCommunes";
+import communeEchelonMocked from "__fixtures__/communeEchelonMocked";
 import useResize from "hooks/useResize";
 import { DotationEchelonFormated } from "models/comparer/comparer.interface";
 import { dotationsFormattedByTotalDotationsPopulationStrateEvolution } from "models/comparer/comparer.serializer";
@@ -66,7 +66,7 @@ function TabEchelon() {
         useState<keyof DotationEchelonFormated>("totalDotation");
     //TODO: utiliser vrai data du back
     const entitiesDepartement = [
-        ...serializeEntities(arrayCommunes).filter(
+        ...serializeEntities(communeEchelonMocked).filter(
             entity => entity.libelle !== libelle
         ),
         { ...currentEntity, libelle },

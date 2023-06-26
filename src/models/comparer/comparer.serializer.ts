@@ -224,7 +224,7 @@ export const dotationsFormattedByTotalDotationsPopulationStrateEvolution = ({
             libelle: entity.libelle as string,
             totalDotation,
             evolutionDotations,
-            strate: Math.ceil(Math.random() * 5),
+            strate: entity.strate as number,
             dotationDgfPerHabitant,
             code: entity.code,
         };
