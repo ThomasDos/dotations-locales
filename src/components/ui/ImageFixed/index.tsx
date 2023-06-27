@@ -18,7 +18,7 @@ export default function ImageFixed({
     src,
     width,
     height,
-    className,
+    className = "",
     onClick,
     dataTip,
     dataFor,
@@ -27,9 +27,7 @@ export default function ImageFixed({
 }: ImageFixedProps) {
     return (
         <div
-            className={`relative flex min-w-[${width}px] min-h-[${height}px] min-w-max ${
-                className ? className : ""
-            }`}
+            className={`relative flex min-w-[${width}px] min-h-[${height}px] min-w-max ${className}`}
             onClick={onClick}
         >
             <Image

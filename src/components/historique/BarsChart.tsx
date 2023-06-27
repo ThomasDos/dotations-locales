@@ -72,7 +72,7 @@ export default function BarsChart({
                             dataKey="label"
                             position="insideTop"
                             fill="#FFF"
-                            dy={10}
+                            dy={2}
                         />
                         <LabelList
                             dataKey="year"
