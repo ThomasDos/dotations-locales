@@ -24,6 +24,9 @@ module.exports = {
             "blue-france-950": "#ECECFE",
             "green-tilleul-verveine-975": "#FEF7DA",
         },
+        borderColor: {
+            "grey-200": "#E6E6E6",
+        },
     },
     plugins: [],
 };

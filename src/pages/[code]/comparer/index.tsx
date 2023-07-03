@@ -1,7 +1,5 @@
-import AlertMessageComparer from "components/comparer/AlertMessageComparer";
 import TabEchelon from "components/comparer/ComparerEchelon/TabEchelon";
-import SearchInputComparer from "components/comparer/SearchInputComparer";
-import TabsContainerComparer from "components/comparer/TabsComparer";
+import ComparerPersonnalisationTab from "components/comparer/ComparerPersonnalisationTab";
 import { SubHeader } from "components/dashboard";
 import { Spinner, Tab, TabsComparer } from "components/ui";
 import useDataEntityInit from "hooks/useDataEntityInit";
@@ -9,7 +7,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFeaturesComparer } from "store/appSettings.slice";
+import {
+    selectFeaturesComparer,
+    selectIsCommune,
+} from "store/appSettings.slice";
 import { addEntity, selectEntities } from "store/entitiesComparer.slice";
 import { selectInitialEntity } from "store/initialEntity.slice";
 import styled from "styled-components";
@@ -33,7 +34,7 @@ const Comparer = () => {
     const { showSpinner } = useDataEntityInit(code);
 
     const currentEntity = useSelector(selectInitialEntity);
-
+    const isCommune = useSelector(selectIsCommune);
     const entities = useSelector(selectEntities);
 
     const featuresComparer = useSelector(selectFeaturesComparer);
@@ -68,24 +69,25 @@ const Comparer = () => {
             </Head>
             <SubHeader libelle={libelle} code={code} />
             <StyledComparerBody>
-                <TabsComparer>
-                    {/* @ts-ignore */}
-                    <Tab label="Dans mon département">
-                        <TabEchelon />
-                    </Tab>
+                {isCommune ? (
+                    <TabsComparer>
+                        {/* @ts-ignore */}
+                        <Tab label="Dans mon département">
+                            <TabEchelon />
+                        </Tab>
 
-                    {/* @ts-ignore */}
-                    <Tab label="Personnalisation">
-                        <div className="mt-10">
-                            <SearchInputComparer />
-                            {entities.length > 1 ? (
-                                <TabsContainerComparer />
-                            ) : (
-                                <AlertMessageComparer />
-                            )}
-                        </div>
-                    </Tab>
-                </TabsComparer>
+                        {/* @ts-ignore */}
+                        <Tab label="Sélection personnalisée">
+                            <ComparerPersonnalisationTab
+                                entitiesLength={entities.length}
+                            />
+                        </Tab>
+                    </TabsComparer>
+                ) : (
+                    <ComparerPersonnalisationTab
+                        entitiesLength={entities.length}
+                    />
+                )}
             </StyledComparerBody>
         </>
     );

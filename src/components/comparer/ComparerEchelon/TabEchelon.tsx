@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
+    selectCommuneEpciName,
     selectInitialCurrentYear,
     selectInitialEntity,
     selectInitialLastYear,
@@ -16,15 +17,6 @@ import serializeEntities from "utils/serializeEntities";
 import sliceEntitiesEchelonWithCurrentEntityPosition from "utils/sliceEntitiesEchelonWithCurrentEntityPosition";
 import sortDotationsEchelonComparerByKey from "utils/sortDotationsEchelonComparerByKey";
 import EchelonBoardRow from "./EchelonBoardRow";
-
-const StyledContainerEchelon = styled.div`
-    border: 1px solid var(--blue-france-850);
-    padding: 16px;
-    margin-top: 40px;
-    @media (min-width: 640px) {
-        padding: 32px 48px 56px 32px;
-    }
-`;
 
 const StyledTitleHover = styled.div`
     cursor: pointer;
@@ -51,6 +43,13 @@ const StyledColumHeaderEntityValue = styled.div<{ isSelected?: boolean }>`
     }
 `;
 
+const StyledDataRowContainer = styled.div`
+    padding: 16px;
+    @media (min-width: 640px) {
+        padding: 32px;
+    }
+`;
+
 function TabEchelon() {
     const router = useRouter();
     const { windowWidth } = useResize();
@@ -62,6 +61,8 @@ function TabEchelon() {
     const currentEntity = useSelector(selectInitialEntity);
     const currentYear = useSelector(selectInitialCurrentYear);
     const lastYear = useSelector(selectInitialLastYear);
+    const epciName = useSelector(selectCommuneEpciName);
+
     const [sortSelector, setSortSelector] =
         useState<keyof DotationEchelonFormated>("totalDotation");
     //TODO: utiliser vrai data du back
@@ -100,10 +101,10 @@ function TabEchelon() {
     const entitiesToDisplay = showFullList ? entitiesSorted : entitiesSliced;
 
     return (
-        <StyledContainerEchelon>
-            <div className="flex justify-between p-1 md:p-4">
-                <div className="flex-[2] sm:flex-[3] md:flex-[4] sm:text-lg font-bold">
-                    {entitiesSorted.length} communes
+        <div className="mt-10 border-[1px] border-grey-200">
+            <div className="flex justify-between bg-grey-975 px-4 sm:px-8 py-2 sm:py-5 border-grey-200 border-b-[1px]">
+                <div className="flex-[2] sm:flex-[3] md:flex-[4] text-sm sm:text-lg font-bold">
+                    {epciName}
                 </div>
                 <StyledColumHeaderEntityValue />
                 <StyledColumHeaderEntityValue
@@ -151,28 +152,29 @@ function TabEchelon() {
                     </StyledTitleHover>
                 </StyledColumHeaderEntityValue>
             </div>
+            <StyledDataRowContainer>
+                {entitiesToDisplay.map(entity => (
+                    <EchelonBoardRow
+                        key={entity.libelle}
+                        entity={entity}
+                        highestDotationDgf={highestDotationDgf}
+                        libelle={libelle}
+                    />
+                ))}
 
-            {entitiesToDisplay.map(entity => (
-                <EchelonBoardRow
-                    key={entity.libelle}
-                    entity={entity}
-                    highestDotationDgf={highestDotationDgf}
-                    libelle={libelle}
-                />
-            ))}
-
-            <div
-                onClick={handleToggleShowFullList}
-                className="px-4 py-3 cursor-pointer text-sm flex justify-between hover:bg-grey-975"
-            >
-                <span>
-                    {showFullList
-                        ? "Montrer uniquement les communes les plus proches"
-                        : `Afficher toutes les communes (${entitiesSorted.length})`}
-                </span>
-                <span className="font-bold">+</span>
-            </div>
-        </StyledContainerEchelon>
+                <div
+                    onClick={handleToggleShowFullList}
+                    className="px-4 py-3 cursor-pointer text-sm flex justify-between hover:bg-grey-975"
+                >
+                    <span>
+                        {showFullList
+                            ? "Montrer uniquement les communes les plus proches"
+                            : `Afficher toutes les communes (${entitiesSorted.length})`}
+                    </span>
+                    <span className="font-bold">+</span>
+                </div>
+            </StyledDataRowContainer>
+        </div>
     );
 }
 
