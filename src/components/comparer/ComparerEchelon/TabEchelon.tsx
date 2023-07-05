@@ -156,17 +156,19 @@ function TabEchelon({ entities }: TabEchelonProps) {
                     />
                 ))}
 
-                <div
-                    onClick={handleToggleShowFullList}
-                    className="px-4 py-3 cursor-pointer text-sm flex justify-between hover:bg-grey-975"
-                >
-                    <span>
-                        {showFullList
-                            ? "Montrer uniquement les communes les plus proches"
-                            : `Afficher toutes les communes (${entitiesSorted.length})`}
-                    </span>
-                    <span className="font-bold">+</span>
-                </div>
+                {entities.length > 10 && (
+                    <div
+                        onClick={handleToggleShowFullList}
+                        className="px-4 py-3 cursor-pointer text-sm flex justify-between hover:bg-grey-975"
+                    >
+                        <span>
+                            {showFullList
+                                ? "Montrer uniquement les communes les plus proches"
+                                : `Afficher toutes les communes (${entitiesSorted.length})`}
+                        </span>
+                        <span className="font-bold">+</span>
+                    </div>
+                )}
             </StyledDataRowContainer>
         </div>
     );
