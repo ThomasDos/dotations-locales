@@ -1,19 +1,17 @@
-import communeEchelonMocked from "__fixtures__/communeEchelonMocked";
 import useResize from "hooks/useResize";
 import { DotationEchelonFormated } from "models/comparer/comparer.interface";
 import { dotationsFormattedByTotalDotationsPopulationStrateEvolution } from "models/comparer/comparer.serializer";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Entities } from "store/entitiesComparer.slice";
 import {
     selectCommuneEpciName,
     selectInitialCurrentYear,
-    selectInitialEntity,
     selectInitialLastYear,
 } from "store/initialEntity.slice";
 import styled from "styled-components";
 import getHighestDotationByTotalDotations from "utils/getHighestDotationByTotalDotations";
-import serializeEntities from "utils/serializeEntities";
 import sliceEntitiesEchelonWithCurrentEntityPosition from "utils/sliceEntitiesEchelonWithCurrentEntityPosition";
 import sortDotationsEchelonComparerByKey from "utils/sortDotationsEchelonComparerByKey";
 import EchelonBoardRow from "./EchelonBoardRow";
@@ -50,34 +48,30 @@ const StyledDataRowContainer = styled.div`
     }
 `;
 
-function TabEchelon() {
+interface TabEchelonProps {
+    entities: Entities;
+}
+
+function TabEchelon({ entities }: TabEchelonProps) {
     const router = useRouter();
     const { windowWidth } = useResize();
-    const { libelle } = router.query as {
+    const { code } = router.query as {
         libelle: string;
         code: string;
     };
 
-    const currentEntity = useSelector(selectInitialEntity);
     const currentYear = useSelector(selectInitialCurrentYear);
     const lastYear = useSelector(selectInitialLastYear);
     const epciName = useSelector(selectCommuneEpciName);
 
     const [sortSelector, setSortSelector] =
         useState<keyof DotationEchelonFormated>("totalDotation");
-    //TODO: utiliser vrai data du back
-    const entitiesDepartement = [
-        ...serializeEntities(communeEchelonMocked).filter(
-            entity => entity.libelle !== libelle
-        ),
-        { ...currentEntity, libelle },
-    ];
 
     const [showFullList, setShowFullList] = useState(false);
     const handleToggleShowFullList = () => setShowFullList(!showFullList);
     const entitiesFormatted =
         dotationsFormattedByTotalDotationsPopulationStrateEvolution({
-            entities: entitiesDepartement,
+            entities,
             currentYear,
             lastYear,
         });
@@ -90,7 +84,7 @@ function TabEchelon() {
         getHighestDotationByTotalDotations(entitiesSorted);
 
     const indexCurrentEntity = entitiesSorted.findIndex(
-        entity => entity.libelle === libelle
+        entity => entity.code === code
     );
 
     const entitiesSliced = sliceEntitiesEchelonWithCurrentEntityPosition(
@@ -158,7 +152,7 @@ function TabEchelon() {
                         key={entity.libelle}
                         entity={entity}
                         highestDotationDgf={highestDotationDgf}
-                        libelle={libelle}
+                        currentEntityCode={code}
                     />
                 ))}
 

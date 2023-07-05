@@ -3,6 +3,7 @@ import ComparerPersonnalisationTab from "components/comparer/ComparerPersonnalis
 import { SubHeader } from "components/dashboard";
 import { Spinner, Tab, TabsComparer } from "components/ui";
 import useDataEntityInit from "hooks/useDataEntityInit";
+import useFetchEntitiesComparer from "hooks/useFetchEntitiesComparer";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -29,6 +30,9 @@ const Comparer = () => {
         code: string;
     };
 
+    const { data: entitiesComparer, isLoading: entitiesComparerIsLoading } =
+        useFetchEntitiesComparer(code, !!code);
+    const entitiesComparerKeys = Object.keys(entitiesComparer || []);
     const dispatch = useDispatch();
 
     const { showSpinner } = useDataEntityInit(code);
@@ -69,12 +73,26 @@ const Comparer = () => {
             </Head>
             <SubHeader libelle={libelle} code={code} />
             <StyledComparerBody>
-                {isCommune ? (
+                {isCommune &&
+                (entitiesComparer || entitiesComparerIsLoading) ? (
                     <TabsComparer>
-                        {/* @ts-ignore */}
-                        <Tab label="Dans mon département">
-                            <TabEchelon />
-                        </Tab>
+                        {entitiesComparerIsLoading ? (
+                            /* @ts-ignore */
+                            <Tab label={"Chargement..."}>
+                                <div className="w-auto my-20 sm:my-40 flex justify-center">
+                                    <Spinner size="md" />
+                                </div>
+                            </Tab>
+                        ) : (
+                            entitiesComparerKeys.map(key => (
+                                /* @ts-ignore */
+                                <Tab label={`Dans mon ${key}`} key={key}>
+                                    <TabEchelon
+                                        entities={entitiesComparer[key]}
+                                    />
+                                </Tab>
+                            ))
+                        )}
 
                         {/* @ts-ignore */}
                         <Tab label="Sélection personnalisée">

@@ -29,8 +29,6 @@ describe("fetchEntitySerializer", () => {
                 },
             })
         ).toEqual({
-            echelons: {},
-            strate: 5,
             libelle: "Mocked Commune",
             partDotationRrf: { annees: [] },
             annees: ["2022", "2021"],

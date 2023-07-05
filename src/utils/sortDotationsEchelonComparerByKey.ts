@@ -8,13 +8,10 @@ function sortDotationsEchelonComparerByKey(
     key: keyof DotationEchelonFormated
 ) {
     return entities.sort((a, b) => {
-        if (!a?.[key] || !b?.[key]) {
-            return 0;
-        }
-        if (a[key]! < b[key]!) {
+        if (a[key] < b[key]) {
             return 1;
         }
-        if (a[key]! > b[key]!) {
+        if (a[key] > b[key]) {
             return -1;
         }
         return 0;

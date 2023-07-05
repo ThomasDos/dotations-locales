@@ -3,6 +3,7 @@ import useResize from "hooks/useResize";
 import { DotationEchelonFormated } from "models/comparer/comparer.interface";
 import Link from "next/link";
 import styled from "styled-components";
+import capitalizeEveryFirstLetter from "utils/capitalizeEveryFirstLetter";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 
 const StyledSpanEntityValue = styled.div<{ textCenter?: boolean }>`
@@ -21,13 +22,13 @@ const StyledRowContainer = styled.div`
 interface EchelonBoardRowProps {
     entity: DotationEchelonFormated;
     highestDotationDgf: number;
-    libelle: string;
+    currentEntityCode: string;
 }
 
 function EchelonBoardRow({
     entity,
     highestDotationDgf,
-    libelle,
+    currentEntityCode,
 }: EchelonBoardRowProps) {
     const {
         libelle: entityLibelle,
@@ -44,7 +45,7 @@ function EchelonBoardRow({
     const calculatedBarWidth =
         ((totalDotation / highestDotationDgf) * 100) / barWidthRatio;
     const emptyBarWidth = fixedBarWidth - calculatedBarWidth;
-    const isCurrentEntity = entityLibelle === libelle;
+    const isCurrentEntity = currentEntityCode === code;
     return (
         <StyledRowContainer
             className={`flex py-2 md:px-4 items-center ${
@@ -59,7 +60,7 @@ function EchelonBoardRow({
             >
                 <Link href={`/${code}?libelle=${entityLibelle}`} target="_">
                     {isCurrentEntity && <span className="text-xs">⭐️</span>}
-                    {entityLibelle} ({code})
+                    {capitalizeEveryFirstLetter(entityLibelle)} ({code})
                 </Link>
             </div>
             <StyledSpanEntityValue>
@@ -69,9 +70,11 @@ function EchelonBoardRow({
                 />
             </StyledSpanEntityValue>
             <StyledSpanEntityValue textCenter>
-                {windowWidth > 640
-                    ? formatNumberWithSpace(totalDotation)
-                    : `${(totalDotation / 1000).toFixed(2)}K`}
+                {totalDotation
+                    ? windowWidth > 640
+                        ? formatNumberWithSpace(totalDotation)
+                        : `${(totalDotation / 1000).toFixed(2)}K`
+                    : 0}
                 €
             </StyledSpanEntityValue>
             <StyledSpanEntityValue>
@@ -80,7 +83,7 @@ function EchelonBoardRow({
             <StyledSpanEntityValue textCenter>{strate}</StyledSpanEntityValue>
             <StyledSpanEntityValue>
                 {evolutionDotations && evolutionDotations > 0 ? "+" : ""}
-                {evolutionDotations}%
+                {!!evolutionDotations && `${evolutionDotations}%`}
             </StyledSpanEntityValue>
         </StyledRowContainer>
     );

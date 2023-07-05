@@ -1,4 +1,5 @@
 import { Dotation, Dotations } from "models/entity/entity.interface";
+import { fetchEntitySerializer } from "models/entity/entity.serializer";
 import { Entities } from "store/entitiesComparer.slice";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
 import getDotationPerHabitantPopulationDgf from "utils/getDotationPerHabitantPopulationDgf";
@@ -6,10 +7,13 @@ import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantP
 import getPercentageEvolution from "utils/getPercentageEvolution";
 import getPopulationDgf from "utils/getPopulationDgf";
 import getPopulationInsee from "utils/getPopulationInsee";
+import getStrateCurrentYear from "utils/getStrateCurrentYear";
 import getTotalDotations from "utils/getTotalDotations";
 import {
     DotationsEchelonFormated,
     DotationsFormattedBoardDgfComparer,
+    EntitiesComparer,
+    rawEntitiesComparer,
 } from "./comparer.interface";
 
 export const dotationsChartComparerSerializer = (
@@ -191,6 +195,20 @@ export const dotationDgfPerHabitantChartSerializer = (
         })
         .filter(Boolean);
 
+export const entitiesComparerSerializer = (
+    rawEntities: rawEntitiesComparer
+): EntitiesComparer => {
+    const rawEntitiesKeys = Object.keys(rawEntities);
+
+    const entities: EntitiesComparer = {};
+
+    rawEntitiesKeys.forEach(key => {
+        entities[key] = rawEntities[key].map(fetchEntitySerializer);
+    });
+
+    return entities;
+};
+
 export const dotationsFormattedByTotalDotationsPopulationStrateEvolution = ({
     entities,
     currentYear,
@@ -219,12 +237,16 @@ export const dotationsFormattedByTotalDotationsPopulationStrateEvolution = ({
             totalDotation
         );
 
-        //TODO: remplacer strate par valeur réelle
+        const strate = getStrateCurrentYear(
+            entity.criteresGeneraux,
+            currentYear
+        );
+
         return {
             libelle: entity.libelle as string,
             totalDotation,
             evolutionDotations,
-            strate: entity.strate as number,
+            strate,
             dotationDgfPerHabitant,
             code: entity.code,
         };

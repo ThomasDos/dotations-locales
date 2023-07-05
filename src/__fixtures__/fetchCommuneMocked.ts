@@ -3,9 +3,6 @@ import { EntityDto } from "models/entity/entity.interface";
 export const fetchCommuneMocked: EntityDto = {
     code: "42113",
     libelle: "Mocked Commune",
-    //TODO: supprimer quand interface sera à jour
-    echelons: {},
-    strate: 5,
     part_dotation_rrf: { annees: [] },
     criteres_generaux: {
         longueur_voirie: {
