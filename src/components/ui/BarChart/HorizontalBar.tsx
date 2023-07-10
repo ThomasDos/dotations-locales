@@ -14,14 +14,12 @@ function HorizontalBar({
 }: HorizontalBarProps) {
     return (
         <svg width={width} height={height}>
-            <g>
-                <rect
-                    y={barPadding * 0.5}
-                    width={width}
-                    height={30 - barPadding}
-                    fill={barColor}
-                />
-            </g>
+            <rect
+                y={barPadding * 0.5}
+                width={width}
+                height={30 - barPadding}
+                fill={barColor}
+            />
         </svg>
     );
 }

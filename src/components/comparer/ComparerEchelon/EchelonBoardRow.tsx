@@ -54,13 +54,17 @@ function EchelonBoardRow({
             key={entityLibelle}
         >
             <div
-                className={`flex-[2] sm:flex-[3] md:flex-[4] flex items-center ${
-                    isCurrentEntity ? "font-bold" : ""
+                className={`flex-[2] sm:flex-[3] md:flex-[4] flex ${
+                    isCurrentEntity && "font-bold"
                 }`}
             >
                 <Link href={`/${code}?libelle=${entityLibelle}`} target="_">
-                    {isCurrentEntity && <span className="text-xs">⭐️</span>}
-                    {capitalizeEveryFirstLetter(entityLibelle)} ({code})
+                    <div className="flex items-center">
+                        {isCurrentEntity && (
+                            <span className="text-xs">⭐️</span>
+                        )}
+                        {capitalizeEveryFirstLetter(entityLibelle)} ({code})
+                    </div>
                 </Link>
             </div>
             <StyledSpanEntityValue>
