@@ -15,7 +15,7 @@ const SearchInputComparer = () => {
             <h2 className="text-2xl md:text-3xl	mb-4">
                 Comparer vos dotations avec :
             </h2>
-            <div className="mb-5 sm:mb-10">
+            <div className="mb-5">
                 <SearchInput
                     fullWidth
                     placeholder={`Ajouter une collectivité ${
@@ -29,7 +29,6 @@ const SearchInputComparer = () => {
                     <div className="flex flex-wrap items-center">
                         {entities.map(({ libelle, code }, index) => {
                             if (!index) return null;
-
                             return (
                                 <LabelEntity
                                     key={code}

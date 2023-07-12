@@ -1,7 +1,7 @@
 import { Tabs } from "@dataesr/react-dsfr";
 import styled from "styled-components";
 
-const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
+const StyledTabsComparer = styled(Tabs)`
     height: auto;
     box-shadow: none;
     ul {
@@ -52,22 +52,9 @@ const StyledTabs = styled(Tabs)<{ dotationsNonEligibles: number[] }>`
         }
     }
 
-    ${({ dotationsNonEligibles }) =>
-        dotationsNonEligibles.map((dotationNonEligible: number) => {
-            return `li:nth-child(${dotationNonEligible}) {
-        button {
-            background: var(--grey-950);
-            color: var(--grey-625-425);
-            &:hover{
-                background: var(--grey-850)
-            }
-        }
-    }`;
-        })}
-
     @media (min-width: 640px) {
         padding: 0 !important;
     }
 `;
 
-export default StyledTabs;
+export default StyledTabsComparer;

@@ -70,6 +70,7 @@ export const criteresMap: Record<string, string> = {
     revenuEpci: "Revenu EPCI",
     revenuParHabitant: "Revenu par habitant",
     revenuTotal: "Revenu total",
+    strateDemographique: "Strate démographique",
     superficie: "Superficie",
     tauxUrbanisation: "Taux urbanisation",
     voirieHorsMontagne: "Voirie hors montagne",

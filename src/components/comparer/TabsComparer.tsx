@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "components/ui";
+import { Tab, TabsDashboard } from "components/ui";
 import { Dotation } from "models/entity/entity.interface";
 import { useSelector } from "react-redux";
 import {
@@ -34,7 +34,7 @@ const TabsContainerComparer = () => {
     const dotationDGF: Dotation = {
         annees: anneesDotationsTotal,
         criteres: {},
-        description: "Dotation (DGF) par habitants",
+        description: "Dotation (DGF) par habitant",
         label: "Résumé",
         title: "Dotation Globale de Fonctionnement (DGF)",
         key: "",
@@ -42,7 +42,9 @@ const TabsContainerComparer = () => {
 
     return (
         <div className="mt-10">
-            <Tabs dotationsNonEligibles={tabIndexDotationsNonEligibles}>
+            <TabsDashboard
+                dotationsNonEligibles={tabIndexDotationsNonEligibles}
+            >
                 {/*@ts-ignore*/}
                 <Tab label="Résumé">
                     <TabComparer
@@ -87,7 +89,7 @@ const TabsContainerComparer = () => {
                         );
                     }
                 )}
-            </Tabs>
+            </TabsDashboard>
         </div>
     );
 };

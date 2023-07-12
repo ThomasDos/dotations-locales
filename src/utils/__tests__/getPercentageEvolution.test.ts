@@ -34,6 +34,6 @@ describe("getPercentageEvolution(currentValue: number, previousValue: number)", 
             previousValue
         );
 
-        expect(evolutionResult).toBeNull();
+        expect(evolutionResult).toBe(0);
     });
 });

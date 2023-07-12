@@ -9,6 +9,7 @@ describe("simulation deserializer", () => {
             expect(
                 postSimulationDeserializer(
                     {
+                        libelle: "Mocked Commune",
                         annees: ["2022", "2021"],
                         anneesCriteres: ["2022", "2021"],
                         code: "42113",

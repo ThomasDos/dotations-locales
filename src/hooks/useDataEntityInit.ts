@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +22,7 @@ import { toastError } from "utils/customToasts";
 import useFetchCommune from "./useFetchCommune";
 import useFetchDepartement from "./useFetchDepartement";
 import useFetchEPCI from "./useFetchEPCI";
+import useFetchEntitiesComparer from "./useFetchEntitiesComparer";
 
 export default (code: string) => {
     const initialCode = useSelector(selectInitialCode);
@@ -64,6 +66,10 @@ export default (code: string) => {
         fetchDepartementData ||
         initialEntity;
 
+    useFetchEntitiesComparer(
+        code,
+        !!code && !fetchEntityIsLoading && !isEmpty(fetchEntityData)
+    );
     const showSpinner = !fetchEntityData.code || fetchEntityIsLoading;
 
     const fetchEntityError =

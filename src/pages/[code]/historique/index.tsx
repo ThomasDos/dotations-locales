@@ -1,6 +1,6 @@
 import { SubHeader } from "components/dashboard";
 import HistoriqueTab from "components/historique";
-import { BaseCalculLoi, Spinner, Tab, Tabs } from "components/ui";
+import { BaseCalculLoi, Spinner, Tab, TabsDashboard } from "components/ui";
 import useDataEntityInit from "hooks/useDataEntityInit";
 import { Dotation } from "models/entity/entity.interface";
 import { historiqueSerializer } from "models/historique/historique.serializer";
@@ -99,7 +99,9 @@ const HistoriquePage = () => {
                         <BaseCalculLoi />
                     </div>
 
-                    <Tabs dotationsNonEligibles={tabIndexDotationsNonEligibles}>
+                    <TabsDashboard
+                        dotationsNonEligibles={tabIndexDotationsNonEligibles}
+                    >
                         {/*@ts-ignore*/}
                         <Tab label="Résumé">
                             <HistoriqueTab dotation={dotationDGF} />
@@ -120,7 +122,7 @@ const HistoriquePage = () => {
                                 );
                             }
                         )}
-                    </Tabs>
+                    </TabsDashboard>
                 </>
             </StyledDashboardBody>
         </>

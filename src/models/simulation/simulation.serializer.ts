@@ -18,4 +18,5 @@ export const fetchEntitySerializerSimulation = (
     // avertissementPrecisionSimulation:
     //     rawResult.avertissement_precision_simulation,
     avertissementPrecisionSimulation: false,
+    libelle: rawResult.libelle,
 });

@@ -1,4 +1,4 @@
-import { BaseCalculLoi, Tab, Tabs } from "components/ui";
+import { BaseCalculLoi, Tab, TabsDashboard } from "components/ui";
 import ImageFixed from "components/ui/ImageFixed";
 import _ from "lodash";
 import { useSelector } from "react-redux";
@@ -116,7 +116,9 @@ const DashboardBody = ({
 
                 {isSimulation && <SimulationWarning />}
 
-                <Tabs dotationsNonEligibles={tabIndexDotationsNonEligibles}>
+                <TabsDashboard
+                    dotationsNonEligibles={tabIndexDotationsNonEligibles}
+                >
                     {/*@ts-ignore*/}
                     <Tab label="Résumé">
                         <MainTab dotations={dotations} />
@@ -137,7 +139,7 @@ const DashboardBody = ({
                             );
                         }
                     )}
-                </Tabs>
+                </TabsDashboard>
             </>
         </StyledDashboardBody>
     );

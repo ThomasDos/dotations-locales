@@ -1,14 +1,23 @@
 import { Dotation, Dotations } from "models/entity/entity.interface";
-import { EntitiesComparer } from "store/entitiesComparer.slice";
+import { fetchEntitySerializer } from "models/entity/entity.serializer";
+import { Entities } from "store/entitiesComparer.slice";
 import formatNumberWithSpace from "utils/formatNumberWithSpace";
+import getDotationPerHabitantPopulationDgf from "utils/getDotationPerHabitantPopulationDgf";
 import getDotationPerHabitantPopulationInsee from "utils/getDotationPerHabitantPopulationInsee";
+import getPercentageEvolution from "utils/getPercentageEvolution";
 import getPopulationDgf from "utils/getPopulationDgf";
 import getPopulationInsee from "utils/getPopulationInsee";
+import getStrateCurrentYear from "utils/getStrateCurrentYear";
 import getTotalDotations from "utils/getTotalDotations";
-import { DotationsFormattedBoardDgfComparer } from "./comparer.interface";
+import {
+    DotationsEchelonFormated,
+    DotationsFormattedBoardDgfComparer,
+    EntitiesComparer,
+    rawEntitiesComparer,
+} from "./comparer.interface";
 
 export const dotationsChartComparerSerializer = (
-    entities: EntitiesComparer,
+    entities: Entities,
     year: string,
     dotation: Dotation
 ) =>
@@ -46,7 +55,7 @@ export const dotationsChartComparerSerializer = (
         .filter(Boolean);
 
 export const sousDotationsChartComparerSerializer = (
-    entities: EntitiesComparer,
+    entities: Entities,
     year: string,
     sousDotationKey: string
 ) =>
@@ -79,10 +88,7 @@ export const sousDotationsChartComparerSerializer = (
         })
         .filter(Boolean);
 
-export const dotationDgfChartSerializer = (
-    entities: EntitiesComparer,
-    year: string
-) =>
+export const dotationDgfChartSerializer = (entities: Entities, year: string) =>
     entities
         .map(({ libelle, code, dotations }, index) => {
             const value = getTotalDotations(dotations, year);
@@ -106,7 +112,7 @@ export const dotationDgfChartSerializer = (
         .filter(Boolean);
 
 export const dotationsDgfBoardSerializer = (
-    entities: EntitiesComparer,
+    entities: Entities,
     year: string
 ): DotationsFormattedBoardDgfComparer =>
     entities
@@ -135,7 +141,7 @@ export const dotationsDgfBoardSerializer = (
         })
         .filter(Boolean);
 export const dotationsDgfBoardPopulationsSerializer = (
-    entities: EntitiesComparer,
+    entities: Entities,
     year: string,
     yearCriteres: string
 ) =>
@@ -158,7 +164,7 @@ export const dotationsDgfBoardPopulationsSerializer = (
     });
 
 export const dotationDgfPerHabitantChartSerializer = (
-    entities: EntitiesComparer,
+    entities: Entities,
     year: string
 ) =>
     entities
@@ -188,3 +194,60 @@ export const dotationDgfPerHabitantChartSerializer = (
             };
         })
         .filter(Boolean);
+
+export const entitiesComparerSerializer = (
+    rawEntities: rawEntitiesComparer
+): EntitiesComparer => {
+    const rawEntitiesKeys = Object.keys(rawEntities);
+
+    const entities: EntitiesComparer = {};
+
+    rawEntitiesKeys.forEach(key => {
+        entities[key] = rawEntities[key].map(fetchEntitySerializer);
+    });
+
+    return entities;
+};
+
+export const dotationsFormattedByTotalDotationsPopulationStrateEvolution = ({
+    entities,
+    currentYear,
+    lastYear,
+}: {
+    entities: Entities;
+    currentYear: string;
+    lastYear: string;
+}): DotationsEchelonFormated =>
+    entities.map(entity => {
+        const totalDotation = getTotalDotations(entity.dotations, currentYear);
+
+        const totalDotationLastYear = getTotalDotations(
+            entity.dotations,
+            lastYear
+        );
+
+        const evolutionDotations = getPercentageEvolution(
+            totalDotation,
+            totalDotationLastYear
+        );
+
+        const dotationDgfPerHabitant = getDotationPerHabitantPopulationDgf(
+            entity.criteresGeneraux,
+            currentYear,
+            totalDotation
+        );
+
+        const strate = getStrateCurrentYear(
+            entity.criteresGeneraux,
+            currentYear
+        );
+
+        return {
+            libelle: entity.libelle as string,
+            totalDotation,
+            evolutionDotations,
+            strate,
+            dotationDgfPerHabitant,
+            code: entity.code,
+        };
+    });

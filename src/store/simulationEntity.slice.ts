@@ -22,6 +22,7 @@ const initialState: EntitySimulation = {
     criteresGeneraux: {},
     dotations: {},
     avertissementPrecisionSimulation: false,
+    libelle: "",
 };
 
 const simulationEntitySlice = createSlice({

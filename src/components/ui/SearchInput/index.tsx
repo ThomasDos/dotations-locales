@@ -40,7 +40,7 @@ const StyledCollapseContent = styled.div<{ fullWidth?: boolean }>`
     }
 
     @media (min-width: 940px) {
-        width: ${({ fullWidth }) => fullWidth && "calc(100% - 12.5rem)"};
+        width: ${({ fullWidth }) => fullWidth && "calc(100%)"};
     }
 `;
 
@@ -179,25 +179,23 @@ const SearchInput = ({
                         }}
                     />
                 )}
-                <button type="button" role="button">
-                    <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
-                        <div className="flex items-center space-x-2">
-                            {searchResultEntityIsLoading ? (
-                                <Spinner />
-                            ) : (
-                                <ImageFixed
-                                    src="/icons/search.svg"
-                                    height={24}
-                                    width={24}
-                                    alt="icone rechercher"
-                                />
-                            )}
-                            <StyledSpanButton className="text-sm md:text-xl font-normal">
-                                {textIcon}
-                            </StyledSpanButton>
-                        </div>
-                    </StyledSearchButton>
-                </button>
+                <StyledSearchButton className="flex justify-center items-center py-3 px-2 md:px-8">
+                    <div className="flex items-center space-x-2">
+                        {searchResultEntityIsLoading ? (
+                            <Spinner />
+                        ) : (
+                            <ImageFixed
+                                src="/icons/search.svg"
+                                height={24}
+                                width={24}
+                                alt="icone rechercher"
+                            />
+                        )}
+                        <StyledSpanButton className="text-sm md:text-xl font-normal">
+                            {textIcon}
+                        </StyledSpanButton>
+                    </div>
+                </StyledSearchButton>
             </StyledSearchInput>
             {!fetchEntityIsLoading && (
                 <Collapse in={autocompletionHasLength && !!search}>

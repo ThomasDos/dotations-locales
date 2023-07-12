@@ -1,15 +1,12 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Entity } from "models/entity/entity.interface";
 
+import { Entity } from "models/entity/entity.interface";
 import type { RootState } from ".";
 
-export interface EntityComparer extends Entity {
-    libelle: string;
-}
-export type EntitiesComparer = EntityComparer[];
+export type Entities = Entity[];
 
 interface EntitiesComparerSlice {
-    entities: EntitiesComparer;
+    entities: Entities;
 }
 
 const initialState: EntitiesComparerSlice = {
@@ -20,7 +17,7 @@ const entitiesComparerSlice = createSlice({
     initialState,
     name: "entitiesComparer",
     reducers: {
-        addEntity: (state, { payload }: PayloadAction<EntityComparer>) => {
+        addEntity: (state, { payload }: PayloadAction<Entity>) => {
             const isAlreadyAdded = state.entities.find(
                 com => com.code === payload.code
             );

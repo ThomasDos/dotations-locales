@@ -12,6 +12,7 @@ const initialState: Entity = {
     code: "",
     criteresGeneraux: {},
     dotations: {},
+    libelle: "",
 };
 
 const initialEntitySlice = createSlice({
@@ -125,5 +126,14 @@ export const selectIsDotationsAnneesDifferentThanDotationRrfAnnees =
         selectCurrentYearInitialPartDotationRrf,
         (annees, currentYear) => annees[0] !== currentYear
     );
+
+export const selectCommuneEpciName = createSelector(
+    selectInitialCriteresGeneraux,
+    selectInitialCurrentYear,
+    (criteresGeneraux, currentYear) => {
+        return criteresGeneraux?.epci?.annees?.[0]?.[currentYear]
+            ?.valeur as string;
+    }
+);
 
 export default initialEntitySlice.reducer;
