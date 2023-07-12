@@ -84,7 +84,11 @@ function EchelonBoardRow({
             <StyledSpanEntityValue>
                 {Math.round(dotationDgfPerHabitant)} €
             </StyledSpanEntityValue>
-            <StyledSpanEntityValue textCenter>{strate}</StyledSpanEntityValue>
+            {!!strate && (
+                <StyledSpanEntityValue textCenter>
+                    {strate}
+                </StyledSpanEntityValue>
+            )}
             <StyledSpanEntityValue>
                 {evolutionDotations && evolutionDotations > 0 ? "+" : ""}
                 {!!evolutionDotations && `${evolutionDotations}%`}

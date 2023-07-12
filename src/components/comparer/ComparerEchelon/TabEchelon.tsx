@@ -8,10 +8,12 @@ import { Entities } from "store/entitiesComparer.slice";
 import {
     selectCommuneEpciName,
     selectInitialCurrentYear,
+    selectInitialEntity,
     selectInitialLastYear,
 } from "store/initialEntity.slice";
 import styled from "styled-components";
 import getHighestDotationByTotalDotations from "utils/getHighestDotationByTotalDotations";
+import getStrateCurrentYear from "utils/getStrateCurrentYear";
 import sliceEntitiesEchelonWithCurrentEntityPosition from "utils/sliceEntitiesEchelonWithCurrentEntityPosition";
 import sortDotationsEchelonComparerByKey from "utils/sortDotationsEchelonComparerByKey";
 import EchelonBoardRow from "./EchelonBoardRow";
@@ -63,6 +65,7 @@ function TabEchelon({ entities }: TabEchelonProps) {
     const currentYear = useSelector(selectInitialCurrentYear);
     const lastYear = useSelector(selectInitialLastYear);
     const epciName = useSelector(selectCommuneEpciName);
+    const currentEntity = useSelector(selectInitialEntity);
 
     const [sortSelector, setSortSelector] =
         useState<keyof DotationEchelonFormated>("totalDotation");
@@ -75,6 +78,11 @@ function TabEchelon({ entities }: TabEchelonProps) {
             currentYear,
             lastYear,
         });
+
+    const strateCurrentEntity = getStrateCurrentYear(
+        currentEntity.criteresGeneraux,
+        currentYear
+    );
 
     const entitiesSorted = sortDotationsEchelonComparerByKey(
         entitiesFormatted,
@@ -123,17 +131,19 @@ function TabEchelon({ entities }: TabEchelonProps) {
                         Par habitant
                     </StyledTitleHover>
                 </StyledColumHeaderEntityValue>
-                <StyledColumHeaderEntityValue
-                    isSelected={sortSelector === "strate"}
-                >
-                    <StyledTitleHover
-                        onClick={() => {
-                            setSortSelector("strate");
-                        }}
+                {!!strateCurrentEntity && (
+                    <StyledColumHeaderEntityValue
+                        isSelected={sortSelector === "strate"}
                     >
-                        Strate
-                    </StyledTitleHover>
-                </StyledColumHeaderEntityValue>
+                        <StyledTitleHover
+                            onClick={() => {
+                                setSortSelector("strate");
+                            }}
+                        >
+                            Strate
+                        </StyledTitleHover>
+                    </StyledColumHeaderEntityValue>
+                )}
                 <StyledColumHeaderEntityValue
                     isSelected={sortSelector === "evolutionDotations"}
                 >

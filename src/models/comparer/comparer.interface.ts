@@ -26,7 +26,7 @@ export interface DotationEchelonFormated {
     totalDotation: number;
     libelle: string;
     evolutionDotations: number;
-    strate: string;
+    strate: number;
     dotationDgfPerHabitant: number;
     code: string;
 }
